@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC19A19E186BB0051C672 /* AppDelegate.swift */; };
+		551AC19D19E186BB0051C672 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC19C19E186BB0051C672 /* ViewController.swift */; };
+		551AC1A019E186BB0051C672 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551AC19E19E186BB0051C672 /* Main.storyboard */; };
+		551AC1A219E186BB0051C672 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551AC1A119E186BB0051C672 /* Images.xcassets */; };
+		551AC1A519E186BB0051C672 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551AC1A319E186BB0051C672 /* LaunchScreen.xib */; };
+		551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */; };
+		551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551AC1BA19E186E00051C672 /* CoreLocation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		551AC1AB19E186BB0051C672 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 551AC18D19E186BB0051C672 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 551AC19419E186BB0051C672;
+			remoteInfo = CarParkApplication;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		551AC19519E186BB0051C672 /* CarParkApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarParkApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		551AC19919E186BB0051C672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		551AC19A19E186BB0051C672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		551AC19C19E186BB0051C672 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		551AC19F19E186BB0051C672 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		551AC1A119E186BB0051C672 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		551AC1A419E186BB0051C672 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		551AC1AA19E186BB0051C672 /* CarParkApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarParkApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		551AC1AF19E186BB0051C672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarParkApplicationTests.swift; sourceTree = "<group>"; };
+		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		551AC19219E186BB0051C672 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551AC1A719E186BB0051C672 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		551AC18C19E186BB0051C672 = {
+			isa = PBXGroup;
+			children = (
+				551AC1BA19E186E00051C672 /* CoreLocation.framework */,
+				551AC19719E186BB0051C672 /* CarParkApplication */,
+				551AC1AD19E186BB0051C672 /* CarParkApplicationTests */,
+				551AC19619E186BB0051C672 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		551AC19619E186BB0051C672 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				551AC19519E186BB0051C672 /* CarParkApplication.app */,
+				551AC1AA19E186BB0051C672 /* CarParkApplicationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		551AC19719E186BB0051C672 /* CarParkApplication */ = {
+			isa = PBXGroup;
+			children = (
+				551AC19A19E186BB0051C672 /* AppDelegate.swift */,
+				551AC19C19E186BB0051C672 /* ViewController.swift */,
+				551AC19E19E186BB0051C672 /* Main.storyboard */,
+				551AC1A119E186BB0051C672 /* Images.xcassets */,
+				551AC1A319E186BB0051C672 /* LaunchScreen.xib */,
+				551AC19819E186BB0051C672 /* Supporting Files */,
+			);
+			path = CarParkApplication;
+			sourceTree = "<group>";
+		};
+		551AC19819E186BB0051C672 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				551AC19919E186BB0051C672 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		551AC1AD19E186BB0051C672 /* CarParkApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */,
+				551AC1AE19E186BB0051C672 /* Supporting Files */,
+			);
+			path = CarParkApplicationTests;
+			sourceTree = "<group>";
+		};
+		551AC1AE19E186BB0051C672 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				551AC1AF19E186BB0051C672 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		551AC19419E186BB0051C672 /* CarParkApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 551AC1B419E186BB0051C672 /* Build configuration list for PBXNativeTarget "CarParkApplication" */;
+			buildPhases = (
+				551AC19119E186BB0051C672 /* Sources */,
+				551AC19219E186BB0051C672 /* Frameworks */,
+				551AC19319E186BB0051C672 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CarParkApplication;
+			productName = CarParkApplication;
+			productReference = 551AC19519E186BB0051C672 /* CarParkApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		551AC1A919E186BB0051C672 /* CarParkApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 551AC1B719E186BB0051C672 /* Build configuration list for PBXNativeTarget "CarParkApplicationTests" */;
+			buildPhases = (
+				551AC1A619E186BB0051C672 /* Sources */,
+				551AC1A719E186BB0051C672 /* Frameworks */,
+				551AC1A819E186BB0051C672 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				551AC1AC19E186BB0051C672 /* PBXTargetDependency */,
+			);
+			name = CarParkApplicationTests;
+			productName = CarParkApplicationTests;
+			productReference = 551AC1AA19E186BB0051C672 /* CarParkApplicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		551AC18D19E186BB0051C672 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = DavidMcQueen;
+				TargetAttributes = {
+					551AC19419E186BB0051C672 = {
+						CreatedOnToolsVersion = 6.0.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					551AC1A919E186BB0051C672 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = 551AC19419E186BB0051C672;
+					};
+				};
+			};
+			buildConfigurationList = 551AC19019E186BB0051C672 /* Build configuration list for PBXProject "CarParkApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 551AC18C19E186BB0051C672;
+			productRefGroup = 551AC19619E186BB0051C672 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				551AC19419E186BB0051C672 /* CarParkApplication */,
+				551AC1A919E186BB0051C672 /* CarParkApplicationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		551AC19319E186BB0051C672 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551AC1A019E186BB0051C672 /* Main.storyboard in Resources */,
+				551AC1A519E186BB0051C672 /* LaunchScreen.xib in Resources */,
+				551AC1A219E186BB0051C672 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551AC1A819E186BB0051C672 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		551AC19119E186BB0051C672 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551AC19D19E186BB0051C672 /* ViewController.swift in Sources */,
+				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551AC1A619E186BB0051C672 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		551AC1AC19E186BB0051C672 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 551AC19419E186BB0051C672 /* CarParkApplication */;
+			targetProxy = 551AC1AB19E186BB0051C672 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		551AC19E19E186BB0051C672 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551AC19F19E186BB0051C672 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		551AC1A319E186BB0051C672 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551AC1A419E186BB0051C672 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		551AC1B219E186BB0051C672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		551AC1B319E186BB0051C672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		551AC1B519E186BB0051C672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CarParkApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		551AC1B619E186BB0051C672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CarParkApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		551AC1B819E186BB0051C672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CarParkApplicationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CarParkApplication.app/CarParkApplication";
+			};
+			name = Debug;
+		};
+		551AC1B919E186BB0051C672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CarParkApplicationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CarParkApplication.app/CarParkApplication";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		551AC19019E186BB0051C672 /* Build configuration list for PBXProject "CarParkApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551AC1B219E186BB0051C672 /* Debug */,
+				551AC1B319E186BB0051C672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		551AC1B419E186BB0051C672 /* Build configuration list for PBXNativeTarget "CarParkApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551AC1B519E186BB0051C672 /* Debug */,
+				551AC1B619E186BB0051C672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		551AC1B719E186BB0051C672 /* Build configuration list for PBXNativeTarget "CarParkApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551AC1B819E186BB0051C672 /* Debug */,
+				551AC1B919E186BB0051C672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 551AC18D19E186BB0051C672 /* Project object */;
+}
