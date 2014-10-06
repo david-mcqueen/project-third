@@ -80,10 +80,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyQ-gW-Iam">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyQ-gW-Iam">
                                 <rect key="frame" x="-20" y="40" width="440" height="721"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waj-eT-Xwj">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="waj-eT-Xwj">
                                         <rect key="frame" x="20" y="20" width="400" height="681"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQY-NJ-awa">
@@ -295,78 +295,78 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="ICI-p2-fSW"/>
-                                                <exclude reference="EVH-kO-lCI"/>
-                                                <exclude reference="FeQ-KO-H3d"/>
-                                                <exclude reference="Kbp-Tg-yyT"/>
-                                                <exclude reference="BSa-WX-pZ4"/>
-                                                <exclude reference="IQ9-Vn-oTW"/>
-                                                <exclude reference="JFp-nV-IAd"/>
-                                                <exclude reference="WEn-WY-8bc"/>
-                                                <exclude reference="6wp-mC-HmC"/>
-                                                <exclude reference="Eym-Wb-Nmp"/>
-                                                <exclude reference="O2x-Td-jwh"/>
-                                                <exclude reference="UgP-db-Dhh"/>
-                                                <exclude reference="KLL-jA-Jko"/>
-                                                <exclude reference="VjH-gC-HAm"/>
-                                                <exclude reference="VrH-7d-PE3"/>
-                                                <exclude reference="jjE-J7-jR1"/>
-                                                <exclude reference="6LY-JL-xi1"/>
-                                                <exclude reference="CDn-mR-WNd"/>
-                                                <exclude reference="jMb-1Y-429"/>
-                                                <exclude reference="qWG-X4-ZZg"/>
-                                                <exclude reference="BX6-yb-m2m"/>
-                                                <exclude reference="UcZ-jD-rfF"/>
-                                                <exclude reference="WXE-gk-IQ0"/>
-                                                <exclude reference="d3o-2s-FA5"/>
-                                                <exclude reference="EYt-Zm-l7w"/>
-                                                <exclude reference="Rdv-oc-9NL"/>
-                                                <exclude reference="c3V-0K-QaH"/>
-                                                <exclude reference="vLN-4b-BVa"/>
-                                                <exclude reference="JUK-zk-cvL"/>
-                                                <exclude reference="M5t-xu-l6v"/>
-                                                <exclude reference="UHe-20-V03"/>
-                                                <exclude reference="mLf-Qz-JcI"/>
-                                                <exclude reference="94I-ea-yMr"/>
-                                                <exclude reference="hnD-Iu-ueV"/>
-                                                <exclude reference="pb0-WJ-CEo"/>
-                                                <exclude reference="qqR-uo-oQc"/>
-                                                <exclude reference="SYh-Gv-rbf"/>
-                                                <exclude reference="VGC-u5-MFh"/>
-                                                <exclude reference="fLO-hK-qm6"/>
-                                                <exclude reference="z8s-rS-wSY"/>
                                                 <exclude reference="0OD-N3-mmB"/>
                                                 <exclude reference="HaX-1j-TMS"/>
                                                 <exclude reference="eh9-C1-3Te"/>
                                                 <exclude reference="t3l-rX-WS4"/>
-                                                <exclude reference="Fvn-DC-Zbx"/>
-                                                <exclude reference="Ifr-0D-STh"/>
-                                                <exclude reference="ena-Ds-z0l"/>
-                                                <exclude reference="jA0-BF-j8E"/>
-                                                <exclude reference="N7k-mf-gF3"/>
-                                                <exclude reference="RSe-y1-wKv"/>
-                                                <exclude reference="YRn-uj-KK6"/>
-                                                <exclude reference="vot-Sl-jTo"/>
-                                                <exclude reference="6oZ-Uh-y4F"/>
-                                                <exclude reference="dpS-UM-FTQ"/>
-                                                <exclude reference="fyE-pS-DkD"/>
-                                                <exclude reference="k2d-DB-nRa"/>
-                                                <exclude reference="D5u-xo-g4Q"/>
-                                                <exclude reference="OSa-9J-j7j"/>
-                                                <exclude reference="n0c-uq-YGw"/>
-                                                <exclude reference="sid-lT-QA3"/>
-                                                <exclude reference="BIy-mm-Shg"/>
-                                                <exclude reference="Cjo-PE-dpv"/>
-                                                <exclude reference="SCU-Y2-3Y1"/>
-                                                <exclude reference="jwT-Ub-Spw"/>
+                                                <exclude reference="KLL-jA-Jko"/>
+                                                <exclude reference="VjH-gC-HAm"/>
+                                                <exclude reference="VrH-7d-PE3"/>
+                                                <exclude reference="jjE-J7-jR1"/>
+                                                <exclude reference="BX6-yb-m2m"/>
+                                                <exclude reference="UcZ-jD-rfF"/>
+                                                <exclude reference="WXE-gk-IQ0"/>
+                                                <exclude reference="d3o-2s-FA5"/>
                                                 <exclude reference="9Yn-AT-7lS"/>
                                                 <exclude reference="G9c-Zy-LK4"/>
                                                 <exclude reference="lBt-vU-i6i"/>
                                                 <exclude reference="q3V-gG-UCf"/>
+                                                <exclude reference="6LY-JL-xi1"/>
+                                                <exclude reference="CDn-mR-WNd"/>
+                                                <exclude reference="jMb-1Y-429"/>
+                                                <exclude reference="qWG-X4-ZZg"/>
                                                 <exclude reference="CGx-Xa-Jx1"/>
                                                 <exclude reference="cjx-Pk-DQy"/>
                                                 <exclude reference="ctR-BE-YZh"/>
                                                 <exclude reference="hZn-ML-HFu"/>
                                                 <exclude reference="m5z-ry-oTs"/>
+                                                <exclude reference="EYt-Zm-l7w"/>
+                                                <exclude reference="Rdv-oc-9NL"/>
+                                                <exclude reference="c3V-0K-QaH"/>
+                                                <exclude reference="vLN-4b-BVa"/>
+                                                <exclude reference="N7k-mf-gF3"/>
+                                                <exclude reference="RSe-y1-wKv"/>
+                                                <exclude reference="YRn-uj-KK6"/>
+                                                <exclude reference="vot-Sl-jTo"/>
+                                                <exclude reference="Fvn-DC-Zbx"/>
+                                                <exclude reference="Ifr-0D-STh"/>
+                                                <exclude reference="ena-Ds-z0l"/>
+                                                <exclude reference="jA0-BF-j8E"/>
+                                                <exclude reference="94I-ea-yMr"/>
+                                                <exclude reference="hnD-Iu-ueV"/>
+                                                <exclude reference="pb0-WJ-CEo"/>
+                                                <exclude reference="qqR-uo-oQc"/>
+                                                <exclude reference="BSa-WX-pZ4"/>
+                                                <exclude reference="IQ9-Vn-oTW"/>
+                                                <exclude reference="JFp-nV-IAd"/>
+                                                <exclude reference="WEn-WY-8bc"/>
+                                                <exclude reference="D5u-xo-g4Q"/>
+                                                <exclude reference="OSa-9J-j7j"/>
+                                                <exclude reference="n0c-uq-YGw"/>
+                                                <exclude reference="sid-lT-QA3"/>
+                                                <exclude reference="JUK-zk-cvL"/>
+                                                <exclude reference="M5t-xu-l6v"/>
+                                                <exclude reference="UHe-20-V03"/>
+                                                <exclude reference="mLf-Qz-JcI"/>
+                                                <exclude reference="SYh-Gv-rbf"/>
+                                                <exclude reference="VGC-u5-MFh"/>
+                                                <exclude reference="fLO-hK-qm6"/>
+                                                <exclude reference="z8s-rS-wSY"/>
+                                                <exclude reference="BIy-mm-Shg"/>
+                                                <exclude reference="Cjo-PE-dpv"/>
+                                                <exclude reference="SCU-Y2-3Y1"/>
+                                                <exclude reference="jwT-Ub-Spw"/>
+                                                <exclude reference="6oZ-Uh-y4F"/>
+                                                <exclude reference="dpS-UM-FTQ"/>
+                                                <exclude reference="fyE-pS-DkD"/>
+                                                <exclude reference="k2d-DB-nRa"/>
+                                                <exclude reference="6wp-mC-HmC"/>
+                                                <exclude reference="Eym-Wb-Nmp"/>
+                                                <exclude reference="O2x-Td-jwh"/>
+                                                <exclude reference="UgP-db-Dhh"/>
+                                                <exclude reference="EVH-kO-lCI"/>
+                                                <exclude reference="FeQ-KO-H3d"/>
+                                                <exclude reference="Kbp-Tg-yyT"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -392,78 +392,78 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="ICI-p2-fSW"/>
-                                                <include reference="EVH-kO-lCI"/>
-                                                <include reference="FeQ-KO-H3d"/>
-                                                <include reference="Kbp-Tg-yyT"/>
-                                                <include reference="BSa-WX-pZ4"/>
-                                                <include reference="IQ9-Vn-oTW"/>
-                                                <include reference="JFp-nV-IAd"/>
-                                                <include reference="WEn-WY-8bc"/>
-                                                <include reference="6wp-mC-HmC"/>
-                                                <include reference="Eym-Wb-Nmp"/>
-                                                <include reference="O2x-Td-jwh"/>
-                                                <include reference="UgP-db-Dhh"/>
-                                                <include reference="KLL-jA-Jko"/>
-                                                <include reference="VjH-gC-HAm"/>
-                                                <include reference="VrH-7d-PE3"/>
-                                                <include reference="jjE-J7-jR1"/>
-                                                <include reference="6LY-JL-xi1"/>
-                                                <include reference="CDn-mR-WNd"/>
-                                                <include reference="jMb-1Y-429"/>
-                                                <include reference="qWG-X4-ZZg"/>
-                                                <include reference="BX6-yb-m2m"/>
-                                                <include reference="UcZ-jD-rfF"/>
-                                                <include reference="WXE-gk-IQ0"/>
-                                                <include reference="d3o-2s-FA5"/>
-                                                <include reference="EYt-Zm-l7w"/>
-                                                <include reference="Rdv-oc-9NL"/>
-                                                <include reference="c3V-0K-QaH"/>
-                                                <include reference="vLN-4b-BVa"/>
-                                                <include reference="JUK-zk-cvL"/>
-                                                <include reference="M5t-xu-l6v"/>
-                                                <include reference="UHe-20-V03"/>
-                                                <include reference="mLf-Qz-JcI"/>
-                                                <include reference="94I-ea-yMr"/>
-                                                <include reference="hnD-Iu-ueV"/>
-                                                <include reference="pb0-WJ-CEo"/>
-                                                <include reference="qqR-uo-oQc"/>
-                                                <include reference="SYh-Gv-rbf"/>
-                                                <include reference="VGC-u5-MFh"/>
-                                                <include reference="fLO-hK-qm6"/>
-                                                <include reference="z8s-rS-wSY"/>
                                                 <include reference="0OD-N3-mmB"/>
                                                 <include reference="HaX-1j-TMS"/>
                                                 <include reference="eh9-C1-3Te"/>
                                                 <include reference="t3l-rX-WS4"/>
-                                                <include reference="Fvn-DC-Zbx"/>
-                                                <include reference="Ifr-0D-STh"/>
-                                                <include reference="ena-Ds-z0l"/>
-                                                <include reference="jA0-BF-j8E"/>
-                                                <include reference="N7k-mf-gF3"/>
-                                                <include reference="RSe-y1-wKv"/>
-                                                <include reference="YRn-uj-KK6"/>
-                                                <include reference="vot-Sl-jTo"/>
-                                                <include reference="6oZ-Uh-y4F"/>
-                                                <include reference="dpS-UM-FTQ"/>
-                                                <include reference="fyE-pS-DkD"/>
-                                                <include reference="k2d-DB-nRa"/>
-                                                <include reference="D5u-xo-g4Q"/>
-                                                <include reference="OSa-9J-j7j"/>
-                                                <include reference="n0c-uq-YGw"/>
-                                                <include reference="sid-lT-QA3"/>
-                                                <include reference="BIy-mm-Shg"/>
-                                                <include reference="Cjo-PE-dpv"/>
-                                                <include reference="SCU-Y2-3Y1"/>
-                                                <include reference="jwT-Ub-Spw"/>
+                                                <include reference="KLL-jA-Jko"/>
+                                                <include reference="VjH-gC-HAm"/>
+                                                <include reference="VrH-7d-PE3"/>
+                                                <include reference="jjE-J7-jR1"/>
+                                                <include reference="BX6-yb-m2m"/>
+                                                <include reference="UcZ-jD-rfF"/>
+                                                <include reference="WXE-gk-IQ0"/>
+                                                <include reference="d3o-2s-FA5"/>
                                                 <include reference="9Yn-AT-7lS"/>
                                                 <include reference="G9c-Zy-LK4"/>
                                                 <include reference="lBt-vU-i6i"/>
                                                 <include reference="q3V-gG-UCf"/>
+                                                <include reference="6LY-JL-xi1"/>
+                                                <include reference="CDn-mR-WNd"/>
+                                                <include reference="jMb-1Y-429"/>
+                                                <include reference="qWG-X4-ZZg"/>
                                                 <include reference="CGx-Xa-Jx1"/>
                                                 <include reference="cjx-Pk-DQy"/>
                                                 <include reference="ctR-BE-YZh"/>
                                                 <include reference="hZn-ML-HFu"/>
                                                 <include reference="m5z-ry-oTs"/>
+                                                <include reference="EYt-Zm-l7w"/>
+                                                <include reference="Rdv-oc-9NL"/>
+                                                <include reference="c3V-0K-QaH"/>
+                                                <include reference="vLN-4b-BVa"/>
+                                                <include reference="N7k-mf-gF3"/>
+                                                <include reference="RSe-y1-wKv"/>
+                                                <include reference="YRn-uj-KK6"/>
+                                                <include reference="vot-Sl-jTo"/>
+                                                <include reference="Fvn-DC-Zbx"/>
+                                                <include reference="Ifr-0D-STh"/>
+                                                <include reference="ena-Ds-z0l"/>
+                                                <include reference="jA0-BF-j8E"/>
+                                                <include reference="94I-ea-yMr"/>
+                                                <include reference="hnD-Iu-ueV"/>
+                                                <include reference="pb0-WJ-CEo"/>
+                                                <include reference="qqR-uo-oQc"/>
+                                                <include reference="BSa-WX-pZ4"/>
+                                                <include reference="IQ9-Vn-oTW"/>
+                                                <include reference="JFp-nV-IAd"/>
+                                                <include reference="WEn-WY-8bc"/>
+                                                <include reference="D5u-xo-g4Q"/>
+                                                <include reference="OSa-9J-j7j"/>
+                                                <include reference="n0c-uq-YGw"/>
+                                                <include reference="sid-lT-QA3"/>
+                                                <include reference="JUK-zk-cvL"/>
+                                                <include reference="M5t-xu-l6v"/>
+                                                <include reference="UHe-20-V03"/>
+                                                <include reference="mLf-Qz-JcI"/>
+                                                <include reference="SYh-Gv-rbf"/>
+                                                <include reference="VGC-u5-MFh"/>
+                                                <include reference="fLO-hK-qm6"/>
+                                                <include reference="z8s-rS-wSY"/>
+                                                <include reference="BIy-mm-Shg"/>
+                                                <include reference="Cjo-PE-dpv"/>
+                                                <include reference="SCU-Y2-3Y1"/>
+                                                <include reference="jwT-Ub-Spw"/>
+                                                <include reference="6oZ-Uh-y4F"/>
+                                                <include reference="dpS-UM-FTQ"/>
+                                                <include reference="fyE-pS-DkD"/>
+                                                <include reference="k2d-DB-nRa"/>
+                                                <include reference="6wp-mC-HmC"/>
+                                                <include reference="Eym-Wb-Nmp"/>
+                                                <include reference="O2x-Td-jwh"/>
+                                                <include reference="UgP-db-Dhh"/>
+                                                <include reference="EVH-kO-lCI"/>
+                                                <include reference="FeQ-KO-H3d"/>
+                                                <include reference="Kbp-Tg-yyT"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -542,9 +542,10 @@
                                     <rect key="frame" x="147" y="76" width="106" height="21"/>
                                 </variation>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Allows the user to - Search by City - Search by Postcode - Display a map of nearby (GPS) - Naviagte to a car park (via G.Maps)" translatesAutoresizingMaskIntoConstraints="NO" id="4F2-uW-HUK">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4F2-uW-HUK">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Allows the user to - Search by City - Search by Postcode - Display a map of nearby (GPS) - Naviagte to a car park (via G.Maps) - Drop a 'pin' so they can find their parked car</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
@@ -566,7 +567,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Find Car Park" id="OCr-nH-uD8"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="OCr-nH-uD8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbS-12-unS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -575,7 +576,7 @@
         <!--Park-->
         <scene sceneID="SE7-Ou-cAg">
             <objects>
-                <viewController title="Park" id="UBE-18-cn7" sceneMemberID="viewController">
+                <viewController title="Park" id="UBE-18-cn7" customClass="ParkViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cki-vp-fd9"/>
                         <viewControllerLayoutGuide type="bottom" id="MMP-FW-VyA"/>
@@ -591,7 +592,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="80" y="336" width="240" height="128"/>
+                                    <rect key="frame" x="80" y="63" width="240" height="128"/>
                                 </variation>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ck-Al-rbe">
@@ -600,29 +601,203 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="183" y="248" width="35" height="21"/>
+                                    <rect key="frame" x="183" y="28" width="35" height="21"/>
                                 </variation>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XnN-LT-cEu">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Length of Stay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASp-KU-nP2">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="8" y="8" width="112" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Funds Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLp-FO-dPc">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="8" y="169" width="121" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGz-QC-2gd">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="8" y="79" width="55" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqG-ae-k34">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Park!">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="166" y="242" width="36" height="30"/>
+                                        </variation>
+                                    </button>
+                                </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="ASp-KU-nP2"/>
+                                        <exclude reference="jLp-FO-dPc"/>
+                                        <exclude reference="AGz-QC-2gd"/>
+                                        <exclude reference="AqG-ae-k34"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="312" width="368" height="431"/>
+                                    <mask key="subviews">
+                                        <include reference="ASp-KU-nP2"/>
+                                        <include reference="jLp-FO-dPc"/>
+                                        <include reference="AGz-QC-2gd"/>
+                                        <include reference="AqG-ae-k34"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8wR-mD-35U">
+                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="169" y="204" width="51" height="31"/>
+                                </variation>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Park Per Hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPo-Ux-Mtr">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="214" width="108" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manually Park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSH-qn-Scb">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="241" y="214" width="109" height="21"/>
+                                </variation>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1GT-r6-yDc">
+                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="169" y="204" width="51" height="31"/>
+                                </variation>
+                                <connections>
+                                    <action selector="ParkMethodChanged:" destination="UBE-18-cn7" eventType="valueChanged" id="xok-0q-Kan"/>
+                                </connections>
+                            </switch>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-g5-oJ5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Funds Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYA-ZP-cxh">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="8" y="8" width="121" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znF-Wg-Idt">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="8" y="71" width="55" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Est. parking expiry" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNk-v9-hYz">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="8" y="133" width="143" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9S-St-KOj">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Start Parking!">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="57" y="281" width="94" height="30"/>
+                                        </variation>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJM-IN-VyI">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Stop Parking">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="222" y="281" width="89" height="30"/>
+                                        </variation>
+                                    </button>
+                                </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="hYA-ZP-cxh"/>
+                                        <exclude reference="znF-Wg-Idt"/>
+                                        <exclude reference="kNk-v9-hYz"/>
+                                        <exclude reference="V9S-St-KOj"/>
+                                        <exclude reference="CJM-IN-VyI"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="312" width="368" height="431"/>
+                                    <mask key="subviews">
+                                        <include reference="hYA-ZP-cxh"/>
+                                        <include reference="znF-Wg-Idt"/>
+                                        <include reference="kNk-v9-hYz"/>
+                                        <include reference="V9S-St-KOj"/>
+                                        <include reference="CJM-IN-VyI"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="wMs-em-4qW"/>
                                 <exclude reference="8Ck-Al-rbe"/>
+                                <exclude reference="XnN-LT-cEu"/>
+                                <exclude reference="8wR-mD-35U"/>
+                                <exclude reference="RPo-Ux-Mtr"/>
+                                <exclude reference="vSH-qn-Scb"/>
+                                <exclude reference="1GT-r6-yDc"/>
+                                <exclude reference="G8d-g5-oJ5"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="wMs-em-4qW"/>
                                 <include reference="8Ck-Al-rbe"/>
+                                <include reference="XnN-LT-cEu"/>
+                                <include reference="8wR-mD-35U"/>
+                                <include reference="RPo-Ux-Mtr"/>
+                                <include reference="vSH-qn-Scb"/>
+                                <include reference="1GT-r6-yDc"/>
+                                <include reference="G8d-g5-oJ5"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Park" id="fCc-0A-smC"/>
+                    <connections>
+                        <outlet property="HourPayView" destination="XnN-LT-cEu" id="zbG-LG-q70"/>
+                        <outlet property="ManuallyPayView" destination="G8d-g5-oJ5" id="xsM-Lu-cea"/>
+                        <outlet property="PayMethodSwitch" destination="1GT-r6-yDc" id="7ft-5s-KeQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1oz-k4-Ye7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2062.5" y="461.25"/>
+            <point key="canvasLocation" x="2104.5" y="461.25"/>
         </scene>
         <!--Settings-->
         <scene sceneID="UsL-AW-SCG">
@@ -658,11 +833,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="QP2-nz-a7v"/>
+                    <navigationItem key="navigationItem" id="FaV-Bt-VFQ">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="jcV-JP-rPJ"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcf-UX-ur0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1264.5" y="963.75"/>
+            <point key="canvasLocation" x="2104.5" y="1236.75"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rFY-FE-dOA">
@@ -677,7 +854,7 @@
                     <connections>
                         <segue destination="iLx-RE-99J" kind="relationship" relationship="viewControllers" id="jTQ-3b-lY3"/>
                         <segue destination="UBE-18-cn7" kind="relationship" relationship="viewControllers" id="faQ-7C-ue2"/>
-                        <segue destination="T3D-H7-TET" kind="relationship" relationship="viewControllers" id="cqt-l5-0Zx"/>
+                        <segue destination="Vbc-oq-C9Z" kind="relationship" relationship="viewControllers" id="cqt-l5-0Zx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Oa-ZX-YBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -701,6 +878,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qj1-5y-l3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1600.5" y="72.75"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="AVd-mj-yFq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vbc-oq-C9Z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="QP2-nz-a7v"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QUG-K1-haQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T3D-H7-TET" kind="relationship" relationship="rootViewController" id="2sc-uG-KLa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p60-oq-1vi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1264.5" y="963.75"/>
         </scene>
     </scenes>
 </document>

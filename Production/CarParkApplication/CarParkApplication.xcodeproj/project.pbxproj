@@ -14,6 +14,7 @@
 		551AC1A519E186BB0051C672 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551AC1A319E186BB0051C672 /* LaunchScreen.xib */; };
 		551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */; };
 		551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551AC1BA19E186E00051C672 /* CoreLocation.framework */; };
+		55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		551AC1AF19E186BB0051C672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarParkApplicationTests.swift; sourceTree = "<group>"; };
 		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				551AC19A19E186BB0051C672 /* AppDelegate.swift */,
 				551AC19C19E186BB0051C672 /* ViewController.swift */,
 				551AC19E19E186BB0051C672 /* Main.storyboard */,
+				55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */,
 				551AC1A119E186BB0051C672 /* Images.xcassets */,
 				551AC1A319E186BB0051C672 /* LaunchScreen.xib */,
 				551AC19819E186BB0051C672 /* Supporting Files */,
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */,
 				551AC19D19E186BB0051C672 /* ViewController.swift in Sources */,
 				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
 			);
