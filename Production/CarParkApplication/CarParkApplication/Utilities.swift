@@ -10,7 +10,7 @@ import Foundation
 
 //MARK:- Encryption
 
-func EncryptString(input:String) -> String {
+func encryptString(input:String) -> String {
     //The main encryption. Take a single string and returns it encrypted
     
     //PRE: Takes an unencrypted string
@@ -19,12 +19,12 @@ func EncryptString(input:String) -> String {
     return "Encrypted";
 }
 
-func EncryptRegistration(registrationInput:UserRegistration) -> UserRegistration{
+func encryptUserRegistration(registrationInput:UserRegistration) -> UserRegistration{
     //Takes the registration details, encrypts each String, then returns an encrypted RegistrationUser
     
     //PRE: RegistrationUser object, unencrypted
     //POST: RegistrationUser object, with values encrypted
-    return UserRegistration(firstName: EncryptString(registrationInput.FirstName), surname: EncryptString(registrationInput.SurName), email: EncryptString(registrationInput.Email), password: EncryptString(registrationInput.Password));
+    return UserRegistration(firstName: encryptString(registrationInput.FirstName), surname: encryptString(registrationInput.SurName), email: encryptString(registrationInput.Email), password: encryptString(registrationInput.Password));
 }
 
 func encryptLogin(loginInput:LoginUser) -> LoginUser {
@@ -32,17 +32,24 @@ func encryptLogin(loginInput:LoginUser) -> LoginUser {
     
     //PRE: loginUser object, unencrypted
     //POST: loginUser object, with values encrypted
-    return LoginUser(userName: EncryptString(loginInput.UserName), password: EncryptString(loginInput.Password));
+    return LoginUser(userName: encryptString(loginInput.UserName), password: encryptString(loginInput.Password));
+}
+
+func encryptVehicleRegistration(registrationInput:VehicleRegistration) -> VehicleRegistration {
+    //Takes vehicle registration details, and returns an object with them encrypted
+    
+    //PRE: VehicleRegistration object, unecnrypted
+    //POST: VehicleRegistration object, with values encrypted
+    return VehicleRegistration(make: encryptString(registrationInput.Make), colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber));
 }
 
 
 //MARK:- Decryption
 
 //The main decryption. Take a single string and returns it decrypted
-func DecryptString(input:String) -> String {
+func decryptString(input:String) -> String {
     //PRE: Takes an encrypted string
     //POST: Returns the string, decrypted
-    
     return "Decrypted";
 
 }

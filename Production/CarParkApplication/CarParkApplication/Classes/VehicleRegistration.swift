@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+class VehicleRegistration {
+    var Make: String;
+    var Colour: String;
+    var RegistrationNumber: String;
+    
+    init(make:String, colour:String, registrationNumber:String){
+        self.Make = make;
+        self.Colour = colour;
+        self.RegistrationNumber = registrationNumber;
+    }
+}
