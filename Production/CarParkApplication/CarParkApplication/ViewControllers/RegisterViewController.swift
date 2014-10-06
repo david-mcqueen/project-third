@@ -51,7 +51,7 @@ class RegisterViewController: UIViewController {
         */
         
         var result: String;
-        let userInput =  RegistrationUser(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text, confirmEmail: EmailInputConfirm.text, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
+        let userInput =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text, confirmEmail: EmailInputConfirm.text, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
         
         if(validateUserDetails(userInput)){
             sendUserDetails(userInput);
@@ -63,7 +63,7 @@ class RegisterViewController: UIViewController {
     
     //MARK:- Functions
     
-    func validateUserDetails(userInput:RegistrationUser) -> (Bool) {
+    func validateUserDetails(userInput:UserRegistration) -> (Bool) {
         //TODO:- User Details validation
         
         /*
@@ -77,7 +77,7 @@ class RegisterViewController: UIViewController {
         return true;
     }
     
-    func sendUserDetails(validatedInput:RegistrationUser){
+    func sendUserDetails(validatedInput:UserRegistration){
         //TODO:- Send registration details to server
         /*
             PRE: Validated user details are passed in

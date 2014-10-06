@@ -10,24 +10,31 @@ import Foundation
 
 //MARK:- Encryption
 
-//The main encryption. Take a single string and returns it encrypted
 func EncryptString(input:String) -> String {
+    //The main encryption. Take a single string and returns it encrypted
+    
     //PRE: Takes an unencrypted string
     //POST: Returns the string, Encrypted
-    var Encryption = "Encrypted";
     
-    return Encryption;
+    return "Encrypted";
 }
 
-//Takes the registration details, encrypts each String, then returns an encrypted RegistrationUser
-func EncryptRegistration(registrationInput:RegistrationUser) -> RegistrationUser{
+func EncryptRegistration(registrationInput:UserRegistration) -> UserRegistration{
+    //Takes the registration details, encrypts each String, then returns an encrypted RegistrationUser
+    
     //PRE: RegistrationUser object, unencrypted
-    //POST: RegistrationUser object, encrypted
-    var encryptedDetails = RegistrationUser(firstName: EncryptString(registrationInput.FirstName), surname: EncryptString(registrationInput.SurName), email: EncryptString(registrationInput.Email), password: EncryptString(registrationInput.Password));
-    
-    return encryptedDetails;
-    
+    //POST: RegistrationUser object, with values encrypted
+    return UserRegistration(firstName: EncryptString(registrationInput.FirstName), surname: EncryptString(registrationInput.SurName), email: EncryptString(registrationInput.Email), password: EncryptString(registrationInput.Password));
 }
+
+func encryptLogin(loginInput:LoginUser) -> LoginUser {
+    //Takes login credentials, and returns them encrypted in an object
+    
+    //PRE: loginUser object, unencrypted
+    //POST: loginUser object, with values encrypted
+    return LoginUser(userName: EncryptString(loginInput.UserName), password: EncryptString(loginInput.Password));
+}
+
 
 //MARK:- Decryption
 
@@ -35,7 +42,7 @@ func EncryptRegistration(registrationInput:RegistrationUser) -> RegistrationUser
 func DecryptString(input:String) -> String {
     //PRE: Takes an encrypted string
     //POST: Returns the string, decrypted
-    var decryption = "decrypted";
     
-    return decryption;
+    return "Decrypted";
+
 }

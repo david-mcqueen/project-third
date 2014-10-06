@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RegistrationUser {
+class UserRegistration {
     var FirstName: String;
     var SurName: String;
     var Email: String;
