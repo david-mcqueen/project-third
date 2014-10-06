@@ -1,5 +1,5 @@
 //
-//  loginUser.swift
+//  UserLogin.swift
 //  CarParkApplication
 //
 //  Created by DavidMcQueen on 06/10/2014.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LoginUser {
+class UserLogin {
     var UserName:String;
     var Password:String;
     

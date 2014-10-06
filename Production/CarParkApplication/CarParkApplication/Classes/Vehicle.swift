@@ -1,5 +1,5 @@
 //
-//  VehicleRegistration.swift
+//  Vehicle.swift
 //  CarParkApplication
 //
 //  Created by DavidMcQueen on 06/10/2014.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VehicleRegistration {
+class Vehicle {
     var Make: String;
     var Colour: String;
     var RegistrationNumber: String;

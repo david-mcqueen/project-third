@@ -27,7 +27,7 @@ func encryptUserRegistration(registrationInput:UserRegistration) -> UserRegistra
     return UserRegistration(firstName: encryptString(registrationInput.FirstName), surname: encryptString(registrationInput.SurName), email: encryptString(registrationInput.Email), password: encryptString(registrationInput.Password));
 }
 
-func encryptLogin(loginInput:LoginUser) -> LoginUser {
+func encryptLogin(loginInput:UserLogin) -> UserLogin {
     //Takes login credentials, and returns them encrypted in an object
     
     //PRE: loginUser object, unencrypted
@@ -35,12 +35,12 @@ func encryptLogin(loginInput:LoginUser) -> LoginUser {
     return LoginUser(userName: encryptString(loginInput.UserName), password: encryptString(loginInput.Password));
 }
 
-func encryptVehicleRegistration(registrationInput:VehicleRegistration) -> VehicleRegistration {
+func encryptVehicleRegistration(registrationInput:Vehicle) -> Vehicle {
     //Takes vehicle registration details, and returns an object with them encrypted
     
     //PRE: VehicleRegistration object, unecnrypted
     //POST: VehicleRegistration object, with values encrypted
-    return VehicleRegistration(make: encryptString(registrationInput.Make), colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber));
+    return Vehicle(make: encryptString(registrationInput.Make), colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber));
 }
 
 

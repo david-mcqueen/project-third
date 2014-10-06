@@ -1,5 +1,5 @@
 //
-//  RegistrationUser.swift
+//  UserRegistration.swift
 //  CarParkApplication
 //
 //  Created by David McQueen on 06/10/2014.

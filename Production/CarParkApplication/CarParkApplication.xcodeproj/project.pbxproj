@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD8E19E32DC800A19484 /* RegisterViewController.swift */; };
 		5519BD9319E3389700A19484 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD9219E3389700A19484 /* Utilities.swift */; };
-		5519BD9919E33F7100A19484 /* VehicleRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD9819E33F7100A19484 /* VehicleRegistration.swift */; };
-		5519BD9D19E3400C00A19484 /* loginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD9C19E3400C00A19484 /* loginUser.swift */; };
 		5519BD9F19E340FC00A19484 /* UserRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD9E19E340FC00A19484 /* UserRegistration.swift */; };
+		5519BDA319E3451A00A19484 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BDA219E3451A00A19484 /* Vehicle.swift */; };
+		5519BDA719E3458200A19484 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BDA619E3458200A19484 /* User.swift */; };
 		551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC19A19E186BB0051C672 /* AppDelegate.swift */; };
 		551AC19D19E186BB0051C672 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC19C19E186BB0051C672 /* ViewController.swift */; };
 		551AC1A019E186BB0051C672 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551AC19E19E186BB0051C672 /* Main.storyboard */; };
@@ -19,6 +19,7 @@
 		551AC1A519E186BB0051C672 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551AC1A319E186BB0051C672 /* LaunchScreen.xib */; };
 		551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */; };
 		551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551AC1BA19E186E00051C672 /* CoreLocation.framework */; };
+		557E963419E345F50037066C /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557E963319E345F50037066C /* UserLogin.swift */; };
 		55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,9 +36,9 @@
 /* Begin PBXFileReference section */
 		5519BD8E19E32DC800A19484 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		5519BD9219E3389700A19484 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		5519BD9819E33F7100A19484 /* VehicleRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleRegistration.swift; path = Classes/VehicleRegistration.swift; sourceTree = "<group>"; };
-		5519BD9C19E3400C00A19484 /* loginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = loginUser.swift; path = Classes/loginUser.swift; sourceTree = "<group>"; };
 		5519BD9E19E340FC00A19484 /* UserRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRegistration.swift; path = Classes/UserRegistration.swift; sourceTree = "<group>"; };
+		5519BDA219E3451A00A19484 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vehicle.swift; path = Classes/Vehicle.swift; sourceTree = "<group>"; };
+		5519BDA619E3458200A19484 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/User.swift; sourceTree = "<group>"; };
 		551AC19519E186BB0051C672 /* CarParkApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarParkApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551AC19919E186BB0051C672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551AC19A19E186BB0051C672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		551AC1AF19E186BB0051C672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarParkApplicationTests.swift; sourceTree = "<group>"; };
 		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		557E963319E345F50037066C /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserLogin.swift; path = Classes/UserLogin.swift; sourceTree = "<group>"; };
 		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,9 +76,10 @@
 		5519BD9419E33D3F00A19484 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5519BDA219E3451A00A19484 /* Vehicle.swift */,
 				5519BD9E19E340FC00A19484 /* UserRegistration.swift */,
-				5519BD9C19E3400C00A19484 /* loginUser.swift */,
-				5519BD9819E33F7100A19484 /* VehicleRegistration.swift */,
+				557E963319E345F50037066C /* UserLogin.swift */,
+				5519BDA619E3458200A19484 /* User.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -255,14 +258,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5519BDA319E3451A00A19484 /* Vehicle.swift in Sources */,
 				5519BD9319E3389700A19484 /* Utilities.swift in Sources */,
+				557E963419E345F50037066C /* UserLogin.swift in Sources */,
 				55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */,
-				5519BD9D19E3400C00A19484 /* loginUser.swift in Sources */,
 				5519BD9F19E340FC00A19484 /* UserRegistration.swift in Sources */,
+				5519BDA719E3458200A19484 /* User.swift in Sources */,
 				551AC19D19E186BB0051C672 /* ViewController.swift in Sources */,
 				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
 				5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */,
-				5519BD9919E33F7100A19484 /* VehicleRegistration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
