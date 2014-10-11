@@ -32,7 +32,7 @@ func encryptLogin(loginInput:UserLogin) -> UserLogin {
     
     //PRE: loginUser object, unencrypted
     //POST: loginUser object, with values encrypted
-    return LoginUser(userName: encryptString(loginInput.UserName), password: encryptString(loginInput.Password));
+    return UserLogin(userName: encryptString(loginInput.UserName), password: encryptString(loginInput.Password));
 }
 
 func encryptVehicleRegistration(registrationInput:Vehicle) -> Vehicle {

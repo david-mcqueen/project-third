@@ -13,6 +13,10 @@ class ParkViewController: UIViewController {
     @IBOutlet weak var ManuallyPayView: UIView!
     @IBOutlet weak var HourPayView: UIView!
     @IBOutlet weak var PayMethodSwitch: UISwitch!
+   
+    //TODO:- Confirm the var name
+    @IBOutlet weak var PayMethodButton: UISwitch!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +45,41 @@ class ParkViewController: UIViewController {
         viewInvert();
     }
 
+    
+    //MARK:- Functions
+    
     func viewInvert(){
         //Inverts the current state of the views
         HourPayView.hidden = !HourPayView.hidden;
         ManuallyPayView.hidden = !ManuallyPayView.hidden;
     }
+    
+    
+    func getTime() -> (hour:Int, minute:Int){
+        //POST: Returns the current hour & minute
+        //This will need to be confirmed with the server
+        let date = NSDate();
+        let calendar = NSCalendar.currentCalendar();
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date);
+        let hour = components.hour;
+        let minutes = components.minute;
+        
+        NSLog(String(minutes));
+        
+        return (hour, minutes);
+    }
+    
+    func getDate() -> (day:Int, month:Int, year: Int){
+        //POST: Returns the current day / Month / Year
+        //This will need to be confirmed with the server
+        let date = NSDate();
+        let calendar = NSCalendar.currentCalendar();
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date);
+        let day = components.day;
+        let month = components.month;
+        let year = components.year;
+        
+        return (day, month, year);
+    }
+    
 }
