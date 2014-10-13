@@ -16,6 +16,17 @@
                     <view key="view" contentMode="scaleToFill" id="dl7-YI-oPl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iV-oW-JUP">
+                                <rect key="frame" x="253" y="290" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IJu-fV-R2t" kind="showDetail" id="OR1-Cs-Yql"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="xEz-Me-j94">
@@ -30,6 +41,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZe-d9-ewd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2144" y="-95.999999999999986"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Gf8-31-egY">
+            <objects>
+                <viewController id="IJu-fV-R2t" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YxQ-a3-OLS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Piw-fP-Pje"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C7t-Cl-Nys">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kl8-Ft-znR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2876" y="140"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="jqt-3l-eRu">
