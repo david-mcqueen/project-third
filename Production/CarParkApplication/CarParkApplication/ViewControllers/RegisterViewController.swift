@@ -10,9 +10,10 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var Scroller: UIScrollView!
+   
     //MARK:- Variables & Constants
     
+    @IBOutlet weak var Scroller: UIScrollView!
     @IBOutlet weak var FirstNameInput: UITextField!
     @IBOutlet weak var SurNameInput: UITextField!
     @IBOutlet weak var EmailInput: UITextField!

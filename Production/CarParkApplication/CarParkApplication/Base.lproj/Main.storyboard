@@ -112,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="1162" y="-883"/>
         </scene>
-        <!--View Controller-->
+        <!--Register View Controller-->
         <scene sceneID="ESD-gP-jQs">
             <objects>
-                <viewController id="tC7-2M-I3X" sceneMemberID="viewController">
+                <viewController id="tC7-2M-I3X" customClass="RegisterViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9EX-vr-qCe"/>
                         <viewControllerLayoutGuide type="bottom" id="kSh-Sl-oWP"/>
@@ -124,10 +124,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YB6-vf-yL8">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YB6-vf-yL8">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tf1-09-eNb">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tf1-09-eNb">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emo-Gn-hfl" userLabel="labelFirstName">
@@ -196,6 +196,12 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXj-Ad-sq8">
+                                                <rect key="frame" x="139" y="539" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -206,9 +212,11 @@
                                             <constraint firstItem="zpC-N5-CRb" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="7V0-Hz-Jy9" userLabel="labelPassword - Left"/>
                                             <constraint firstItem="2r3-nf-b6x" firstAttribute="top" secondItem="emo-Gn-hfl" secondAttribute="bottom" constant="8" id="8eI-cf-dKS" userLabel="txtFirstName - Top"/>
                                             <constraint firstItem="qYw-9b-okI" firstAttribute="top" secondItem="2r3-nf-b6x" secondAttribute="bottom" constant="8" id="8vO-ik-BTs" userLabel="txtFirstName - Bottom"/>
+                                            <constraint firstItem="KXj-Ad-sq8" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="139" id="97o-J6-FKb"/>
                                             <constraint firstAttribute="trailing" secondItem="zpC-N5-CRb" secondAttribute="trailing" constant="236" id="BZx-4D-ZN5" userLabel="labelPassword - Right"/>
                                             <constraint firstItem="xWS-wG-C4s" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Bdx-YM-kir" userLabel="txtConfirmEmail - Left"/>
                                             <constraint firstItem="lcO-MC-9A0" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="EAm-oA-bar" userLabel="labelEmail - Left"/>
+                                            <constraint firstAttribute="trailing" secondItem="KXj-Ad-sq8" secondAttribute="trailing" constant="139" id="EW2-2z-RR2"/>
                                             <constraint firstItem="lcO-MC-9A0" firstAttribute="top" secondItem="p43-P6-8db" secondAttribute="bottom" constant="8" id="Era-Fi-QtM" userLabel="labelEmail - Top"/>
                                             <constraint firstItem="Wvz-dj-O3x" firstAttribute="top" secondItem="1ci-U9-4bk" secondAttribute="bottom" constant="8" id="G90-QD-Mrr" userLabel="txtEmail - Bottom"/>
                                             <constraint firstItem="zpC-N5-CRb" firstAttribute="top" secondItem="xWS-wG-C4s" secondAttribute="bottom" constant="8" id="GoT-Rv-GoX" userLabel="labelPassword - Top"/>
@@ -246,27 +254,31 @@
                                             <constraint firstItem="lcO-MC-9A0" firstAttribute="top" secondItem="p43-P6-8db" secondAttribute="bottom" constant="8" id="rue-qU-606" userLabel="txtSurname - Bottom"/>
                                             <constraint firstAttribute="trailing" secondItem="emo-Gn-hfl" secondAttribute="trailing" constant="8" id="svB-Yq-xPt" userLabel="labelFirstName - Right"/>
                                             <constraint firstItem="p43-P6-8db" firstAttribute="top" secondItem="qYw-9b-okI" secondAttribute="bottom" constant="8" id="yai-NZ-jV8" userLabel="txtSurname - Top"/>
+                                            <constraint firstItem="KXj-Ad-sq8" firstAttribute="top" secondItem="52g-YH-frH" secondAttribute="bottom" constant="119" id="yxj-7S-vGa"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="tf1-09-eNb" firstAttribute="top" secondItem="YB6-vf-yL8" secondAttribute="top" id="1f2-7M-mTV"/>
-                                    <constraint firstItem="tf1-09-eNb" firstAttribute="leading" secondItem="YB6-vf-yL8" secondAttribute="leading" id="3wF-zF-mCM"/>
-                                    <constraint firstAttribute="bottom" secondItem="tf1-09-eNb" secondAttribute="bottom" id="W9H-LG-kNg"/>
-                                    <constraint firstAttribute="trailing" secondItem="tf1-09-eNb" secondAttribute="trailing" id="u5w-9B-CpL"/>
+                                    <constraint firstItem="tf1-09-eNb" firstAttribute="leading" secondItem="YB6-vf-yL8" secondAttribute="leading" id="3fO-Nz-E5N"/>
+                                    <constraint firstItem="tf1-09-eNb" firstAttribute="top" secondItem="YB6-vf-yL8" secondAttribute="top" id="f8i-Yd-AD4"/>
+                                    <constraint firstAttribute="bottom" secondItem="tf1-09-eNb" secondAttribute="bottom" id="l3z-uG-xQS"/>
+                                    <constraint firstAttribute="trailing" secondItem="tf1-09-eNb" secondAttribute="trailing" id="lxU-m6-EPz"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tf1-09-eNb" firstAttribute="height" secondItem="f06-Xp-uWL" secondAttribute="height" id="1UD-sN-gF3"/>
-                            <constraint firstItem="kSh-Sl-oWP" firstAttribute="top" secondItem="YB6-vf-yL8" secondAttribute="bottom" id="599-OT-aFu"/>
-                            <constraint firstItem="YB6-vf-yL8" firstAttribute="leading" secondItem="f06-Xp-uWL" secondAttribute="leadingMargin" constant="-16" id="Yns-3S-hV6"/>
-                            <constraint firstItem="tf1-09-eNb" firstAttribute="width" secondItem="f06-Xp-uWL" secondAttribute="width" id="bp3-4N-R0g"/>
-                            <constraint firstItem="YB6-vf-yL8" firstAttribute="top" secondItem="f06-Xp-uWL" secondAttribute="topMargin" id="eAQ-1K-yjC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="YB6-vf-yL8" secondAttribute="trailing" constant="-16" id="xHv-iE-QAI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YB6-vf-yL8" secondAttribute="trailing" constant="-16" id="6xr-Sb-rBk"/>
+                            <constraint firstItem="kSh-Sl-oWP" firstAttribute="top" secondItem="YB6-vf-yL8" secondAttribute="bottom" id="8xs-Ct-rgb"/>
+                            <constraint firstItem="YB6-vf-yL8" firstAttribute="top" secondItem="f06-Xp-uWL" secondAttribute="topMargin" id="D4s-Wz-Qw3"/>
+                            <constraint firstItem="YB6-vf-yL8" firstAttribute="leading" secondItem="f06-Xp-uWL" secondAttribute="leadingMargin" constant="-16" id="WsI-Im-m5x"/>
+                            <constraint firstItem="YB6-vf-yL8" firstAttribute="height" secondItem="f06-Xp-uWL" secondAttribute="height" id="chm-Tz-bwf"/>
+                            <constraint firstItem="YB6-vf-yL8" firstAttribute="width" secondItem="f06-Xp-uWL" secondAttribute="width" id="tPK-l9-eDJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Scroller" destination="YB6-vf-yL8" id="4qf-RL-s78"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCk-57-olm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
