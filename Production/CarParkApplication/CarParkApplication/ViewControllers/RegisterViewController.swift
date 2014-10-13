@@ -10,6 +10,7 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
+    @IBOutlet weak var Scroller: UIScrollView!
     //MARK:- Variables & Constants
     
     @IBOutlet weak var FirstNameInput: UITextField!
@@ -29,6 +30,16 @@ class RegisterViewController: UIViewController {
         
         //TODO:- Disable VehicleDetailsButton until all fields are complete / have content
         
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let sceenSize: CGRect = UIScreen.mainScreen().bounds;
+        Scroller.scrollEnabled = true;
+        Scroller.contentSize = CGSize(width:sceenSize.width, height: 1000);
     }
 
     override func didReceiveMemoryWarning() {
