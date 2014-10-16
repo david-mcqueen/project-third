@@ -2,8 +2,8 @@
 //  RegisterViewController.swift
 //  CarParkApplication
 //
-//  Created by DavidMcQueen on 06/10/2014.
-//  Copyright (c) 2014 DavidMcQueen. All rights reserved.
+//  Created by David McQueen on 06/10/2014.
+//  Copyright (c) 2014 David McQueen. All rights reserved.
 //
 
 import UIKit
@@ -31,7 +31,6 @@ class RegisterViewController: UIViewController {
         
     }
     
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -49,70 +48,36 @@ class RegisterViewController: UIViewController {
     
     @IBAction func RegisterPressed(sender: AnyObject) {
         
+        
         //TODO:- Process new registration
         /*
         1) Validate details are good
-        If bad then stay on page
+            If bad then stay on page
         2) If details are good, pass them to the server
         3) Get a response back from the server
-        If success: Proceed to vehicle details
-        If Failure: take appropiate action dependent on failed reason.
+            If success: Proceed to vehicle details
+            If Failure: take appropiate action dependent on failed reason.
         */
         
-        var result: String;
         let userInput =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text, confirmEmail: EmailInputConfirm.text, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
+       
+        userInput.validate();
         
-        if(validateUserDetails(userInput)){
-            sendUserDetails(userInput);
-            NSLog(userInput.FirstName);
-            NSLog(userInput.SurName);
-            NSLog(userInput.Email);
-            NSLog(userInput.ConfirmEmail!);
-            NSLog(userInput.Password);
-            NSLog(userInput.ConfirmPassword!);
-            if (validateEmail(userInput.Email)){
-                NSLog("emailed Passed");
-            }else {
-                NSLog("email Failed");
-            }
-            
+        if(userInput.validationPassed) {
+            NSLog("Validate Success");
+            userInput.register();
         }else{
-            result = "failed";
+            NSLog(userInput.validationErrors!);
         }
+        
+        if(userInput.RegistrationSuccess){
+            let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController
+            self.navigationController?.pushViewController(viewVehicleRegistration, animated: true)
+        }else{
+            //Get the error messages
+            NSLog(userInput.RegistrationErrors!);
+        }
+        
     }
-    
-    //MARK:- Functions
-    
-    func validateUserDetails(userInput:UserRegistration) -> (Bool) {
-        //TODO:- User Details validation
-        
-        /*
-        //Pre: All of the user input fields will be passed in, via the class RegistrationUser
-        //Post: Bool = True Then the validation has passed
-        //      Bool = False. Then the validation has failed
-        
-        //This will take the user input, validate it, and then return the result (Pass / Fail)
-        */
-        
-        return true;
-    }
-    
-    func validateEmail(inputEmail: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-        
-        var emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx);
-        return emailTest.evaluateWithObject(inputEmail);
-    }
-    
-    func sendUserDetails(validatedInput:UserRegistration){
-        //TODO:- Send registration details to server
-        /*
-            PRE: Validated user details are passed in
-            POST: Unique userID is returned from the server
-        */
-        
-        //Encrypt user details
-    }
-
 
 }
