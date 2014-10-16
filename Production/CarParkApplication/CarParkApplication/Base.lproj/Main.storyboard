@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login-->
         <scene sceneID="2f3-9K-QKn">
             <objects>
-                <viewController id="ZPG-mg-6a8" sceneMemberID="viewController">
+                <viewController title="Login" id="ZPG-mg-6a8" customClass="LoginViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3PC-tA-8dM"/>
                         <viewControllerLayoutGuide type="bottom" id="Chm-Lm-vYC"/>
@@ -18,29 +18,55 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iV-oW-JUP">
-                                <rect key="frame" x="253" y="290" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                                <rect key="frame" x="132" y="366" width="56" height="30"/>
+                                <state key="normal" title="iBeacon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="IJu-fV-R2t" kind="push" id="OR1-Cs-Yql"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Registered email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYq-fY-Ajg">
+                                <rect key="frame" x="16" y="211" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-U3-aJF">
+                                <rect key="frame" x="16" y="261" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fhW-U3-aJF" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" id="0xv-d8-Ses"/>
+                            <constraint firstItem="bYq-fY-Ajg" firstAttribute="top" secondItem="3PC-tA-8dM" secondAttribute="bottom" constant="147" id="FQ0-np-VDr"/>
+                            <constraint firstItem="bYq-fY-Ajg" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" id="JaX-Vl-CIw"/>
+                            <constraint firstItem="fhW-U3-aJF" firstAttribute="top" secondItem="bYq-fY-Ajg" secondAttribute="bottom" constant="20" id="Q4u-GM-4Fl"/>
+                            <constraint firstItem="bYq-fY-Ajg" firstAttribute="trailing" secondItem="dl7-YI-oPl" secondAttribute="trailingMargin" id="QMW-vq-vrf"/>
+                            <constraint firstItem="fhW-U3-aJF" firstAttribute="trailing" secondItem="dl7-YI-oPl" secondAttribute="trailingMargin" id="i9r-qr-Tbl"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xEz-Me-j94">
-                        <barButtonItem key="leftBarButtonItem" title="Login" id="9c4-4v-N8P"/>
+                        <barButtonItem key="leftBarButtonItem" title="Login" id="9c4-4v-N8P">
+                            <connections>
+                                <action selector="LoginButtonPressed:" destination="ZPG-mg-6a8" id="uGy-3w-LqD"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Register" id="zTx-ZJ-iXE">
                             <connections>
                                 <segue destination="tC7-2M-I3X" kind="push" id="BFF-vj-w7e"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="inputEmail" destination="bYq-fY-Ajg" id="pCN-bY-tyG"/>
+                        <outlet property="inputPassword" destination="fhW-U3-aJF" id="7Fe-fE-KsB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZe-d9-ewd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143.4666666666667" y="-90.879999999999981"/>
+            <point key="canvasLocation" x="1143" y="-91"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Dum-6E-mzh">
@@ -283,6 +309,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Register" id="Dyg-UT-S23">
                             <connections>
                                 <action selector="RegisterPressed:" destination="tC7-2M-I3X" id="G2h-fE-6V3"/>
+                                <segue destination="0AA-am-eg3" kind="custom" id="rtt-MC-Afm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -300,10 +327,28 @@
             </objects>
             <point key="canvasLocation" x="1533" y="-493"/>
         </scene>
-        <!--View Controller-->
+        <!--Vehicle Registration-->
+        <scene sceneID="bYo-9w-Eu0">
+            <objects>
+                <viewController storyboardIdentifier="viewVehicleRegistration" id="0AA-am-eg3" userLabel="Vehicle Registration" customClass="RegisterVehicleViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BTi-KJ-B2t"/>
+                        <viewControllerLayoutGuide type="bottom" id="G8m-0I-MkP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w5k-wN-pqm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L5C-Yl-1sS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1995" y="-493"/>
+        </scene>
+        <!--Park-->
         <scene sceneID="Gf8-31-egY">
             <objects>
-                <viewController id="IJu-fV-R2t" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Park" id="IJu-fV-R2t" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="apF-DA-51q"/>
                         <viewControllerLayoutGuide type="bottom" id="361-zD-KhO"/>
@@ -317,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kl8-Ft-znR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1533.8666666666666" y="132.53333333333333"/>
+            <point key="canvasLocation" x="1533" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ghc-rn-YZo">

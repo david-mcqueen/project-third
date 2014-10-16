@@ -16,4 +16,8 @@ class UserLogin {
         self.UserName = userName;
         self.Password = password;
     }
+    
+    func login() -> Bool{
+        return true;
+    }
 }
