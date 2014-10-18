@@ -33,4 +33,8 @@ class CarParkApplicationTests: XCTestCase {
         }
     }
     
+    func testDoSomething(){
+        
+    }
+    
 }
