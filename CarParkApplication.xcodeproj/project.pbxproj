@@ -28,6 +28,7 @@
 		55BB56A019F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A119F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A419F2CD1800492154 /* UtilitiesTests.swift */; };
+		55BB56A719F2DBBA00492154 /* UserRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A619F2DBBA00492154 /* UserRegistrationTests.swift */; };
 		55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		5584FBA419F05133001CE01D /* RegisterVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVehicleViewController.swift; path = ViewControllers/RegisterVehicleViewController.swift; sourceTree = "<group>"; };
 		55BB569F19F2C70C00492154 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
+		55BB56A619F2DBBA00492154 /* UserRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationTests.swift; sourceTree = "<group>"; };
 		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +156,7 @@
 			children = (
 				551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */,
 				55BB56A419F2CD1800492154 /* UtilitiesTests.swift */,
+				55BB56A619F2DBBA00492154 /* UserRegistrationTests.swift */,
 				551AC1AE19E186BB0051C672 /* Supporting Files */,
 			);
 			path = CarParkApplicationTests;
@@ -293,6 +296,7 @@
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
 				557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,
+				55BB56A719F2DBBA00492154 /* UserRegistrationTests.swift in Sources */,
 				55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */,
 				557C2CF419F2C4D500DE28DF /* UserLogin.swift in Sources */,
 				557C2CF119F2C4C300DE28DF /* User.swift in Sources */,

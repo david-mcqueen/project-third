@@ -36,6 +36,7 @@ class UserRegistration {
         self.ConfirmPassword = confirmPassword;
     }
     
+
     func validate(){
         //TODO:- User Details validation
         
