@@ -11,6 +11,7 @@ import XCTest
 
 class CarParkApplicationTests: XCTestCase {
     
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -33,8 +34,11 @@ class CarParkApplicationTests: XCTestCase {
         }
     }
     
-    func testDoSomething(){
-        
+    func testUserValidation(){
+        var testUser = UserRegistration(firstName: "David", surname: "McQueen", email: "t@t.com", password: "abcd");
+        testUser.register();
+        XCTAssert(testUser.RegistrationSuccess, "User Registration");
     }
+    
     
 }

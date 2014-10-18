@@ -19,7 +19,7 @@ class UserRegistration {
     var validationErrors: String?;
     var RegistrationSuccess: Bool = false;
     var RegistrationErrors: String?;
-    
+        
     init(firstName:String, surname:String, email:String, password:String) {
         self.FirstName = firstName;
         self.SurName = surname;
@@ -91,6 +91,6 @@ class UserRegistration {
         
     }
     
-
+    
     
 }
