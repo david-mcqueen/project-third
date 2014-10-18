@@ -22,11 +22,6 @@ class CarParkApplicationTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
@@ -36,9 +31,11 @@ class CarParkApplicationTests: XCTestCase {
     
     func testUserValidation(){
         var testUser = UserRegistration(firstName: "David", surname: "McQueen", email: "t@t.com", password: "abcd");
-        testUser.register();
-        XCTAssert(testUser.RegistrationSuccess, "User Registration");
+        testUser.validate();
+        XCTAssert(testUser.validationSuccess, "Validation Passed");
     }
+    
+
     
     
 }

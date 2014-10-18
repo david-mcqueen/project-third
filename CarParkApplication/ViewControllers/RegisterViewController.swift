@@ -63,7 +63,7 @@ class RegisterViewController: UIViewController {
        
         userInput.validate();
         
-        if(userInput.validationPassed) {
+        if(userInput.validationSuccess) {
             NSLog("Validate Success");
             userInput.register();
         }else{

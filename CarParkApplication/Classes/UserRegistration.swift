@@ -15,7 +15,7 @@ class UserRegistration {
     var ConfirmEmail: String?;
     var Password: String;
     var ConfirmPassword: String?;
-    var validationPassed: Bool = false;
+    var validationSuccess: Bool = false;
     var validationErrors: String?;
     var RegistrationSuccess: Bool = false;
     var RegistrationErrors: String?;
@@ -49,9 +49,7 @@ class UserRegistration {
         NSLog(self.FirstName);
         NSLog(self.SurName);
         NSLog(self.Email);
-        NSLog(self.ConfirmEmail!);
         NSLog(self.Password);
-        NSLog(self.ConfirmPassword!);
         if (validateEmail(self.Email)){
             NSLog("emailed Passed");
         }else {
@@ -59,9 +57,9 @@ class UserRegistration {
         }
         
         if(true){
-            self.validationPassed = true;
+            self.validationSuccess = true;
         }else{
-            self.validationPassed = false;
+            self.validationSuccess = false;
             self.validationErrors = "Errors";
         }
         
