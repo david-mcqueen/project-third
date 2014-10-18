@@ -28,7 +28,11 @@ class UtilitiesTests: XCTestCase {
         }
     }
     
+    
+    //MARK:- Email Validation Tests
+    
     func testValidEmail(){
+        //Test valid emails are returned valid
         XCTAssertTrue(validateEmail("test@gmail.com"), "Email Validation");
         XCTAssertTrue(validateEmail("test@gmail.co.uk"), "Email Validation");
         XCTAssertTrue(validateEmail("test@gmail.com"), "Email Validation");
@@ -39,16 +43,50 @@ class UtilitiesTests: XCTestCase {
     }
     
     func testInvalidEmail(){
-        
-        XCTAssertFalse(validateEmail("testATgmail.com"), "Email Validation");
-        XCTAssertFalse(validateEmail("test@gmailcom"), "Email Validation");
-        XCTAssertFalse(validateEmail("test_@gmailcom"), "Email Validation");
-        XCTAssertFalse(validateEmail("test@google.com123"), "Email Validation");
-        XCTAssertFalse(validateEmail("test@gmail.com@"), "Email Validation");
-        XCTAssertFalse(validateEmail("@test@gmail.com"), "Email Validation");
-        XCTAssertFalse(validateEmail("test@gmail.com."), "Email Validation");
+        //Test invalid emails are returned invalid
+        XCTAssertFalse(validateEmail("testATgmail.com"), "Email Validation - No @");
+        XCTAssertFalse(validateEmail("test@gmailcom"), "Email Validation - No .");
+        XCTAssertFalse(validateEmail("test_@gmailcom"), "Email Validation - Misplaced _");
+        XCTAssertFalse(validateEmail("test@google.com123"), "Email Validation - Ending number");
+        XCTAssertFalse(validateEmail("test@gmail.com@"), "Email Validation - Ending @");
+        XCTAssertFalse(validateEmail("@test@gmail.com"), "Email Validation - Starting @");
+        XCTAssertFalse(validateEmail("test@gmail.com."), "Email Validation - Ending .");
+        XCTAssertFalse(validateEmail(".test@gmail.com."), "Email Validation - Starting .");
     }
     
     
+    //MARK:- Password Validation Tests
+    
+    func testValidPassword(){
+        //Test valid passwords are returned valid
+        XCTAssertTrue(validatePassword("passWord123@"), "Password Validation");
+    }
+    
+    func testInvalidPassword(){
+        //Test invalid passwords are returned invalid
+        XCTAssertFalse(validatePassword(""), "Password Validation - Empty");
+        XCTAssertFalse(validatePassword("pA1@"), "Password Validation - Short");
+        XCTAssertFalse(validatePassword("pA1@ThisIsTooLongToPassValidation"), "Password Validation - Short");
+        XCTAssertFalse(validatePassword("password123@"), "Password Validation - Upper Case");
+        XCTAssertFalse(validatePassword("passWord123"), "Password Validation - Symbol");
+        XCTAssertFalse(validatePassword("passWord@"), "Password Validation - Number");
+    }
 
+    //MARK:- Encryption & Decryption Tests
+    
+    func testStringEncryption(){
+        //Tests that a string is encrypted correctly
+        //Once we decide on an encryption method
+        
+        //This needs to be changed to XCTAssertEqual()
+        XCTAssertNotEqual("Call Function And Encrypt String", "Encrypted string to compare", "String Encryption");
+    }
+    
+    func testStringDecryption(){
+        //Tests that a string is decrypted correctly
+        //Once we decide on an encryption method
+        
+        //This needs to be changed to XCTAssertEqual()
+        XCTAssertNotEqual("Call Function And Decrypt String", "Decrypted string to compare", "String Decryption");
+    }
 }
