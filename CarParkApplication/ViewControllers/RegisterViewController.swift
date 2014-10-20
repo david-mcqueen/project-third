@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class RegisterViewController: UIViewController {
 
@@ -44,40 +45,62 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK:- Actions
+    //MARK:- Functions
     
     @IBAction func RegisterPressed(sender: AnyObject) {
         
-        
-        //TODO:- Process new registration
-        /*
-        1) Validate details are good
-            If bad then stay on page
-        2) If details are good, pass them to the server
-        3) Get a response back from the server
-            If success: Proceed to vehicle details
-            If Failure: take appropiate action dependent on failed reason.
-        */
-        
-        let userInput =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text, confirmEmail: EmailInputConfirm.text, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
+        let userInput =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text.lowercaseString, confirmEmail: EmailInputConfirm.text.lowercaseString, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
        
-        userInput.validate();
+        var emailMatch = userInput.matchingEmail()
+        var passwordMatch = userInput.matchingPassword();
         
-        if(userInput.validationSuccess) {
-            NSLog("Validate Success");
-            userInput.register();
+        if (emailMatch && passwordMatch){
+            userInput.validate();
+            
+            if(userInput.validationSuccess.password && userInput.validationSuccess.email) {
+                NSLog("Validate Success");
+                userInput.register();
+            }else{
+                NSLog("Validation Failed");
+                validationFailed(!userInput.validationSuccess.email, password: !userInput.validationSuccess.password);
+            }
+            
+            if(userInput.RegistrationSuccess){
+                NSLog("Registration Successful");
+                
+                let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController
+                self.navigationController?.pushViewController(viewVehicleRegistration, animated: true);
+            }else{
+                //Get the error messages
+                NSLog("Registration Failed");
+                NSLog(userInput.RegistrationErrors!);
+            }
+            
         }else{
-            NSLog(userInput.validationErrors!);
+            inputMatchFailed(!emailMatch, password: !passwordMatch);
         }
-        
-        if(userInput.RegistrationSuccess){
-            let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController
-            self.navigationController?.pushViewController(viewVehicleRegistration, animated: true)
-        }else{
-            //Get the error messages
-            NSLog(userInput.RegistrationErrors!);
+    }
+    
+    func inputMatchFailed(email: Bool, password: Bool){
+        if(email){
+            borderRed(EmailInput);
+            borderRed(EmailInputConfirm);
+        }else if(password){
+            borderRed(PasswordInput);
+            borderRed(PasswordInputConfirm);
         }
-        
+    }
+    
+    func validationFailed(email: Bool, password: Bool){
+        if(email){
+            borderRed(EmailInput);
+        }else if(password){
+            borderRed(PasswordInput);
+        }
+    }
+    
+    func borderRed(inputField: UITextField){
+        inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
     }
 
 }

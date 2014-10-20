@@ -15,8 +15,7 @@ class UserRegistration {
     var ConfirmEmail: String?;
     var Password: String;
     var ConfirmPassword: String?;
-    var validationSuccess: Bool = false;
-    var validationErrors: String?;
+    var validationSuccess: (email:Bool, password:Bool) = (false, false);
     var RegistrationSuccess: Bool = false;
     var RegistrationErrors: String?;
         
@@ -36,34 +35,33 @@ class UserRegistration {
         self.ConfirmPassword = confirmPassword;
     }
     
+    func matchingEmail() -> Bool{
+        if(Email.lowercaseString == ConfirmEmail?.lowercaseString){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    func matchingPassword() -> Bool{
+        if(Password == ConfirmPassword){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     func validate(){
-        //TODO:- User Details validation
+        // Validates the user input details
+
+        NSLog("Validating User Input");
         
-        /*
-        //Pre: All of the user input fields will be passed in, via the class RegistrationUser
-        //Post: Bool = True Then the validation has passed
-        //      Bool = False. Then the validation has failed
-        
-        //This will take the user input, validate it, and then return the result (Pass / Fail)
-        */
-        NSLog(self.FirstName);
-        NSLog(self.SurName);
-        NSLog(self.Email);
-        NSLog(self.Password);
-        if (validateEmail(self.Email)){
-            NSLog("emailed Passed");
-        }else {
-            NSLog("email Failed");
+        if(validateEmail(self.Email)){
+            self.validationSuccess.email = true;
         }
-        
-        if(true){
-            self.validationSuccess = true;
-        }else{
-            self.validationSuccess = false;
-            self.validationErrors = "Errors";
+        if(validatePassword(self.Password)){
+            self.validationSuccess.password = true;
         }
-        
     }
     
     func register(){
