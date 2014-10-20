@@ -55,10 +55,11 @@ class RegisterViewController: UIViewController {
         var passwordMatch = userInput.matchingPassword();
         
         if (emailMatch && passwordMatch){
+            NSLog("Input match successful");
             userInput.validate();
             
             if(userInput.validationSuccess.password && userInput.validationSuccess.email) {
-                NSLog("Validate Success");
+                NSLog("Validation Success");
                 userInput.register();
             }else{
                 NSLog("Validation Failed");
@@ -77,11 +78,13 @@ class RegisterViewController: UIViewController {
             }
             
         }else{
+            NSLog("Input match failed");
             inputMatchFailed(!emailMatch, password: !passwordMatch);
         }
     }
     
     func inputMatchFailed(email: Bool, password: Bool){
+        //The email and/or password entered did not match the confirmation entry
         if(email){
             borderRed(EmailInput);
             borderRed(EmailInputConfirm);
@@ -92,6 +95,7 @@ class RegisterViewController: UIViewController {
     }
     
     func validationFailed(email: Bool, password: Bool){
+        //The email and/or password entered failed validation.
         if(email){
             borderRed(EmailInput);
         }else if(password){
@@ -100,6 +104,7 @@ class RegisterViewController: UIViewController {
     }
     
     func borderRed(inputField: UITextField){
+        //Set the border colour red for the input that failed
         inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
     }
 

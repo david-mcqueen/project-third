@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1nD-Qw-M7e">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -356,7 +355,29 @@
                     <view key="view" contentMode="scaleToFill" id="C7t-Cl-Nys">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXc-bN-x31">
+                                <rect key="frame" x="8" y="101" width="304" height="80"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Closest car park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-t9-7Gn">
+                                <rect key="frame" x="8" y="72" width="126" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hPG-t9-7Gn" firstAttribute="top" secondItem="apF-DA-51q" secondAttribute="bottom" constant="8" id="2Hh-AJ-z4j"/>
+                            <constraint firstItem="wXc-bN-x31" firstAttribute="leading" secondItem="C7t-Cl-Nys" secondAttribute="leadingMargin" constant="-8" id="8SA-67-vdK"/>
+                            <constraint firstItem="wXc-bN-x31" firstAttribute="top" secondItem="hPG-t9-7Gn" secondAttribute="bottom" constant="8" id="J1E-6x-6Q8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wXc-bN-x31" secondAttribute="trailing" constant="-8" id="OBU-d4-3OL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hPG-t9-7Gn" secondAttribute="trailing" constant="254" id="YZN-eb-S11"/>
+                            <constraint firstItem="hPG-t9-7Gn" firstAttribute="leading" secondItem="C7t-Cl-Nys" secondAttribute="leadingMargin" constant="-8" id="yk5-g7-uqV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zEl-P7-PLH"/>
                 </viewController>

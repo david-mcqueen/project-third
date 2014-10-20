@@ -10,11 +10,13 @@ import Foundation
 
 class Vehicle {
     var Make: String;
+    var Model: String;
     var Colour: String;
     var RegistrationNumber: String;
     
-    init(make:String, colour:String, registrationNumber:String){
+    init(make:String, model: String, colour:String, registrationNumber:String){
         self.Make = make;
+        self.Model = model;
         self.Colour = colour;
         self.RegistrationNumber = registrationNumber;
     }

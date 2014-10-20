@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
         if(userLogin.login()){
             //Login has been successful
             NSLog("Login successful");
+            
         }else{
             NSLog("Login unsuccessful");
         }
