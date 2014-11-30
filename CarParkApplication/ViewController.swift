@@ -56,10 +56,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //Disregard beacons that are Unknown proximity
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.Unknown };
         
+        
         //TODO:- Organise the array in closest first
         // It looks like it might already do that, however cant be trusted
         if(knownBeacons.count > 0){
             println(knownBeacons);
+            let closestBeacon = knownBeacons[0] as CLBeacon;
+            
+            println(closestBeacon.rssi);
+            println(closestBeacon.minor.integerValue);
+            println(closestBeacon.major.integerValue);
         }
         
     }

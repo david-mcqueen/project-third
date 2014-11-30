@@ -40,7 +40,7 @@ func encryptVehicleRegistration(registrationInput:Vehicle) -> Vehicle {
     
     //PRE: VehicleRegistration object, unecnrypted
     //POST: VehicleRegistration object, with values encrypted
-    return Vehicle(make: encryptString(registrationInput.Make), colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber));
+    return Vehicle(make: encryptString(registrationInput.Make), model: "Test", colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber));
 }
 
 
@@ -51,7 +51,6 @@ func decryptString(input:String) -> String {
     //PRE: Takes an encrypted string
     //POST: Returns the string, decrypted
     return "Decrypted";
-    
 }
 
 
@@ -60,10 +59,11 @@ func decryptString(input:String) -> String {
 
 func validateEmail(inputEmail: String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    
     var emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx);
-    return emailTest.evaluateWithObject(inputEmail);
-}
+    
+    return emailTest!.evaluateWithObject(inputEmail);
+    
+    }
 
 
 func validatePassword(inputPassword: String) -> Bool{
@@ -76,8 +76,8 @@ func validatePassword(inputPassword: String) -> Bool{
         be between 6 and 20 characters
     */
     let passwordRegEx = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
-    
     var passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegEx);
-    return passwordTest.evaluateWithObject(inputPassword);
+    
+    return passwordTest!.evaluateWithObject(inputPassword);
     
 }
