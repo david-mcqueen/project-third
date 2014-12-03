@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1nD-Qw-M7e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1nD-Qw-M7e">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -363,12 +363,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Closest car park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-t9-7Gn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Closest car park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-t9-7Gn">
                                 <rect key="frame" x="8" y="72" width="126" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SW1-VG-lem">
+                                <rect key="frame" x="86" y="220" width="148" height="30"/>
+                                <state key="normal" title="Find closest car park!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="findCarParkButton:" destination="IJu-fV-R2t" eventType="touchUpInside" id="qHf-O8-dbM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -376,11 +385,13 @@
                             <constraint firstItem="wXc-bN-x31" firstAttribute="leading" secondItem="C7t-Cl-Nys" secondAttribute="leadingMargin" constant="-8" id="8SA-67-vdK"/>
                             <constraint firstItem="wXc-bN-x31" firstAttribute="top" secondItem="hPG-t9-7Gn" secondAttribute="bottom" constant="8" id="J1E-6x-6Q8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wXc-bN-x31" secondAttribute="trailing" constant="-8" id="OBU-d4-3OL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hPG-t9-7Gn" secondAttribute="trailing" constant="254" id="YZN-eb-S11"/>
                             <constraint firstItem="hPG-t9-7Gn" firstAttribute="leading" secondItem="C7t-Cl-Nys" secondAttribute="leadingMargin" constant="-8" id="yk5-g7-uqV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zEl-P7-PLH"/>
+                    <connections>
+                        <outlet property="beaonOutput" destination="wXc-bN-x31" id="ZSK-x4-tKO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kl8-Ft-znR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -58,10 +58,14 @@ class UserRegistration {
         
         if(validateEmail(self.Email)){
             self.validationSuccess.email = true;
+            NSLog("Email Validated successfully");
         }
         if(validatePassword(self.Password)){
             self.validationSuccess.password = true;
+            NSLog("Password Validated successfully");
         }
+        
+        
     }
     
     func register(){

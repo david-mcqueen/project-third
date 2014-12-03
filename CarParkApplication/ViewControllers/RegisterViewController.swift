@@ -49,24 +49,24 @@ class RegisterViewController: UIViewController {
     
     @IBAction func RegisterPressed(sender: AnyObject) {
         
-        let userInput =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text.lowercaseString, confirmEmail: EmailInputConfirm.text.lowercaseString, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
+        let newRegistration =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text.lowercaseString, confirmEmail: EmailInputConfirm.text.lowercaseString, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
        
-        var emailMatch = userInput.matchingEmail()
-        var passwordMatch = userInput.matchingPassword();
+        var emailMatch = newRegistration.matchingEmail();
+        var passwordMatch = newRegistration.matchingPassword();
         
         if (emailMatch && passwordMatch){
             NSLog("Input match successful");
-            userInput.validate();
+            newRegistration.validate();
             
-            if(userInput.validationSuccess.password && userInput.validationSuccess.email) {
+            if(newRegistration.validationSuccess.password && newRegistration.validationSuccess.email) {
                 NSLog("Validation Success");
-                userInput.register();
+                newRegistration.register();
             }else{
                 NSLog("Validation Failed");
-                validationFailed(!userInput.validationSuccess.email, password: !userInput.validationSuccess.password);
+                validationFailed(!newRegistration.validationSuccess.email, password: !newRegistration.validationSuccess.password);
             }
             
-            if(userInput.RegistrationSuccess){
+            if(newRegistration.RegistrationSuccess){
                 NSLog("Registration Successful");
                 
                 let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController
@@ -74,7 +74,7 @@ class RegisterViewController: UIViewController {
             }else{
                 //Get the error messages
                 NSLog("Registration Failed");
-                NSLog(userInput.RegistrationErrors!);
+                NSLog(newRegistration.RegistrationErrors!);
             }
             
         }else{

@@ -81,3 +81,11 @@ func validatePassword(inputPassword: String) -> Bool{
     return passwordTest!.evaluateWithObject(inputPassword);
     
 }
+
+func validatePhoneNumber(inputNumber: Int) -> Bool{
+    //Phone Number must be 11 characters long
+    let numberRegEx = "[0-9]{11}";
+    var numberTest = NSPredicate(format:"SELF MATCHES %@", numberRegEx);
+    
+    return numberTest!.evaluateWithObject(inputNumber);
+}

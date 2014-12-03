@@ -12,8 +12,9 @@ import CoreLocation
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager();
-    let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark")
+    let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     
+    @IBOutlet weak var beaonOutput: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +26,43 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization();
         }
         
+        
         //TODO:- Handle the user denying the location request
-        
-        
+    }
+    
+    @IBAction func findCarParkButton(sender: AnyObject) {
         //Start looking for beacons so long as we have permission
         if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-                
-                locationManager.startRangingBeaconsInRegion(region);
+            //Start looks for regions
+            NSLog("Start monitoring for regions");
+            locationManager.startRangingBeaconsInRegion(region);
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func getBeaconDetails(major: Int, minor: Int, rssi: Int){
+        var locationName: String;
+        
+        
+        //Will have to get the beacon details and match.
+        //Either on the server or locally
+        println(String(rssi));
+        println(String(minor));
+        println(String(major));
+        var beacon = String(major) + "." + String(minor);
+        beaonOutput.text = beacon;
+    }
+
+    
+    func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
+        println("rangingDidFailForRegion");
+        println(error.localizedDescription);
+    }
+    
     
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
@@ -56,16 +79,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //Disregard beacons that are Unknown proximity
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.Unknown };
         
-        
-        //TODO:- Organise the array in closest first
-        // It looks like it might already do that, however cant be trusted
+
         if(knownBeacons.count > 0){
             println(knownBeacons);
             let closestBeacon = knownBeacons[0] as CLBeacon;
             
-            println(closestBeacon.rssi);
-            println(closestBeacon.minor.integerValue);
-            println(closestBeacon.major.integerValue);
+            
+            getBeaconDetails(closestBeacon.major.integerValue, minor: closestBeacon.minor.integerValue, rssi: closestBeacon.rssi);
+            
+            //We have found the closest beacon, stop ranging for new locations
+            locationManager.stopRangingBeaconsInRegion(region);
         }
         
     }
