@@ -50,13 +50,16 @@ class RegisterViewController: UIViewController {
     @IBAction func RegisterPressed(sender: AnyObject) {
         
         let newRegistration =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text.lowercaseString, confirmEmail: EmailInputConfirm.text.lowercaseString, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
-       
-        var emailMatch = newRegistration.matchingEmail();
-        var passwordMatch = newRegistration.matchingPassword();
         
-        if (emailMatch && passwordMatch){
+        //Validate before checking emails match
+        newRegistration.validate();
+        
+        var matchingEmail = newRegistration.matchingEmail();
+        var matchingPassword = newRegistration.matchingPassword();
+        
+        if (matchingEmail && matchingPassword){
             NSLog("Input match successful");
-            newRegistration.validate();
+            
             
             if(newRegistration.validationSuccess.password && newRegistration.validationSuccess.email) {
                 NSLog("Validation Success");
@@ -79,7 +82,7 @@ class RegisterViewController: UIViewController {
             
         }else{
             NSLog("Input match failed");
-            inputMatchFailed(!emailMatch, password: !passwordMatch);
+            inputMatchFailed(!matchingEmail, password: !matchingPassword);
         }
     }
     
@@ -106,6 +109,10 @@ class RegisterViewController: UIViewController {
     func borderRed(inputField: UITextField){
         //Set the border colour red for the input that failed
         inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
+        inputField.layer.borderWidth = 2.0;
+        inputField.layer.cornerRadius = 5;
+        inputField.clipsToBounds = true;
+        
     }
 
 }

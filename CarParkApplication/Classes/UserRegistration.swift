@@ -9,6 +9,7 @@
 import Foundation
 
 class UserRegistration {
+    //TODO:- Move functions into the controllers!
     var FirstName: String;
     var SurName: String;
     var Email: String;
@@ -53,6 +54,7 @@ class UserRegistration {
 
     func validate(){
         // Validates the user input details
+        // TODO:- Check inputs are not empty
 
         NSLog("Validating User Input");
         
@@ -64,8 +66,6 @@ class UserRegistration {
             self.validationSuccess.password = true;
             NSLog("Password Validated successfully");
         }
-        
-        
     }
     
     func register(){

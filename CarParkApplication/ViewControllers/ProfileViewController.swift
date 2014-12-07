@@ -41,7 +41,7 @@ class ProfileVewController: UIViewController, PayPalPaymentDelegate {
         var payment = PayPalPayment()
         payment.amount = amount
         payment.currencyCode = "GBP"
-        payment.shortDescription = "Carparking payment"
+        payment.shortDescription = "Car Parking Funds"
         
         if (!payment.processable) {
             println("Can't process payment")

@@ -17,6 +17,22 @@ class UserLogin {
         self.Password = password;
     }
     
+    func emptyInputUsername() -> Bool{
+        if self.UserName == ""{
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    func emptyInputPassword() -> Bool{
+        if self.Password == ""{
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     func login() -> Bool{
         return true;
     }

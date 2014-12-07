@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iV-oW-JUP">
-                                <rect key="frame" x="132" y="366" width="56" height="30"/>
-                                <state key="normal" title="iBeacon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Registered email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYq-fY-Ajg">
                                 <rect key="frame" x="16" y="211" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -34,15 +28,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-05-WJk">
-                                <rect key="frame" x="142" y="450" width="44" height="30"/>
-                                <state key="normal" title="Profile">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Kle-kD-CjN" kind="push" id="SHX-g2-QWl"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -369,7 +354,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Closest car park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-t9-7Gn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Closest car park" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-t9-7Gn">
                                 <rect key="frame" x="8" y="72" width="126" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -394,6 +379,7 @@
                             <constraint firstItem="hPG-t9-7Gn" firstAttribute="leading" secondItem="C7t-Cl-Nys" secondAttribute="leadingMargin" constant="-8" id="yk5-g7-uqV"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Park" id="XKB-3X-fYU"/>
                     <navigationItem key="navigationItem" id="zEl-P7-PLH"/>
                     <connections>
                         <outlet property="beaonOutput" destination="wXc-bN-x31" id="ZSK-x4-tKO"/>
@@ -401,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kl8-Ft-znR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1533" y="132"/>
+            <point key="canvasLocation" x="2113" y="363"/>
         </scene>
         <!--Profile-->
         <scene sceneID="15U-c4-vF6">
@@ -432,6 +418,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" id="sx0-1U-HAb"/>
                     <navigationItem key="navigationItem" title="Profile" id="TcI-cv-rhZ"/>
                     <connections>
                         <outlet property="valueInput" destination="UQ9-aQ-vjn" id="D2W-ja-biJ"/>
@@ -439,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w24-C4-PSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="618"/>
+            <point key="canvasLocation" x="2522" y="363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ghc-rn-YZo">
@@ -458,6 +445,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ygz-rQ-8a4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="733.33333333333337" y="-90.879999999999981"/>
+        </scene>
+        <!--Logged In-->
+        <scene sceneID="Lyq-AC-FZN">
+            <objects>
+                <tabBarController storyboardIdentifier="viewLoggedInViewController" title="Logged In" automaticallyAdjustsScrollViewInsets="NO" id="gWl-Q9-dSo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="z1K-on-2fL">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="IJu-fV-R2t" kind="relationship" relationship="viewControllers" id="dTZ-lu-zyh"/>
+                        <segue destination="Kle-kD-CjN" kind="relationship" relationship="viewControllers" id="o7s-Uo-10R"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AAg-dw-lHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1581" y="363"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

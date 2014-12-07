@@ -30,18 +30,37 @@ class LoginViewController: UIViewController{
     @IBAction func LoginButtonPressed(sender: AnyObject) {
         let userLogin = UserLogin(userName: inputEmail.text, password: inputPassword.text);
         
-        if(userLogin.login()){
-            //Login has been successful
-            //Display the logged in section
-            NSLog("Login successful");
-            let viewParkViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkViewController") as ViewController
-            self.navigationController?.pushViewController(viewParkViewController, animated: true);
-            
+        if(!userLogin.emptyInputUsername()){
+            borderRed(inputEmail);
+        }else if(!userLogin.emptyInputPassword()){
+            borderRed(inputPassword);
         }else{
-            NSLog("Login unsuccessful");
+            if(userLogin.login()){
+                //Login has been successful
+                //Display the logged in section
+                NSLog("Login successful");
+                let viewLoggedInViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController
+                self.navigationController?.pushViewController(viewLoggedInViewController, animated: true);
+                
+            }else{
+                NSLog("Login unsuccessful");
+            }
         }
-        
     }
 
+    func borderRed(inputField: UITextField){
+        //Set the border colour red for the input that failed
+        inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
+        inputField.layer.borderWidth = 2.0;
+        inputField.layer.cornerRadius = 5;
+        inputField.clipsToBounds = true;
+    }
+    
+    func clearBorderRed(inputField: UITextField){
+        inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
+        inputField.layer.borderWidth = 0.0;
+        inputField.layer.cornerRadius = 5;
+        inputField.clipsToBounds = true;
+    }
 
 }
