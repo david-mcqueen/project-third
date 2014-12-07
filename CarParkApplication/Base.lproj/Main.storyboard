@@ -23,9 +23,6 @@
                                 <state key="normal" title="iBeacon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="IJu-fV-R2t" kind="push" id="OR1-Cs-Yql"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Registered email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYq-fY-Ajg">
                                 <rect key="frame" x="16" y="211" width="288" height="30"/>
@@ -37,6 +34,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-05-WJk">
+                                <rect key="frame" x="142" y="450" width="44" height="30"/>
+                                <state key="normal" title="Profile">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Kle-kD-CjN" kind="push" id="SHX-g2-QWl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -348,7 +354,7 @@
         <!--Park-->
         <scene sceneID="Gf8-31-egY">
             <objects>
-                <viewController title="Park" id="IJu-fV-R2t" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewParkViewController" title="Park" id="IJu-fV-R2t" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="apF-DA-51q"/>
                         <viewControllerLayoutGuide type="bottom" id="361-zD-KhO"/>
@@ -396,6 +402,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kl8-Ft-znR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1533" y="132"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="15U-c4-vF6">
+            <objects>
+                <viewController storyboardIdentifier="profile" id="Kle-kD-CjN" customClass="ProfileVewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iSV-U0-gaU"/>
+                        <viewControllerLayoutGuide type="bottom" id="00B-gd-qTA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pPR-ix-X17">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rv0-eB-gRE">
+                                <rect key="frame" x="123" y="81" width="75" height="30"/>
+                                <state key="normal" title="Add Funds">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addFunds:" destination="Kle-kD-CjN" eventType="touchUpInside" id="mQF-3U-hbM"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UQ9-aQ-vjn">
+                                <rect key="frame" x="16" y="82" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="TcI-cv-rhZ"/>
+                    <connections>
+                        <outlet property="valueInput" destination="UQ9-aQ-vjn" id="D2W-ja-biJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w24-C4-PSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1143" y="618"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ghc-rn-YZo">

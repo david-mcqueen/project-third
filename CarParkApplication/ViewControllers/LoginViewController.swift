@@ -8,16 +8,18 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController{
 
     @IBOutlet weak var inputEmail: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -30,7 +32,10 @@ class LoginViewController: UIViewController {
         
         if(userLogin.login()){
             //Login has been successful
+            //Display the logged in section
             NSLog("Login successful");
+            let viewParkViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkViewController") as ViewController
+            self.navigationController?.pushViewController(viewParkViewController, animated: true);
             
         }else{
             NSLog("Login unsuccessful");
