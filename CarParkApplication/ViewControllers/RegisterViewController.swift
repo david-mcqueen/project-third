@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, NSURLSessionDataDelegate {
 
    
     //MARK:- Variables & Constants
@@ -27,9 +27,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,62 +47,80 @@ class RegisterViewController: UIViewController {
     
     @IBAction func RegisterPressed(sender: AnyObject) {
         
+        
         let newRegistration =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text.lowercaseString, confirmEmail: EmailInputConfirm.text.lowercaseString, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
         
-        //Validate before checking emails match
-        newRegistration.validate();
         
-        var matchingEmail = newRegistration.matchingEmail();
-        var matchingPassword = newRegistration.matchingPassword();
         
-        if (matchingEmail && matchingPassword){
-            NSLog("Input match successful");
+        if(!validInputs(newRegistration)){
+            NSLog("All inputs valid");
             
-            
-            if(newRegistration.validationSuccess.password && newRegistration.validationSuccess.email) {
-                NSLog("Validation Success");
-                newRegistration.register();
-            }else{
-                NSLog("Validation Failed");
-                validationFailed(!newRegistration.validationSuccess.email, password: !newRegistration.validationSuccess.password);
-            }
-            
-            if(newRegistration.RegistrationSuccess){
-                NSLog("Registration Successful");
+            registerUser(newRegistration, {(success: Bool, msg: String) -> () in
+                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                if(success) {
+                    alert.title = "Success!"
+                    alert.message = msg
+                }
+                else {
+                    alert.title = "Failed : ("
+                    alert.message = msg
+                }
                 
-                let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController
-                self.navigationController?.pushViewController(viewVehicleRegistration, animated: true);
-            }else{
-                //Get the error messages
-                NSLog("Registration Failed");
-                NSLog(newRegistration.RegistrationErrors!);
-            }
-            
-        }else{
-            NSLog("Input match failed");
-            inputMatchFailed(!matchingEmail, password: !matchingPassword);
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    alert.show()
+                    if(success){
+                        let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController;
+                        self.navigationController?.pushViewController(viewVehicleRegistration, animated: true);
+                    }
+                })
+                
+                }
+            );
+
         }
+        
     }
     
-    func inputMatchFailed(email: Bool, password: Bool){
-        //The email and/or password entered did not match the confirmation entry
-        if(email){
+    func validInputs(newUser: UserRegistration) -> Bool{
+        clearBorderRed(FirstNameInput);
+        clearBorderRed(SurNameInput);
+        clearBorderRed(EmailInput);
+        clearBorderRed(EmailInputConfirm);
+        clearBorderRed(PasswordInput);
+        clearBorderRed(PasswordInputConfirm);
+        
+        var valid = true;
+        
+        if (newUser.FirstName == ""){
+            valid = false;
+            borderRed(FirstNameInput);
+        }
+        if (newUser.SurName == ""){
+            valid = false;
+            borderRed(SurNameInput);
+        }
+        if (newUser.Email == "" || !newUser.validEmailPattern()){
+            valid = false;
             borderRed(EmailInput);
+        }
+        if (newUser.ConfirmEmail == "" || !newUser.matchingEmail() || !newUser.validEmailPattern()){
+            valid = false;
             borderRed(EmailInputConfirm);
-        }else if(password){
-            borderRed(PasswordInput);
-            borderRed(PasswordInputConfirm);
         }
+        if (newUser.Password == "" || newUser.validPasswordPattern()){
+            valid = false;
+            borderRed(PasswordInput);
+        }
+        if (newUser.ConfirmPassword == "" || !newUser.matchingPassword() || newUser.validPasswordPattern()){
+            valid = false;
+            borderRed(PasswordInputConfirm)
+        }
+        
+        return valid;
     }
     
-    func validationFailed(email: Bool, password: Bool){
-        //The email and/or password entered failed validation.
-        if(email){
-            borderRed(EmailInput);
-        }else if(password){
-            borderRed(PasswordInput);
-        }
-    }
     
     func borderRed(inputField: UITextField){
         //Set the border colour red for the input that failed
@@ -114,5 +130,55 @@ class RegisterViewController: UIViewController {
         inputField.clipsToBounds = true;
         
     }
+    
+    func clearBorderRed(inputField: UITextField){
+        inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
+        inputField.layer.borderWidth = 0.0;
+        inputField.layer.cornerRadius = 5;
+        inputField.clipsToBounds = true;
+    }
+    
+    func registerUser(newUser: UserRegistration, loginCompleted: (success: Bool, msg: String) -> ()) -> (){
+        //Pass the user details to the server, to register
+
+        let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather?q=London,uk");
+        let urlSession = NSURLSession.sharedSession();
+        
+        
+        //Used for POST messages
+//        let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather");
+//        var request = NSMutableURLRequest(URL: url!);
+        
+//        var error1 : NSError?;
+//        request.HTTPMethod = "POST";
+//        var params: Dictionary<String, String> = (["q" : "London,uk", "password" : "Test 2"]);
+//        
+//        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type");
+//        request.addValue("application/json", forHTTPHeaderField: "Accept");
+//        println(error1?.localizedDescription);
+//        let jsonResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        
+        let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+            if (error != nil) {
+                println(error.localizedDescription);
+            }
+            var err: NSError?
+            
+            var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+            let city:String! = jsonResult["name"] as NSString;
+            println(jsonResult);
+            
+            loginCompleted(success: true, msg: "Register Successful");
+            });
+        
+        jsonResponse.resume();
+        
+    }
+    
+    
 
 }

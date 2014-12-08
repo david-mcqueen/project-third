@@ -51,47 +51,13 @@ class UserRegistration {
             return false;
         }
     }
-
-    func validate(){
-        // Validates the user input details
-        // TODO:- Check inputs are not empty
-
-        NSLog("Validating User Input");
-        
-        if(validateEmail(self.Email)){
-            self.validationSuccess.email = true;
-            NSLog("Email Validated successfully");
-        }
-        if(validatePassword(self.Password)){
-            self.validationSuccess.password = true;
-            NSLog("Password Validated successfully");
-        }
+    
+    func validEmailPattern() -> Bool{
+        return validateEmail(self.Email);
     }
     
-    func register(){
-        //TODO:- Send registration details to server
-        /*
-        PRE: Validated user details are passed in
-        POST: Unique userID is returned from the server
-        
-        //Bool represents register successful
-        //String represents any errors
-        */
-        
-        //Encrypt user details
-        
-        //If return from the server successfully, then proceed to the next stage (Vehicle)
-        //Else, stay on registration page and flag errors
-        
-        if(true){
-            self.RegistrationSuccess = true;
-        }else{
-            self.RegistrationSuccess = false;
-            self.RegistrationErrors = "Errors";
-        }
-        
+    func validPasswordPattern() -> Bool{
+        return !validatePassword(self.Password);
     }
-    
-    
     
 }

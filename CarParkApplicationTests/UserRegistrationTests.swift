@@ -28,21 +28,6 @@ class UserRegistrationTests: XCTestCase {
         }
     }
     
-    func testUserPassValidation(){
-        var testUser = UserRegistration(firstName: "David", surname: "McQueen", email: "t@t.com", password: "aPassword1%");
-        testUser.validate();
-        XCTAssertTrue(testUser.validationSuccess.password, "Validation Passed - Password");
-        XCTAssertTrue(testUser.validationSuccess.email, "Validation Passed - Email");
-
-    }
-    
-    func testUserFailValidation(){
-        var testUser = UserRegistration(firstName: "David", surname: "McQueen", email: "tt.com", password: "abcd");
-        testUser.validate();
-        XCTAssertFalse(testUser.validationSuccess.password, "Validation Failed - Password");
-        XCTAssertFalse(testUser.validationSuccess.email, "Validation Failed - Email");
-    }
-    
     func testMatchingEmailPassword(){
         var testUser = UserRegistration(firstName: "David", surname: "McQueen", email: "tesT@gmail.co.uk", confirmEmail: "Test@GMAIL.CO.UK", password: "abcd12%", confirmPassword: "abcd12%");
         

@@ -19,13 +19,13 @@ func encryptString(input:String) -> String {
     return "Encrypted";
 }
 
-func encryptUserRegistration(registrationInput:UserRegistration) -> UserRegistration{
-    //Takes the registration details, encrypts each String, then returns an encrypted RegistrationUser
-    
-    //PRE: RegistrationUser object, unencrypted
-    //POST: RegistrationUser object, with values encrypted
-    return UserRegistration(firstName: encryptString(registrationInput.FirstName), surname: encryptString(registrationInput.SurName), email: encryptString(registrationInput.Email), password: encryptString(registrationInput.Password));
-}
+//func encryptUserRegistration(registrationInput:UserRegistration) -> UserRegistration{
+//    //Takes the registration details, encrypts each String, then returns an encrypted RegistrationUser
+//    
+//    //PRE: RegistrationUser object, unencrypted
+//    //POST: RegistrationUser object, with values encrypted
+//    return UserRegistration(firstName: encryptString(registrationInput.FirstName), surname: encryptString(registrationInput.SurName), email: encryptString(registrationInput.Email), password: encryptString(registrationInput.Password));
+//}
 
 func encryptLogin(loginInput:UserLogin) -> UserLogin {
     //Takes login credentials, and returns them encrypted in an object
