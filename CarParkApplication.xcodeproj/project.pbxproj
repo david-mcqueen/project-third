@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5507B2701A3C64960082BB0F /* ClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507B26F1A3C64960082BB0F /* ClassTests.swift */; };
 		5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD8E19E32DC800A19484 /* RegisterViewController.swift */; };
 		551A189719F0559500E6702B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A189619F0559500E6702B /* LoginViewController.swift */; };
 		551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC19A19E186BB0051C672 /* AppDelegate.swift */; };
@@ -37,7 +38,6 @@
 		55BB56A019F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A119F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A419F2CD1800492154 /* UtilitiesTests.swift */; };
-		55BB56A719F2DBBA00492154 /* UserRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A619F2DBBA00492154 /* UserRegistrationTests.swift */; };
 		55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5507B26F1A3C64960082BB0F /* ClassTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTests.swift; sourceTree = "<group>"; };
 		5519BD8E19E32DC800A19484 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		551A189619F0559500E6702B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ViewControllers/LoginViewController.swift; sourceTree = "<group>"; };
 		551AC19519E186BB0051C672 /* CarParkApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarParkApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,7 +98,6 @@
 		5584FBA419F05133001CE01D /* RegisterVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVehicleViewController.swift; path = ViewControllers/RegisterVehicleViewController.swift; sourceTree = "<group>"; };
 		55BB569F19F2C70C00492154 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
-		55BB56A619F2DBBA00492154 /* UserRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationTests.swift; sourceTree = "<group>"; };
 		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,8 +207,8 @@
 			children = (
 				551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */,
 				55BB56A419F2CD1800492154 /* UtilitiesTests.swift */,
-				55BB56A619F2DBBA00492154 /* UserRegistrationTests.swift */,
 				551AC1AE19E186BB0051C672 /* Supporting Files */,
+				5507B26F1A3C64960082BB0F /* ClassTests.swift */,
 			);
 			path = CarParkApplicationTests;
 			sourceTree = "<group>";
@@ -372,8 +372,8 @@
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
 				557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,
-				55BB56A719F2DBBA00492154 /* UserRegistrationTests.swift in Sources */,
 				55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */,
+				5507B2701A3C64960082BB0F /* ClassTests.swift in Sources */,
 				557C2CF419F2C4D500DE28DF /* UserLogin.swift in Sources */,
 				557C2CF119F2C4C300DE28DF /* User.swift in Sources */,
 				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,

@@ -72,10 +72,9 @@ func validatePassword(inputPassword: String) -> Bool{
         Contain one digit 0-9
         contain one lowercase character
         contain one uppercase character
-        contain one special symbol in the grup {@#$%}
-        be between 6 and 20 characters
+        be between 7 and 30 characters
     */
-    let passwordRegEx = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+    let passwordRegEx = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,30})";
     var passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegEx);
     
     return passwordTest!.evaluateWithObject(inputPassword);

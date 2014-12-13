@@ -48,8 +48,15 @@ class RegisterViewController: UIViewController, NSURLSessionDataDelegate {
     @IBAction func RegisterPressed(sender: AnyObject) {
         
         
-        let newRegistration =  UserRegistration(firstName: FirstNameInput.text, surname: SurNameInput.text, email: EmailInput.text.lowercaseString, confirmEmail: EmailInputConfirm.text.lowercaseString, password: PasswordInput.text, confirmPassword: PasswordInputConfirm.text)
-        
+        let newRegistration =  UserRegistration(
+            _firstName: FirstNameInput.text,
+            _surname: SurNameInput.text,
+            _email: EmailInput.text.lowercaseString,
+            _confirmEmail: EmailInputConfirm.text.lowercaseString,
+            _password: PasswordInput.text,
+            _confirmPassword: PasswordInputConfirm.text,
+            _phoneNumber: "1",
+            _confirmPhoneNumber: "2");
         
         
         if(!validInputs(newRegistration)){
@@ -74,7 +81,7 @@ class RegisterViewController: UIViewController, NSURLSessionDataDelegate {
                         let viewVehicleRegistration = self.storyboard?.instantiateViewControllerWithIdentifier("viewVehicleRegistration") as RegisterVehicleViewController;
                         self.navigationController?.pushViewController(viewVehicleRegistration, animated: true);
                     }
-                })
+                });
                 
                 }
             );
@@ -117,10 +124,16 @@ class RegisterViewController: UIViewController, NSURLSessionDataDelegate {
             valid = false;
             borderRed(PasswordInputConfirm)
         }
+        if (newUser.PhoneNumber == ""){
+            //TODO:- Border red the phone number inputs
+            valid = false;
+        }
+        if (newUser.ConfirmPhoneNumber == "" || !newUser.matchingPhoneNumber()){
+            valid = false;
+        }
         
         return valid;
     }
-    
     
     func borderRed(inputField: UITextField){
         //Set the border colour red for the input that failed
@@ -138,7 +151,7 @@ class RegisterViewController: UIViewController, NSURLSessionDataDelegate {
         inputField.clipsToBounds = true;
     }
     
-    func registerUser(newUser: UserRegistration, loginCompleted: (success: Bool, msg: String) -> ()) -> (){
+    func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, msg: String) -> ()) -> (){
         //Pass the user details to the server, to register
 
         let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather?q=London,uk");
@@ -172,7 +185,7 @@ class RegisterViewController: UIViewController, NSURLSessionDataDelegate {
             let city:String! = jsonResult["name"] as NSString;
             println(jsonResult);
             
-            loginCompleted(success: true, msg: "Register Successful");
+            registerCompleted(success: true, msg: "Register Successful");
             });
         
         jsonResponse.resume();

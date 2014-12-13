@@ -16,24 +16,26 @@ class UserRegistration {
     var ConfirmEmail: String?;
     var Password: String;
     var ConfirmPassword: String?;
-    var validationSuccess: (email:Bool, password:Bool) = (false, false);
-    var RegistrationSuccess: Bool = false;
-    var RegistrationErrors: String?;
+    var PhoneNumber: String;
+    var ConfirmPhoneNumber: String?;
         
-    init(firstName:String, surname:String, email:String, password:String) {
-        self.FirstName = firstName;
-        self.SurName = surname;
-        self.Email = email;
-        self.Password = password;
+    init(_firstName:String, _surname:String, _email:String, _password:String, _phoneNumber:String) {
+        self.FirstName = _firstName;
+        self.SurName = _surname;
+        self.Email = _email;
+        self.Password = _password;
+        self.PhoneNumber = _phoneNumber;
     }
     
-    init(firstName:String, surname:String, email:String, confirmEmail:String, password:String, confirmPassword:String) {
-        self.FirstName = firstName;
-        self.SurName = surname;
-        self.Email = email;
-        self.Password = password;
-        self.ConfirmEmail = confirmEmail;
-        self.ConfirmPassword = confirmPassword;
+    init(_firstName:String, _surname:String, _email:String, _confirmEmail:String, _password:String, _confirmPassword:String, _phoneNumber: String, _confirmPhoneNumber: String) {
+        self.FirstName = _firstName;
+        self.SurName = _surname;
+        self.Email = _email;
+        self.Password = _password;
+        self.ConfirmEmail = _confirmEmail;
+        self.ConfirmPassword = _confirmPassword;
+        self.PhoneNumber = _phoneNumber;
+        self.ConfirmPhoneNumber = _confirmPhoneNumber;
     }
     
     func matchingEmail() -> Bool{
@@ -46,6 +48,14 @@ class UserRegistration {
     
     func matchingPassword() -> Bool{
         if(Password == ConfirmPassword){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    func matchingPhoneNumber() -> Bool {
+        if(PhoneNumber == ConfirmPhoneNumber){
             return true;
         }else{
             return false;

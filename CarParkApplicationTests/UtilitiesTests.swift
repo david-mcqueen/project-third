@@ -60,16 +60,17 @@ class UtilitiesTests: XCTestCase {
     func testValidPassword(){
         //Test valid passwords are returned valid
         XCTAssertTrue(validatePassword("passWord123@"), "Password Validation");
+        XCTAssertTrue(validatePassword("passWord123"), "Password Validation");
+        XCTAssertTrue(validatePassword("passWo3"), "Password Validation - Min length");
     }
     
     func testInvalidPassword(){
         //Test invalid passwords are returned invalid
         XCTAssertFalse(validatePassword(""), "Password Validation - Empty");
         XCTAssertFalse(validatePassword("pA1@"), "Password Validation - Short");
-        XCTAssertFalse(validatePassword("pA1@ThisIsTooLongToPassValidation"), "Password Validation - Short");
         XCTAssertFalse(validatePassword("password123@"), "Password Validation - Upper Case");
-        XCTAssertFalse(validatePassword("passWord123"), "Password Validation - Symbol");
-        XCTAssertFalse(validatePassword("passWord@"), "Password Validation - Number");
+        XCTAssertFalse(validatePassword("passWord"), "Password Validation - Number");
+        XCTAssertFalse(validatePassword("passWord@!"), "Password Validation - Number");
     }
 
     //MARK:- Encryption & Decryption Tests

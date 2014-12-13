@@ -33,7 +33,4 @@ class UserLogin {
         }
     }
     
-    func login() -> Bool{
-        return true;
-    }
 }
