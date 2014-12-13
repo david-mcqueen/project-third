@@ -217,40 +217,47 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXj-Ad-sq8">
-                                                <rect key="frame" x="139" y="539" width="322" height="21"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cXt-yp-wdu" userLabel="txtPhoneNumber">
+                                                <rect key="frame" x="8" y="460" width="584" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pmd-6B-eaM" userLabel="labelPhoneNumber">
+                                                <rect key="frame" x="8" y="431" width="584" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="2r3-nf-b6x" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="2n0-VW-XAP" userLabel="txtFirstName - Left"/>
                                             <constraint firstItem="f3v-0P-NYm" firstAttribute="top" secondItem="DLf-Fd-Msk" secondAttribute="bottom" constant="8" id="45D-e0-R67" userLabel="txtPassword - Bottom"/>
+                                            <constraint firstAttribute="trailing" secondItem="Pmd-6B-eaM" secondAttribute="trailing" constant="8" id="4Ho-v3-1S5"/>
                                             <constraint firstItem="2r3-nf-b6x" firstAttribute="top" secondItem="emo-Gn-hfl" secondAttribute="bottom" constant="8" id="4lA-a0-Ulv" userLabel="labelFirstName - Bottom"/>
                                             <constraint firstItem="f3v-0P-NYm" firstAttribute="top" secondItem="DLf-Fd-Msk" secondAttribute="bottom" constant="8" id="6aP-QV-sfn" userLabel="labelConfirmPassword - Top"/>
                                             <constraint firstItem="zpC-N5-CRb" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="7V0-Hz-Jy9" userLabel="labelPassword - Left"/>
                                             <constraint firstItem="2r3-nf-b6x" firstAttribute="top" secondItem="emo-Gn-hfl" secondAttribute="bottom" constant="8" id="8eI-cf-dKS" userLabel="txtFirstName - Top"/>
                                             <constraint firstItem="qYw-9b-okI" firstAttribute="top" secondItem="2r3-nf-b6x" secondAttribute="bottom" constant="8" id="8vO-ik-BTs" userLabel="txtFirstName - Bottom"/>
-                                            <constraint firstItem="KXj-Ad-sq8" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="139" id="97o-J6-FKb"/>
                                             <constraint firstAttribute="trailing" secondItem="zpC-N5-CRb" secondAttribute="trailing" constant="236" id="BZx-4D-ZN5" userLabel="labelPassword - Right"/>
                                             <constraint firstItem="xWS-wG-C4s" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Bdx-YM-kir" userLabel="txtConfirmEmail - Left"/>
                                             <constraint firstItem="lcO-MC-9A0" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="EAm-oA-bar" userLabel="labelEmail - Left"/>
-                                            <constraint firstAttribute="trailing" secondItem="KXj-Ad-sq8" secondAttribute="trailing" constant="139" id="EW2-2z-RR2"/>
                                             <constraint firstItem="lcO-MC-9A0" firstAttribute="top" secondItem="p43-P6-8db" secondAttribute="bottom" constant="8" id="Era-Fi-QtM" userLabel="labelEmail - Top"/>
                                             <constraint firstItem="Wvz-dj-O3x" firstAttribute="top" secondItem="1ci-U9-4bk" secondAttribute="bottom" constant="8" id="G90-QD-Mrr" userLabel="txtEmail - Bottom"/>
+                                            <constraint firstItem="cXt-yp-wdu" firstAttribute="top" secondItem="Pmd-6B-eaM" secondAttribute="bottom" constant="8" id="Gnf-Gt-krf"/>
                                             <constraint firstItem="zpC-N5-CRb" firstAttribute="top" secondItem="xWS-wG-C4s" secondAttribute="bottom" constant="8" id="GoT-Rv-GoX" userLabel="labelPassword - Top"/>
                                             <constraint firstItem="emo-Gn-hfl" firstAttribute="top" secondItem="tf1-09-eNb" secondAttribute="top" constant="26" id="HYt-5a-mOc" userLabel="labelFirstName - Top"/>
+                                            <constraint firstItem="Pmd-6B-eaM" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="HcV-O1-u7Y"/>
                                             <constraint firstAttribute="trailing" secondItem="f3v-0P-NYm" secondAttribute="trailing" constant="170" id="Jnl-1G-8WV" userLabel="labelConfirmPassword - Right"/>
                                             <constraint firstItem="DLf-Fd-Msk" firstAttribute="top" secondItem="zpC-N5-CRb" secondAttribute="bottom" constant="8" id="KTa-eW-mET" userLabel="labelPassword - Bottom"/>
                                             <constraint firstItem="1ci-U9-4bk" firstAttribute="top" secondItem="lcO-MC-9A0" secondAttribute="bottom" constant="8" id="M00-8h-waz" userLabel="labelEmail - Bottom"/>
+                                            <constraint firstItem="cXt-yp-wdu" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="M8P-ZS-4qj"/>
                                             <constraint firstItem="52g-YH-frH" firstAttribute="top" secondItem="f3v-0P-NYm" secondAttribute="bottom" constant="8" id="MME-Tc-lem" userLabel="labelConfirmPassword - Bottom"/>
                                             <constraint firstItem="52g-YH-frH" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="NDf-E6-93x" userLabel="txtConfirmPassword - Left"/>
                                             <constraint firstItem="p43-P6-8db" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="NsK-pg-tXU" userLabel="txtSurname - Left"/>
                                             <constraint firstItem="Wvz-dj-O3x" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Nyk-ay-Sjv" userLabel="labelConfirmEmail - Left"/>
                                             <constraint firstItem="1ci-U9-4bk" firstAttribute="top" secondItem="lcO-MC-9A0" secondAttribute="bottom" constant="8" id="O62-sd-a7X" userLabel="txtEmail - Top"/>
                                             <constraint firstItem="qYw-9b-okI" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="PYe-Iz-YQf" userLabel="labelSurname - Left"/>
+                                            <constraint firstItem="Pmd-6B-eaM" firstAttribute="top" secondItem="52g-YH-frH" secondAttribute="bottom" constant="11" id="RES-U1-Ylk"/>
                                             <constraint firstItem="xWS-wG-C4s" firstAttribute="top" secondItem="Wvz-dj-O3x" secondAttribute="bottom" constant="8" id="TdW-iv-96b" userLabel="txtConfirmEmail - Top"/>
                                             <constraint firstAttribute="trailing" secondItem="Wvz-dj-O3x" secondAttribute="trailing" constant="204" id="Wue-mc-bch" userLabel="labelConfirmEmail - Right"/>
                                             <constraint firstItem="f3v-0P-NYm" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Wxd-IS-oe4" userLabel="labelConfirmPassword - Left"/>
@@ -274,8 +281,8 @@
                                             <constraint firstItem="emo-Gn-hfl" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="rf3-n0-fSR" userLabel="labelFirstName - Left"/>
                                             <constraint firstItem="lcO-MC-9A0" firstAttribute="top" secondItem="p43-P6-8db" secondAttribute="bottom" constant="8" id="rue-qU-606" userLabel="txtSurname - Bottom"/>
                                             <constraint firstAttribute="trailing" secondItem="emo-Gn-hfl" secondAttribute="trailing" constant="8" id="svB-Yq-xPt" userLabel="labelFirstName - Right"/>
+                                            <constraint firstAttribute="trailing" secondItem="cXt-yp-wdu" secondAttribute="trailing" constant="8" id="yA2-aA-F0n"/>
                                             <constraint firstItem="p43-P6-8db" firstAttribute="top" secondItem="qYw-9b-okI" secondAttribute="bottom" constant="8" id="yai-NZ-jV8" userLabel="txtSurname - Top"/>
-                                            <constraint firstItem="KXj-Ad-sq8" firstAttribute="top" secondItem="52g-YH-frH" secondAttribute="bottom" constant="119" id="yxj-7S-vGa"/>
                                         </constraints>
                                     </view>
                                 </subviews>
