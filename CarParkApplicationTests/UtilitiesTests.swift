@@ -59,7 +59,7 @@ class UtilitiesTests: XCTestCase {
     
     func testValidPassword(){
         //Test valid passwords are returned valid
-        XCTAssertFalse(validatePassword("passWord123@"), "Password Validation");
+        XCTAssertTrue(validatePassword("passWord123@"), "Password Validation");
         XCTAssertTrue(validatePassword("passWord123"), "Password Validation");
         XCTAssertTrue(validatePassword("passWo3"), "Password Validation - Min length");
     }
