@@ -16,7 +16,7 @@ func encryptString(input:String) -> String {
     //PRE: Takes an unencrypted string
     //POST: Returns the string, Encrypted
     
-    return "Encrypted";
+    return "Encryptedawiugdwfkuygkawegu";
 }
 
 //func encryptUserRegistration(registrationInput:UserRegistration) -> UserRegistration{
