@@ -33,7 +33,7 @@ class UtilitiesTests: XCTestCase {
     
     func testValidEmail(){
         //Test valid emails are returned valid
-        XCTAssertTrue(validateEmail("test@gmail.com"), "Email Validation");
+        XCTAssertFalse(validateEmail("test@gmail.com"), "Email Validation");
         XCTAssertTrue(validateEmail("test@gmail.co.uk"), "Email Validation");
         XCTAssertTrue(validateEmail("test@gmail.com"), "Email Validation");
         XCTAssertTrue(validateEmail("david_mcqueen@gmail.com"), "Email Validation");
