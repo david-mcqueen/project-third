@@ -47,7 +47,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Register" id="zTx-ZJ-iXE">
                             <connections>
-                                <segue destination="tC7-2M-I3X" kind="show" id="BFF-vj-w7e"/>
+                                <segue destination="Luz-3v-Auo" kind="show" id="HtO-fH-xGH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -134,214 +134,40 @@
             <point key="canvasLocation" x="2178.75" y="-932.74647887323943"/>
         </scene>
         <!--Register View Controller-->
-        <scene sceneID="ESD-gP-jQs">
+        <scene sceneID="MC6-Rt-qQq">
             <objects>
-                <viewController id="tC7-2M-I3X" customClass="RegisterViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9EX-vr-qCe"/>
-                        <viewControllerLayoutGuide type="bottom" id="kSh-Sl-oWP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="f06-Xp-uWL">
+                <tableViewController id="Luz-3v-Auo" customClass="RegisterViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="MRe-5P-S2h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YB6-vf-yL8">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tf1-09-eNb">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emo-Gn-hfl" userLabel="labelFirstName">
-                                                <rect key="frame" x="8" y="26" width="584" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYw-9b-okI" userLabel="labelSurname">
-                                                <rect key="frame" x="8" y="93" width="350" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2r3-nf-b6x" userLabel="txtFirstName">
-                                                <rect key="frame" x="8" y="55" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p43-P6-8db" userLabel="txtSurname">
-                                                <rect key="frame" x="8" y="122" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcO-MC-9A0" userLabel="labelEmail">
-                                                <rect key="frame" x="8" y="160" width="322" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ci-U9-4bk" userLabel="txtEmail">
-                                                <rect key="frame" x="8" y="189" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xWS-wG-C4s" userLabel="txtConfirmEmail">
-                                                <rect key="frame" x="8" y="256" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wvz-dj-O3x" userLabel="labelConfirmEmail">
-                                                <rect key="frame" x="8" y="227" width="388" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-N5-CRb" userLabel="labelPassword">
-                                                <rect key="frame" x="8" y="294" width="356" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3v-0P-NYm" userLabel="labelConfirmPassword">
-                                                <rect key="frame" x="8" y="361" width="422" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DLf-Fd-Msk" userLabel="txtPassword">
-                                                <rect key="frame" x="8" y="323" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="52g-YH-frH" userLabel="txtConfirmPassword">
-                                                <rect key="frame" x="8" y="390" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cXt-yp-wdu" userLabel="txtPhoneNumber">
-                                                <rect key="frame" x="8" y="460" width="584" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pmd-6B-eaM" userLabel="labelPhoneNumber">
-                                                <rect key="frame" x="8" y="431" width="584" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="2r3-nf-b6x" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="2n0-VW-XAP" userLabel="txtFirstName - Left"/>
-                                            <constraint firstItem="f3v-0P-NYm" firstAttribute="top" secondItem="DLf-Fd-Msk" secondAttribute="bottom" constant="8" id="45D-e0-R67" userLabel="txtPassword - Bottom"/>
-                                            <constraint firstAttribute="trailing" secondItem="Pmd-6B-eaM" secondAttribute="trailing" constant="8" id="4Ho-v3-1S5"/>
-                                            <constraint firstItem="2r3-nf-b6x" firstAttribute="top" secondItem="emo-Gn-hfl" secondAttribute="bottom" constant="8" id="4lA-a0-Ulv" userLabel="labelFirstName - Bottom"/>
-                                            <constraint firstItem="f3v-0P-NYm" firstAttribute="top" secondItem="DLf-Fd-Msk" secondAttribute="bottom" constant="8" id="6aP-QV-sfn" userLabel="labelConfirmPassword - Top"/>
-                                            <constraint firstItem="zpC-N5-CRb" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="7V0-Hz-Jy9" userLabel="labelPassword - Left"/>
-                                            <constraint firstItem="2r3-nf-b6x" firstAttribute="top" secondItem="emo-Gn-hfl" secondAttribute="bottom" constant="8" id="8eI-cf-dKS" userLabel="txtFirstName - Top"/>
-                                            <constraint firstItem="qYw-9b-okI" firstAttribute="top" secondItem="2r3-nf-b6x" secondAttribute="bottom" constant="8" id="8vO-ik-BTs" userLabel="txtFirstName - Bottom"/>
-                                            <constraint firstAttribute="trailing" secondItem="zpC-N5-CRb" secondAttribute="trailing" constant="236" id="BZx-4D-ZN5" userLabel="labelPassword - Right"/>
-                                            <constraint firstItem="xWS-wG-C4s" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Bdx-YM-kir" userLabel="txtConfirmEmail - Left"/>
-                                            <constraint firstItem="lcO-MC-9A0" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="EAm-oA-bar" userLabel="labelEmail - Left"/>
-                                            <constraint firstItem="lcO-MC-9A0" firstAttribute="top" secondItem="p43-P6-8db" secondAttribute="bottom" constant="8" id="Era-Fi-QtM" userLabel="labelEmail - Top"/>
-                                            <constraint firstItem="Wvz-dj-O3x" firstAttribute="top" secondItem="1ci-U9-4bk" secondAttribute="bottom" constant="8" id="G90-QD-Mrr" userLabel="txtEmail - Bottom"/>
-                                            <constraint firstItem="cXt-yp-wdu" firstAttribute="top" secondItem="Pmd-6B-eaM" secondAttribute="bottom" constant="8" id="Gnf-Gt-krf"/>
-                                            <constraint firstItem="zpC-N5-CRb" firstAttribute="top" secondItem="xWS-wG-C4s" secondAttribute="bottom" constant="8" id="GoT-Rv-GoX" userLabel="labelPassword - Top"/>
-                                            <constraint firstItem="emo-Gn-hfl" firstAttribute="top" secondItem="tf1-09-eNb" secondAttribute="top" constant="26" id="HYt-5a-mOc" userLabel="labelFirstName - Top"/>
-                                            <constraint firstItem="Pmd-6B-eaM" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="HcV-O1-u7Y"/>
-                                            <constraint firstAttribute="trailing" secondItem="f3v-0P-NYm" secondAttribute="trailing" constant="170" id="Jnl-1G-8WV" userLabel="labelConfirmPassword - Right"/>
-                                            <constraint firstItem="DLf-Fd-Msk" firstAttribute="top" secondItem="zpC-N5-CRb" secondAttribute="bottom" constant="8" id="KTa-eW-mET" userLabel="labelPassword - Bottom"/>
-                                            <constraint firstItem="1ci-U9-4bk" firstAttribute="top" secondItem="lcO-MC-9A0" secondAttribute="bottom" constant="8" id="M00-8h-waz" userLabel="labelEmail - Bottom"/>
-                                            <constraint firstItem="cXt-yp-wdu" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="M8P-ZS-4qj"/>
-                                            <constraint firstItem="52g-YH-frH" firstAttribute="top" secondItem="f3v-0P-NYm" secondAttribute="bottom" constant="8" id="MME-Tc-lem" userLabel="labelConfirmPassword - Bottom"/>
-                                            <constraint firstItem="52g-YH-frH" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="NDf-E6-93x" userLabel="txtConfirmPassword - Left"/>
-                                            <constraint firstItem="p43-P6-8db" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="NsK-pg-tXU" userLabel="txtSurname - Left"/>
-                                            <constraint firstItem="Wvz-dj-O3x" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Nyk-ay-Sjv" userLabel="labelConfirmEmail - Left"/>
-                                            <constraint firstItem="1ci-U9-4bk" firstAttribute="top" secondItem="lcO-MC-9A0" secondAttribute="bottom" constant="8" id="O62-sd-a7X" userLabel="txtEmail - Top"/>
-                                            <constraint firstItem="qYw-9b-okI" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="PYe-Iz-YQf" userLabel="labelSurname - Left"/>
-                                            <constraint firstItem="Pmd-6B-eaM" firstAttribute="top" secondItem="52g-YH-frH" secondAttribute="bottom" constant="11" id="RES-U1-Ylk"/>
-                                            <constraint firstItem="xWS-wG-C4s" firstAttribute="top" secondItem="Wvz-dj-O3x" secondAttribute="bottom" constant="8" id="TdW-iv-96b" userLabel="txtConfirmEmail - Top"/>
-                                            <constraint firstAttribute="trailing" secondItem="Wvz-dj-O3x" secondAttribute="trailing" constant="204" id="Wue-mc-bch" userLabel="labelConfirmEmail - Right"/>
-                                            <constraint firstItem="f3v-0P-NYm" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Wxd-IS-oe4" userLabel="labelConfirmPassword - Left"/>
-                                            <constraint firstItem="1ci-U9-4bk" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="XHE-e2-yYF" userLabel="txtEmail - Left"/>
-                                            <constraint firstAttribute="trailing" secondItem="qYw-9b-okI" secondAttribute="trailing" constant="242" id="XJd-6s-BBN" userLabel="labelSurname - Right"/>
-                                            <constraint firstAttribute="trailing" secondItem="p43-P6-8db" secondAttribute="trailing" constant="8" id="Xpq-EI-jrH" userLabel="txtSurname - Right"/>
-                                            <constraint firstItem="DLf-Fd-Msk" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="Yj6-0h-5xB" userLabel="txtPassword - Left"/>
-                                            <constraint firstAttribute="trailing" secondItem="2r3-nf-b6x" secondAttribute="trailing" constant="8" id="cGz-w1-4t5" userLabel="txtFirstName - Right"/>
-                                            <constraint firstItem="Wvz-dj-O3x" firstAttribute="top" secondItem="1ci-U9-4bk" secondAttribute="bottom" constant="8" id="dMv-1M-f5d" userLabel="labelConfirmEmail - Top"/>
-                                            <constraint firstItem="qYw-9b-okI" firstAttribute="top" secondItem="2r3-nf-b6x" secondAttribute="bottom" constant="8" id="dRJ-Qy-WEV" userLabel="labelSurname - Top"/>
-                                            <constraint firstItem="zpC-N5-CRb" firstAttribute="top" secondItem="xWS-wG-C4s" secondAttribute="bottom" constant="8" id="g19-V5-JVO" userLabel="txtConfirmEmail - Bottom"/>
-                                            <constraint firstAttribute="trailing" secondItem="52g-YH-frH" secondAttribute="trailing" constant="8" id="gi2-nM-SEK" userLabel="txtConfirmPassword"/>
-                                            <constraint firstAttribute="trailing" secondItem="lcO-MC-9A0" secondAttribute="trailing" constant="270" id="h6C-p8-LUS" userLabel="labelEmail - Right"/>
-                                            <constraint firstAttribute="trailing" secondItem="DLf-Fd-Msk" secondAttribute="trailing" constant="8" id="haZ-Mc-VQ9" userLabel="txtPassword - Right"/>
-                                            <constraint firstAttribute="trailing" secondItem="1ci-U9-4bk" secondAttribute="trailing" constant="8" id="hkG-ec-eVe" userLabel="txtEmail - Right"/>
-                                            <constraint firstItem="p43-P6-8db" firstAttribute="top" secondItem="qYw-9b-okI" secondAttribute="bottom" constant="8" id="iFC-SO-9CO" userLabel="labelSurname - Bottom"/>
-                                            <constraint firstItem="xWS-wG-C4s" firstAttribute="top" secondItem="Wvz-dj-O3x" secondAttribute="bottom" constant="8" id="idB-8J-wxy" userLabel="labelConfirmEmail - Bottom"/>
-                                            <constraint firstItem="52g-YH-frH" firstAttribute="top" secondItem="f3v-0P-NYm" secondAttribute="bottom" constant="8" id="kWI-zr-3m5" userLabel="txtConfirmPassword - Top"/>
-                                            <constraint firstAttribute="trailing" secondItem="xWS-wG-C4s" secondAttribute="trailing" constant="8" id="nH3-8G-2Bp" userLabel="txtConfirmEmail - Right"/>
-                                            <constraint firstItem="DLf-Fd-Msk" firstAttribute="top" secondItem="zpC-N5-CRb" secondAttribute="bottom" constant="8" id="rAw-6j-hK6" userLabel="txtPassword - Top"/>
-                                            <constraint firstItem="emo-Gn-hfl" firstAttribute="leading" secondItem="tf1-09-eNb" secondAttribute="leading" constant="8" id="rf3-n0-fSR" userLabel="labelFirstName - Left"/>
-                                            <constraint firstItem="lcO-MC-9A0" firstAttribute="top" secondItem="p43-P6-8db" secondAttribute="bottom" constant="8" id="rue-qU-606" userLabel="txtSurname - Bottom"/>
-                                            <constraint firstAttribute="trailing" secondItem="emo-Gn-hfl" secondAttribute="trailing" constant="8" id="svB-Yq-xPt" userLabel="labelFirstName - Right"/>
-                                            <constraint firstAttribute="trailing" secondItem="cXt-yp-wdu" secondAttribute="trailing" constant="8" id="yA2-aA-F0n"/>
-                                            <constraint firstItem="p43-P6-8db" firstAttribute="top" secondItem="qYw-9b-okI" secondAttribute="bottom" constant="8" id="yai-NZ-jV8" userLabel="txtSurname - Top"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="tf1-09-eNb" secondAttribute="bottom" id="DgZ-30-mB5"/>
-                                    <constraint firstAttribute="trailing" secondItem="tf1-09-eNb" secondAttribute="trailing" id="SfU-sY-5yV"/>
-                                    <constraint firstItem="tf1-09-eNb" firstAttribute="top" secondItem="YB6-vf-yL8" secondAttribute="top" id="jzj-PN-wwh"/>
-                                    <constraint firstItem="tf1-09-eNb" firstAttribute="centerY" secondItem="YB6-vf-yL8" secondAttribute="centerY" id="psn-WH-osd"/>
-                                    <constraint firstItem="tf1-09-eNb" firstAttribute="leading" secondItem="YB6-vf-yL8" secondAttribute="leading" id="teU-fJ-Y3V"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="tf1-09-eNb" secondAttribute="width" id="61G-4i-W8g"/>
-                            <constraint firstItem="YB6-vf-yL8" firstAttribute="leading" secondItem="f06-Xp-uWL" secondAttribute="leading" id="JB9-LQ-gbG"/>
-                            <constraint firstAttribute="width" secondItem="YB6-vf-yL8" secondAttribute="width" id="t0R-mf-PvX"/>
-                            <constraint firstItem="YB6-vf-yL8" firstAttribute="bottom" secondItem="kSh-Sl-oWP" secondAttribute="top" id="wYD-XS-nst"/>
-                            <constraint firstAttribute="height" secondItem="YB6-vf-yL8" secondAttribute="height" id="zdy-0Y-wiR"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="PkP-s0-PbY">
-                        <barButtonItem key="rightBarButtonItem" title="Register" id="Dyg-UT-S23">
-                            <connections>
-                                <action selector="RegisterPressed:" destination="tC7-2M-I3X" id="G2h-fE-6V3"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="EmailInput" destination="1ci-U9-4bk" id="wLQ-MX-b6T"/>
-                        <outlet property="EmailInputConfirm" destination="xWS-wG-C4s" id="PiD-i1-hm7"/>
-                        <outlet property="FirstNameInput" destination="2r3-nf-b6x" id="5UJ-69-hng"/>
-                        <outlet property="PasswordInput" destination="DLf-Fd-Msk" id="D70-5y-FAm"/>
-                        <outlet property="PasswordInputConfirm" destination="52g-YH-frH" id="1Er-EQ-tkS"/>
-                        <outlet property="Scroller" destination="YB6-vf-yL8" id="4qf-RL-s78"/>
-                        <outlet property="SurNameInput" destination="p43-P6-8db" id="BE2-6t-5Mi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qCk-57-olm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Luz-3v-Auo" id="WlZ-tB-9RG"/>
+                            <outlet property="delegate" destination="Luz-3v-Auo" id="C3u-sq-Ygp"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xuz-hc-n05" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2874" y="-521"/>
+            <point key="canvasLocation" x="2871" y="-524"/>
         </scene>
-        <!--Vehicle Registration-->
-        <scene sceneID="bYo-9w-Eu0">
+        <!--Register Vehicle View Controller-->
+        <scene sceneID="Q92-Gt-5HA">
             <objects>
-                <viewController storyboardIdentifier="viewVehicleRegistration" id="0AA-am-eg3" userLabel="Vehicle Registration" customClass="RegisterVehicleViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BTi-KJ-B2t"/>
-                        <viewControllerLayoutGuide type="bottom" id="G8m-0I-MkP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="w5k-wN-pqm">
+                <tableViewController storyboardIdentifier="viewVehicleRegistration" id="5BR-Vf-amg" customClass="RegisterVehicleViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PMN-cE-ysg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L5C-Yl-1sS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="5BR-Vf-amg" id="CNI-xx-pLA"/>
+                            <outlet property="delegate" destination="5BR-Vf-amg" id="ncD-YX-vHd"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="prH-wZ-1fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3740.625" y="-520.77464788732391"/>
+            <point key="canvasLocation" x="3640" y="-590"/>
         </scene>
         <!--Park-->
         <scene sceneID="Gf8-31-egY">
@@ -394,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kl8-Ft-znR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961.875" y="383.45070422535207"/>
+            <point key="canvasLocation" x="4413" y="15"/>
         </scene>
         <!--Profile-->
         <scene sceneID="15U-c4-vF6">
@@ -409,7 +235,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rv0-eB-gRE">
-                                <rect key="frame" x="123" y="81" width="75" height="30"/>
+                                <rect key="frame" x="218" y="237" width="75" height="30"/>
                                 <state key="normal" title="Add Funds">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -418,7 +244,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UQ9-aQ-vjn">
-                                <rect key="frame" x="16" y="82" width="97" height="30"/>
+                                <rect key="frame" x="111" y="237" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
@@ -433,7 +259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w24-C4-PSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4728.75" y="383.45070422535207"/>
+            <point key="canvasLocation" x="4413" y="746"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ghc-rn-YZo">

@@ -57,7 +57,8 @@ class FormTextFieldCell: FormBaseCell {
         textField.text = rowDescriptor.value as? String
         textField.placeholder = rowDescriptor.placeholder
     
-        textField.secureTextEntry = false
+       // textField.secureTextEntry = false
+        //Removed this line to remove the bug of only being able to enter 1 character for password fields
         textField.clearButtonMode = .WhileEditing
         
         switch rowDescriptor.rowType {
