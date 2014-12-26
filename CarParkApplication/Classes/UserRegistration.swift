@@ -18,6 +18,9 @@ class UserRegistration {
     var ConfirmPassword: String?;
     var PhoneNumber: String;
     var ConfirmPhoneNumber: String?;
+    
+    //TODO:- Create GET and SET functions for each of the values, make these private!
+    //Spread the changes throughout the rest of the project
         
     init(_firstName:String, _surname:String, _email:String, _password:String, _phoneNumber:String) {
         self.FirstName = _firstName;
@@ -67,7 +70,11 @@ class UserRegistration {
     }
     
     func validPasswordPattern() -> Bool{
-        return !validatePassword(self.Password);
+        return validatePassword(self.Password);
+    }
+    
+    func validPhonePattern() -> Bool{
+        return validatePhoneNumber(self.PhoneNumber);
     }
     
 }
