@@ -47,14 +47,15 @@ class FormDescriptor: NSObject {
         return formValues.copy() as NSDictionary
     }
     
-    func validateForm() -> FormRowDescriptor! {
+    func validateForm() -> [FormRowDescriptor]! {
+        var result:[FormRowDescriptor] = [];
         for section in sections {
             for row in section.rows {
                 if row.required && row.value == nil {
-                    return row
+                    result.append(row);
                 }
             }
         }
-        return nil
+        return result
     }
 }
