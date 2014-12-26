@@ -87,10 +87,30 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         row.required = true;
         section1.addRow(row)
         
-        form.sections = [section1]
+        let section2 = FormSectionDescriptor()
+        
+        row = FormRowDescriptor(tag: Static.picker, rowType: .Picker, title: "Gender")
+        row.options = ["F", "M", "U"]
+        row.titleFormatter = { value in
+            switch( value ) {
+            case "F":
+                return "Female"
+            case "M":
+                return "Male"
+            case "U":
+                return "I'd rather not to say"
+            default:
+                return nil
+            }
+        }
+        section2.addRow(row)
+
+        
+        form.sections = [section1, section2]
         
         self.form = form
     }
+    
     
     /// MARK: FormViewControllerDelegate
     
