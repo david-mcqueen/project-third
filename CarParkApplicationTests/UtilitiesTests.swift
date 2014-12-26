@@ -73,6 +73,22 @@ class UtilitiesTests: XCTestCase {
         XCTAssertFalse(validatePassword("passWord@!"), "Password Validation - Number");
     }
 
+    //MARK:- PhoneNumber validation Tests
+    
+    func testValidPhoneNumber(){
+        XCTAssertTrue(validatePhoneNumber("01234567891"), "Phone Validation");
+    }
+    
+    
+    func testInvalidPhoneNumber(){
+        XCTAssertFalse(validatePhoneNumber(""), "Phone Validation - Empty");
+        XCTAssertFalse(validatePhoneNumber("0"), "Phone Validation - Short");
+        XCTAssertFalse(validatePhoneNumber("012345678901"), "Phone Validation - Long");
+        XCTAssertFalse(validatePhoneNumber("012345678901zdfhjv"), "Phone Validation - Letters");
+        XCTAssertFalse(validatePhoneNumber("isydfgh"), "Phone Validation - Letters");
+        XCTAssertFalse(validatePhoneNumber("%&*^$&&%"), "Phone Validation - Symbols");
+    }
+    
     //MARK:- Encryption & Decryption Tests
     
     func testStringEncryption(){
