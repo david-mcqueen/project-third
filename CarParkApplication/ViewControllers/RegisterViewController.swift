@@ -79,21 +79,23 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
                 var invalidInputsMessage = "Please correct your inputs"
                 var invalidInputsAlert = UIAlertView(title: "Missing data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
                 invalidInputsAlert.show();
-                println(!newUser.validEmailPattern());
-                println(!newUser.validPasswordPattern());
-                println(!newUser.validPhonePattern());
+                
+                println("Email failed: \(!newUser.validEmailPattern())");
+                println("Password failed: \(!newUser.validPasswordPattern())");
+                println("Phone failed: \(!newUser.validPhonePattern())");
+                
                 return;
             }
             
-            registerUser(newUser, {(success: Bool, msg: String) -> () in
-                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
+                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
                 if(success) {
                     alert.title = "Success!"
                     alert.message = message
                 }
                 else {
                     alert.title = "Failed : ("
-                    alert.message = msg
+                    alert.message = token
                 }
                 
                 // Move to the UI thread
@@ -114,7 +116,7 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
     }
     
     
-    func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, msg: String) -> ()) -> (){
+    func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, token: String, error: String?) -> ()) -> (){
         //Pass the user details to the server, to register
         //TODO:- Handle failure reponse / unknown failure
         
@@ -124,6 +126,7 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
         var request = NSMutableURLRequest(URL: url!);
         
         var error1 : NSError?;
+        var errorResponse: String?;
         request.HTTPMethod = "POST";
         var params: Dictionary<String, String> = ([
             "Forename" : newUser.FirstName,
@@ -141,22 +144,33 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
 
             println(response);
             var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            var success = false;
                 
             println(strData);
 
             if (error != nil) {
                 println(error.localizedDescription);
+                errorResponse = error.localizedDescription;
             }
-            var err: NSError?
+//            var err: NSError?
         
             //Parse the resonse into JSON
             //var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
                     
-            if (err != nil){
-                println("JSON Error \(err!.localizedDescription) ");
+//            if (err != nil){
+//                println("JSON Error \(err!.localizedDescription) ");
+//            }
+            
+            var token:String?;
+            //TODO:- CHeck of the response contains an error message
+            if (strData != nil){
+                if (validateGUID(strData!.description)){
+                    token = strData!.description;
+                    success = true;
+                }
             }
-        
-            registerCompleted(success: true, msg: "Register Successful");
+            
+            registerCompleted(success: success, token: token!, error: errorResponse);
             });
         
         registerResponse.resume();
