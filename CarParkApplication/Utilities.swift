@@ -65,7 +65,6 @@ func validateEmail(inputEmail: String) -> Bool {
     
     }
 
-
 func validatePassword(inputPassword: String) -> Bool{
     /*
     Password must:
@@ -87,4 +86,12 @@ func validatePhoneNumber(inputNumber: String) -> Bool{
     var numberTest = NSPredicate(format:"SELF MATCHES %@", numberRegEx);
     
     return numberTest!.evaluateWithObject(inputNumber);
+}
+
+func validateGUID(inputGUID: String) -> Bool {
+    //Determine if the String is a valid GUID
+    let GUIDRegEx = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
+    var GUIDTest = NSPredicate(format:"SELF MATCHES %@", GUIDRegEx);
+    
+    return GUIDTest!.evaluateWithObject(inputGUID);
 }

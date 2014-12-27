@@ -89,6 +89,31 @@ class UtilitiesTests: XCTestCase {
         XCTAssertFalse(validatePhoneNumber("%&*^$&&%"), "Phone Validation - Symbols");
     }
     
+    //MARK:- GUID validation tests
+    
+    func testValidGUID(){
+        XCTAssertTrue(validateGUID("192317b4-8dd4-11e4-aa9b-001e8c3af66d"), "GUID Validation")
+        XCTAssertTrue(validateGUID("6e4aafa7-8171-496e-9e9e-5f960dd842af"), "GUID Validation")
+        XCTAssertTrue(validateGUID("c425b02d-eca5-4971-b9fe-278b718770df"), "GUID Validation")
+        XCTAssertTrue(validateGUID("2ac80dbd-0034-4905-8874-86b0248e124e"), "GUID Validation")
+        XCTAssertTrue(validateGUID("c116af05-e41a-4616-8efc-0e8d130cc21f"), "GUID Validation")
+        XCTAssertTrue(validateGUID("e57c4581-ac95-47ae-b23d-ee5002a40b80"), "GUID Validation")
+        XCTAssertTrue(validateGUID("2d41cbb3-24fb-43a9-a902-bde71e85fdd7"), "GUID Validation")
+        XCTAssertTrue(validateGUID("950e5bb2-53a7-40d7-8913-5f010ab5ea49"), "GUID Validation")
+        XCTAssertTrue(validateGUID("743a5b74-4eb8-4965-80bc-5a25dfe7bf32"), "GUID Validation")
+    }
+    
+    func testInvalidGUID(){
+        XCTAssertFalse(validateGUID("192317b48dd411e4aa9b001e8c3af66d"), "GUID Validation - Hyphens")
+        XCTAssertFalse(validateGUID("192317b4-8dd4-11e4-aa9b-001e8c3af66"), "GUID Validation - Length Short")
+        XCTAssertFalse(validateGUID("192317b-8dd4-11e4-aa9b-001e8c3af66d"), "GUID Validation - Length Short")
+        XCTAssertFalse(validateGUID("192317b4-8dd4-11e4aa9b-001e8c3af66d"), "GUID Validation - Missing middle hyphen")
+        XCTAssertFalse(validateGUID("192317b4--8dd4--11e4--aa9b--001e8c3af66d"), "GUID Validation - Double hyphens")
+        XCTAssertFalse(validateGUID("192317b4-8dd4-11e4-aa9b-001e8c3af66d-"), "GUID Validation - End hyphen")
+        XCTAssertFalse(validateGUID("-192317b4-8dd4-11e4-aa9b-001e8c3af66d"), "GUID Validation - Start hyphen")
+        XCTAssertFalse(validateGUID("192317b4"), "GUID Validation - Short")
+    }
+    
     //MARK:- Encryption & Decryption Tests
     
     func testStringEncryption(){
