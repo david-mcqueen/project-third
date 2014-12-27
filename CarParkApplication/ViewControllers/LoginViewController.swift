@@ -30,20 +30,21 @@ class LoginViewController: UIViewController{
     @IBAction func LoginButtonPressed(sender: AnyObject) {
         let userLogin = UserLogin(userName: inputEmail.text, password: inputPassword.text);
         
-        if(!userLogin.emptyInputUsername()){
+        if(userLogin.emptyInputUsername()){
             borderRed(inputEmail);
-        }else if(!userLogin.emptyInputPassword()){
+        }else if(userLogin.emptyInputPassword()){
             borderRed(inputPassword);
         }else{
-            loginUser(userLogin, {(success: Bool, msg: String) -> () in
-                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            loginUser(userLogin, {(success: Bool, token: String?, error:String?) -> () in
+                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
+                
                 if(success) {
                     alert.title = "Success!"
-                    alert.message = msg
+                    alert.message = token
                 }
                 else {
-                    alert.title = "Failed : ("
-                    alert.message = msg
+                    alert.title = "Login Failed"
+                    alert.message = error!;
                 }
                 
                 // Move to the UI thread
@@ -81,44 +82,54 @@ class LoginViewController: UIViewController{
         inputField.clipsToBounds = true;
     }
     
-    func loginUser(user: UserLogin, loginCompleted: (success: Bool, msg: String) -> ()) -> (){
+    func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, error:String?) -> ()) -> (){
         //Pass the user details to the server, to register
         
-        let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather?q=London,uk");
+        //TODO:- Handle failure reponse / unknown failure
+        
         let urlSession = NSURLSession.sharedSession();
         
+        let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/login");
+        var request = NSMutableURLRequest(URL: url!);
         
-        //Used for POST messages
-        //        let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather");
-        //        var request = NSMutableURLRequest(URL: url!);
+        var error1 : NSError?;
+        var errorResponse: String?;
         
-        //        var error1 : NSError?;
-        //        request.HTTPMethod = "POST";
-        //        var params: Dictionary<String, String> = (["q" : "London,uk", "password" : "Test 2"]);
-        //
-        //        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
-        //        request.addValue("application/json", forHTTPHeaderField: "Content-Type");
-        //        request.addValue("application/json", forHTTPHeaderField: "Accept");
-        //        println(error1?.localizedDescription);
-        //        let jsonResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        request.HTTPMethod = "POST";
+        var params: Dictionary<String, String> = ([
+            "Email" : user.UserName,
+            "Password" : user.Password
+            ]);
         
-        let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type");
+        request.addValue("text/plain", forHTTPHeaderField: "Accept");
+        
+        
+        var loginResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+            
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+            var success:Bool = false;
+            var token:String?;
+            
             if (error != nil) {
                 println(error.localizedDescription);
+                errorResponse = error.localizedDescription;
             }
-            var err: NSError?
             
-            var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-            if (err != nil){
-                println("JSON Error \(err!.localizedDescription) ");
+            if (strData != nil){
+                if (validateGUID(strData!.description)){
+                    token = strData!.description;
+                    success = true;
+                }else{
+                    errorResponse = strData!.description;
+                }
             }
-            let city:String! = jsonResult["name"] as NSString;
-            println(jsonResult);
             
-            loginCompleted(success: true, msg: "Login Successful");
+            loginCompleted(success: success, token: token, error: errorResponse);
         });
         
-        jsonResponse.resume();
+        loginResponse.resume();
         
     }
 
