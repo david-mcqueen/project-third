@@ -77,7 +77,16 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
             
             if(!newUser.validEmailPattern() || !newUser.validPasswordPattern() || !newUser.validPhonePattern()){
                 var invalidInputsMessage = "Please correct your inputs"
-                var invalidInputsAlert = UIAlertView(title: "Missing data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
+                if (!newUser.validEmailPattern()){
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Email"
+                }
+                if (!newUser.validPasswordPattern()){
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password"
+                }
+                if (!newUser.validPhonePattern()){
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Phone Number"
+                }
+                var invalidInputsAlert = UIAlertView(title: "Incomplete data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
                 invalidInputsAlert.show();
                 
                 println("Email failed: \(!newUser.validEmailPattern())");

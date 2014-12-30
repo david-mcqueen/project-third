@@ -43,7 +43,45 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         super.viewDidLoad()
         self.delegate = self
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Bordered, target: self, action: "submit:")
+        
+        getMakes({(success: Bool, vehicleMakes: [Car]) -> () in
+            if(success) {
+                var listOfMakes: [NSObject] = []
+                
+                for make in vehicleMakes{
+                    listOfMakes.append(make.make_display.description);
+                }
+                
+                var sectionIndex = 0
+                var rowIndex = 0
+            
+                for section in self.form.sections {
+                    for row in section.rows {
+                        if row.tag == "picker" && row.title == "Make"{
+                        
+                            row.options = listOfMakes;
+                            row.titleFormatter = { value in
+                                switch( value ) {
+                                default:
+                                    return value.description
+                                }
+                            }
+                            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: rowIndex, inSection: sectionIndex)) as? FormBaseCell {
+                                cell.update()
+                            }
+                            return
+                        }
+                    
+                        ++rowIndex
+                    }
+                    ++sectionIndex
+                }
+            }
+            
+
+        });
     }
+    
     
     /// MARK: Actions
     
@@ -71,52 +109,98 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         row.cellConfiguration = ["textField.placeholder" : "e.g. PR05 ABC", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
         row.required = true;
         section1.addRow(row)
-
-        row = FormRowDescriptor(tag: "make", rowType: .Name, title: "Make")
-        row.cellConfiguration = ["textField.placeholder" : "Vehicle Make", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section1.addRow(row)
-        
-        row = FormRowDescriptor(tag: "model", rowType: .Name, title: "Model")
-        row.cellConfiguration = ["textField.placeholder" : "Vehicle Model", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section1.addRow(row)
         
         row = FormRowDescriptor(tag: "colour", rowType: .Name, title: "Colour")
         row.cellConfiguration = ["textField.placeholder" : "Vehicle Colour", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
         row.required = true;
         section1.addRow(row)
         
+        
         let section2 = FormSectionDescriptor()
         
-        row = FormRowDescriptor(tag: Static.picker, rowType: .Picker, title: "Gender")
-        row.options = ["F", "M", "U"]
+        row = FormRowDescriptor(tag: Static.picker, rowType: .Picker, title: "Make")
+        row.options = ["U"]
+        row.required = true;
         row.titleFormatter = { value in
             switch( value ) {
-            case "F":
-                return "Female"
-            case "M":
-                return "Male"
             case "U":
-                return "I'd rather not to say"
+                return "Loading Makes..."
             default:
                 return nil
             }
         }
         section2.addRow(row)
-
+        
+        row = FormRowDescriptor(tag: Static.picker, rowType: .Picker, title: "Model")
+        row.options = ["U"]
+        row.required = true;
+        row.titleFormatter = { value in
+            switch( value ) {
+            case "U":
+                return "Loading Models..."
+            default:
+                return nil
+            }
+        }
+        section2.addRow(row)
         
         form.sections = [section1, section2]
         
         self.form = form
     }
     
+    func getMakes(requestCompleted: (success: Bool, vehicleMakes: [Car]) -> ()) -> (){
+        //Pass the user details to the server, to register
+        
+        let url = NSURL(string:"http://www.carqueryapi.com/api/0.3/?cmd=getMakes");
+        let urlSession = NSURLSession.sharedSession();
+        
+        
+        let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+            if (error != nil) {
+                println(error.localizedDescription);
+            }
+            var err: NSError?
+            
+            var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+         
+            var makes: [Car] = [];
+            
+            if let vehicleMakeArray = jsonResult["Makes"] as? NSArray{
+                println(vehicleMakeArray);
+                for make in vehicleMakeArray {
+                    let carCountry: AnyObject? = make["make_display"]!
+                    let carDisplay: AnyObject?  = make["make_display"]!
+                    let carID: AnyObject?  = make["make_id"]!
+                    let carCommon: AnyObject?  = make["make_is_common"]!
+                    
+                    let newCar = Car(_make_country: carCountry!, _make_display: carDisplay!, _make_id: carID!, _make_is_common: carCommon!)
+                    
+                    makes.append(newCar);
+                }
+            }
+            
+            requestCompleted(success: true, vehicleMakes: makes);
+        });
+        
+        jsonResponse.resume();
+    }
+
     
     /// MARK: FormViewControllerDelegate
     
     func formViewController(controller: FormViewController, didSelectRowDescriptor rowDescriptor: FormRowDescriptor) {
+        
         if rowDescriptor.tag == Static.button {
             self.view.endEditing(true)
         }
+        
+        //TODO:- Handle the option for when a make has been selected.
+        //Need to retrieve all the models for that make
+        println(rowDescriptor.title)
+        
     }
 }
