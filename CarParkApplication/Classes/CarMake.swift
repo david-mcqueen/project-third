@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Car {
+class CarMake {
     var make_country: AnyObject;
     var make_display: AnyObject;
     var make_id: AnyObject;
