@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import UIKit
 
+//MARK:- Get Vehicle Makes
 func getMakes(requestCompleted: (success: Bool, vehicleMakes: [CarMake]) -> ()) -> (){
     //Pass the user details to the server, to register
     
@@ -49,6 +49,7 @@ func getMakes(requestCompleted: (success: Bool, vehicleMakes: [CarMake]) -> ()) 
     jsonResponse.resume();
 }
 
+//MARK:- Get Models for specific make
 func getModels(modelID: String, requestModelsCompleted: (success: Bool, vehicleModels: [CarModel]) -> ()) -> (){
     //Pass the user details to the server, to register
     

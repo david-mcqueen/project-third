@@ -81,56 +81,5 @@ class LoginViewController: UIViewController{
         inputField.layer.cornerRadius = 5;
         inputField.clipsToBounds = true;
     }
-    
-    func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, error:String?) -> ()) -> (){
-        //Pass the user details to the server, to register
-        
-        //TODO:- Handle failure reponse / unknown failure
-        
-        let urlSession = NSURLSession.sharedSession();
-        
-        let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/login");
-        var request = NSMutableURLRequest(URL: url!);
-        
-        var error1 : NSError?;
-        var errorResponse: String?;
-        
-        request.HTTPMethod = "POST";
-        var params: Dictionary<String, String> = ([
-            "Email" : user.UserName,
-            "Password" : user.Password
-            ]);
-        
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type");
-        request.addValue("text/plain", forHTTPHeaderField: "Accept");
-        
-        
-        var loginResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
-            
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
-            var success:Bool = false;
-            var token:String?;
-            
-            if (error != nil) {
-                println(error.localizedDescription);
-                errorResponse = error.localizedDescription;
-            }
-            
-            if (strData != nil){
-                if (validateGUID(strData!.description)){
-                    token = strData!.description;
-                    success = true;
-                }else{
-                    errorResponse = strData!.description;
-                }
-            }
-            
-            loginCompleted(success: success, token: token, error: errorResponse);
-        });
-        
-        loginResponse.resume();
-        
-    }
 
 }
