@@ -34,6 +34,13 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         static let modelTag = "Model"
     }
     
+    var makePicker: FormRowDescriptor?;
+//    var makeRowIndex: Int?;
+//    var makeRowSection: Int?;
+    var modelPicker: FormRowDescriptor?;
+//    var modelRowIndex: Int?;
+//    var modelRowSection: Int?;
+    
     override init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.loadForm()
@@ -44,41 +51,51 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         self.delegate = self
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Bordered, target: self, action: "submit:")
         
-        getMakes({(success: Bool, vehicleMakes: [Car]) -> () in
+        //Find the Make & Model pickers - Copy them to variables
+        var sectionIndex = 0
+        var rowIndex = 0
+        
+        for section in self.form.sections {
+            for row in section.rows {
+                if row.tag == "picker" && row.title == "Make"{
+                    
+                    self.makePicker = row;
+                    //                            self.makeRowIndex = rowIndex;
+                    //                            self.makeRowSection = sectionIndex;
+                    
+                }else if row.tag == "picker" && row.title == "Model"{
+                    self.modelPicker = row;
+                }
+                
+                ++rowIndex
+            }
+            ++sectionIndex
+        }
+        
+        //Get the makes from the API
+        getMakes({(success: Bool, vehicleMakes: [CarMake]) -> () in
             if(success) {
                 var listOfMakes: [NSObject] = []
                 
                 for make in vehicleMakes{
-                    listOfMakes.append(make.make_display.description);
+                    listOfMakes.append(make.make_id.description);
                 }
                 
-                var sectionIndex = 0
-                var rowIndex = 0
-            
-                for section in self.form.sections {
-                    for row in section.rows {
-                        if row.tag == "picker" && row.title == "Make"{
-                        
-                            row.options = listOfMakes;
-                            row.titleFormatter = { value in
-                                switch( value ) {
-                                default:
-                                    return value.description
-                                }
-                            }
-                            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: rowIndex, inSection: sectionIndex)) as? FormBaseCell {
-                                cell.update()
-                            }
-                            return
+                self.makePicker!.options = listOfMakes;
+                //The name displayed also wants to be the value
+                self.makePicker!.titleFormatter = { value in
+                    var result:String = "Not Found"
+                    for make in vehicleMakes{
+                        if make.make_id.description == value{
+                            result =  make.make_display.description;
                         }
-                    
-                        ++rowIndex
                     }
-                    ++sectionIndex
+                    return result;
                 }
-            }
-            
 
+            }else{
+                println("Something went wrong");
+            }
         });
     }
     
@@ -137,7 +154,7 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         row.titleFormatter = { value in
             switch( value ) {
             case "U":
-                return "Loading Models..."
+                return "Select make first"
             default:
                 return nil
             }
@@ -149,7 +166,7 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         self.form = form
     }
     
-    func getMakes(requestCompleted: (success: Bool, vehicleMakes: [Car]) -> ()) -> (){
+    func getMakes(requestCompleted: (success: Bool, vehicleMakes: [CarMake]) -> ()) -> (){
         //Pass the user details to the server, to register
         
         let url = NSURL(string:"http://www.carqueryapi.com/api/0.3/?cmd=getMakes");
@@ -167,7 +184,7 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
                 println("JSON Error \(err!.localizedDescription) ");
             }
          
-            var makes: [Car] = [];
+            var makes: [CarMake] = [];
             
             if let vehicleMakeArray = jsonResult["Makes"] as? NSArray{
                 println(vehicleMakeArray);
@@ -177,13 +194,51 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
                     let carID: AnyObject?  = make["make_id"]!
                     let carCommon: AnyObject?  = make["make_is_common"]!
                     
-                    let newCar = Car(_make_country: carCountry!, _make_display: carDisplay!, _make_id: carID!, _make_is_common: carCommon!)
+                    let newCar = CarMake(_make_country: carCountry!, _make_display: carDisplay!, _make_id: carID!, _make_is_common: carCommon!)
                     
                     makes.append(newCar);
                 }
             }
             
             requestCompleted(success: true, vehicleMakes: makes);
+        });
+        
+        jsonResponse.resume();
+    }
+    
+    func getModels(modelID: String, requestModelsCompleted: (success: Bool, vehicleModels: [CarModel]) -> ()) -> (){
+        //Pass the user details to the server, to register
+        
+        let url = NSURL(string:"http://www.carqueryapi.com/api/0.3/?cmd=getModels&make=\(modelID)");
+        let urlSession = NSURLSession.sharedSession();
+        
+        
+        let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+            if (error != nil) {
+                println(error.localizedDescription);
+           }
+            var err: NSError?
+            
+            var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+            
+            var models: [CarModel] = [];
+            
+            if let vehicleModelArray = jsonResult["Models"] as? NSArray{
+                println(vehicleModelArray);
+                for model in vehicleModelArray {
+                    let modelname: AnyObject? = model["model_name"]!
+                    let modelID: AnyObject?  = model["model_make_id"]!
+                    
+                    let newCar = CarModel(_model_name: modelname!, _model_make_id: modelID!);
+                    
+                    models.append(newCar);
+                }
+            }
+            
+            requestModelsCompleted(success: true, vehicleModels: models);
         });
         
         jsonResponse.resume();
@@ -200,7 +255,45 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         
         //TODO:- Handle the option for when a make has been selected.
         //Need to retrieve all the models for that make
-        println(rowDescriptor.title)
+
+        
+        
+        if rowDescriptor.tag == "picker" && rowDescriptor.title == "Model"{
+            println(self.makePicker!.value.description);
+            
+            self.modelPicker!.options = [self.makePicker!.value.description];
+            //The name displayed also wants to be the value
+            self.modelPicker!.titleFormatter = { value in
+                switch( value ) {
+                default:
+                    return value.description
+                }
+            }
+            
+            //Get the makes from the API
+            getModels(self.makePicker!.value.description, requestModelsCompleted: {(success: Bool, vehicleModels: [CarModel]) -> () in
+                if(success) {
+                    var listOfModels: [NSObject] = []
+                    
+                    for make in vehicleModels{
+                        listOfModels.append(make.model_name.description);
+                    }
+                    
+                    self.modelPicker!.options = listOfModels;
+                    //The name displayed also wants to be the value
+                    self.modelPicker!.titleFormatter = { value in
+                        switch (value){
+                        default:
+                            return value.description;
+                        }
+                    }
+                    
+                }else{
+                    println("Something went wrong");
+                }
+            });
+
+        }
         
     }
 }
