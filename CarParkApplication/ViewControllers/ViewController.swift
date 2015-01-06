@@ -37,6 +37,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
 
     }
     
+    @IBAction func determineLocation(sender: AnyObject) {
+        //Start looking for beacons so long as we have permission
+                if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
+                    //Start looks for regions
+                    NSLog("Start monitoring for regions");
+                    locationManager.startRangingBeaconsInRegion(region);
+                }
+    }
+    
 //    @IBAction func determineLocation(sender: AnyObject) {
 //        //Start looking for beacons so long as we have permission
 //        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
