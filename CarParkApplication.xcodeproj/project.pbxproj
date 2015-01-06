@@ -24,6 +24,8 @@
 		551AC1A519E186BB0051C672 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551AC1A319E186BB0051C672 /* LaunchScreen.xib */; };
 		551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */; };
 		551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551AC1BA19E186E00051C672 /* CoreLocation.framework */; };
+		55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
+		55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
 		55440BB91A34B96700969FBC /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BB11A34B96700969FBC /* libPayPalMobile.a */; };
 		55440BBB1A34BA1400969FBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BBA1A34BA1400969FBC /* AudioToolbox.framework */; };
 		55440BBD1A34BA1C00969FBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BBC1A34BA1C00969FBC /* AVFoundation.framework */; };
@@ -96,6 +98,7 @@
 		551AC1AF19E186BB0051C672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarParkApplicationTests.swift; sourceTree = "<group>"; };
 		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleSelectViewController.swift; path = ViewControllers/VehicleSelectViewController.swift; sourceTree = "<group>"; };
 		55440BA91A34B96700969FBC /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		55440BAA1A34B96700969FBC /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
 		55440BAB1A34B96700969FBC /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
@@ -208,6 +211,7 @@
 				5584FBA419F05133001CE01D /* RegisterVehicleViewController.swift */,
 				551A189619F0559500E6702B /* LoginViewController.swift */,
 				55440BCC1A34D53900969FBC /* ProfileViewController.swift */,
+				55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -498,6 +502,7 @@
 				55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */,
 				557CD1921A3F7723009D171F /* FormSegmentedControlCell.swift in Sources */,
 				55ABC7681A542E31005A4371 /* UserAPI.swift in Sources */,
+				55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
 				557CD1941A3F7723009D171F /* FormSwitchCell.swift in Sources */,
 				557CD18B1A3F7723009D171F /* FormBaseCell.swift in Sources */,
@@ -524,6 +529,7 @@
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
 				55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
+				55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,
 				55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */,
 				5507B2701A3C64960082BB0F /* ClassTests.swift in Sources */,

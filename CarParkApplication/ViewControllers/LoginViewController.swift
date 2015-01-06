@@ -105,4 +105,66 @@ class LoginViewController: UIViewController{
         inputField.clipsToBounds = true;
     }
 
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if identifier == "loginUser"{
+            
+            let userLogin = UserLogin(userName: inputEmail.text, password: inputPassword.text);
+            
+            var loginIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+            loginIndicator.center = self.view.center
+            loginIndicator.hidesWhenStopped = true
+            loginIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            
+            if(userLogin.emptyInputUsername()){
+                borderRed(inputEmail);
+            }else if(userLogin.emptyInputPassword()){
+                borderRed(inputPassword);
+            }else{
+                view.addSubview(loginIndicator)
+                loginIndicator.startAnimating()
+                loginUser(userLogin, {(success: Bool, token: String?, error:String?) -> () in
+                    var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
+                    
+                    if(success) {
+                        alert.title = "Success!"
+                        alert.message = token
+                    }
+                    else {
+                        alert.title = "Login Failed"
+                        alert.message = error!;
+                    }
+                    
+                    // Move to the UI thread
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        // Show the alert
+                        alert.show()
+                        if(success){
+                            NSLog("Login successful");
+                            
+                            //Save the token, and username
+                            NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token");
+                            NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
+                            NSUserDefaults.standardUserDefaults().synchronize();
+                            
+                            loginIndicator.stopAnimating()
+                            
+                            let viewLoggedInViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController
+                            self.navigationController?.pushViewController(viewLoggedInViewController, animated: true);
+                        }else{
+                            //Highlight the relevant fields
+                            self.borderRed(self.inputEmail);
+                            self.borderRed(self.inputPassword);
+                            loginIndicator.stopAnimating()
+                        }
+                    })
+                    
+                    }
+                );
+            }
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

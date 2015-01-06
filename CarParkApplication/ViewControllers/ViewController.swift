@@ -14,7 +14,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     @IBOutlet var locationLabel: UILabel!
     let locationManager = CLLocationManager();
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
+    var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     
+
+    @IBOutlet var vehicleLabel: UILabel!
+    var selectedVehicle:String = "Renault Megane"
     
     @IBOutlet var toggleMethod: UISwitch!
     
@@ -22,28 +26,41 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         //Reload all of the table data
         self.tableView.reloadData();
     }
+    
+    @IBAction func parkPressed(sender: AnyObject) {
+        println("park the vehicle");
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager.delegate = self;
+        vehicleLabel.text = selectedVehicle;
         
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
             locationManager.requestWhenInUseAuthorization();
         }
         
-        
         //TODO:- Handle the user denying the location request
+        
+        beaconActivityIndicator.center = self.view.center
+        beaconActivityIndicator.hidesWhenStopped = true
+        beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        
+        
+        
 
     }
     
     @IBAction func determineLocation(sender: AnyObject) {
         //Start looking for beacons so long as we have permission
-                if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-                    //Start looks for regions
-                    NSLog("Start monitoring for regions");
-                    locationManager.startRangingBeaconsInRegion(region);
-                }
+        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
+            //Start looks for regions
+            NSLog("Start monitoring for regions");
+            beaconActivityIndicator.startAnimating()
+            locationManager.startRangingBeaconsInRegion(region);
+        }
     }
     
 //    @IBAction func determineLocation(sender: AnyObject) {
@@ -139,6 +156,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             
             //We have found the closest beacon, stop ranging for new locations
             locationManager.stopRangingBeaconsInRegion(region);
+            beaconActivityIndicator.stopAnimating();
             //TODO:- Only turn of beacon ranging, when the server has returned a car park ID?
             //TODO:- Or keep sending the same ID until a response is retunred?
         }
@@ -180,14 +198,34 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 return 0;
             } else if(!toggleMethod.on && section == 2){
                 return 0;
-            } else{
-                return 3; //The number of rows in the section
+            } else if (section == 1 && !toggleMethod.on){
+                return 2;
+            } else {
+                return 1;
             }
             
         }else{
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PickVehicle" {
+            let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
+            vehicleSelectViewController.selectedVehicle = selectedVehicle
+        }
+    }
+    
+    @IBAction func selectedVehicleSave(segue:UIStoryboardSegue) {
+        let vehicleSelectViewController = segue.sourceViewController as VehicleSelectViewController
+        if let _selectedVehicle = vehicleSelectViewController.selectedVehicle {
+            vehicleLabel.text = _selectedVehicle
+            selectedVehicle = _selectedVehicle
+            println("selected vehicel: \(selectedVehicle)");
+        }
+        self.navigationController?.popViewControllerAnimated(true);
+    }
+    
     
 }
 
