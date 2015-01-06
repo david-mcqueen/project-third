@@ -15,6 +15,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     
     @IBOutlet weak var beaonOutput: UILabel!
+    @IBOutlet weak var perHour: UIView!
+    @IBOutlet weak var manual: UIView!
+    @IBOutlet weak var PayMethodSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         
         //TODO:- Handle the user denying the location request
+    
+        if(PayMethodSwitch.on){
+            perHour.hidden = true;
+            manual.hidden = false;
+        }else{
+            perHour.hidden = false;
+            manual.hidden = true;
+        }
     }
     
     @IBAction func findCarParkButton(sender: AnyObject) {
@@ -47,21 +58,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func getBeaconDetails(major: Int, minor: Int, rssi: Int){
         var locationName: String;
         
-        
-        //Will have to get the beacon details and match.
-        //Either on the server or locally
-        println(String(rssi));
-        println(String(minor));
-        println(String(major));
+        //The beacon ID needs to be in the format stored on the server.
         var beacon = String(major) + "." + String(minor);
-        beaonOutput.text = beacon;
         
-        //TODO:- Pass through the correct session ID (Token)
-        determineCarPark("c05afc84-9420-11e4-aa9b-001e8c3af66d", beacon, {(success: Bool, carPark: String) -> () in
+        //TODO:- Remove this hardcode beacon value
+        beacon = "1.1";
+        
+        //Get the session token, saved from the last login.
+        let savedToken: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("token")!;
+        
+        
+        determineCarPark(savedToken.description, beacon, {(success: Bool, carPark: String) -> () in
             var alert = UIAlertView(title: "Success!", message: carPark, delegate: nil, cancelButtonTitle: "Okay.")
             if(success) {
                 alert.title = "Success!"
                 alert.message = carPark
+                
             }
             else {
                 alert.title = "Failed : ("
@@ -71,6 +83,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
+                let carParkName = "Manchester Oxford Road"
+                self.beaonOutput.text = "\(carPark): \(carParkName)";
                 alert.show()
             });
             
@@ -79,6 +93,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     }
 
+    @IBAction func toggleViews(sender: AnyObject) {
+        if(PayMethodSwitch.on){
+            perHour.hidden = true;
+            manual.hidden = false;
+        }else{
+            perHour.hidden = false;
+            manual.hidden = true;
+        }
+    }
     
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
         println("rangingDidFailForRegion");
@@ -111,6 +134,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             //We have found the closest beacon, stop ranging for new locations
             locationManager.stopRangingBeaconsInRegion(region);
+            //TODO:- Only turn of beacon ranging, when the server has returned a car park ID?
+            //TODO:- Or keep sending the same ID until a response is retunred?
         }
         
     }
