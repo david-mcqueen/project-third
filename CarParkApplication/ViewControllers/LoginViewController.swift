@@ -37,11 +37,18 @@ class LoginViewController: UIViewController{
     @IBAction func LoginButtonPressed(sender: AnyObject) {
         let userLogin = UserLogin(userName: inputEmail.text, password: inputPassword.text);
         
+        var loginIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+        loginIndicator.center = self.view.center
+        loginIndicator.hidesWhenStopped = true
+        loginIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        
         if(userLogin.emptyInputUsername()){
             borderRed(inputEmail);
         }else if(userLogin.emptyInputPassword()){
             borderRed(inputPassword);
         }else{
+            view.addSubview(loginIndicator)
+            loginIndicator.startAnimating()
             loginUser(userLogin, {(success: Bool, token: String?, error:String?) -> () in
                 var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
                 
@@ -66,9 +73,7 @@ class LoginViewController: UIViewController{
                         NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
                         NSUserDefaults.standardUserDefaults().synchronize();
                         
-                        if let savedToken: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("token") {
-                            println(savedToken)
-                        }
+                        loginIndicator.stopAnimating()
                         
                         let viewLoggedInViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController
                         self.navigationController?.pushViewController(viewLoggedInViewController, animated: true);
@@ -76,6 +81,7 @@ class LoginViewController: UIViewController{
                         //Highlight the relevant fields
                         self.borderRed(self.inputEmail);
                         self.borderRed(self.inputPassword);
+                        loginIndicator.stopAnimating()
                     }
                 })
                 

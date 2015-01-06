@@ -167,6 +167,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q2k-jd-bx5">
                                                     <rect key="frame" x="543" y="5" width="51" height="31"/>
+                                                    <color key="onTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <connections>
                                                         <action selector="toggleMethodPressed:" destination="nUs-13-0F2" eventType="valueChanged" id="Vjp-dz-Se8"/>
                                                     </connections>
@@ -189,7 +190,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3n1-7U-KHK" id="yo3-yl-oa4">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ta-4B-caI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ta-4B-caI">
                                                     <rect key="frame" x="17" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -256,7 +257,7 @@
                             <outlet property="delegate" destination="nUs-13-0F2" id="rI7-ds-qNo"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="62B-1k-kH6"/>
+                    <tabBarItem key="tabBarItem" title="Park" id="62B-1k-kH6"/>
                     <connections>
                         <outlet property="locationLabel" destination="NtY-fs-Hic" id="Pr9-XW-QjY"/>
                         <outlet property="toggleMethod" destination="Q2k-jd-bx5" id="EGB-h1-kDu"/>
@@ -327,6 +328,7 @@
         <scene sceneID="Lyq-AC-FZN">
             <objects>
                 <tabBarController storyboardIdentifier="viewLoggedInViewController" title="Logged In" automaticallyAdjustsScrollViewInsets="NO" id="gWl-Q9-dSo" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="z1K-on-2fL">
@@ -334,8 +336,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Kle-kD-CjN" kind="relationship" relationship="viewControllers" id="o7s-Uo-10R"/>
                         <segue destination="nUs-13-0F2" kind="relationship" relationship="viewControllers" id="D5c-0J-e6a"/>
+                        <segue destination="Kle-kD-CjN" kind="relationship" relationship="viewControllers" id="o7s-Uo-10R"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAg-dw-lHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
