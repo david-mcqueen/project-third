@@ -18,6 +18,13 @@ class LoginViewController: UIViewController{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
+            inputEmail.text = savedUsername.description;
+        }
+        
+        //TODO:- remove this line
+        inputPassword.text = "password"
     }
     
 
@@ -53,6 +60,16 @@ class LoginViewController: UIViewController{
                     alert.show()
                     if(success){
                         NSLog("Login successful");
+                        
+                        //Save the token, and username
+                        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token");
+                        NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
+                        NSUserDefaults.standardUserDefaults().synchronize();
+                        
+                        if let savedToken: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("token") {
+                            println(savedToken)
+                        }
+                        
                         let viewLoggedInViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController
                         self.navigationController?.pushViewController(viewLoggedInViewController, animated: true);
                     }else{

@@ -60,6 +60,8 @@
 		55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABC7671A542E31005A4371 /* UserAPI.swift */; };
 		55ABC76B1A542EA8005A4371 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABC76A1A542EA8005A4371 /* User.swift */; };
 		55ABC76C1A542EA8005A4371 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABC76A1A542EA8005A4371 /* User.swift */; };
+		55B631811A598B7700DD5DBF /* CarParkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B631801A598B7700DD5DBF /* CarParkAPI.swift */; };
+		55B631821A598B7700DD5DBF /* CarParkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B631801A598B7700DD5DBF /* CarParkAPI.swift */; };
 		55BB56A019F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A119F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A419F2CD1800492154 /* UtilitiesTests.swift */; };
@@ -142,6 +144,7 @@
 		55ABC7631A542CC1005A4371 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewControllers/ViewController.swift; sourceTree = "<group>"; };
 		55ABC7671A542E31005A4371 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAPI.swift; path = "Network Access/UserAPI.swift"; sourceTree = "<group>"; };
 		55ABC76A1A542EA8005A4371 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/User.swift; sourceTree = "<group>"; };
+		55B631801A598B7700DD5DBF /* CarParkAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarParkAPI.swift; path = "Network Access/CarParkAPI.swift"; sourceTree = "<group>"; };
 		55BB569F19F2C70C00492154 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 			children = (
 				550294B81A5429B400198EC7 /* CarQueryAPI.swift */,
 				55ABC7671A542E31005A4371 /* UserAPI.swift */,
+				55B631801A598B7700DD5DBF /* CarParkAPI.swift */,
 			);
 			name = "Network Access";
 			sourceTree = "<group>";
@@ -498,6 +502,7 @@
 				557CD1941A3F7723009D171F /* FormSwitchCell.swift in Sources */,
 				557CD18B1A3F7723009D171F /* FormBaseCell.swift in Sources */,
 				55ABC76B1A542EA8005A4371 /* User.swift in Sources */,
+				55B631811A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55ABC7641A542CC1005A4371 /* ViewController.swift in Sources */,
 				5584FBA519F05133001CE01D /* RegisterVehicleViewController.swift in Sources */,
 				557CD1991A3F7723009D171F /* FormDescriptor.swift in Sources */,
@@ -515,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				550294B51A54269A00198EC7 /* CarMake.swift in Sources */,
+				55B631821A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
 				55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
