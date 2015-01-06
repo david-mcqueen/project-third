@@ -9,16 +9,19 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate {
 
+    @IBOutlet var locationLabel: UILabel!
     let locationManager = CLLocationManager();
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     
-    @IBOutlet weak var beaonOutput: UILabel!
-    @IBOutlet weak var perHour: UIView!
-    @IBOutlet weak var manual: UIView!
-    @IBOutlet weak var PayMethodSwitch: UISwitch!
     
+    @IBOutlet var toggleMethod: UISwitch!
+    
+    @IBAction func toggleMethodPressed(sender: AnyObject) {
+        //Reload all of the table data
+        self.tableView.reloadData();
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,24 +34,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         
         //TODO:- Handle the user denying the location request
-    
-        if(PayMethodSwitch.on){
-            perHour.hidden = true;
-            manual.hidden = false;
-        }else{
-            perHour.hidden = false;
-            manual.hidden = true;
-        }
+
     }
     
-    @IBAction func findCarParkButton(sender: AnyObject) {
-        //Start looking for beacons so long as we have permission
-        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-            //Start looks for regions
-            NSLog("Start monitoring for regions");
-            locationManager.startRangingBeaconsInRegion(region);
-        }
-    }
+//    @IBAction func determineLocation(sender: AnyObject) {
+//        //Start looking for beacons so long as we have permission
+//        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
+//            //Start looks for regions
+//            NSLog("Start monitoring for regions");
+//            locationManager.startRangingBeaconsInRegion(region);
+//        }
+//    }
+    
+//    @IBAction func findCarParkButton(sender: AnyObject) {
+//        //Start looking for beacons so long as we have permission
+//        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
+//            //Start looks for regions
+//            NSLog("Start monitoring for regions");
+//            locationManager.startRangingBeaconsInRegion(region);
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,7 +89,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
                 let carParkName = "Manchester Oxford Road"
-                self.beaonOutput.text = "\(carPark): \(carParkName)";
+                self.locationLabel.text = "\(carPark): \(carParkName)";
                 alert.show()
             });
             
@@ -93,16 +98,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     }
 
-    @IBAction func toggleViews(sender: AnyObject) {
-        if(PayMethodSwitch.on){
-            perHour.hidden = true;
-            manual.hidden = false;
-        }else{
-            perHour.hidden = false;
-            manual.hidden = true;
-        }
-    }
-    
+   
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
         println("rangingDidFailForRegion");
         println(error.localizedDescription);
@@ -138,6 +134,50 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             //TODO:- Or keep sending the same ID until a response is retunred?
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 1 && toggleMethod.on){
+            //Set the header & footer heights to 0
+            self.tableView.sectionHeaderHeight = 0;
+            return 0;
+        } else if(section == 2 && !toggleMethod.on){
+            //Set the header & footer heights to 0
+            self.tableView.sectionHeaderHeight = 0;
+            return 0;
+        } else {
+            return super.tableView(tableView, heightForHeaderInSection: section);
+        }  //keeps inalterate all other Header
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if(section == 1 && toggleMethod.on){
+            //Set the header & footer heights to 0
+            self.tableView.sectionFooterHeight = 0;
+            return 0;
+        } else if(section == 2 && !toggleMethod.on) {
+            //Set the header & footer heights to 0
+            self.tableView.sectionFooterHeight = 0;
+            return 0;
+        } else {
+            return super.tableView(tableView, heightForFooterInSection: section)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(section == 1 || section == 2) //Index number of interested section
+        {
+            if(toggleMethod.on && section == 1){
+                return 0;
+            } else if(!toggleMethod.on && section == 2){
+                return 0;
+            } else{
+                return 3; //The number of rows in the section
+            }
+            
+        }else{
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
     }
     
 }
