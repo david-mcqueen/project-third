@@ -17,8 +17,10 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     
 
+    @IBOutlet var timeBandLabel: UILabel!
     @IBOutlet var vehicleLabel: UILabel!
     var selectedVehicle:String = "Renault Megane"
+    var selectedTimeBand: String = "2 hours"
     
     @IBOutlet var toggleMethod: UISwitch!
     
@@ -164,11 +166,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if(section == 1 && toggleMethod.on){
-            //Set the header & footer heights to 0
-            self.tableView.sectionHeaderHeight = 0;
-            return 0;
-        } else if(section == 2 && !toggleMethod.on){
+        if(section == 2 && toggleMethod.on){
             //Set the header & footer heights to 0
             self.tableView.sectionHeaderHeight = 0;
             return 0;
@@ -178,11 +176,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if(section == 1 && toggleMethod.on){
-            //Set the header & footer heights to 0
-            self.tableView.sectionFooterHeight = 0;
-            return 0;
-        } else if(section == 2 && !toggleMethod.on) {
+        if(section == 2 && toggleMethod.on) {
             //Set the header & footer heights to 0
             self.tableView.sectionFooterHeight = 0;
             return 0;
@@ -192,15 +186,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 1 || section == 2) //Index number of interested section
+        if(section == 2) //Index number of interested section
         {
-            if(toggleMethod.on && section == 1){
+            if(section == 2 && toggleMethod.on){
                 return 0;
-            } else if(!toggleMethod.on && section == 2){
-                return 0;
-            } else if (section == 1 && !toggleMethod.on){
-                return 2;
-            } else {
+            } else  {
                 return 1;
             }
             
@@ -214,6 +204,21 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
             vehicleSelectViewController.selectedVehicle = selectedVehicle
         }
+        if segue.identifier == "PickTimeBand" {
+            let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
+            timeBandSelectViewController.selectedTimeBand = selectedTimeBand
+        }
+        
+    }
+    
+    @IBAction func selectedTimeBandSave(segue:UIStoryboardSegue) {
+        let timeBandSelectViewController = segue.sourceViewController as TimeBandSelectViewController
+        if let _selectedTimeBand = timeBandSelectViewController.selectedTimeBand {
+            timeBandLabel.text = _selectedTimeBand
+            selectedTimeBand = _selectedTimeBand
+            println("selected time band: \(selectedTimeBand)");
+        }
+        self.navigationController?.popViewControllerAnimated(true);
     }
     
     @IBAction func selectedVehicleSave(segue:UIStoryboardSegue) {

@@ -57,6 +57,8 @@
 		557CD19A1A3F7723009D171F /* FormRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1891A3F7723009D171F /* FormRowDescriptor.swift */; };
 		557CD19B1A3F7723009D171F /* FormSectionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */; };
 		5584FBA519F05133001CE01D /* RegisterVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584FBA419F05133001CE01D /* RegisterVehicleViewController.swift */; };
+		558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */; };
+		558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */; };
 		55ABC7641A542CC1005A4371 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABC7631A542CC1005A4371 /* ViewController.swift */; };
 		55ABC7681A542E31005A4371 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABC7671A542E31005A4371 /* UserAPI.swift */; };
 		55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABC7671A542E31005A4371 /* UserAPI.swift */; };
@@ -144,6 +146,7 @@
 		557CD1891A3F7723009D171F /* FormRowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRowDescriptor.swift; sourceTree = "<group>"; };
 		557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionDescriptor.swift; sourceTree = "<group>"; };
 		5584FBA419F05133001CE01D /* RegisterVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVehicleViewController.swift; path = ViewControllers/RegisterVehicleViewController.swift; sourceTree = "<group>"; };
+		558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeBandSelectViewController.swift; path = ViewControllers/TimeBandSelectViewController.swift; sourceTree = "<group>"; };
 		55ABC7631A542CC1005A4371 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewControllers/ViewController.swift; sourceTree = "<group>"; };
 		55ABC7671A542E31005A4371 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAPI.swift; path = "Network Access/UserAPI.swift"; sourceTree = "<group>"; };
 		55ABC76A1A542EA8005A4371 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/User.swift; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 				551A189619F0559500E6702B /* LoginViewController.swift */,
 				55440BCC1A34D53900969FBC /* ProfileViewController.swift */,
 				55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */,
+				558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -483,6 +487,7 @@
 			files = (
 				557CD1971A3F7723009D171F /* FormSelector.swift in Sources */,
 				557CD18F1A3F7723009D171F /* FormCheckCell.swift in Sources */,
+				558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
 				550294C21A542C7900198EC7 /* UserLogin.swift in Sources */,
 				557C2CED19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
 				557CD19A1A3F7723009D171F /* FormRowDescriptor.swift in Sources */,
@@ -528,6 +533,7 @@
 				55B631821A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
 				55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */,
+				558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
 				55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,

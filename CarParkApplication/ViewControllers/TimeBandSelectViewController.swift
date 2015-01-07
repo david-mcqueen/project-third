@@ -1,29 +1,29 @@
 //
-//  VehicleSelectViewController
+//  TimeBandSelectViewController.swift
 //  CarParkApplication
 //
-//  Created by DavidMcQueen on 06/10/2014.
-//  Copyright (c) 2014 DavidMcQueen. All rights reserved.
+//  Created by DavidMcQueen on 07/01/2015.
+//  Copyright (c) 2015 DavidMcQueen. All rights reserved.
 //
 
 import UIKit
 
-class VehicleSelectViewController: UITableViewController {
+class TimeBandSelectViewController: UITableViewController {
     
-    var vehicles:[String]!
-    var selectedVehicle:String? = nil
-    var selectedVehicleIndex:Int? = nil
+    var timeBands:[String]!
+    var selectedTimeBand:String? = nil
+    var selectedTimeBandIndex:Int? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vehicles = [
-            "Renault Megane",
-            "Peugeot 206",
-            "All other user vehicles"
+        timeBands = [
+            "2 hours",
+            "2-4 hours",
+            "4+ hours"
         ];
         
-        if let vehicle = selectedVehicle {
-            selectedVehicleIndex = find(vehicles, vehicle)!
+        if let timeBand = selectedTimeBand {
+            selectedTimeBandIndex = find(timeBands, timeBand)!
         }
         
     }
@@ -40,14 +40,14 @@ class VehicleSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vehicles.count //The amount of vehicles linked to the user
+        return timeBands.count //The amount of vehicles linked to the user
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = vehicles[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.text = timeBands[indexPath.row]
         
-        if indexPath.row == selectedVehicleIndex {
+        if indexPath.row == selectedTimeBandIndex {
             cell.accessoryType = .Checkmark
         } else {
             cell.accessoryType = .None
@@ -61,13 +61,13 @@ class VehicleSelectViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         //Other row is selected - need to deselect it
-        if let index = selectedVehicleIndex {
+        if let index = selectedTimeBandIndex {
             let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
             cell?.accessoryType = .None
         }
         
-        selectedVehicleIndex = indexPath.row
-        selectedVehicle = vehicles[indexPath.row]
+        selectedTimeBandIndex = indexPath.row
+        selectedTimeBand = timeBands[indexPath.row]
         
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)
@@ -75,12 +75,13 @@ class VehicleSelectViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SaveSelectedVehicle" {
-            let cell = sender as UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            selectedVehicleIndex = indexPath?.row
-            if let index = selectedVehicleIndex {
-                selectedVehicle = vehicles[index]
+        if segue.identifier == "SaveTimeBand" {
+            let cell = sender as UITableViewCell;
+            let indexPath = tableView.indexPathForCell(cell);
+            selectedTimeBandIndex = indexPath?.row
+            
+            if let index = selectedTimeBandIndex {
+                selectedTimeBand = timeBands[index]
             }
         }
     }

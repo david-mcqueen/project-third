@@ -201,7 +201,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Hour Method" id="h5P-8T-3I0">
+                            <tableViewSection headerTitle="Select Vehicle" id="h5P-8T-3I0">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Sy6-Zx-lQ9" detailTextLabel="DcO-GD-gN6" style="IBUITableViewCellStyleValue1" id="3n1-7U-KHK">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -226,45 +226,32 @@
                                             <segue destination="7GU-od-18u" kind="show" identifier="PickVehicle" id="RjA-ik-w8t"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yMc-uc-fLh">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yMc-uc-fLh" id="egR-l5-HCp">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picker containg list of parking times &amp; prices" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAB-m8-NqR">
-                                                    <rect key="frame" x="8" y="11" width="341" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="mAB-m8-NqR" firstAttribute="leading" secondItem="egR-l5-HCp" secondAttribute="leadingMargin" id="cJW-Ug-X6g"/>
-                                                <constraint firstAttribute="centerY" secondItem="mAB-m8-NqR" secondAttribute="centerY" id="fPo-It-TRz"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Manual Method" id="I7F-4o-VOH">
+                            <tableViewSection headerTitle="Select Length of Parking" id="I7F-4o-VOH">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uQU-u1-vHu">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="HKz-my-zfL" detailTextLabel="Bz0-tD-LD3" style="IBUITableViewCellStyleValue1" id="uQU-u1-vHu">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uQU-u1-vHu" id="N1e-jx-baz">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Picker containing list of the users cars" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odu-Ru-9rE">
-                                                    <rect key="frame" x="16" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Length of Parking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HKz-my-zfL">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bz0-tD-LD3">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="odu-Ru-9rE" firstAttribute="leading" secondItem="N1e-jx-baz" secondAttribute="leadingMargin" constant="8" id="6eV-k6-Xet"/>
-                                                <constraint firstAttribute="centerY" secondItem="odu-Ru-9rE" secondAttribute="centerY" constant="3" id="en8-oJ-SAc"/>
-                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="0PV-HH-Lne" kind="show" identifier="PickTimeBand" id="3qI-WE-6QB"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -300,6 +287,7 @@
                     <navigationItem key="navigationItem" id="0hY-ax-SWU"/>
                     <connections>
                         <outlet property="locationLabel" destination="NtY-fs-Hic" id="Pr9-XW-QjY"/>
+                        <outlet property="timeBandLabel" destination="Bz0-tD-LD3" id="OIy-PO-fuL"/>
                         <outlet property="toggleMethod" destination="Q2k-jd-bx5" id="EGB-h1-kDu"/>
                         <outlet property="vehicleLabel" destination="DcO-GD-gN6" id="uIx-6g-7wz"/>
                     </connections>
@@ -333,12 +321,43 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ee8-Iz-iud" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="e3F-fr-nqq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5128" y="31"/>
+            <point key="canvasLocation" x="5121" y="-183"/>
+        </scene>
+        <!--Select Time Band-->
+        <scene sceneID="mPq-jo-Ypf">
+            <objects>
+                <tableViewController title="Select Time Band" id="0PV-HH-Lne" customClass="TimeBandSelectViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uoe-W8-tlN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeBandCell" id="tuo-aU-HBa">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tuo-aU-HBa" id="vc3-gT-Ao9">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="oC2-oF-mgq" kind="unwind" identifier="SaveTimeBand" unwindAction="selectedTimeBandSave:" id="U3w-xv-Zyj"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0PV-HH-Lne" id="jMB-EI-CFh"/>
+                            <outlet property="delegate" destination="0PV-HH-Lne" id="b5S-qm-YzL"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="frt-l1-BMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oC2-oF-mgq" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5121" y="504"/>
         </scene>
         <!--Profile-->
         <scene sceneID="15U-c4-vF6">
@@ -382,7 +401,6 @@
         <!--Navigation Controller-->
         <scene sceneID="ghc-rn-YZo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ygz-rQ-8a4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1nD-Qw-M7e" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gfe-fT-Exl">
@@ -394,6 +412,7 @@
                         <segue destination="ZPG-mg-6a8" kind="relationship" relationship="rootViewController" id="FKg-sX-Ekl"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ygz-rQ-8a4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1375" y="-95.999999999999972"/>
         </scene>
