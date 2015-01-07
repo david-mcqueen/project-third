@@ -71,6 +71,7 @@
 		55BB56A019F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A119F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A419F2CD1800492154 /* UtilitiesTests.swift */; };
+		55EF4DBA1A5D9FA7006F7613 /* CreateVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */; };
 		55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +157,7 @@
 		55B631801A598B7700DD5DBF /* CarParkAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarParkAPI.swift; path = "Network Access/CarParkAPI.swift"; sourceTree = "<group>"; };
 		55BB569F19F2C70C00492154 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
+		55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateVehicleViewController.swift; path = ViewControllers/CreateVehicleViewController.swift; sourceTree = "<group>"; };
 		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */,
 				558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */,
 				558777F31A5D5B5E008ACCE9 /* LoggedInViewController.swift */,
+				55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				558777F11A5D58E6008ACCE9 /* User.swift in Sources */,
 				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
+				55EF4DBA1A5D9FA7006F7613 /* CreateVehicleViewController.swift in Sources */,
 				557CD1941A3F7723009D171F /* FormSwitchCell.swift in Sources */,
 				557CD18B1A3F7723009D171F /* FormBaseCell.swift in Sources */,
 				55B631811A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
