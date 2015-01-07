@@ -12,7 +12,7 @@ class LoginViewController: UIViewController{
 
     @IBOutlet weak var inputEmail: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +55,12 @@ class LoginViewController: UIViewController{
                 if(success) {
                     alert.title = "Success!"
                     alert.message = token
+                    
+                    //Save the token into the Singleton object, for use throughut the app
+                    var test = token!;
+                    println(token!)
+                    User.sharedInstance.token = token!;
+                    User.sharedInstance.UserName = userLogin.UserName;
                 }
                 else {
                     alert.title = "Login Failed"
@@ -68,10 +74,11 @@ class LoginViewController: UIViewController{
                     if(success){
                         NSLog("Login successful");
                         
-                        //Save the token, and username
-                        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token");
+                        //Save the username to memory, for fast login
                         NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
                         NSUserDefaults.standardUserDefaults().synchronize();
+                        
+                        
                         
                         loginIndicator.stopAnimating()
                         
@@ -146,6 +153,10 @@ class LoginViewController: UIViewController{
                             NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token");
                             NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
                             NSUserDefaults.standardUserDefaults().synchronize();
+                            User.sharedInstance.token = token;
+                            User.sharedInstance.UserName = userLogin.UserName;
+
+                            
                             
                             loginIndicator.stopAnimating()
                             

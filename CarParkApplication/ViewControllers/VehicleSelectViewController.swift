@@ -10,17 +10,22 @@ import UIKit
 
 class VehicleSelectViewController: UITableViewController {
     
-    var vehicles:[String]!
+    var vehicles:[String] = []
     var selectedVehicle:String? = nil
     var selectedVehicleIndex:Int? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vehicles = [
-            "Renault Megane",
-            "Peugeot 206",
-            "All other user vehicles"
-        ];
+//        vehicles = [
+//            "Renault Megane",
+//            "Peugeot 206",
+//            "All other user vehicles"
+//        ];
+        var allVehicles = User.sharedInstance.getVehicles();
+        
+        for vehicle in allVehicles{
+            vehicles.append("\(vehicle.Make) \(vehicle.Model) (\(vehicle.RegistrationNumber))");
+        }
         
         if let vehicle = selectedVehicle {
             selectedVehicleIndex = find(vehicles, vehicle)!

@@ -19,7 +19,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
 
     @IBOutlet var timeBandLabel: UILabel!
     @IBOutlet var vehicleLabel: UILabel!
-    var selectedVehicle:String = "Renault Megane"
+    var selectedVehicle:String = ""
     var selectedTimeBand: String = "2 hours"
     
     @IBOutlet var toggleMethod: UISwitch!
@@ -35,6 +35,10 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        println("\(User.sharedInstance.getVehicles())")
+        var firstVehicle = User.sharedInstance.getFirstVehicle();
+        selectedVehicle = ("\(firstVehicle.Make) \(firstVehicle.Model) (\(firstVehicle.RegistrationNumber))");
         
         locationManager.delegate = self;
         vehicleLabel.text = selectedVehicle;
@@ -89,6 +93,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     func getBeaconDetails(major: Int, minor: Int, rssi: Int){
+        println("getBeaconDetails")
         var locationName: String;
         
         //The beacon ID needs to be in the format stored on the server.
@@ -97,11 +102,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         //TODO:- Remove this hardcode beacon value
         beacon = "1.1";
         
-        //Get the session token, saved from the last login.
-        let savedToken: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("token")!;
-        
-        
-        determineCarPark(savedToken.description, beacon, {(success: Bool, carPark: String) -> () in
+        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carPark: String) -> () in
             var alert = UIAlertView(title: "Success!", message: carPark, delegate: nil, cancelButtonTitle: "Okay.")
             if(success) {
                 alert.title = "Success!"
@@ -150,7 +151,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
 
         if(knownBeacons.count > 0){
-            println(knownBeacons);
+            println("Known Beacons \(knownBeacons)");
             let closestBeacon = knownBeacons[0] as CLBeacon;
             
             
