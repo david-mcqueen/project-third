@@ -61,4 +61,13 @@ class User {
     func getFirstVehicle() -> Vehicle {
         return self.Vehicles[0];
     }
+    
+    func logout() {
+        self.deleteAllvehciles();
+        self.FirstName = "";
+        self.Surname = ""
+        self.token = ""
+        self.UserName = "";
+        self.CurrentBalance = 0.0;
+    }
 }

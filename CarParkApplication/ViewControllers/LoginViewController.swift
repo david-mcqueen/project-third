@@ -55,40 +55,35 @@ class LoginViewController: UIViewController{
                 if(success) {
                     alert.title = "Success!"
                     alert.message = token
-                    
-                    //Save the token into the Singleton object, for use throughut the app
-                    var test = token!;
-                    println(token!)
-                    User.sharedInstance.token = token!;
-                    User.sharedInstance.UserName = userLogin.UserName;
                 }
                 else {
-                    alert.title = "Login Failed"
+                    alert.title = "Login Failed";
                     alert.message = error!;
                 }
                 
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // Show the alert
-                    alert.show()
+                    alert.show();
                     if(success){
                         NSLog("Login successful");
                         
-                        //Save the username to memory, for fast login
+                        //Save the username to phone memory, for fast login
                         NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
                         NSUserDefaults.standardUserDefaults().synchronize();
                         
+                        loginIndicator.stopAnimating();
+                        //Save the token into the Singleton object, for use throughut the app
+                        User.sharedInstance.token = token!;
+                        User.sharedInstance.UserName = userLogin.UserName;
                         
-                        
-                        loginIndicator.stopAnimating()
-                        
-                        self.performSegueWithIdentifier("loggedIn", sender: self)
+                        self.performSegueWithIdentifier("loggedIn", sender: self);
                         
                     }else{
                         //Highlight the relevant fields
                         self.borderRed(self.inputEmail);
                         self.borderRed(self.inputPassword);
-                        loginIndicator.stopAnimating()
+                        loginIndicator.stopAnimating();
                     }
                 })
                 
@@ -98,10 +93,14 @@ class LoginViewController: UIViewController{
     }
     
     @IBAction func cancelRegistration(segue:UIStoryboardSegue) {
+        //Log the user out, removing all of their information from the singleton.
+        User.sharedInstance.logout();
         self.navigationController?.popViewControllerAnimated(true);
     }
     
     @IBAction func logout(segue:UIStoryboardSegue) {
+        User.sharedInstance.logout();
+        //TODO:- Need to logout on the server as well
         self.navigationController?.popViewControllerAnimated(true);
     }
 
