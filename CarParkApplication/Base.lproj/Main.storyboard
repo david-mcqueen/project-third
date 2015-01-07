@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1nD-Qw-M7e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZPG-mg-6a8">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Lv7-wE-LUF">
+            <objects>
+                <navigationController storyboardIdentifier="RegisterNavBar" id="dRD-ch-RlS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SqO-Uq-yqa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Luz-3v-Auo" kind="relationship" relationship="rootViewController" id="r6c-wX-cSd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ESQ-k7-OYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2134" y="-524"/>
+        </scene>
         <!--Login-->
         <scene sceneID="2f3-9K-QKn">
             <objects>
@@ -18,53 +34,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Registered email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYq-fY-Ajg">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Registered email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYq-fY-Ajg">
                                 <rect key="frame" x="16" y="211" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-U3-aJF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-U3-aJF">
                                 <rect key="frame" x="16" y="261" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqB-rb-itA">
+                                <rect key="frame" x="17" y="310" width="567" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="LoginButtonPressed:" destination="ZPG-mg-6a8" eventType="touchUpInside" id="tPB-EL-9jE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngw-zO-S0m">
+                                <rect key="frame" x="17" y="348" width="567" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="dRD-ch-RlS" kind="show" id="RNj-DY-7Z4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fhW-U3-aJF" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" id="0xv-d8-Ses"/>
+                            <constraint firstItem="wqB-rb-itA" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" constant="1" id="5CI-j7-pLu"/>
+                            <constraint firstItem="wqB-rb-itA" firstAttribute="trailing" secondItem="dl7-YI-oPl" secondAttribute="trailingMargin" id="Deq-2e-SfQ"/>
                             <constraint firstItem="bYq-fY-Ajg" firstAttribute="top" secondItem="3PC-tA-8dM" secondAttribute="bottom" constant="147" id="FQ0-np-VDr"/>
                             <constraint firstItem="bYq-fY-Ajg" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" id="JaX-Vl-CIw"/>
                             <constraint firstItem="fhW-U3-aJF" firstAttribute="top" secondItem="bYq-fY-Ajg" secondAttribute="bottom" constant="20" id="Q4u-GM-4Fl"/>
                             <constraint firstItem="bYq-fY-Ajg" firstAttribute="trailing" secondItem="dl7-YI-oPl" secondAttribute="trailingMargin" id="QMW-vq-vrf"/>
+                            <constraint firstItem="wqB-rb-itA" firstAttribute="top" secondItem="fhW-U3-aJF" secondAttribute="bottom" constant="19" id="Qdf-Ac-NtG"/>
+                            <constraint firstItem="Ngw-zO-S0m" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" constant="1" id="TlO-eI-7Sd"/>
+                            <constraint firstItem="Ngw-zO-S0m" firstAttribute="trailing" secondItem="dl7-YI-oPl" secondAttribute="trailingMargin" id="ePG-pq-EWU"/>
+                            <constraint firstItem="Ngw-zO-S0m" firstAttribute="leading" secondItem="dl7-YI-oPl" secondAttribute="leadingMargin" constant="1" id="hDw-UZ-ksu"/>
                             <constraint firstItem="fhW-U3-aJF" firstAttribute="trailing" secondItem="dl7-YI-oPl" secondAttribute="trailingMargin" id="i9r-qr-Tbl"/>
+                            <constraint firstItem="Ngw-zO-S0m" firstAttribute="top" secondItem="wqB-rb-itA" secondAttribute="bottom" constant="8" id="ryK-Cn-xor"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xEz-Me-j94">
                         <barButtonItem key="leftBarButtonItem" title="Login" id="9c4-4v-N8P">
                             <connections>
                                 <action selector="LoginButtonPressed:" destination="ZPG-mg-6a8" id="uGy-3w-LqD"/>
-                                <segue destination="gWl-Q9-dSo" kind="show" identifier="loginUser" id="cz8-uc-B4X"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Register" id="zTx-ZJ-iXE">
-                            <connections>
-                                <segue destination="Luz-3v-Auo" kind="show" id="HtO-fH-xGH"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Register" id="zTx-ZJ-iXE"/>
                     </navigationItem>
                     <connections>
                         <outlet property="inputEmail" destination="bYq-fY-Ajg" id="pCN-bY-tyG"/>
                         <outlet property="inputPassword" destination="fhW-U3-aJF" id="7Fe-fE-KsB"/>
+                        <segue destination="gWl-Q9-dSo" kind="show" identifier="loggedIn" id="bRy-Oa-g6b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZe-d9-ewd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2097" y="-96"/>
+            <point key="canvasLocation" x="1306" y="-524"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="MC6-Rt-qQq">
             <objects>
-                <tableViewController id="Luz-3v-Auo" customClass="RegisterViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RegisterNewUser" id="Luz-3v-Auo" customClass="RegisterViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="MRe-5P-S2h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,8 +113,17 @@
                             <outlet property="delegate" destination="Luz-3v-Auo" id="C3u-sq-Ygp"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="kJo-ST-aZB">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="WKs-iO-C6q"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8ql-HC-SR4">
+                            <connections>
+                                <segue destination="N2y-0o-zLW" kind="unwind" unwindAction="cancelRegistration:" id="XPU-m5-W5O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xuz-hc-n05" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="N2y-0o-zLW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2871" y="-524"/>
         </scene>
@@ -112,7 +160,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SB3-Qe-rKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3712" y="133"/>
+            <point key="canvasLocation" x="2506" y="1073"/>
         </scene>
         <!--Park-->
         <scene sceneID="vN1-M9-d06">
@@ -284,7 +332,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Park" id="62B-1k-kH6"/>
-                    <navigationItem key="navigationItem" id="0hY-ax-SWU"/>
+                    <navigationItem key="navigationItem" id="0hY-ax-SWU">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="IpW-u0-Ase">
+                            <connections>
+                                <segue destination="oTD-bT-3Re" kind="unwind" identifier="logoutUser" unwindAction="logout:" id="Cn1-l2-CXh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="locationLabel" destination="NtY-fs-Hic" id="Pr9-XW-QjY"/>
                         <outlet property="timeBandLabel" destination="Bz0-tD-LD3" id="OIy-PO-fuL"/>
@@ -293,8 +347,9 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxd-zv-aBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oTD-bT-3Re" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4413" y="31"/>
+            <point key="canvasLocation" x="2501" y="1829"/>
         </scene>
         <!--Select Vehicle-->
         <scene sceneID="FEg-cy-gOB">
@@ -326,7 +381,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ee8-Iz-iud" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="e3F-fr-nqq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5121" y="-183"/>
+            <point key="canvasLocation" x="3283" y="1511"/>
         </scene>
         <!--Select Time Band-->
         <scene sceneID="mPq-jo-Ypf">
@@ -357,7 +412,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frt-l1-BMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oC2-oF-mgq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5121" y="504"/>
+            <point key="canvasLocation" x="3283" y="2200"/>
         </scene>
         <!--Profile-->
         <scene sceneID="15U-c4-vF6">
@@ -396,25 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w24-C4-PSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3712" y="827"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ghc-rn-YZo">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1nD-Qw-M7e" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gfe-fT-Exl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ZPG-mg-6a8" kind="relationship" relationship="rootViewController" id="FKg-sX-Ekl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ygz-rQ-8a4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1375" y="-95.999999999999972"/>
+            <point key="canvasLocation" x="1620" y="1115"/>
         </scene>
         <!--Logged In-->
         <scene sceneID="Lyq-AC-FZN">
@@ -435,7 +472,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAg-dw-lHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2964.375" y="383.45070422535207"/>
+            <point key="canvasLocation" x="2134" y="191"/>
         </scene>
     </scenes>
 </document>
