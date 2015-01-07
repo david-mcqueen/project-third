@@ -13,6 +13,8 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
     
     //TODO:- Handle failure reponse / unknown failure
     
+    //TODO:- After the user has registered / added a new vehicle the Singleton needs updating!
+    
     let urlSession = NSURLSession.sharedSession();
     
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/login");

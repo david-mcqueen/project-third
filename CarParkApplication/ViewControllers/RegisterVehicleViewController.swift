@@ -57,13 +57,13 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         
         for section in self.form.sections {
             for row in section.rows {
-                if row.tag == "picker" && row.title == "Make"{
+                if row.tag == "Make" && row.title == "Make"{
                     
                     self.makePicker = row;
                     //                            self.makeRowIndex = rowIndex;
                     //                            self.makeRowSection = sectionIndex;
                     
-                }else if row.tag == "picker" && row.title == "Model"{
+                }else if row.tag == "Model" && row.title == "Model"{
                     self.modelPicker = row;
                 }
                 
@@ -104,11 +104,31 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
     
     func submit(_: UIBarButtonItem!) {
         
-        let message = self.form.formValues().description
+        var validationErrors = self.form.validateForm();
+
         
-        let alert: UIAlertView = UIAlertView(title: "Form output", message: message, delegate: nil, cancelButtonTitle: "OK")
+        if validationErrors.count > 0 {
+            var validationMessage = "Please complete all fields!."
+            for (inputField) in validationErrors{
+                validationMessage = validationMessage + "\n" +  inputField.tag;
+            }
+            
+            var validationAlert = UIAlertView(title: "Missing data!", message: validationMessage, delegate: nil, cancelButtonTitle: "Okay.")
+            validationAlert.show();
+        }else{
+            let message = self.form.formValues().description
         
-        alert.show()
+            let alert: UIAlertView = UIAlertView(title: "Form output", message: message, delegate: nil, cancelButtonTitle: "OK")
+        
+            alert.show()
+            let inputs:Dictionary = self.form.formValues()
+            var registrationInput = inputs["Registration"] as String!;
+            var makeInput = inputs["Make"] as String!;
+            var modelInput = inputs["Model"] as String!;
+            var colourInput = inputs["Colour"] as String!;
+        
+            var newVehicle = Vehicle(make: makeInput, model: modelInput, colour: colourInput, registrationNumber: registrationInput)
+        }
     }
     
     /// MARK: Private interface
@@ -121,13 +141,13 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         
         let section1 = FormSectionDescriptor()
         
-        var row: FormRowDescriptor! = FormRowDescriptor(tag: Static.nameTag, rowType: .Name, title: "Registration")
+        var row: FormRowDescriptor! = FormRowDescriptor(tag: "Registration", rowType: .Name, title: "Registration")
         
         row.cellConfiguration = ["textField.placeholder" : "e.g. PR05 ABC", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
         row.required = true;
         section1.addRow(row)
         
-        row = FormRowDescriptor(tag: "colour", rowType: .Name, title: "Colour")
+        row = FormRowDescriptor(tag: "Colour", rowType: .Name, title: "Colour")
         row.cellConfiguration = ["textField.placeholder" : "Vehicle Colour", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
         row.required = true;
         section1.addRow(row)
@@ -135,7 +155,7 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         
         let section2 = FormSectionDescriptor()
         
-        row = FormRowDescriptor(tag: Static.picker, rowType: .Picker, title: "Make")
+        row = FormRowDescriptor(tag: "Make", rowType: .Picker, title: "Make")
         row.options = ["U"]
         row.required = true;
         row.titleFormatter = { value in
@@ -148,7 +168,7 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         }
         section2.addRow(row)
         
-        row = FormRowDescriptor(tag: Static.picker, rowType: .Picker, title: "Model")
+        row = FormRowDescriptor(tag: "Model", rowType: .Picker, title: "Model")
         row.options = ["U"]
         row.required = true;
         row.titleFormatter = { value in
@@ -178,7 +198,7 @@ class RegisterVehicleViewController: FormViewController, FormViewControllerDeleg
         //Need to retrieve all the models for that make
 
         
-        if rowDescriptor.tag == "picker" && rowDescriptor.title == "Model"{
+        if rowDescriptor.tag == "Model" && rowDescriptor.title == "Model"{
             println(self.makePicker!.value.description);
             
             self.modelPicker!.options = [self.makePicker!.value.description];
