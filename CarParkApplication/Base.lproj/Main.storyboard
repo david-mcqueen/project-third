@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZPG-mg-6a8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kCB-3C-ces">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -355,7 +355,7 @@
         <scene sceneID="IUM-Dr-N4D">
             <objects>
                 <tableViewController id="kCB-3C-ces" customClass="CreateVehicleViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4Tn-Pd-Unk">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4Tn-Pd-Unk">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -400,6 +400,25 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pk0-gQ-ncB" id="VeA-zC-a7k">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JbZ-Z8-Ijs">
+                                                    <rect key="frame" x="302" y="9" width="174" height="30"/>
+                                                    <accessibility key="accessibilityConfiguration" label=""/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Loading Makes..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Im-WI-VL4">
+                                                    <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="4Im-WI-VL4" secondAttribute="centerY" id="9mz-u3-luo"/>
+                                                <constraint firstItem="4Im-WI-VL4" firstAttribute="leading" secondItem="VeA-zC-a7k" secondAttribute="leadingMargin" id="KTi-NJ-rIA"/>
+                                                <constraint firstItem="4Im-WI-VL4" firstAttribute="trailing" secondItem="VeA-zC-a7k" secondAttribute="trailingMargin" id="k1a-ZP-fFf"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -410,6 +429,24 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OGR-sP-gbo" id="MsF-K5-cgk">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PpQ-Bd-MLo">
+                                                    <rect key="frame" x="394" y="5" width="97" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select Make First..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMx-3P-TDt">
+                                                    <rect key="frame" x="8" y="12" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="aMx-3P-TDt" secondAttribute="centerY" id="HC9-Gm-pXT"/>
+                                                <constraint firstItem="aMx-3P-TDt" firstAttribute="leading" secondItem="MsF-K5-cgk" secondAttribute="leadingMargin" id="bGr-99-luz"/>
+                                                <constraint firstItem="aMx-3P-TDt" firstAttribute="trailing" secondItem="MsF-K5-cgk" secondAttribute="trailingMargin" id="mQg-Em-EAt"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -422,12 +459,16 @@
                     </tableView>
                     <connections>
                         <outlet property="colourLabel" destination="MPO-2G-yk4" id="dB6-vf-LOI"/>
+                        <outlet property="makeInput" destination="JbZ-Z8-Ijs" id="sy7-Fv-hgV"/>
+                        <outlet property="makeLabel" destination="4Im-WI-VL4" id="7EC-ao-dkM"/>
+                        <outlet property="modelInput" destination="PpQ-Bd-MLo" id="xUW-yp-Oqc"/>
+                        <outlet property="modelLabel" destination="aMx-3P-TDt" id="tFB-Fj-0pn"/>
                         <outlet property="registrationLabel" destination="tXi-3v-hQ1" id="8T5-9x-tqf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZJ-GK-Dts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4144" y="783"/>
+            <point key="canvasLocation" x="4144" y="775"/>
         </scene>
         <!--Select Vehicle-->
         <scene sceneID="FEg-cy-gOB">
