@@ -15,6 +15,7 @@ class User {
     var CurrentBalance: Double; //The £ balance of their account
     var Vehicles:[Vehicle]; //An array of all vehicles associated with the user.
     var token: String?; //The authorization token provided by the server.
+    var selectedVehicle: String?;
     
     class var sharedInstance: User {
         struct Singleton {

@@ -36,9 +36,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        println("\(User.sharedInstance.getVehicles())")
         var firstVehicle = User.sharedInstance.getFirstVehicle();
         selectedVehicle = ("\(firstVehicle.Make) \(firstVehicle.Model) (\(firstVehicle.RegistrationNumber))");
+        User.sharedInstance.selectedVehicle = selectedVehicle;
         
         locationManager.delegate = self;
         vehicleLabel.text = selectedVehicle;
@@ -201,11 +201,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PickVehicle" {
-            let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
-            vehicleSelectViewController.selectedVehicle = selectedVehicle
-        }
         if segue.identifier == "PickTimeBand" {
+            println("PickTimeBand Segue")
             let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
             timeBandSelectViewController.selectedTimeBand = selectedTimeBand
         }
@@ -227,7 +224,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         if let _selectedVehicle = vehicleSelectViewController.selectedVehicle {
             vehicleLabel.text = _selectedVehicle
             selectedVehicle = _selectedVehicle
-            println("selected vehicel: \(selectedVehicle)");
+            User.sharedInstance.selectedVehicle = selectedVehicle
         }
         self.navigationController?.popViewControllerAnimated(true);
     }

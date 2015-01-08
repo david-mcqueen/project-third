@@ -253,7 +253,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="k70-cM-8FI" kind="show" id="BSs-Fb-z6n"/>
+                                            <segue destination="k70-cM-8FI" kind="show" identifier="PickVehicle" id="BSs-Fb-z6n"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -446,9 +446,11 @@
                         <outlet property="modelInput" destination="PpQ-Bd-MLo" id="xUW-yp-Oqc"/>
                         <outlet property="modelLabel" destination="aMx-3P-TDt" id="tFB-Fj-0pn"/>
                         <outlet property="registrationLabel" destination="tXi-3v-hQ1" id="8T5-9x-tqf"/>
+                        <segue destination="YFf-JM-u2D" kind="unwind" identifier="newVehicleAdded" unwindAction="newVehicleAdded:" id="DXT-4q-Hxb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZJ-GK-Dts" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="YFf-JM-u2D" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4830" y="1533"/>
         </scene>
@@ -480,7 +482,7 @@
                     <navigationItem key="navigationItem" title="Select Vehicle" id="uGG-qE-T4r">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4eo-7u-RzQ">
                             <connections>
-                                <segue destination="kCB-3C-ces" kind="show" id="2DJ-5Y-FD4"/>
+                                <segue destination="kCB-3C-ces" kind="show" identifier="" id="2DJ-5Y-FD4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

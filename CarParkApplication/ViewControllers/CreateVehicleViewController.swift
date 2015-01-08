@@ -11,23 +11,31 @@ import UIKit
 
 class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,UIPickerViewDelegate{
     
+    //MARK:- Static view objects
     @IBOutlet var makeLabel: UILabel!
-
     @IBOutlet var modelLabel: UILabel!
     @IBOutlet var modelInput: UITextField!
     @IBOutlet var makeInput: UITextField!
     @IBOutlet var colourLabel: UITextField!
     @IBOutlet var registrationLabel: UITextField!
+    
+    //MARK:- Dynamic view objects
     var makePicker: UIPickerView = UIPickerView();
     var modelPicker: UIPickerView = UIPickerView();
+    
+    //MRK:- Vehicle data
     var makePickerData = ["Loading..."];
     var makeDictionary: [String: String] = ["": ""];
     var modelPickerData = ["Loading..."];
     var modelDictionary: [String: String] = ["": ""];
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Create a navbar item
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Bordered, target: self, action: "submit:")
+        
         makePicker.dataSource = self;
         makePicker.delegate = self;
         makePicker.tag = 0;
@@ -46,9 +54,81 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         modelInput.userInteractionEnabled = false;
         
         populateMakes();
-        
     }
     
+    //MARK:- Add vehicle
+    func submit(_: UIBarButtonItem!) {
+        println("Register new vehicle with user")
+        
+        println(allInputsComplete());
+        if(allInputsComplete()){
+            let newUserVehicle = Vehicle(make: makeLabel.text!, model: modelLabel.text!, colour: colourLabel.text!, registrationNumber: registrationLabel.text!)
+            
+            //Process the new vehicle registration with the server
+            
+            //Add the new vehicle to the user vehicle list
+            User.sharedInstance.addVehicle(newUserVehicle);
+            println("New vehicle added")
+            performSegueWithIdentifier("newVehicleAdded", sender: self)
+            
+            //TODO:- After registering first time, navigate the user to the "logged in" section
+        }else{
+            var validationAlert = UIAlertView(title: "Missing data!", message: "Please complete all fields", delegate: nil, cancelButtonTitle: "Okay.")
+            validationAlert.show();
+        }
+    }
+    
+    //MARK:- viewFunctions
+    func allInputsComplete() -> Bool{
+        if (modelLabel.text == nil || modelLabel.text == ""
+            || makeLabel.text == nil || makeLabel.text == ""
+            || registrationLabel.text == nil || registrationLabel.text == ""
+            || colourLabel.text == nil || colourLabel.text == ""){
+                return false;
+        }else{
+            return true;
+        }
+    }
+
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    //MARK:- Picker data sources
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if (pickerView.tag == 0){
+            return makePickerData.count
+        }else{
+            return modelPickerData.count
+        }
+    }
+    
+    //MARK:- Picker delegates
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        if (pickerView.tag == 0){
+            return makePickerData[row]
+        }else{
+            return modelPickerData[row]
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var result: (String, String) = ("","");
+        //makePicker.tag == 0
+        if (pickerView.tag == 0){
+            //Display the selected car make
+            makeLabel.text = makePickerData[row]
+            
+            //Make the model read only, until the models for that make are loaded
+            modelInput.userInteractionEnabled = false;
+            modelLabel.text = "Loading models..."
+            
+            populateModels(self.makeDictionary[makePickerData[row]]!);
+        }else{
+            modelLabel.text = modelPickerData[row]
+        }
+    }
+    
+    //MARK:- Table delegates
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0){
             registrationLabel.becomeFirstResponder();
@@ -61,51 +141,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         }
     }
     
-    func submit(_: UIBarButtonItem!) {
-        println("Register new vehicle with user")
-    }
-    
-    //MARK: - Delegates and data sources
-    //MARK: Data Sources
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if (pickerView.tag == 0){
-            return makePickerData.count
-        }else{
-            return modelPickerData.count
-        }
-    }
-    
-    //MARK: Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        if (pickerView.tag == 0){
-            return makePickerData[row]
-        }else{
-            return modelPickerData[row]
-        }
-        
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        var result: (String, String) = ("","");
-        if (pickerView.tag == 0){
-            //Display the selected car make
-            makeLabel.text = makePickerData[row]
-            
-            //Make the model read only, until the models for that make are loaded
-            modelInput.userInteractionEnabled = false;
-            modelLabel.text = "Loading models..."
-            
-            populateModels(self.makeDictionary[makePickerData[row]]!);
-            
-        }else{
-            modelLabel.text = modelPickerData[row]
-        }
-        
-    }
-    
+    //MARK:- Vehicle data
     func populateMakes(){
         //Get the makes from the API
         getMakes({(success: Bool, vehicleMakes: [CarMake]) -> () in

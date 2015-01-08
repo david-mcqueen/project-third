@@ -31,6 +31,8 @@ class LoggedInViewController: UITabBarController {
         
         let renault = Vehicle(make: "Renault", model: "Megane", colour: "Grey", registrationNumber: "HT57 GHF");
         User.sharedInstance.addVehicle(renault);
+        let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK");
+        User.sharedInstance.addVehicle(honda);
     }
     
     func getUserName(){
