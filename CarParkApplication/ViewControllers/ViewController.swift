@@ -16,6 +16,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     
+    @IBOutlet var determineLocationButton: UIButton!
 
     @IBOutlet var timeBandLabel: UILabel!
     @IBOutlet var vehicleLabel: UILabel!
@@ -54,9 +55,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         beaconActivityIndicator.hidesWhenStopped = true
         beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         
-        
-        
-
     }
     
     @IBAction func determineLocation(sender: AnyObject) {
@@ -69,23 +67,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         }
     }
     
-//    @IBAction func determineLocation(sender: AnyObject) {
-//        //Start looking for beacons so long as we have permission
-//        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-//            //Start looks for regions
-//            NSLog("Start monitoring for regions");
-//            locationManager.startRangingBeaconsInRegion(region);
-//        }
-//    }
-    
-//    @IBAction func findCarParkButton(sender: AnyObject) {
-//        //Start looking for beacons so long as we have permission
-//        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-//            //Start looks for regions
-//            NSLog("Start monitoring for regions");
-//            locationManager.startRangingBeaconsInRegion(region);
-//        }
-//    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -199,6 +181,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if(indexPath.section == 0 && indexPath.row == 1){
+            determineLocation(self);
+        }else if(indexPath.section == 3 && indexPath.row == 0){
+            parkPressed(self);
+        }
+    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickTimeBand" {

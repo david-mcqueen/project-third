@@ -13,19 +13,14 @@ class VehicleSelectViewController: UITableViewController {
     var vehicles:[String] = []
     var selectedVehicle:String? = nil
     var selectedVehicleIndex:Int? = nil
+    var allVehicles:[Vehicle] = [];
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        vehicles = [
-//            "Renault Megane",
-//            "Peugeot 206",
-//            "All other user vehicles"
-//        ];
-        var allVehicles = User.sharedInstance.getVehicles();
         
-        for vehicle in allVehicles{
-            vehicles.append("\(vehicle.Make) \(vehicle.Model) (\(vehicle.RegistrationNumber))");
-        }
+        updateTabelData();
+        
+        selectedVehicle = User.sharedInstance.selectedVehicle
         
         if let vehicle = selectedVehicle {
             selectedVehicleIndex = find(vehicles, vehicle)!
@@ -51,7 +46,7 @@ class VehicleSelectViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = vehicles[indexPath.row]
-        
+
         if indexPath.row == selectedVehicleIndex {
             cell.accessoryType = .Checkmark
         } else {
@@ -87,6 +82,23 @@ class VehicleSelectViewController: UITableViewController {
             if let index = selectedVehicleIndex {
                 selectedVehicle = vehicles[index]
             }
+        }
+    }
+    
+    @IBAction func newVehicleAdded(segue:UIStoryboardSegue) {
+        
+        self.navigationController?.popViewControllerAnimated(true);
+        //TODO:- Refresh the list of user vehicles
+        updateTabelData();
+        self.tableView.reloadData();
+        
+    }
+    
+    func updateTabelData(){
+        allVehicles = User.sharedInstance.getVehicles();
+        vehicles.removeAll(keepCapacity: false);
+        for vehicle in allVehicles{
+            vehicles.append("\(vehicle.Make) \(vehicle.Model) (\(vehicle.RegistrationNumber))");
         }
     }
     
