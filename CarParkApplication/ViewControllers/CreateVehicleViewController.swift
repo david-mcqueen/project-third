@@ -29,6 +29,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     var modelPickerData = ["Loading..."];
     var modelDictionary: [String: String] = ["": ""];
     
+    weak var delegate: CreateVehicleDelegate?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +69,9 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             
             //Add the new vehicle to the user vehicle list
             User.sharedInstance.addVehicle(newUserVehicle);
+            
             println("New vehicle added")
-            performSegueWithIdentifier("newVehicleAdded", sender: self)
+            //delegate?.newVehicleCreated();
             
             //TODO:- After registering first time, navigate the user to the "logged in" section
         }else{
@@ -145,6 +147,8 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     func populateMakes(){
         //Get the makes from the API
         getMakes({(success: Bool, vehicleMakes: [CarMake]) -> () in
+            //Switch to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if(success) {
                 
                 var listOfMakes: [String] = []
@@ -157,32 +161,36 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                 }
                 //TODO:- Handle no data being returned from the server (empty list for picker etc)
                 self.makePickerData = listOfMakes;
-                self.makeLabel.text = "Select Make"
+                self.makeLabel.text = "Select Make";
                 
             }else{
                 println("Something went wrong");
             }
+            });
         });
     }
     
     func populateModels(selectedMakeID: String){
         //Get the makes from the API
         getModels(selectedMakeID, {(success: Bool, vehicleModels: [CarModel]) -> () in
-            if(success) {
-                var listOfModels: [String] = []
+            //Switch to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if(success) {
+                    var listOfModels: [String] = []
                 
-                for model in vehicleModels{
-                    listOfModels.append(model.model_name.description);
-                    self.modelDictionary[model.model_name.description] = model.model_make_id.description;
+                    for model in vehicleModels{
+                        listOfModels.append(model.model_name.description);
+                        self.modelDictionary[model.model_name.description] = model.model_make_id.description;
+                    }
+                    //TODO:- Handle no data being returned from the server (empty list for picker etc)
+                    self.modelPickerData = listOfModels;
+                    self.modelLabel.text = "Select Model";
+                    self.modelInput.userInteractionEnabled = true;
+                
+                }else{
+                    println("Something went wrong");
                 }
-                //TODO:- Handle no data being returned from the server (empty list for picker etc)
-                self.modelPickerData = listOfModels;
-                self.modelLabel.text = "Select Model";
-                self.modelInput.userInteractionEnabled = true;
-                
-            }else{
-                println("Something went wrong");
-            }
+            });
         });
     }
 

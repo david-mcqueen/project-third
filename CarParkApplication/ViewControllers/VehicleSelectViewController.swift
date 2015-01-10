@@ -8,24 +8,24 @@
 
 import UIKit
 
-class VehicleSelectViewController: UITableViewController {
+class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate {
     
     var vehicles:[String] = []
-    var selectedVehicle:String? = nil
+    var selectedVehicle:Vehicle?
+    var selectedVehicleObject: Vehicle?;
     var selectedVehicleIndex:Int? = nil
     var allVehicles:[Vehicle] = [];
+    
+    var delegate: SelectUserVehicleDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateTabelData();
         
-        selectedVehicle = User.sharedInstance.selectedVehicle
-        
-        if let vehicle = selectedVehicle {
+        if let vehicle = selectedVehicle?.displayVehicle() {
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,38 +67,40 @@ class VehicleSelectViewController: UITableViewController {
         }
         
         selectedVehicleIndex = indexPath.row
-        selectedVehicle = vehicles[indexPath.row]
+        selectedVehicle = allVehicles[indexPath.row]
         
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
+        
+
+        selectedVehicleIndex = indexPath.row
+        if let index = selectedVehicleIndex {
+            selectedVehicle = allVehicles[index]
+        }
+        delegate?.didSelectUserVehicle(selectedVehicle!);
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SaveSelectedVehicle" {
-            let cell = sender as UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            selectedVehicleIndex = indexPath?.row
-            if let index = selectedVehicleIndex {
-                selectedVehicle = vehicles[index]
-            }
+        if (segue.identifier == "createNewVehicle"){
+            println("Need to set the delegate here")
         }
     }
     
-    @IBAction func newVehicleAdded(segue:UIStoryboardSegue) {
+    
+    func newVehicleCreated(){
         
         self.navigationController?.popViewControllerAnimated(true);
         //TODO:- Refresh the list of user vehicles
         updateTabelData();
         self.tableView.reloadData();
-        
     }
     
     func updateTabelData(){
         allVehicles = User.sharedInstance.getVehicles();
         vehicles.removeAll(keepCapacity: false);
         for vehicle in allVehicles{
-            vehicles.append("\(vehicle.Make) \(vehicle.Model) (\(vehicle.RegistrationNumber))");
+            vehicles.append(vehicle.displayVehicle());
         }
     }
     

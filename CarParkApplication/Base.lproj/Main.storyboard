@@ -25,7 +25,7 @@
         <!--Login-->
         <scene sceneID="2f3-9K-QKn">
             <objects>
-                <viewController title="Login" id="ZPG-mg-6a8" customClass="LoginViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Login" id="ZPG-mg-6a8" customClass="LoginViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3PC-tA-8dM"/>
                         <viewControllerLayoutGuide type="bottom" id="Chm-Lm-vYC"/>
@@ -147,7 +147,7 @@
         <!--Park-->
         <scene sceneID="vN1-M9-d06">
             <objects>
-                <tableViewController title="Park" id="nUs-13-0F2" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ViewController" title="Park" id="nUs-13-0F2" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O79-tF-wZm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -253,7 +253,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="k70-cM-8FI" kind="show" identifier="PickVehicle" id="BSs-Fb-z6n"/>
+                                            <segue destination="7GU-od-18u" kind="show" identifier="PickUserVehicle" id="acm-hZ-7sZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -447,18 +447,16 @@
                         <outlet property="modelInput" destination="PpQ-Bd-MLo" id="xUW-yp-Oqc"/>
                         <outlet property="modelLabel" destination="aMx-3P-TDt" id="tFB-Fj-0pn"/>
                         <outlet property="registrationLabel" destination="tXi-3v-hQ1" id="8T5-9x-tqf"/>
-                        <segue destination="YFf-JM-u2D" kind="unwind" identifier="newVehicleAdded" unwindAction="newVehicleAdded:" id="DXT-4q-Hxb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZJ-GK-Dts" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="YFf-JM-u2D" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4830" y="1533"/>
         </scene>
         <!--Select Vehicle-->
         <scene sceneID="FEg-cy-gOB">
             <objects>
-                <tableViewController title="Select Vehicle" id="7GU-od-18u" customClass="VehicleSelectViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VehicleSelectViewController" title="Select Vehicle" id="7GU-od-18u" customClass="VehicleSelectViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="N5w-Sf-oi4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -469,9 +467,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vsj-kC-efV" id="9oW-Fg-JOj">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="e3F-fr-nqq" kind="unwind" identifier="SaveSelectedVehicle" unwindAction="selectedVehicleSave:" id="GXz-Ub-HJN"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -483,14 +478,13 @@
                     <navigationItem key="navigationItem" title="Select Vehicle" id="uGG-qE-T4r">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4eo-7u-RzQ">
                             <connections>
-                                <segue destination="kCB-3C-ces" kind="show" identifier="" id="2DJ-5Y-FD4"/>
+                                <segue destination="kCB-3C-ces" kind="show" identifier="createNewVehicle" id="2DJ-5Y-FD4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ee8-Iz-iud" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="e3F-fr-nqq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4041" y="1533"/>
         </scene>
@@ -602,4 +596,7 @@
             <point key="canvasLocation" x="2134" y="191"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="acm-hZ-7sZ"/>
+    </inferredMetricsTieBreakers>
 </document>

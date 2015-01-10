@@ -119,4 +119,5 @@ class LoginViewController: UIViewController{
         inputField.layer.cornerRadius = 5;
         inputField.clipsToBounds = true;
     }
+
 }

@@ -20,4 +20,8 @@ class Vehicle {
         self.Colour = colour;
         self.RegistrationNumber = registrationNumber;
     }
+    
+    func displayVehicle() -> String{
+        return ("\(self.Make) \(self.Model) (\(self.RegistrationNumber))");
+    }
 }

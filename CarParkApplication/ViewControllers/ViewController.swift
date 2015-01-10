@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate {
+class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
 
     @IBOutlet var locationLabel: UILabel!
     let locationManager = CLLocationManager();
@@ -20,8 +20,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
 
     @IBOutlet var timeBandLabel: UILabel!
     @IBOutlet var vehicleLabel: UILabel!
-    var selectedVehicle:String = ""
-    var selectedTimeBand: String = "2 hours"
+    var selectedVehicle:Vehicle?;
+    var selectedTimeBand: String?;
     
     @IBOutlet var toggleMethod: UISwitch!
     
@@ -34,15 +34,24 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         println("park the vehicle");
     }
     
+    @IBAction func selectUserVehicle(sender: AnyObject){
+        println("bjsdgfgsdufguksahbfh")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var firstVehicle = User.sharedInstance.getFirstVehicle();
-        selectedVehicle = ("\(firstVehicle.Make) \(firstVehicle.Model) (\(firstVehicle.RegistrationNumber))");
-        User.sharedInstance.selectedVehicle = selectedVehicle;
+        selectedVehicle = firstVehicle;
         
         locationManager.delegate = self;
-        vehicleLabel.text = selectedVehicle;
+        vehicleLabel.text = selectedVehicle?.displayVehicle();
+        if ((selectedTimeBand) != nil){
+            timeBandLabel.text = selectedTimeBand;
+        }else{
+            timeBandLabel.text = "Select Time";
+        }
+        
         
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
@@ -191,15 +200,22 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
 
     
+    //MARK:- Segue - Prepare
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickTimeBand" {
             println("PickTimeBand Segue")
             let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
             timeBandSelectViewController.selectedTimeBand = selectedTimeBand
+        }else if segue.identifier == "PickUserVehicle" {
+            println("PickVehicleBand Segue")
+            let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
+            vehicleSelectViewController.selectedVehicle = selectedVehicle
+            vehicleSelectViewController.delegate = self;
         }
         
     }
     
+    //MARK:- Segue unwind
     @IBAction func selectedTimeBandSave(segue:UIStoryboardSegue) {
         let timeBandSelectViewController = segue.sourceViewController as TimeBandSelectViewController
         if let _selectedTimeBand = timeBandSelectViewController.selectedTimeBand {
@@ -210,16 +226,20 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.navigationController?.popViewControllerAnimated(true);
     }
     
-    @IBAction func selectedVehicleSave(segue:UIStoryboardSegue) {
-        let vehicleSelectViewController = segue.sourceViewController as VehicleSelectViewController
-        if let _selectedVehicle = vehicleSelectViewController.selectedVehicle {
-            vehicleLabel.text = _selectedVehicle
-            selectedVehicle = _selectedVehicle
-            User.sharedInstance.selectedVehicle = selectedVehicle
-        }
+    
+    
+    //MARK:- SelectUserVehicleDelegate
+    func didSelectUserVehicle(userVehicle: Vehicle) {
+        println("vehicle Selected")
+        vehicleLabel.text = userVehicle.displayVehicle();
+        selectedVehicle = userVehicle
         self.navigationController?.popViewControllerAnimated(true);
     }
     
-    
+    func newVehicleCreated() {
+        println("New Vehicle")
+        let testBlah = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterNavBar")
+        //self.navigationController?.popViewControllerAnimated(true);
+    }
 }
 

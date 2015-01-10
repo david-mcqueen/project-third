@@ -47,6 +47,7 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
     
     func submit(_: UIBarButtonItem!) {
         let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
+        
         self.navigationController?.pushViewController(createVehicleViewController, animated: true);
         
 //        var validationErrors = self.form.validateForm();
