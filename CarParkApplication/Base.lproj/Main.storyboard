@@ -125,7 +125,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xuz-hc-n05" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="N2y-0o-zLW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2871" y="-524"/>
+            <point key="canvasLocation" x="2861" y="-524"/>
         </scene>
         <!--Park-->
         <scene sceneID="Sqx-Pe-NMo">
@@ -451,7 +451,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZJ-GK-Dts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4830" y="1533"/>
+            <point key="canvasLocation" x="4836" y="1533"/>
         </scene>
         <!--Select Vehicle-->
         <scene sceneID="FEg-cy-gOB">
@@ -478,7 +478,7 @@
                     <navigationItem key="navigationItem" title="Select Vehicle" id="uGG-qE-T4r">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4eo-7u-RzQ">
                             <connections>
-                                <segue destination="kCB-3C-ces" kind="show" identifier="createNewVehicle" id="2DJ-5Y-FD4"/>
+                                <action selector="addNewVehicle:" destination="7GU-od-18u" id="Paa-pQ-rvX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

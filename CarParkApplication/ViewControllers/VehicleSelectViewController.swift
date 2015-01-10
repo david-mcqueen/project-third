@@ -16,7 +16,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     var selectedVehicleIndex:Int? = nil
     var allVehicles:[Vehicle] = [];
     
-    var delegate: SelectUserVehicleDelegate?
+    weak var delegate: SelectUserVehicleDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,13 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         if let vehicle = selectedVehicle?.displayVehicle() {
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
+    }
+    
+    @IBAction func addNewVehicle(sender: AnyObject) {
+        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController
+        createVehicleViewController.delegate = self;
+        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,13 +87,6 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         }
         delegate?.didSelectUserVehicle(selectedVehicle!);
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "createNewVehicle"){
-            println("Need to set the delegate here")
-        }
-    }
-    
     
     func newVehicleCreated(){
         

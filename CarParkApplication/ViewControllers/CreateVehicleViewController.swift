@@ -71,9 +71,14 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             User.sharedInstance.addVehicle(newUserVehicle);
             
             println("New vehicle added")
-            //delegate?.newVehicleCreated();
+            if (delegate != nil){
+                delegate?.newVehicleCreated();
+            }else{
+                //Navigate to the logged in section (replacing the previous view)
+                let userRegistered = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController;
+                self.navigationController?.showDetailViewController(userRegistered, sender: self);
+            }
             
-            //TODO:- After registering first time, navigate the user to the "logged in" section
         }else{
             var validationAlert = UIAlertView(title: "Missing data!", message: "Please complete all fields", delegate: nil, cancelButtonTitle: "Okay.")
             validationAlert.show();

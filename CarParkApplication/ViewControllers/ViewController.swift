@@ -33,10 +33,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
     }
-    
-    @IBAction func selectUserVehicle(sender: AnyObject){
-        println("bjsdgfgsdufguksahbfh")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,8 +222,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.navigationController?.popViewControllerAnimated(true);
     }
     
-    
-    
     //MARK:- SelectUserVehicleDelegate
     func didSelectUserVehicle(userVehicle: Vehicle) {
         println("vehicle Selected")
@@ -236,10 +230,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.navigationController?.popViewControllerAnimated(true);
     }
     
+    
+    //CreateUserVehicleDelegate
     func newVehicleCreated() {
         println("New Vehicle")
-        let testBlah = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterNavBar")
-        //self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewControllerAnimated(true);
     }
 }
 

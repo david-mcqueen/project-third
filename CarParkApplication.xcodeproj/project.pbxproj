@@ -38,6 +38,7 @@
 		5554A6221A6179C0004D2D28 /* CreateVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */; };
 		5554A6231A617C60004D2D28 /* CreateVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */; };
 		5554A6241A617D1F004D2D28 /* SelectUserVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */; };
+		5554A6261A61914A004D2D28 /* CreateVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */; };
 		557C2CEA19F2C3FE00DE28DF /* UserRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */; };
 		557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */; };
 		557C2CED19F2C4AE00DE28DF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */; };
@@ -583,6 +584,7 @@
 				5507B2701A3C64960082BB0F /* ClassTests.swift in Sources */,
 				550294B21A54268000198EC7 /* CarModel.swift in Sources */,
 				550294BA1A5429B400198EC7 /* CarQueryAPI.swift in Sources */,
+				5554A6261A61914A004D2D28 /* CreateVehicleViewController.swift in Sources */,
 				550294C31A542C7900198EC7 /* UserLogin.swift in Sources */,
 				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,
 				558777F51A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
