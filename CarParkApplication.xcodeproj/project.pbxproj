@@ -218,12 +218,11 @@
 		5519BD9519E33D5600A19484 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5554A6271A619357004D2D28 /* Selectors */,
 				5554A6251A618199004D2D28 /* Register-Login */,
 				55ABC7631A542CC1005A4371 /* ViewController.swift */,
 				55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */,
 				55440BCC1A34D53900969FBC /* ProfileViewController.swift */,
-				55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */,
-				558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -333,6 +332,15 @@
 				55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */,
 			);
 			name = "Register-Login";
+			sourceTree = "<group>";
+		};
+		5554A6271A619357004D2D28 /* Selectors */ = {
+			isa = PBXGroup;
+			children = (
+				55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */,
+				558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */,
+			);
+			name = Selectors;
 			sourceTree = "<group>";
 		};
 		557CD1741A3F7707009D171F /* SwiftForms */ = {

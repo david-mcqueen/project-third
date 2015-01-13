@@ -30,7 +30,6 @@ func getMakes(requestCompleted: (success: Bool, vehicleMakes: [CarMake]) -> ()) 
         var makes: [CarMake] = [];
         
         if let vehicleMakeArray = jsonResult["Makes"] as? NSArray{
-            println(vehicleMakeArray);
             for make in vehicleMakeArray {
                 let carCountry: AnyObject? = make["make_display"]!
                 let carDisplay: AnyObject?  = make["make_display"]!
@@ -71,7 +70,6 @@ func getModels(modelID: String, requestModelsCompleted: (success: Bool, vehicleM
         var models: [CarModel] = [];
         
         if let vehicleModelArray = jsonResult["Models"] as? NSArray{
-            println(vehicleModelArray);
             for model in vehicleModelArray {
                 let modelname: AnyObject? = model["model_name"]!
                 let modelID: AnyObject?  = model["model_make_id"]!

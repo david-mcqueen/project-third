@@ -62,6 +62,10 @@ class User {
         return self.Vehicles[0];
     }
     
+    func getBalanceString() -> String {
+        return self.CurrentBalance.description;
+    }
+    
     func logout() {
         self.deleteAllvehciles();
         self.FirstName = "";
