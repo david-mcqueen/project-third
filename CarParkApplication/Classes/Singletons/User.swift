@@ -46,6 +46,7 @@ class User {
             searchIndex++;
         }
         
+        //TODO:- Only delete if there is > 1 vehicle (need at least 1)
         self.Vehicles.removeAtIndex(removeVehicleIndex!)
     }
     

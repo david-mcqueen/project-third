@@ -26,6 +26,8 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         if let vehicle = selectedVehicle?.displayVehicle() {
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
+        
+//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     
     @IBAction func addNewVehicle(sender: AnyObject) {
@@ -76,16 +78,44 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         selectedVehicleIndex = indexPath.row
         selectedVehicle = allVehicles[indexPath.row]
         
-        //update the checkmark for the current row
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = .Checkmark
-        
+        if (delegate != nil){
+            //update the checkmark for the current row
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            cell?.accessoryType = .Checkmark
+        }
 
         selectedVehicleIndex = indexPath.row
         if let index = selectedVehicleIndex {
             selectedVehicle = allVehicles[index]
         }
         delegate?.didSelectUserVehicle(selectedVehicle!);
+        
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        var editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Edit", handler:{action, indexpath in
+            println("EDIT•ACTION");
+        });
+        editRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+        
+        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+            //Delete vehicle
+            self.vehicles.removeAtIndex(indexPath.row);
+            User.sharedInstance.deleteVehicle(self.allVehicles[indexPath.row]);
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+        });
+        
+        
+        
+        return [deleteRowAction, editRowAction];
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
     func newVehicleCreated(){

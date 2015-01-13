@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileVewController: UITableViewController, PayPalPaymentDelegate, SelectUserVehicleDelegate {
+class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     
     @IBOutlet var textAddFunds: UITextField!
@@ -138,22 +138,6 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate, Select
         paymentIndicator.stopAnimating();
         self.presentViewController(alert, animated: true, completion: nil);
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
-    }
-    
-    //MARK:- Segue - Prepare
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ViewUserVehicles" {
-            println("PickVehicleBand Segue")
-            let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
-            vehicleSelectViewController.delegate = self;
-        }
-        
-    }
-    
-    //MARK:- SelectUserVehicleDelegate
-    func didSelectUserVehicle(userVehicle: Vehicle) {
-        println("vehicle Selected")
-        self.navigationController?.popViewControllerAnimated(true);
     }
     
 }

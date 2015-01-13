@@ -52,11 +52,7 @@ class LoginViewController: UIViewController{
             loginUser(userLogin, {(success: Bool, token: String?, error:String?) -> () in
                 var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
                 
-                if(success) {
-                    alert.title = "Success!"
-                    alert.message = token
-                }
-                else {
+                if(!success) {
                     alert.title = "Login Failed";
                     alert.message = error!;
                 }
@@ -64,7 +60,7 @@ class LoginViewController: UIViewController{
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // Show the alert
-                    alert.show();
+                   
                     if(success){
                         NSLog("Login successful");
                         
@@ -80,6 +76,7 @@ class LoginViewController: UIViewController{
                         self.performSegueWithIdentifier("loggedIn", sender: self);
                         
                     }else{
+                         alert.show();
                         //Highlight the relevant fields
                         self.borderRed(self.inputEmail);
                         self.borderRed(self.inputPassword);

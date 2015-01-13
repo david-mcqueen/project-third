@@ -556,7 +556,7 @@
         <scene sceneID="vWo-IV-nnQ">
             <objects>
                 <tableViewController storyboardIdentifier="profile" title="Profile" id="zpc-fY-9mF" customClass="ProfileVewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LsS-Q9-pZD">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LsS-Q9-pZD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -622,6 +622,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="7GU-od-18u" kind="show" identifier="ShowUserVehicles" id="ehk-dQ-7VM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -732,7 +735,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0h-Yg-HyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="YB4-8r-ddW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1774" y="1823"/>
+            <point key="canvasLocation" x="1774" y="1829"/>
         </scene>
         <!--Logged In-->
         <scene sceneID="Lyq-AC-FZN">
@@ -747,8 +750,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="SqF-sj-zr8" kind="relationship" relationship="viewControllers" id="wxl-xH-8gT"/>
                         <segue destination="PTn-df-WNM" kind="relationship" relationship="viewControllers" id="Xzz-Xj-1a8"/>
+                        <segue destination="SqF-sj-zr8" kind="relationship" relationship="viewControllers" id="wxl-xH-8gT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAg-dw-lHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -757,6 +760,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Nc8-0l-1gT"/>
+        <segue reference="ehk-dQ-7VM"/>
     </inferredMetricsTieBreakers>
 </document>

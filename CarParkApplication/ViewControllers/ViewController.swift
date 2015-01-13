@@ -86,9 +86,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         //The beacon ID needs to be in the format stored on the server.
         var beacon = String(major) + "." + String(minor);
         
-        //TODO:- Remove this hardcode beacon value
-        beacon = "1.1";
-        
         determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carPark: String) -> () in
             var alert = UIAlertView(title: "Success!", message: carPark, delegate: nil, cancelButtonTitle: "Okay.")
             if(success) {
