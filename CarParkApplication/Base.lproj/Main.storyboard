@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pxY-Vx-ZKK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZPG-mg-6a8">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -551,7 +551,13 @@
                             <constraint firstItem="r5I-tY-vYu" firstAttribute="leading" secondItem="TVR-rD-vdY" secondAttribute="leading" id="e32-eo-SsF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EJa-mi-VR3"/>
+                    <navigationItem key="navigationItem" id="EJa-mi-VR3">
+                        <barButtonItem key="leftBarButtonItem" title="Current Location" id="VGj-Ra-sVa">
+                            <connections>
+                                <action selector="viewCurrentLocation:" destination="pxY-Vx-ZKK" id="b6C-2X-KjB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnSearch" destination="Tck-vE-d70" id="Wvq-oQ-Vdh"/>
                         <outlet property="map" destination="r5I-tY-vYu" id="pdo-SH-lwK"/>

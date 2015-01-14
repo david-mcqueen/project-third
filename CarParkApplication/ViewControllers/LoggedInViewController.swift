@@ -14,7 +14,6 @@ class LoggedInViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("Logged in view controller")
         getUserBalance();
         getUserVehicles();
         getUserName();

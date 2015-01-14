@@ -21,6 +21,8 @@ class LoginViewController: UIViewController{
         
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
+        }else{
+            inputEmail.text = "email@gmail.com"
         }
         
         //TODO:- remove this line
