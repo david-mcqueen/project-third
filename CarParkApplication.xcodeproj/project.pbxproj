@@ -60,6 +60,9 @@
 		557CD1991A3F7723009D171F /* FormDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1881A3F7723009D171F /* FormDescriptor.swift */; };
 		557CD19A1A3F7723009D171F /* FormRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1891A3F7723009D171F /* FormRowDescriptor.swift */; };
 		557CD19B1A3F7723009D171F /* FormSectionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */; };
+		5585EA091A659E6B001CEF37 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5585EA081A659E6B001CEF37 /* MapKit.framework */; };
+		5585EA0E1A65A112001CEF37 /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */; };
+		5585EA0F1A65A112001CEF37 /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */; };
 		558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */; };
 		558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */; };
 		558777F11A5D58E6008ACCE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777F01A5D58E6008ACCE9 /* User.swift */; };
@@ -153,6 +156,8 @@
 		557CD1881A3F7723009D171F /* FormDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDescriptor.swift; sourceTree = "<group>"; };
 		557CD1891A3F7723009D171F /* FormRowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRowDescriptor.swift; sourceTree = "<group>"; };
 		557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionDescriptor.swift; sourceTree = "<group>"; };
+		5585EA081A659E6B001CEF37 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewViewController.swift; path = ViewControllers/MapViewViewController.swift; sourceTree = "<group>"; };
 		558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeBandSelectViewController.swift; path = ViewControllers/TimeBandSelectViewController.swift; sourceTree = "<group>"; };
 		558777F01A5D58E6008ACCE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/Singletons/User.swift; sourceTree = "<group>"; };
 		558777F31A5D5B5E008ACCE9 /* LoggedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoggedInViewController.swift; path = ViewControllers/LoggedInViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5585EA091A659E6B001CEF37 /* MapKit.framework in Frameworks */,
 				55440BC51A34BA4500969FBC /* SystemConfiguration.framework in Frameworks */,
 				55440BC31A34BA3D00969FBC /* MobileCoreServices.framework in Frameworks */,
 				55440BC11A34BA3500969FBC /* MessageUI.framework in Frameworks */,
@@ -223,6 +229,7 @@
 				55ABC7631A542CC1005A4371 /* ViewController.swift */,
 				55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */,
 				55440BCC1A34D53900969FBC /* ProfileViewController.swift */,
+				5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -230,6 +237,7 @@
 		551AC18C19E186BB0051C672 = {
 			isa = PBXGroup;
 			children = (
+				5585EA081A659E6B001CEF37 /* MapKit.framework */,
 				55440BC41A34BA4500969FBC /* SystemConfiguration.framework */,
 				55440BC21A34BA3D00969FBC /* MobileCoreServices.framework */,
 				55440BC01A34BA3500969FBC /* MessageUI.framework */,
@@ -560,6 +568,7 @@
 				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
 				55EF4DBA1A5D9FA7006F7613 /* CreateVehicleViewController.swift in Sources */,
 				557CD1941A3F7723009D171F /* FormSwitchCell.swift in Sources */,
+				5585EA0E1A65A112001CEF37 /* MapViewViewController.swift in Sources */,
 				557CD18B1A3F7723009D171F /* FormBaseCell.swift in Sources */,
 				55B631811A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55ABC7641A542CC1005A4371 /* ViewController.swift in Sources */,
@@ -591,6 +600,7 @@
 				55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */,
 				5507B2701A3C64960082BB0F /* ClassTests.swift in Sources */,
 				550294B21A54268000198EC7 /* CarModel.swift in Sources */,
+				5585EA0F1A65A112001CEF37 /* MapViewViewController.swift in Sources */,
 				550294BA1A5429B400198EC7 /* CarQueryAPI.swift in Sources */,
 				5554A6261A61914A004D2D28 /* CreateVehicleViewController.swift in Sources */,
 				550294C31A542C7900198EC7 /* UserLogin.swift in Sources */,
