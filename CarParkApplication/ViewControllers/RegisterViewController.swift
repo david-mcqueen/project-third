@@ -46,84 +46,82 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
     /// MARK: Actions
     
     func submit(_: UIBarButtonItem!) {
-        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
         
-        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
         
-//        var validationErrors = self.form.validateForm();
-// 
-//        if validationErrors.count > 0 {
-//            var validationMessage = "Please complete all fields!."
-//            for (inputField) in validationErrors{
-//                validationMessage = validationMessage + "\n" +  inputField.title;
-//            }
-//            
-//            var validationAlert = UIAlertView(title: "Missing data!", message: validationMessage, delegate: nil, cancelButtonTitle: "Okay.")
-//            validationAlert.show();
-//        }else{
-//            
-//            let message = self.form.formValues().description
-//            let inputs:Dictionary = self.form.formValues()
-//            
-//            var emailInput = inputs["email"] as String!
-//            var forenameInput = inputs["name"] as String!
-//            var lastnameInput = inputs["lastName"] as String!
-//            var passwordInput = inputs["password"] as String!
-//            var phoneNumberInput = inputs["phone"] as String!
-//            
-//            var newUser = UserRegistration(
-//                _firstName: forenameInput,
-//                _surname: lastnameInput,
-//                _email: emailInput,
-//                _password: passwordInput,
-//                _phoneNumber: phoneNumberInput);
-//            
-//            if(!newUser.validEmailPattern() || !newUser.validPasswordPattern() || !newUser.validPhonePattern()){
-//                var invalidInputsMessage = "Please correct your inputs"
-//                if (!newUser.validEmailPattern()){
-//                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Email"
-//                }
-//                if (!newUser.validPasswordPattern()){
-//                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password"
-//                }
-//                if (!newUser.validPhonePattern()){
-//                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Phone Number"
-//                }
-//                var invalidInputsAlert = UIAlertView(title: "Incomplete data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
-//                invalidInputsAlert.show();
-//                
-//                println("Email failed: \(!newUser.validEmailPattern())");
-//                println("Password failed: \(!newUser.validPasswordPattern())");
-//                println("Phone failed: \(!newUser.validPhonePattern())");
-//                
-//                return;
-//            }
-//            
-//            registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
-//                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
-//                if(success) {
-//                    alert.title = "Success!"
-//                    alert.message = message
-//                }
-//                else {
-//                    alert.title = "Failed : ("
-//                    alert.message = token
-//                }
-//                
-//                // Move to the UI thread
-//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                    // Show the alert
-//                    alert.show()
-//                    if(success){
-//                        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
-//                        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
-//                    }
-//                });
-//                
-//                }
-//            );
-//            
-//        }
+        var validationErrors = self.form.validateForm();
+ 
+        if validationErrors.count > 0 {
+            var validationMessage = "Please complete all fields!."
+            for (inputField) in validationErrors{
+                validationMessage = validationMessage + "\n" +  inputField.title;
+            }
+            
+            var validationAlert = UIAlertView(title: "Missing data!", message: validationMessage, delegate: nil, cancelButtonTitle: "Okay.")
+            validationAlert.show();
+        }else{
+            
+            let message = self.form.formValues().description
+            let inputs:Dictionary = self.form.formValues()
+            
+            var emailInput = inputs["email"] as String!
+            var forenameInput = inputs["name"] as String!
+            var lastnameInput = inputs["lastName"] as String!
+            var passwordInput = inputs["password"] as String!
+            var phoneNumberInput = inputs["phone"] as String!
+            
+            var newUser = UserRegistration(
+                _firstName: forenameInput,
+                _surname: lastnameInput,
+                _email: emailInput,
+                _password: passwordInput,
+                _phoneNumber: phoneNumberInput);
+            
+            if(!newUser.validEmailPattern() || !newUser.validPasswordPattern() || !newUser.validPhonePattern()){
+                var invalidInputsMessage = "Please correct your inputs"
+                if (!newUser.validEmailPattern()){
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Email"
+                }
+                if (!newUser.validPasswordPattern()){
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password"
+                }
+                if (!newUser.validPhonePattern()){
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Phone Number"
+                }
+                var invalidInputsAlert = UIAlertView(title: "Incomplete data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
+                invalidInputsAlert.show();
+                
+                println("Email failed: \(!newUser.validEmailPattern())");
+                println("Password failed: \(!newUser.validPasswordPattern())");
+                println("Phone failed: \(!newUser.validPhonePattern())");
+                
+                return;
+            }
+            
+            registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
+                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
+                if(success) {
+                    alert.title = "Success!"
+                    alert.message = message
+                }
+                else {
+                    alert.title = "Failed : ("
+                    alert.message = token
+                }
+                
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    alert.show()
+                    if(success){
+                        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
+                        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
+                    }
+                });
+                
+                }
+            );
+            
+        }
         
     }
     

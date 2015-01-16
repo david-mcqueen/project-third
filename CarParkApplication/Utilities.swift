@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK:- Encryption
 
@@ -95,3 +96,10 @@ func validateGUID(inputGUID: String) -> Bool {
     
     return GUIDTest!.evaluateWithObject(inputGUID);
 }
+
+func displayAlert(title: String, message: String, cancelButton: String){
+    var alert = UIAlertView(title: "Success!", message: message, delegate: nil, cancelButtonTitle: cancelButton)
+    alert.show();
+}
+
+

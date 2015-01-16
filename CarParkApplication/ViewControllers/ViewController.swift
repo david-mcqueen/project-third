@@ -103,6 +103,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 // Show the alert
                 let carParkName = "Manchester Oxford Road"
                 self.locationLabel.text = "\(carPark): \(carParkName)";
+        self.locationLabel.text = "\(beacon): \(carParkName)";
                 alert.show()
             });
             

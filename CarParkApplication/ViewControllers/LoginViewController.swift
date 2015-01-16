@@ -74,7 +74,7 @@ class LoginViewController: UIViewController{
                         //Save the token into the Singleton object, for use throughut the app
                         User.sharedInstance.token = token!;
                         User.sharedInstance.UserName = userLogin.UserName;
-                        
+        
                         self.performSegueWithIdentifier("loggedIn", sender: self);
                         
                     }else{

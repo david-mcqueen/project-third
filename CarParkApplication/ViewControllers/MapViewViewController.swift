@@ -183,6 +183,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 println("Long: \(longitude)");
                 
                 self.addMapAnnotation(location, title: "Car Park Location", subtitle: "Some car park information goes here");
+                displayAlert("Map Coordinates", ("Lat: \(latitude) Long: \(longitude)"), "Dismiss");
             }
         });
     }
