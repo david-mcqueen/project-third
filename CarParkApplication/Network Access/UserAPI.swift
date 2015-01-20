@@ -130,10 +130,10 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
     registerResponse.resume();
 }
 
-func getAllParkingSessions(currentUser: String, requestCompleted: (success: Bool, session: [ParkSession], error: String?) -> ()) -> (){
+func getAllParkingSessions(token: String, requestCompleted: (success: Bool, session: [ParkSession], error: String?) -> ()) -> (){
     
     println("All parking sessions")
-        let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park?Token=\(currentUser)");
+        let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park?Token=\(token)");
         let urlSession = NSURLSession.sharedSession();
         var sessions: [ParkSession] = []
         
@@ -167,6 +167,8 @@ func getAllParkingSessions(currentUser: String, requestCompleted: (success: Bool
                     let sessionEndTime: AnyObject?  = session["StartTime"]!
                     let sessionValue: AnyObject?  = session["Value"]!
                     
+                    //TODO:- Get the vehicle information back from the server
+                    //Or can link to the known vehicles on the user account?
                     let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
                     
                     let newSession = ParkSession(parkSessionID: sessionID!, carParkID: sessionCarParkID!, startTime: sessionStartTime!, currentSession: true, parkedVehicle: honda);

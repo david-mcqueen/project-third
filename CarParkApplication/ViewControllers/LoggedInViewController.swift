@@ -42,7 +42,7 @@ class LoggedInViewController: UITabBarController {
     }
     
     func getUserParkingSessions(){
-        getAllParkingSessions("c5985e40-a0db-11e4-b772-001e8c3af66d", {(success, session, error) -> () in
+        getAllParkingSessions(User.sharedInstance.token!, {(success, session, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     println(success);
                     println(session)
