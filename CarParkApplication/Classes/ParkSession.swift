@@ -14,19 +14,22 @@ class ParkSession {
     var StartTime: NSDate;
     var EndTime: NSDate?;
     var CurrentSession: Bool;
+    var ParkedVehicle: Vehicle;
     
-    init (parkSessionID: Int, carParkID: Int, startTime: NSDate, currentSession: Bool){
+    init (parkSessionID: Int, carParkID: Int, startTime: NSDate, currentSession: Bool, parkedVehicle: Vehicle){
         self.ParkessionID = parkSessionID;
         self.CarParkID = carParkID;
         self.StartTime = startTime;
         self.CurrentSession = currentSession;
+        self.ParkedVehicle = parkedVehicle;
     }
     
-    init (parkSessionID: Int, carParkID: Int, startTime: NSDate, endTime: NSDate, currentSession: Bool){
+    init (parkSessionID: Int, carParkID: Int, startTime: NSDate, endTime: NSDate, currentSession: Bool, parkedVehicle: Vehicle){
         self.ParkessionID = parkSessionID;
         self.CarParkID = carParkID;
         self.StartTime = startTime;
         self.EndTime = endTime;
         self.CurrentSession = currentSession;
+        self.ParkedVehicle = parkedVehicle;
     }
 }

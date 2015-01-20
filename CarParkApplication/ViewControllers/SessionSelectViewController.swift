@@ -40,8 +40,11 @@ class SessionSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("sessionCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = parkSessions[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("sessionCell", forIndexPath: indexPath) as ParkSessionViewCell
+//        cell.textLabel?.text = parkSessions[indexPath.row]
+        cell.sessionDetails.text = "skjbfkbhsabfjhra"
+        cell.vehicleDetails.text = parkSessions[indexPath.row]
+        cell.vehicleDetails.text = allParkSessions[indexPath.row].ParkedVehicle.displayVehicle();
         
         return cell
     }
