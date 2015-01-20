@@ -17,6 +17,7 @@ class LoggedInViewController: UITabBarController {
         getUserBalance();
         getUserVehicles();
         getUserName();
+        getUserParkingSessions();
     }
     
     func getUserBalance(){
@@ -38,6 +39,17 @@ class LoggedInViewController: UITabBarController {
         //TODO:- Get the users name from the API
         User.sharedInstance.FirstName = "David";
         User.sharedInstance.Surname = "McQueen";
+    }
+    
+    func getUserParkingSessions(){
+        getAllParkingSessions("c5985e40-a0db-11e4-b772-001e8c3af66d", {(success, session, error) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    println(success);
+                    println(session)
+                User.sharedInstance.ParkSessions = session;
+                    println(error)
+            });
+        });
     }
     
 }

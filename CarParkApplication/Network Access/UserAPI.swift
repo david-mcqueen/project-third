@@ -130,4 +130,55 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
     registerResponse.resume();
 }
 
+func getAllParkingSessions(currentUser: String, requestCompleted: (success: Bool, session: [ParkSession], error: String?) -> ()) -> (){
+    
+    println("All parking sessions")
+        let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park?Token=\(currentUser)");
+        let urlSession = NSURLSession.sharedSession();
+        var sessions: [ParkSession] = []
+        
+        let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+            
+            var success = false;
+            var errorResponse: String?;
+            
+            if (error != nil) {
+                println(error.localizedDescription);
+            }
+            var err: NSError?
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+            var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
+            println(jsonResult)
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+            println(jsonResult)
 
+            
+                for session in jsonResult{
+                    if let errorMessage: AnyObject = session["Error"]!{
+                        println(errorMessage);
+                        errorResponse = errorMessage as? String;
+                    }
+                    let sessionID: AnyObject? = session["ParkingTransactionID"]!
+                    let sessionVehicleID: AnyObject?  = session["UserVehicleID"]!
+                    let sessionCarParkID: AnyObject?  = session["CarParkID"]!
+                    let sessionStartTime: AnyObject?  = session["StartTime"]!
+                    let sessionEndTime: AnyObject?  = session["StartTime"]!
+                    let sessionValue: AnyObject?  = session["Value"]!
+                    
+                    let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
+                    
+                    let newSession = ParkSession(parkSessionID: sessionID!, carParkID: sessionCarParkID!, startTime: sessionStartTime!, currentSession: true, parkedVehicle: honda);
+                    
+                    sessions.append(newSession);
+                }
+                success = true;
+            
+            
+            requestCompleted(success: success, session: sessions, error: errorResponse);
+        });
+        
+    jsonResponse.resume();
+    
+}

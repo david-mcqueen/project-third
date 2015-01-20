@@ -44,7 +44,7 @@ class SessionSelectViewController: UITableViewController {
 //        cell.textLabel?.text = parkSessions[indexPath.row]
         cell.sessionDetails.text = "skjbfkbhsabfjhra"
         cell.vehicleDetails.text = parkSessions[indexPath.row]
-        cell.vehicleDetails.text = allParkSessions[indexPath.row].ParkedVehicle.displayVehicle();
+        cell.vehicleDetails.text = "Id: \(parkSessions[indexPath.row]) \(allParkSessions[indexPath.row].ParkedVehicle.displayVehicle())";
         
         return cell
     }
@@ -70,8 +70,10 @@ class SessionSelectViewController: UITableViewController {
             allParkSessions = User.sharedInstance.getPreviousParkSessions()
         }
         parkSessions.removeAll(keepCapacity: false);
+        
         for session in allParkSessions{
-            parkSessions.append(String(session.ParkessionID));
+            parkSessions.append(String(session.ParkSessionID.description));
+            println(session.ParkSessionID);
         }
     }
     
