@@ -9,6 +9,7 @@
 import Foundation
 
 func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, error:String?) -> ()) -> (){
+    println("login")
     //Pass the user details to the server, to register
     
     //TODO:- Handle failure reponse / unknown failure
@@ -31,12 +32,12 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
     
     request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
     request.addValue("application/json", forHTTPHeaderField: "Content-Type");
-    request.addValue("text/plain", forHTTPHeaderField: "Accept");
+    request.addValue("application/json", forHTTPHeaderField: "Accept");
     
     
     var loginResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
         
-        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        var err: NSError?
         var success:Bool = false;
         var token:String?;
         
@@ -45,12 +46,19 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
             errorResponse = error.localizedDescription;
         }
         
-        if (strData != nil){
-            if (validateGUID(strData!.description)){
-                token = strData!.description;
+        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+        
+        if (err != nil){
+            println("JSON Error \(err!.localizedDescription) ");
+            errorResponse = err!.localizedDescription;
+        }
+        
+        
+        if let responseToken: AnyObject = jsonResult["Token"]{
+            token = responseToken as? String;
+            
+            if (validateGUID(token!)){
                 success = true;
-            }else{
-                errorResponse = strData!.description;
             }
         }
         
@@ -70,6 +78,7 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/register");
     var request = NSMutableURLRequest(URL: url!);
     
+    
     var error1 : NSError?;
     var errorResponse: String?;
     request.HTTPMethod = "POST";
@@ -83,34 +92,34 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
     
     request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
     request.addValue("application/json", forHTTPHeaderField: "Content-Type");
-    request.addValue("text/plain", forHTTPHeaderField: "Accept");
+    request.addValue("application/json", forHTTPHeaderField: "Accept");
     
     var registerResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        
+        var err: NSError?
+        var token:String?;
         
         println(response);
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
         var success = false;
         
-        println(strData);
         
         if (error != nil) {
             println(error.localizedDescription);
             errorResponse = error.localizedDescription;
         }
-        //            var err: NSError?
+        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
         
-        //Parse the resonse into JSON
-        //var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+        if (err != nil){
+            println("JSON Error \(err!.localizedDescription) ");
+            errorResponse = err!.localizedDescription;
+        }
         
-        //            if (err != nil){
-        //                println("JSON Error \(err!.localizedDescription) ");
-        //            }
         
-        var token:String?;
-        //TODO:- CHeck of the response contains an error message
-        if (strData != nil){
-            if (validateGUID(strData!.description)){
-                token = strData!.description;
+        if let responseToken: AnyObject = jsonResult["Token"]{
+            token = responseToken as? String;
+            
+            if (validateGUID(token!)){
                 success = true;
             }
         }

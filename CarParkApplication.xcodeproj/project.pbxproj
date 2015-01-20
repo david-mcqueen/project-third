@@ -26,6 +26,8 @@
 		551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551AC1BA19E186E00051C672 /* CoreLocation.framework */; };
 		55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
 		55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
+		55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
+		55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55440BB91A34B96700969FBC /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BB11A34B96700969FBC /* libPayPalMobile.a */; };
 		55440BBB1A34BA1400969FBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BBA1A34BA1400969FBC /* AudioToolbox.framework */; };
 		55440BBD1A34BA1C00969FBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BBC1A34BA1C00969FBC /* AVFoundation.framework */; };
@@ -111,6 +113,7 @@
 		551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarParkApplicationTests.swift; sourceTree = "<group>"; };
 		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleSelectViewController.swift; path = ViewControllers/VehicleSelectViewController.swift; sourceTree = "<group>"; };
+		55322CF71A6EAEB300C13F2E /* ParkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSession.swift; path = Classes/ParkSession.swift; sourceTree = "<group>"; };
 		55440BA91A34B96700969FBC /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		55440BAA1A34B96700969FBC /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
 		55440BAB1A34B96700969FBC /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 				550294BF1A542C7900198EC7 /* UserLogin.swift */,
 				550294B01A54268000198EC7 /* CarModel.swift */,
 				550294B31A54269A00198EC7 /* CarMake.swift */,
+				55322CF71A6EAEB300C13F2E /* ParkSession.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -538,6 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */,
 				557CD1971A3F7723009D171F /* FormSelector.swift in Sources */,
 				55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */,
 				558777F41A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
@@ -586,6 +591,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */,
 				550294B51A54269A00198EC7 /* CarMake.swift in Sources */,
 				55B631821A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,

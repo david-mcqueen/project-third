@@ -101,7 +101,9 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
                 var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
                 if(success) {
                     alert.title = "Success!"
+                    println(token)
                     alert.message = message
+                    //TODO:- Add the token and user details into the user object
                 }
                 else {
                     alert.title = "Failed : ("

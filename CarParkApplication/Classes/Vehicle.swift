@@ -13,6 +13,7 @@ class Vehicle {
     var Model: String;
     var Colour: String;
     var RegistrationNumber: String;
+    var VehicleID: Int?;
     
     init(make:String, model: String, colour:String, registrationNumber:String){
         self.Make = make;
@@ -21,7 +22,19 @@ class Vehicle {
         self.RegistrationNumber = registrationNumber;
     }
     
+    init(make:String, model: String, colour:String, registrationNumber:String, vehicleID: Int){
+        self.Make = make;
+        self.Model = model;
+        self.Colour = colour;
+        self.RegistrationNumber = registrationNumber;
+        self.VehicleID = vehicleID;
+    }
+    
     func displayVehicle() -> String{
         return ("\(self.Make) \(self.Model) (\(self.RegistrationNumber))");
+    }
+    
+    func getVehicleID() -> Int{
+        return 2;
     }
 }

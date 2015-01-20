@@ -28,9 +28,9 @@ class LoggedInViewController: UITabBarController {
         //TODO:- Get the users vehicles from the API
         User.sharedInstance.deleteAllvehciles();
         
-        let renault = Vehicle(make: "Renault", model: "Megane", colour: "Grey", registrationNumber: "HT57 GHF");
+        let renault = Vehicle(make: "Renault", model: "Megane", colour: "Grey", registrationNumber: "HT57 GHF", vehicleID: 1);
         User.sharedInstance.addVehicle(renault);
-        let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK");
+        let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
         User.sharedInstance.addVehicle(honda);
     }
     

@@ -11,10 +11,12 @@ import CoreLocation
 
 class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
 
-    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var locationTextField: UITextField!
     let locationManager = CLLocationManager();
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+    
+    var editLocationButton = false;
     
     @IBOutlet var determineLocationButton: UIButton!
 
@@ -32,6 +34,44 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
+        //TODO:- Validation checking on the input fields
+        let userVehicle = selectedVehicle?.VehicleID
+        
+        let carParkLocationID: Int = 1
+        let parkingTimeMinutes: Int = 37;
+        parkVehicle(User.sharedInstance.token!, carParkLocationID, userVehicle!, parkingTimeMinutes,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
+            
+            var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
+            
+            if(!success) {
+                alert.title = "Park Failed";
+                alert.message = String(error!);
+            }else{
+                alert.title = "Park Success";
+                alert.message = String(parkTransactionID!);
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                alert.show();
+                if (parkTransactionID != nil && success){
+                    println(parkTransactionID!)
+                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate());
+                    User.sharedInstance.addParkSession(newParkSession);
+                    var blah = User.sharedInstance.getAllParkSessions()!
+                    for parkSesh in blah{
+                        println(parkSesh);
+                    }
+                }
+                
+                if error != nil{
+                    println(error!);
+                }
+                
+                })
+            
+            }
+        );
+        
     }
 
     override func viewDidLoad() {
@@ -64,11 +104,16 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     @IBAction func determineLocation(sender: AnyObject) {
         //Start looking for beacons so long as we have permission
-        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
+        if (editLocationButton){
+            self.locationTextField.becomeFirstResponder()
+        }else{
+            if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
             //Start looks for regions
             NSLog("Start monitoring for regions");
+            locationTextField.text = "Searching..."
             beaconActivityIndicator.startAnimating()
             locationManager.startRangingBeaconsInRegion(region);
+            }
         }
     }
     
@@ -102,9 +147,12 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
                 let carParkName = "Manchester Oxford Road"
-                self.locationLabel.text = "\(carPark): \(carParkName)";
-        self.locationLabel.text = "\(beacon): \(carParkName)";
-                alert.show()
+                self.locationTextField.text = "\(carPark): \(carParkName)";
+                self.locationTextField.text = "\(beacon): \(carParkName)";
+                self.determineLocationButton.setTitle("Edit location", forState: UIControlState.Normal);
+                self.editLocationButton = true;
+                
+                alert.show();
             });
             
             }
@@ -186,8 +234,10 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if(indexPath.section == 0 && indexPath.row == 1){
+        if(indexPath.section == 0 && indexPath.row == 1 && !editLocationButton) {
             determineLocation(self);
+        }else if (indexPath.section == 0 && indexPath.row == 1 && editLocationButton){
+            self.locationTextField.becomeFirstResponder();
         }else if(indexPath.section == 3 && indexPath.row == 0){
             parkPressed(self);
         }

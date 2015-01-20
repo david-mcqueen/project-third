@@ -15,6 +15,7 @@ class User {
     var CurrentBalance: Double; //The £ balance of their account
     var Vehicles:[Vehicle]; //An array of all vehicles associated with the user.
     var token: String?; //The authorization token provided by the server.
+    var ParkSessions: [ParkSession]?;
     
     class var sharedInstance: User {
         struct Singleton {
@@ -31,6 +32,7 @@ class User {
         self.Vehicles = []
     }
     
+    //MARK:- Vehicle functions
     func addVehicle(newVehicle: Vehicle) {
         self.Vehicles.append(newVehicle);
     }
@@ -62,11 +64,26 @@ class User {
     func getFirstVehicle() -> Vehicle {
         return self.Vehicles[0];
     }
+        
+    //MARK:- Park Session functions
+    func deleteAllParkSessions(){
+        self.ParkSessions?.removeAll(keepCapacity: false);
+    }
     
+    func addParkSession(newParkSession: ParkSession){
+        self.ParkSessions?.append(newParkSession);
+    }
+    
+    func getAllParkSessions() -> [ParkSession]? {
+        return self.ParkSessions;
+    }
+    
+    //MARK:- Balance Functions
     func getBalanceString() -> String {
         return self.CurrentBalance.description;
     }
     
+        
     func logout() {
         self.deleteAllvehciles();
         self.FirstName = "";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZPG-mg-6a8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZPG-mg-6a8">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -148,7 +148,7 @@
         <scene sceneID="vN1-M9-d06">
             <objects>
                 <tableViewController storyboardIdentifier="ViewController" title="Park" id="nUs-13-0F2" customClass="ViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O79-tF-wZm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O79-tF-wZm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -166,18 +166,18 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtY-fs-Hic">
-                                                    <rect key="frame" x="264" y="12" width="328" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ng2-H6-ioH">
+                                                    <rect key="frame" x="93" y="8" width="499" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="NtY-fs-Hic" secondAttribute="centerY" constant="-0.5" id="6l6-eE-Sfw"/>
-                                                <constraint firstItem="NtY-fs-Hic" firstAttribute="trailing" secondItem="sAC-lt-hSb" secondAttribute="trailingMargin" id="Z5A-6e-zy2"/>
+                                                <constraint firstAttribute="centerY" secondItem="ng2-H6-ioH" secondAttribute="centerY" constant="-1" id="0ZA-Bd-r5A"/>
                                                 <constraint firstAttribute="centerY" secondItem="uMe-qd-Iee" secondAttribute="centerY" constant="-2" id="auD-No-KOf"/>
+                                                <constraint firstItem="ng2-H6-ioH" firstAttribute="leading" secondItem="uMe-qd-Iee" secondAttribute="trailing" constant="8" id="bQL-Mx-GLm"/>
                                                 <constraint firstItem="uMe-qd-Iee" firstAttribute="leading" secondItem="sAC-lt-hSb" secondAttribute="leadingMargin" id="l7e-cf-700"/>
+                                                <constraint firstItem="ng2-H6-ioH" firstAttribute="trailing" secondItem="sAC-lt-hSb" secondAttribute="trailingMargin" id="zf5-6S-QMe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -323,7 +323,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="determineLocationButton" destination="b96-Yb-4IO" id="dFE-Er-YB6"/>
-                        <outlet property="locationLabel" destination="NtY-fs-Hic" id="Pr9-XW-QjY"/>
+                        <outlet property="locationTextField" destination="ng2-H6-ioH" id="TaE-tc-RkQ"/>
                         <outlet property="timeBandLabel" destination="Bz0-tD-LD3" id="OIy-PO-fuL"/>
                         <outlet property="toggleMethod" destination="Q2k-jd-bx5" id="EGB-h1-kDu"/>
                         <outlet property="vehicleLabel" destination="DcO-GD-gN6" id="uIx-6g-7wz"/>
@@ -332,7 +332,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxd-zv-aBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oTD-bT-3Re" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2501" y="1829"/>
+            <point key="canvasLocation" x="2501" y="1828"/>
         </scene>
         <!--Create Vehicle View Controller-->
         <scene sceneID="IUM-Dr-N4D">
@@ -613,7 +613,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frt-l1-BMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oC2-oF-mgq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3217" y="1823"/>
+            <point key="canvasLocation" x="3217" y="1829"/>
         </scene>
         <!--Profile-->
         <scene sceneID="r2H-e0-6fj">
@@ -841,6 +841,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ehk-dQ-7VM"/>
+        <segue reference="acm-hZ-7sZ"/>
     </inferredMetricsTieBreakers>
 </document>
