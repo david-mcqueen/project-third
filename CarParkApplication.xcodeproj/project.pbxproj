@@ -28,6 +28,8 @@
 		55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
 		552C98F51A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
 		552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
+		552C98F91A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
+		552C98FA1A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
 		55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55440BB91A34B96700969FBC /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BB11A34B96700969FBC /* libPayPalMobile.a */; };
@@ -116,6 +118,7 @@
 		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleSelectViewController.swift; path = ViewControllers/VehicleSelectViewController.swift; sourceTree = "<group>"; };
 		552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionSelectViewController.swift; path = ViewControllers/SessionSelectViewController.swift; sourceTree = "<group>"; };
+		552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSessionViewCell.swift; path = Classes/Display/ParkSessionViewCell.swift; sourceTree = "<group>"; };
 		55322CF71A6EAEB300C13F2E /* ParkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSession.swift; path = Classes/ParkSession.swift; sourceTree = "<group>"; };
 		55440BA91A34B96700969FBC /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		55440BAA1A34B96700969FBC /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 		5519BD9419E33D3F00A19484 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				552C98F71A6ECBDB00155AFC /* Display */,
 				558777EC1A5D5253008ACCE9 /* Singletons */,
 				557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */,
 				557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */,
@@ -313,6 +317,22 @@
 				551AC1AF19E186BB0051C672 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		552C98F71A6ECBDB00155AFC /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				552C98FB1A6ED22D00155AFC /* Custom Views */,
+			);
+			name = Display;
+			sourceTree = "<group>";
+		};
+		552C98FB1A6ED22D00155AFC /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */,
+			);
+			name = "Custom Views";
 			sourceTree = "<group>";
 		};
 		55440BA81A34B96700969FBC /* PayPalMobile */ = {
@@ -551,6 +571,7 @@
 				55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */,
 				558777F41A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
 				557CD18F1A3F7723009D171F /* FormCheckCell.swift in Sources */,
+				552C98F91A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */,
 				558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
 				550294C21A542C7900198EC7 /* UserLogin.swift in Sources */,
 				557C2CED19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
@@ -598,6 +619,7 @@
 			files = (
 				55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */,
 				550294B51A54269A00198EC7 /* CarMake.swift in Sources */,
+				552C98FA1A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */,
 				55B631821A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
 				5554A6241A617D1F004D2D28 /* SelectUserVehicle.swift in Sources */,

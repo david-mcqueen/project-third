@@ -55,7 +55,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 alert.show();
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
-                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate(), currentSession: true);
+                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate(), currentSession: true, parkedVehicle: self.selectedVehicle!);
                     User.sharedInstance.addParkSession(newParkSession);
                 }
                 
@@ -127,24 +127,22 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         //The beacon ID needs to be in the format stored on the server.
         var beacon = String(major) + "." + String(minor);
         
-        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carPark: String) -> () in
-            var alert = UIAlertView(title: "Success!", message: carPark, delegate: nil, cancelButtonTitle: "Okay.")
+        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
+            var alert = UIAlertView(title: "Success!", message: carParkName, delegate: nil, cancelButtonTitle: "Okay.")
             if(success) {
                 alert.title = "Success!"
-                alert.message = carPark
+                alert.message = carParkName
                 
             }
             else {
                 alert.title = "Failed : ("
-                alert.message = carPark
+                alert.message = carParkName
             }
             
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
-                let carParkName = "Manchester Oxford Road"
-                self.locationTextField.text = "\(carPark): \(carParkName)";
-                self.locationTextField.text = "\(beacon): \(carParkName)";
+                self.locationTextField.text = "\(carParkID): \(carParkName)";
                 self.determineLocationButton.setTitle("Edit location", forState: UIControlState.Normal);
                 self.editLocationButton = true;
                 

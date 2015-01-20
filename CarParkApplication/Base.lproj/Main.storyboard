@@ -580,11 +580,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionCell" id="JoM-7Y-puO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionCell" rowHeight="100" id="JoM-7Y-puO" customClass="ParkSessionViewCell" customModule="CarParkApplication" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JoM-7Y-puO" id="Ae8-ix-7S4">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vehicle Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDq-Na-s8f">
+                                            <rect key="frame" x="8" y="10" width="584" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Session Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pc-pv-02o">
+                                            <rect key="frame" x="8" y="39" width="584" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3pc-pv-02o" secondAttribute="bottom" constant="32" id="3Po-fh-Q4i"/>
+                                        <constraint firstItem="FDq-Na-s8f" firstAttribute="leading" secondItem="Ae8-ix-7S4" secondAttribute="leadingMargin" id="C0W-Xx-rfa"/>
+                                        <constraint firstItem="3pc-pv-02o" firstAttribute="trailing" secondItem="Ae8-ix-7S4" secondAttribute="trailingMargin" id="GfO-Wl-ITQ"/>
+                                        <constraint firstItem="FDq-Na-s8f" firstAttribute="top" secondItem="Ae8-ix-7S4" secondAttribute="topMargin" constant="1" id="IeV-3H-vfS"/>
+                                        <constraint firstItem="3pc-pv-02o" firstAttribute="top" secondItem="FDq-Na-s8f" secondAttribute="bottom" constant="8" id="L6V-BZ-goO"/>
+                                        <constraint firstItem="3pc-pv-02o" firstAttribute="leading" secondItem="Ae8-ix-7S4" secondAttribute="leadingMargin" id="mGC-ob-wmA"/>
+                                        <constraint firstItem="FDq-Na-s8f" firstAttribute="trailing" secondItem="Ae8-ix-7S4" secondAttribute="trailingMargin" id="qRA-7y-IMg"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="sessionDetails" destination="3pc-pv-02o" id="npf-0U-IE8"/>
+                                    <outlet property="vehicleDetails" destination="FDq-Na-s8f" id="RdO-Hw-lBV"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -596,7 +623,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbC-lX-NDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1774" y="2647"/>
+            <point key="canvasLocation" x="1774" y="2642"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2tl-sN-w7R">
