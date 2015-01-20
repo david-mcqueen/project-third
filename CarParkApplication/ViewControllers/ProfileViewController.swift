@@ -140,4 +140,13 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "currentParkingSessions" {
+            println("currentParkingSessions Segue")
+            let currentSessionViewController = segue.destinationViewController as SessionSelectViewController
+            currentSessionViewController.currentSessions = true
+        }
+    }
+    
 }

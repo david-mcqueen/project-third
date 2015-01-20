@@ -297,6 +297,9 @@
                                                     <state key="normal" title="Park!">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="parkPressed:" destination="nUs-13-0F2" eventType="touchUpInside" id="0iI-K0-4Hd"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -451,7 +454,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZJ-GK-Dts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3217" y="2721"/>
+            <point key="canvasLocation" x="3217" y="2647"/>
         </scene>
         <!--Select Vehicle-->
         <scene sceneID="FEg-cy-gOB">
@@ -486,7 +489,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ee8-Iz-iud" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2506" y="2721"/>
+            <point key="canvasLocation" x="2501" y="2647"/>
         </scene>
         <!--Map-->
         <scene sceneID="9YY-JW-39n">
@@ -505,7 +508,7 @@
             </objects>
             <point key="canvasLocation" x="1003" y="1073"/>
         </scene>
-        <!--Map View View Controller-->
+        <!--Map-->
         <scene sceneID="eAz-QE-CJ3">
             <objects>
                 <viewController id="pxY-Vx-ZKK" customClass="MapViewViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
@@ -551,7 +554,7 @@
                             <constraint firstItem="r5I-tY-vYu" firstAttribute="leading" secondItem="TVR-rD-vdY" secondAttribute="leading" id="e32-eo-SsF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EJa-mi-VR3">
+                    <navigationItem key="navigationItem" title="Map" id="EJa-mi-VR3">
                         <barButtonItem key="leftBarButtonItem" title="Current Location" id="VGj-Ra-sVa">
                             <connections>
                                 <action selector="viewCurrentLocation:" destination="pxY-Vx-ZKK" id="b6C-2X-KjB"/>
@@ -568,6 +571,49 @@
             </objects>
             <point key="canvasLocation" x="1003" y="1823"/>
         </scene>
+        <!--Parking Sessions-->
+        <scene sceneID="ZDk-kD-AnV">
+            <objects>
+                <tableViewController storyboardIdentifier="ParkingSessions" title="Parking Sessions" id="IAo-ag-79F" customClass="SessionSelectViewController" customModule="CarParkApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vig-mV-gzU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sessionCell" id="JoM-7Y-puO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JoM-7Y-puO" id="Ae8-ix-7S4">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IAo-ag-79F" id="UZf-gC-YS2"/>
+                            <outlet property="delegate" destination="IAo-ag-79F" id="WVA-mR-XLL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Parking Sessions" id="ljL-LR-YMN"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbC-lX-NDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1774" y="2647"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2tl-sN-w7R">
+            <objects>
+                <navigationController id="gWF-46-uIx" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fWg-Bk-X3y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="IAo-ag-79F" kind="relationship" relationship="rootViewController" id="w5d-bY-4qJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G3m-ZA-HPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1170" y="3387"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ywO-l6-6Uj">
             <objects>
@@ -582,7 +628,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xrb-b6-INM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1798" y="2721"/>
+            <point key="canvasLocation" x="1859" y="3387"/>
         </scene>
         <!--Select Time Band-->
         <scene sceneID="mPq-jo-Ypf">
@@ -791,13 +837,63 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Parking Sessions" id="I9c-e6-Z4k">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="BOX-FK-LGR" detailTextLabel="TTt-SU-00U" style="IBUITableViewCellStyleValue1" id="dNr-Jk-hFK">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNr-Jk-hFK" id="qON-Rb-5CR">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Current Sessions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BOX-FK-LGR">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TTt-SU-00U">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="IAo-ag-79F" kind="show" identifier="currentParkingSessions" id="PoQ-Gl-3fc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TO6-Uj-VdN" detailTextLabel="eed-Nl-1fp" style="IBUITableViewCellStyleValue1" id="qz0-Ye-FSn">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qz0-Ye-FSn" id="d2u-3n-sOs">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Previous Sessions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TO6-Uj-VdN">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eed-Nl-1fp">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="IAo-ag-79F" kind="show" identifier="previousParkingSessions" id="FLC-be-oDR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="zpc-fY-9mF" id="dVq-qe-SLX"/>
                             <outlet property="delegate" destination="zpc-fY-9mF" id="Ltx-5T-l8x"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eoF-Dg-XYm">
+                    <navigationItem key="navigationItem" title="Profile" id="eoF-Dg-XYm">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="LvQ-zY-1t9">
                             <connections>
                                 <segue destination="YB4-8r-ddW" kind="unwind" unwindAction="logout:" id="shs-58-2nm"/>
@@ -841,6 +937,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="acm-hZ-7sZ"/>
+        <segue reference="ehk-dQ-7VM"/>
+        <segue reference="PoQ-Gl-3fc"/>
     </inferredMetricsTieBreakers>
 </document>

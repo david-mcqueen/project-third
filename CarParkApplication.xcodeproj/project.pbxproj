@@ -26,6 +26,8 @@
 		551AC1BB19E186E00051C672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551AC1BA19E186E00051C672 /* CoreLocation.framework */; };
 		55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
 		55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
+		552C98F51A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
+		552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
 		55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55440BB91A34B96700969FBC /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BB11A34B96700969FBC /* libPayPalMobile.a */; };
@@ -113,6 +115,7 @@
 		551AC1B019E186BB0051C672 /* CarParkApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarParkApplicationTests.swift; sourceTree = "<group>"; };
 		551AC1BA19E186E00051C672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleSelectViewController.swift; path = ViewControllers/VehicleSelectViewController.swift; sourceTree = "<group>"; };
+		552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionSelectViewController.swift; path = ViewControllers/SessionSelectViewController.swift; sourceTree = "<group>"; };
 		55322CF71A6EAEB300C13F2E /* ParkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSession.swift; path = Classes/ParkSession.swift; sourceTree = "<group>"; };
 		55440BA91A34B96700969FBC /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		55440BAA1A34B96700969FBC /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
@@ -351,6 +354,7 @@
 			children = (
 				55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */,
 				558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */,
+				552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */,
 			);
 			name = Selectors;
 			sourceTree = "<group>";
@@ -579,6 +583,7 @@
 				55ABC7641A542CC1005A4371 /* ViewController.swift in Sources */,
 				557CD1991A3F7723009D171F /* FormDescriptor.swift in Sources */,
 				55440BCD1A34D53900969FBC /* ProfileViewController.swift in Sources */,
+				552C98F51A6EC13400155AFC /* SessionSelectViewController.swift in Sources */,
 				557CD18E1A3F7723009D171F /* FormButtonCell.swift in Sources */,
 				550294B41A54269A00198EC7 /* CarMake.swift in Sources */,
 				5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */,
@@ -612,6 +617,7 @@
 				550294C31A542C7900198EC7 /* UserLogin.swift in Sources */,
 				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,
 				558777F51A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
+				552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

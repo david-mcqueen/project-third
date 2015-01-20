@@ -28,19 +28,6 @@ class LoginViewController: UIViewController{
         //TODO:- remove this line
         inputPassword.text = "password"
         
-        parkVehicle("a026c0f8-a0a8-11e4-b772-001e8c3af66d", 1 , 2, 0,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
-            
-            if (parkTransactionID != nil){
-                println(parkTransactionID!)
-            }
-            
-            if error != nil{
-                println(error!);
-            }
-        
-            }
-        );
-        
     }
     
 
