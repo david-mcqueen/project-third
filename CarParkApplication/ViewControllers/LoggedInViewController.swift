@@ -28,6 +28,12 @@ class LoggedInViewController: UITabBarController {
     func getUserVehicles() {
         //TODO:- Get the users vehicles from the API
         User.sharedInstance.deleteAllvehciles();
+        getAllUserVehicles(User.sharedInstance.token!, { (success, vehicles, error) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                println("getUserVehicles()")
+                User.sharedInstance.Vehicles = vehicles;
+            });
+        });
     }
     
     func getUserName(){

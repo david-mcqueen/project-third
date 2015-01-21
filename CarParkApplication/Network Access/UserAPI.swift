@@ -165,11 +165,7 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     let sessionEndTime: AnyObject?  = session["StartTime"]!
                     let sessionValue: AnyObject?  = session["Value"]!
                     
-                    //TODO:- Get the vehicle information back from the server
-                    //Or can link to the known vehicles on the user account?
-                    let vehicle = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
-                    
-                    let newSession = ParkSession(parkSessionID: sessionID!, carParkID: sessionCarParkID!, startTime: sessionStartTime!, currentSession: true, parkedVehicle: vehicle);
+                    let newSession = ParkSession(parkSessionID: (sessionID!.description).toInt()!, carParkID: (sessionCarParkID!.description).toInt()!, startTime: sessionStartTime!.description!, currentSession: true, parkedVehicleID: (sessionVehicleID!.description).toInt()!);
                     
                     sessions.append(newSession);
                 }
@@ -183,6 +179,8 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
     
 }
 
+
+//MARK:- createVehicle
 func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success: Bool, createdVehicle: Vehicle, error: String?) -> ()) -> (){
     
     println("Create Vehicle")
@@ -203,7 +201,7 @@ func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success:
     request.HTTPMethod = "POST";
     var params: Dictionary<String, String> = ([
         "Token" : token,
-        "VehicleReg" : newVehicle.RegistrationNumber,
+        "Registration" : newVehicle.RegistrationNumber,
         "Make" : newVehicle.Make,
         "Model" : newVehicle.Model,
         "Colour" : newVehicle.Colour
@@ -243,5 +241,56 @@ func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success:
     });
     
     createVehicleResponse.resume();
+}
+
+
+func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicles: [Vehicle], error: String?) -> ()) -> (){
+    
+    println("All user vehicles")
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/vehicle?Token=\(token)");
+    let urlSession = NSURLSession.sharedSession();
+    var vehicles: [Vehicle] = []
+    
+    let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+        
+        var success = false;
+        var errorResponse: String?;
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+        }
+        var err: NSError?
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
+        println(jsonResult)
+        if (err != nil){
+            println("JSON Error \(err!.localizedDescription) ");
+        }
+        
+        for vehicle in jsonResult{
+            if let errorMessage: AnyObject = vehicle["Error"]!{
+                println(errorMessage);
+                errorResponse = errorMessage as? String;
+            }
+            let userVehicleID: AnyObject? = vehicle["UserVehicleID"]!
+            let vehicleRegistration: AnyObject?  = vehicle["Registration"]!
+            let vehicleModel: AnyObject?  = vehicle["Model"]!
+            let vehicleMake: AnyObject?  = vehicle["Make"]!
+            let vehicleColour: AnyObject?  = vehicle["Colour"]!
+            
+            //TODO:- Get the vehicle information back from the server
+            //Or can link to the known vehicles on the user account?
+            let vehicle = Vehicle(make: vehicleMake!.description, model: vehicleModel!.description, colour: vehicleColour!.description, registrationNumber: vehicleRegistration!.description, vehicleID: (userVehicleID!.description).toInt()!);
+            
+            vehicles.append(vehicle);
+        }
+        success = true;
+        
+        
+        requestCompleted(success: success, vehicles: vehicles, error: errorResponse);
+    });
+    
+    jsonResponse.resume();
+    
 }
 
