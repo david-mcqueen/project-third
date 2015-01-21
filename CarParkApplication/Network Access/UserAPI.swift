@@ -162,12 +162,34 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     let sessionVehicleID: AnyObject?  = session["UserVehicleID"]!
                     let sessionCarParkID: AnyObject?  = session["CarParkID"]!
                     let sessionStartTime: AnyObject?  = session["StartTime"]!
-                    let sessionEndTime: AnyObject?  = session["StartTime"]!
+                    let sessionEndTime: AnyObject?  = session["FinishTime"]!
                     let sessionValue: AnyObject?  = session["Value"]!
                     
-                    let newSession = ParkSession(parkSessionID: (sessionID!.description).toInt()!, carParkID: (sessionCarParkID!.description).toInt()!, startTime: sessionStartTime!.description!, currentSession: true, parkedVehicleID: (sessionVehicleID!.description).toInt()!);
+                    if(sessionEndTime == nil){
+                        let newSession = ParkSession(
+                            parkSessionID: (sessionID!.description).toInt()!,
+                            carParkID: (sessionCarParkID!.description).toInt()!,
+                            startTime: sessionStartTime!.description!,
+                            currentSession: true,
+                            parkedVehicleID: (sessionVehicleID!.description).toInt()!);
+                        
+                        sessions.append(newSession);
+                    }else{
+                        let newSession = ParkSession(
+                            parkSessionID: (sessionID!.description).toInt()!,
+                            carParkID: (sessionCarParkID!.description).toInt()!,
+                            startTime: sessionStartTime!.description!,
+                            endTimeParking: sessionEndTime!.description!,
+                            currentSession: false,
+                            parkedVehicleID: (sessionVehicleID!.description).toInt()!,
+                            value: (sessionValue!.description! as NSString).doubleValue);
+                        
+                        sessions.append(newSession);
+                    }
                     
-                    sessions.append(newSession);
+                    
+                    
+                    
                 }
                 success = true;
             

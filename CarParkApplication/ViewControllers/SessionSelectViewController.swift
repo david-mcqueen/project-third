@@ -14,7 +14,7 @@ class SessionSelectViewController: UITableViewController {
     var parkSessions:[String] = []
     var allParkSessions:[ParkSession] = [];
     var allUserVehicles:[Vehicle] = []
-    var currentSessions = false;
+    var currentSessions = true;
     
     weak var delegate: SelectUserVehicleDelegate?
     
@@ -67,8 +67,30 @@ class SessionSelectViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        //TODO:- Change the colour of the END button
+        if(currentSessions){
+            var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "End", handler:{action, indexpath in
+                //Delete vehicle
+                self.allParkSessions[indexPath.row].CurrentSession = false;
+                self.parkSessions.removeAtIndex(indexPath.row);
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+            });
+             return [deleteRowAction];
+        }else{
+            return nil;
+        }
+        
+    }
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
+        if (currentSessions){
+            return true
+        }else{
+            return false;
+        }
+        
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

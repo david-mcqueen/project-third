@@ -964,7 +964,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="FLC-be-oDR"/>
         <segue reference="ehk-dQ-7VM"/>
-        <segue reference="PoQ-Gl-3fc"/>
     </inferredMetricsTieBreakers>
 </document>

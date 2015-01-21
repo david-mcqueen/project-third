@@ -15,6 +15,7 @@ class ParkSession {
     var EndTime: String?;
     var CurrentSession: Bool;
     var ParkedVehicleID: Int;
+    var Value: Double?;
     
     init (parkSessionID: Int, carParkID: Int, startTime: String, currentSession: Bool, parkedVehicleID: Int){
         self.ParkSessionID = parkSessionID;
@@ -24,12 +25,13 @@ class ParkSession {
         self.ParkedVehicleID = parkedVehicleID;
     }
     
-//    init (parkSessionID: Int, carParkID: Int, startTime: String, endTime: String, currentSession: Bool, parkedVehicle: Vehicle){
-//        self.ParkessionID = parkSessionID;
-//        self.CarParkID = carParkID;
-//        self.StartTime = startTime;
-//        self.EndTime = endTime;
-//        self.CurrentSession = currentSession;
-//        self.ParkedVehicle = parkedVehicle;
-//    }
+    init (parkSessionID: Int, carParkID: Int, startTime: String, endTimeParking: String, currentSession: Bool, parkedVehicleID: Int, value: Double){
+        self.ParkSessionID = parkSessionID;
+        self.CarParkID = carParkID;
+        self.StartTime = startTime;
+        self.EndTime = endTimeParking;
+        self.CurrentSession = currentSession;
+        self.ParkedVehicleID = parkedVehicleID;
+        self.Value = value;
+    }
 }

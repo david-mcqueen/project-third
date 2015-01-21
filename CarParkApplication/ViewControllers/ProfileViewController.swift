@@ -142,10 +142,10 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "currentParkingSessions" {
+        if segue.identifier == "previousParkingSessions" {
             println("currentParkingSessions Segue")
             let currentSessionViewController = segue.destinationViewController as SessionSelectViewController
-            currentSessionViewController.currentSessions = true
+            currentSessionViewController.currentSessions = false
         }
     }
     
