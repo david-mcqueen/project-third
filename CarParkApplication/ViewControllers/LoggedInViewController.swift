@@ -28,11 +28,6 @@ class LoggedInViewController: UITabBarController {
     func getUserVehicles() {
         //TODO:- Get the users vehicles from the API
         User.sharedInstance.deleteAllvehciles();
-        
-        let renault = Vehicle(make: "Renault", model: "Megane", colour: "Grey", registrationNumber: "HT57 GHF", vehicleID: 1);
-        User.sharedInstance.addVehicle(renault);
-        let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
-        User.sharedInstance.addVehicle(honda);
     }
     
     func getUserName(){
@@ -42,12 +37,9 @@ class LoggedInViewController: UITabBarController {
     }
     
     func getUserParkingSessions(){
-        getAllParkingSessions(User.sharedInstance.token!, {(success, session, error) -> () in
+        getAllParkingSessions(User.sharedInstance.token!, {(success, sessions, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    println(success);
-                    println(session)
-                User.sharedInstance.ParkSessions = session;
-                    println(error)
+                User.sharedInstance.ParkSessions = sessions;
             });
         });
     }

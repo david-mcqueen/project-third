@@ -68,16 +68,29 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             //Process the new vehicle registration with the server
             
             //Add the new vehicle to the user vehicle list
-            User.sharedInstance.addVehicle(newUserVehicle);
-            
-            println("New vehicle added")
-            if (delegate != nil){
-                delegate?.newVehicleCreated();
-            }else{
-                //Navigate to the logged in section (replacing the previous view)
-                let userRegistered = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController;
-                self.navigationController?.showDetailViewController(userRegistered, sender: self);
-            }
+            createVehicle(User.sharedInstance.token!, newUserVehicle, {(success: Bool, createdVehicle: Vehicle, error:String?) -> () in
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    
+                    if(success){
+                        println("New vehicle added")
+                        User.sharedInstance.addVehicle(createdVehicle);
+                        
+                        if (self.delegate != nil){
+                            self.delegate?.newVehicleCreated();
+                        }else{
+                            //Navigate to the logged in section (replacing the previous view)
+                            let userRegistered = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController;
+                            self.navigationController?.showDetailViewController(userRegistered, sender: self);
+                        }
+                    }else{
+                        println("Create Vehicle: Something went wrong.")
+                    }
+                });
+                
+                }
+            );
             
         }else{
             var validationAlert = UIAlertView(title: "Missing data!", message: "Please complete all fields", delegate: nil, cancelButtonTitle: "Okay.")

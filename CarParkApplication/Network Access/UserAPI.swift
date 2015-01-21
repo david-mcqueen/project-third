@@ -148,12 +148,10 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
             var err: NSError?
             var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
             var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
-            println(jsonResult)
+            
             if (err != nil){
                 println("JSON Error \(err!.localizedDescription) ");
             }
-            println(jsonResult)
-
             
                 for session in jsonResult{
                     if let errorMessage: AnyObject = session["Error"]!{
@@ -169,9 +167,9 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     
                     //TODO:- Get the vehicle information back from the server
                     //Or can link to the known vehicles on the user account?
-                    let honda = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
+                    let vehicle = Vehicle(make: "Honda", model: "Accord", colour: "Blue", registrationNumber: "AF05 VNK", vehicleID: 2);
                     
-                    let newSession = ParkSession(parkSessionID: sessionID!, carParkID: sessionCarParkID!, startTime: sessionStartTime!, currentSession: true, parkedVehicle: honda);
+                    let newSession = ParkSession(parkSessionID: sessionID!, carParkID: sessionCarParkID!, startTime: sessionStartTime!, currentSession: true, parkedVehicle: vehicle);
                     
                     sessions.append(newSession);
                 }
@@ -184,3 +182,66 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
     jsonResponse.resume();
     
 }
+
+func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success: Bool, createdVehicle: Vehicle, error: String?) -> ()) -> (){
+    
+    println("Create Vehicle")
+    //Pass the user details to the server, to register
+    
+    //TODO:- Handle failure reponse / unknown failure
+    
+    //TODO:- After the user has registered / added a new vehicle the Singleton needs updating!
+    
+    let urlSession = NSURLSession.sharedSession();
+    
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/vehicle");
+    var request = NSMutableURLRequest(URL: url!);
+    
+    var error1 : NSError?;
+    var errorResponse: String?;
+    
+    request.HTTPMethod = "POST";
+    var params: Dictionary<String, String> = ([
+        "Token" : token,
+        "VehicleReg" : newVehicle.RegistrationNumber,
+        "Make" : newVehicle.Make,
+        "Model" : newVehicle.Model,
+        "Colour" : newVehicle.Colour
+        ]);
+    
+    request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type");
+    request.addValue("application/json", forHTTPHeaderField: "Accept");
+    
+    
+    var createVehicleResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        
+        var err: NSError?
+        var success:Bool = false;
+        var token:String?;
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+            errorResponse = error.localizedDescription;
+        }
+        
+        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+        
+        
+        if (err != nil){
+            println("JSON Error \(err!.localizedDescription) ");
+            errorResponse = err!.localizedDescription;
+        }
+        
+        
+        if let newVehicleID: AnyObject = jsonResult["UserVehicleID"]{
+            success = true;
+            newVehicle.VehicleID = newVehicleID as? Int;
+        }
+        
+        vehicleCreated(success: success, createdVehicle: newVehicle, error: errorResponse);
+    });
+    
+    createVehicleResponse.resume();
+}
+
