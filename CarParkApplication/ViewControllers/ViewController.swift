@@ -55,7 +55,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 alert.show();
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
-                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate(), currentSession: true, parkedVehicle: self.selectedVehicle!);
+                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate().description, currentSession: true, parkedVehicleID: self.selectedVehicle!.VehicleID!);
                     User.sharedInstance.addParkSession(newParkSession);
                 }
                 
@@ -163,15 +163,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-        //This is called when:
-        // A new beacon is within range
-        // A beacon goe out of range
-        // A beacon gets closer / further away
-        
-        //the CLBeacon object (beacons) is an array of all beacons in region
-        
-        // Look on http://willd.me/posts/getting-started-with-ibeacon-a-swift-tutorial for more properties that can be accessed
-        // Proximity / rssi / accuracy
+
         
         //Disregard beacons that are Unknown proximity
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.Unknown };

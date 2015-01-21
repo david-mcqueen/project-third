@@ -9,19 +9,19 @@
 import Foundation
 
 class ParkSession {
-    var ParkSessionID: AnyObject;
-    var CarParkID: AnyObject;
-    var StartTime: AnyObject;
-    var EndTime: AnyObject?;
+    var ParkSessionID: Int;
+    var CarParkID: Int;
+    var StartTime: String;
+    var EndTime: String?;
     var CurrentSession: Bool;
-    var ParkedVehicle: Vehicle;
+    var ParkedVehicleID: Int;
     
-    init (parkSessionID: AnyObject, carParkID: AnyObject, startTime: AnyObject, currentSession: Bool, parkedVehicle: Vehicle){
+    init (parkSessionID: Int, carParkID: Int, startTime: String, currentSession: Bool, parkedVehicleID: Int){
         self.ParkSessionID = parkSessionID;
         self.CarParkID = carParkID;
         self.StartTime = startTime;
         self.CurrentSession = currentSession;
-        self.ParkedVehicle = parkedVehicle;
+        self.ParkedVehicleID = parkedVehicleID;
     }
     
 //    init (parkSessionID: Int, carParkID: Int, startTime: String, endTime: String, currentSession: Bool, parkedVehicle: Vehicle){
