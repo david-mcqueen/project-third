@@ -13,6 +13,7 @@ class SessionSelectViewController: UITableViewController {
     
     var parkSessions:[String] = []
     var allParkSessions:[ParkSession] = [];
+    var allUserVehicles:[Vehicle] = []
     var currentSessions = false;
     
     weak var delegate: SelectUserVehicleDelegate?
@@ -20,8 +21,10 @@ class SessionSelectViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        allUserVehicles = User.sharedInstance.getVehicles();
+        
         updateTabelData(currentSessions);
-        println(currentSessions)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,9 +45,18 @@ class SessionSelectViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("sessionCell", forIndexPath: indexPath) as ParkSessionViewCell
 //        cell.textLabel?.text = parkSessions[indexPath.row]
-        cell.sessionDetails.text = "skjbfkbhsabfjhra"
+        var cellSession = allParkSessions[indexPath.row];
+        
+        cell.sessionDetails.text = "\(cellSession.StartTime)"
         cell.vehicleDetails.text = parkSessions[indexPath.row]
-        cell.vehicleDetails.text = "Id: \(parkSessions[indexPath.row]) \(allParkSessions[indexPath.row].ParkedVehicle.displayVehicle())";
+        
+        var sessionVehicle: Vehicle?;
+        for vehicle in allUserVehicles{
+            if vehicle.VehicleID == allParkSessions[indexPath.row].ParkedVehicleID{
+                sessionVehicle = vehicle;
+            }
+        }
+        cell.vehicleDetails.text = "\(sessionVehicle!.displayVehicle())";
         
         return cell
     }
