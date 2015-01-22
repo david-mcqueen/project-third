@@ -211,7 +211,7 @@
 		550294B71A54296E00198EC7 /* Network Access */ = {
 			isa = PBXGroup;
 			children = (
-				550294B81A5429B400198EC7 /* CarQueryAPI.swift */,
+				555031561A713B7100B9FDB0 /* Third Party */,
 				55ABC7671A542E31005A4371 /* UserAPI.swift */,
 				55B631801A598B7700DD5DBF /* CarParkAPI.swift */,
 			);
@@ -221,13 +221,12 @@
 		5519BD9419E33D3F00A19484 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				555031551A7138FA00B9FDB0 /* CarQueryAPI */,
 				552C98F71A6ECBDB00155AFC /* Display */,
 				558777EC1A5D5253008ACCE9 /* Singletons */,
 				557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */,
 				557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */,
 				550294BF1A542C7900198EC7 /* UserLogin.swift */,
-				550294B01A54268000198EC7 /* CarModel.swift */,
-				550294B31A54269A00198EC7 /* CarMake.swift */,
 				55322CF71A6EAEB300C13F2E /* ParkSession.swift */,
 			);
 			name = Classes;
@@ -357,6 +356,23 @@
 				55440BB81A34B96700969FBC /* PayPalProfileSharingViewController.h */,
 			);
 			path = PayPalMobile;
+			sourceTree = "<group>";
+		};
+		555031551A7138FA00B9FDB0 /* CarQueryAPI */ = {
+			isa = PBXGroup;
+			children = (
+				550294B01A54268000198EC7 /* CarModel.swift */,
+				550294B31A54269A00198EC7 /* CarMake.swift */,
+			);
+			name = CarQueryAPI;
+			sourceTree = "<group>";
+		};
+		555031561A713B7100B9FDB0 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				550294B81A5429B400198EC7 /* CarQueryAPI.swift */,
+			);
+			name = "Third Party";
 			sourceTree = "<group>";
 		};
 		5554A6251A618199004D2D28 /* Register-Login */ = {

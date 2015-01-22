@@ -9,12 +9,12 @@
 import Foundation
 
 class CarMake {
-    var make_country: AnyObject;
-    var make_display: AnyObject;
-    var make_id: AnyObject;
-    var make_is_common: AnyObject;
+    var make_country: String;
+    var make_display: String;
+    var make_id: String;
+    var make_is_common: String;
     
-    init(_make_country:AnyObject, _make_display:AnyObject, _make_id:AnyObject, _make_is_common:AnyObject){
+    init(_make_country:String, _make_display:String, _make_id:String, _make_is_common:String){
         self.make_country = _make_country;
         self.make_display = _make_display;
         self.make_id = _make_id;

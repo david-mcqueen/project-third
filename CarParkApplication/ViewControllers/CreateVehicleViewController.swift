@@ -164,7 +164,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     //MARK:- Vehicle data
     func populateMakes(){
         //Get the makes from the API
-        getMakes({(success: Bool, vehicleMakes: [CarMake]) -> () in
+        getMakes({(success: Bool, vehicleMakes: [CarMake], serverError:NSError?, JSONerror: NSError?) -> () in
             //Switch to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if(success) {
@@ -172,10 +172,10 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                 var listOfMakes: [String] = []
                 
                 for make in vehicleMakes{
-                    listOfMakes.append(make.make_display.description);
+                    listOfMakes.append(make.make_display);
                     
                     //Save the make name & ID in a dictionary
-                    self.makeDictionary[make.make_display.description] = make.make_id.description;
+                    self.makeDictionary[make.make_display] = make.make_id;
                 }
                 //TODO:- Handle no data being returned from the server (empty list for picker etc)
                 self.makePickerData = listOfMakes;
@@ -183,22 +183,23 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                 
             }else{
                 println("Something went wrong");
+                //TODO:- Handler the 2 error vairables
             }
             });
         });
     }
     
     func populateModels(selectedMakeID: String){
-        //Get the makes from the API
-        getModels(selectedMakeID, {(success: Bool, vehicleModels: [CarModel]) -> () in
+        //Get the models from the API
+        getModels(selectedMakeID, {(success: Bool, vehicleModels: [CarModel], serverError:NSError?, JSONerror: NSError?) -> () in
             //Switch to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if(success) {
                     var listOfModels: [String] = []
                 
                     for model in vehicleModels{
-                        listOfModels.append(model.model_name.description);
-                        self.modelDictionary[model.model_name.description] = model.model_make_id.description;
+                        listOfModels.append(model.model_name);
+                        self.modelDictionary[model.model_name] = model.model_make_id;
                     }
                     //TODO:- Handle no data being returned from the server (empty list for picker etc)
                     self.modelPickerData = listOfModels;
@@ -207,6 +208,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                 
                 }else{
                     println("Something went wrong");
+                    //TODO:- Handler the 2 error vairables
                 }
             });
         });

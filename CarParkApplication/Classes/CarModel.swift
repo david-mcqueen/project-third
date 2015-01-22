@@ -9,10 +9,10 @@
 import Foundation
 
 class CarModel {
-    var model_name: AnyObject;
-    var model_make_id: AnyObject;
+    var model_name: String;
+    var model_make_id: String;
     
-    init(_model_name:AnyObject, _model_make_id:AnyObject){
+    init(_model_name:String, _model_make_id:String){
         self.model_name = _model_name;
         self.model_make_id = _model_make_id;
     }
