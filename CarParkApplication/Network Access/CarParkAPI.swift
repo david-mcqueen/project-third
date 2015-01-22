@@ -110,3 +110,61 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkTime: Int, p
     parkVehicleResponse.resume();
 
 }
+
+func stopParking(token: String, parkTransactionID: Int, endParkComplete: (success: Bool, value: Double?, error: String?) -> ()) -> (){
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park/end");
+    let urlSession = NSURLSession.sharedSession();
+    
+    var request = NSMutableURLRequest(URL: url!);
+    
+    var error1 : NSError?;
+    var errorResponse: String?;
+    request.HTTPMethod = "POST";
+    var params: Dictionary<String, AnyObject> = ([
+        "Token" : token,
+        "ParkTransactionID" : parkTransactionID,
+        ]);
+    
+    println(params);
+    request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type");
+    request.addValue("application/json", forHTTPHeaderField: "Accept");
+    
+    
+    var parkVehicleResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        
+        var err: NSError?
+        var parkTransactionValue:Double?;
+        
+        var success = false;
+        
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+            errorResponse = error.localizedDescription;
+        }
+        
+        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+        
+        println(jsonResult);
+        if (err != nil){
+            println("JSON Error \(err!.localizedDescription) ");
+            errorResponse = err!.localizedDescription;
+        }
+        
+        if let dataError: AnyObject = jsonResult["Error"]{
+            println(dataError);
+            errorResponse = dataError as? String;
+        }else if let parkID: AnyObject = jsonResult["Value"]{
+            
+            parkTransactionValue = parkID as? Double
+            success = true;
+        }
+        println(parkTransactionValue);
+        
+        endParkComplete(success: success, value: parkTransactionValue, error: errorResponse);
+    });
+    
+    parkVehicleResponse.resume();
+    
+}

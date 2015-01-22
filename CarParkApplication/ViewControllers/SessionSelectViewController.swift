@@ -44,10 +44,10 @@ class SessionSelectViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("sessionCell", forIndexPath: indexPath) as ParkSessionViewCell
-//        cell.textLabel?.text = parkSessions[indexPath.row]
+
         var cellSession = allParkSessions[indexPath.row];
         
-        cell.sessionDetails.text = "\(cellSession.StartTime)"
+        cell.sessionDetails.text = (cellSession.StartTime) + (!currentSessions ? " -> \(cellSession.EndTime!)" : "");
         cell.vehicleDetails.text = parkSessions[indexPath.row]
         
         var sessionVehicle: Vehicle?;
@@ -72,10 +72,27 @@ class SessionSelectViewController: UITableViewController {
         //TODO:- Change the colour of the END button
         if(currentSessions){
             var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "End", handler:{action, indexpath in
-                //Delete vehicle
-                self.allParkSessions[indexPath.row].CurrentSession = false;
-                self.parkSessions.removeAtIndex(indexPath.row);
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+                
+                //TODO:- Connect to the API to end the park session
+                
+                stopParking(User.sharedInstance.token!, self.allParkSessions[indexPath.row].ParkSessionID, { (success, value, error) -> () in
+                
+                    // Move to the UI thread
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if (success){
+                            self.allParkSessions[indexPath.row].CurrentSession = false;
+                            self.parkSessions.removeAtIndex(indexPath.row);
+                            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+                            //TODO:- Display the cost of the parking session.
+                            println("\(value)")
+                        }else{
+                            NSLog("Something went wrong. \(error)")
+                        }
+
+                    });
+                    
+                });
+                
             });
              return [deleteRowAction];
         }else{
