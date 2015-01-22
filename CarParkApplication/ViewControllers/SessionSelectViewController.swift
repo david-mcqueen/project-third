@@ -15,8 +15,7 @@ class SessionSelectViewController: UITableViewController {
     var allParkSessions:[ParkSession] = [];
     var allUserVehicles:[Vehicle] = []
     var currentSessions = true;
-    
-    weak var delegate: SelectUserVehicleDelegate?
+    var selectedSession: ParkSession?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +63,9 @@ class SessionSelectViewController: UITableViewController {
     //MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedSession = allParkSessions[indexPath.row];
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegueWithIdentifier("viewParkingSession", sender: self);
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
@@ -73,7 +74,6 @@ class SessionSelectViewController: UITableViewController {
         if(currentSessions){
             var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "End", handler:{action, indexpath in
                 
-                //TODO:- Connect to the API to end the park session
                 
                 stopParking(User.sharedInstance.token!, self.allParkSessions[indexPath.row].ParkSessionID, { (success, value, error) -> () in
                 
@@ -124,8 +124,16 @@ class SessionSelectViewController: UITableViewController {
         
         for session in allParkSessions{
             parkSessions.append(String(session.ParkSessionID.description));
-            println(session.ParkSessionID);
         }
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "viewParkingSession"){
+            println("viewSession Segue")
+            println(selectedSession!)
+            let currentSessionViewController = segue.destinationViewController as SessionViewController
+            currentSessionViewController.parkingSession = selectedSession!;
+        }
+    }
 }

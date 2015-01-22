@@ -41,6 +41,8 @@
 		55440BC51A34BA4500969FBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BC41A34BA4500969FBC /* SystemConfiguration.framework */; };
 		55440BC81A34BA7400969FBC /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 55440BC71A34BA7400969FBC /* Bridge.m */; };
 		55440BCD1A34D53900969FBC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55440BCC1A34D53900969FBC /* ProfileViewController.swift */; };
+		555031501A71174400B9FDB0 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550314F1A71174400B9FDB0 /* SessionViewController.swift */; };
+		555031511A71174400B9FDB0 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550314F1A71174400B9FDB0 /* SessionViewController.swift */; };
 		5554A6221A6179C0004D2D28 /* CreateVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */; };
 		5554A6231A617C60004D2D28 /* CreateVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */; };
 		5554A6241A617D1F004D2D28 /* SelectUserVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */; };
@@ -85,7 +87,6 @@
 		55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A419F2CD1800492154 /* UtilitiesTests.swift */; };
 		55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */; };
 		55EF4DBA1A5D9FA7006F7613 /* CreateVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */; };
-		55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		55440BC61A34BA7400969FBC /* CarParkApplication-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CarParkApplication-Bridging-Header.h"; sourceTree = "<group>"; };
 		55440BC71A34BA7400969FBC /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		55440BCC1A34D53900969FBC /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
+		5550314F1A71174400B9FDB0 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionViewController.swift; path = ViewControllers/SessionViewController.swift; sourceTree = "<group>"; };
 		5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateVehicleDelegate.swift; path = Protocols/CreateVehicleDelegate.swift; sourceTree = "<group>"; };
 		557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRegistration.swift; path = Classes/UserRegistration.swift; sourceTree = "<group>"; };
 		557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vehicle.swift; path = Classes/Vehicle.swift; sourceTree = "<group>"; };
@@ -177,7 +179,6 @@
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectUserVehicle.swift; path = Protocols/SelectUserVehicle.swift; sourceTree = "<group>"; };
 		55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateVehicleViewController.swift; path = ViewControllers/CreateVehicleViewController.swift; sourceTree = "<group>"; };
-		55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = ViewControllers/ParkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,9 +239,9 @@
 				5554A6271A619357004D2D28 /* Selectors */,
 				5554A6251A618199004D2D28 /* Register-Login */,
 				55ABC7631A542CC1005A4371 /* ViewController.swift */,
-				55F6328119E2A3A0005BF7A4 /* ParkViewController.swift */,
 				55440BCC1A34D53900969FBC /* ProfileViewController.swift */,
 				5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */,
+				5550314F1A71174400B9FDB0 /* SessionViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -589,7 +590,6 @@
 				557CD18C1A3F7723009D171F /* FormTitleCell.swift in Sources */,
 				55440BC81A34BA7400969FBC /* Bridge.m in Sources */,
 				550294B11A54268000198EC7 /* CarModel.swift in Sources */,
-				55F6328219E2A3A0005BF7A4 /* ParkViewController.swift in Sources */,
 				557CD1921A3F7723009D171F /* FormSegmentedControlCell.swift in Sources */,
 				55ABC7681A542E31005A4371 /* UserAPI.swift in Sources */,
 				5554A6221A6179C0004D2D28 /* CreateVehicleDelegate.swift in Sources */,
@@ -608,6 +608,7 @@
 				557CD18E1A3F7723009D171F /* FormButtonCell.swift in Sources */,
 				550294B41A54269A00198EC7 /* CarMake.swift in Sources */,
 				5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */,
+				555031501A71174400B9FDB0 /* SessionViewController.swift in Sources */,
 				551A189719F0559500E6702B /* LoginViewController.swift in Sources */,
 				557CD18D1A3F7723009D171F /* FormValueCell.swift in Sources */,
 			);
@@ -626,6 +627,7 @@
 				55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */,
 				558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
+				555031511A71174400B9FDB0 /* SessionViewController.swift in Sources */,
 				5554A6231A617C60004D2D28 /* CreateVehicleDelegate.swift in Sources */,
 				55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,

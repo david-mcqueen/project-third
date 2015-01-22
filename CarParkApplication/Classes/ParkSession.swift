@@ -34,4 +34,8 @@ class ParkSession {
         self.ParkedVehicleID = parkedVehicleID;
         self.Value = value;
     }
+    
+    func vehicleIDAsString() -> String {
+        return String(ParkedVehicleID);
+    }
 }

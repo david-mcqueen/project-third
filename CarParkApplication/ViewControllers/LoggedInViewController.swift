@@ -37,6 +37,8 @@ class LoggedInViewController: UITabBarController {
     }
     
     func getUserName(){
+        var testToken = User.sharedInstance.token!;
+        testToken = "This is a new token";
         //TODO:- Get the users name from the API
         User.sharedInstance.FirstName = "David";
         User.sharedInstance.Surname = "McQueen";

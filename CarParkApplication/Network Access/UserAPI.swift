@@ -192,8 +192,6 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     
                 }
                 success = true;
-            
-            
             requestCompleted(success: success, session: sessions, error: errorResponse);
         });
         
