@@ -5,7 +5,9 @@
 //  Created by David McQueen on 06/10/2014.
 //  Copyright (c) 2014 David McQueen. All rights reserved.
 //
-
+/*
+//  A class to hold the vehicle Make, as returned from CarQueryAPI
+*/
 import Foundation
 
 class CarMake {

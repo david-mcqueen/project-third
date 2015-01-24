@@ -5,7 +5,9 @@
 //  Created by DavidMcQueen on 31/12/2014.
 //  Copyright (c) 2014 DavidMcQueen. All rights reserved.
 //
-
+/*
+//  A class to hold the vehicle Model, as returned from CarQueryAPI
+*/
 import Foundation
 
 class CarModel {
