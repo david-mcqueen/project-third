@@ -116,6 +116,8 @@ class RegisterViewController: FormViewController, FormViewControllerDelegate {
                     alert.show()
                     if(success){
                         User.sharedInstance.token = token;
+                        User.sharedInstance.FirstName = newUser.FirstName;
+                        User.sharedInstance.Surname = newUser.SurName;
                         let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
                         self.navigationController?.pushViewController(createVehicleViewController, animated: true);
                     }

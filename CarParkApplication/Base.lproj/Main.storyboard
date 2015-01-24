@@ -1112,6 +1112,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="K4z-wa-ewi">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="btnPay" destination="2Nn-hj-wrZ" id="xsw-Rw-eRH"/>
                         <outlet property="lblBalance" destination="pkC-Fy-OiL" id="wrg-zx-yP8"/>
@@ -1149,7 +1152,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Nc8-0l-1gT"/>
-        <segue reference="w5d-bY-4qJ"/>
+        <segue reference="PoQ-Gl-3fc"/>
+        <segue reference="ehk-dQ-7VM"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -21,17 +21,45 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     var displayAddFunds: Bool = false;
     
-    var paymentIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView;
+    var paymentIndicatorView: UIView = UIView(frame: CGRectMake(0, 0, 200, 200));
+    var paymentIndicatorActivity : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView;
+    var paymentIndicatorLabel: UILabel = UILabel(frame: CGRectMake(20, 115, 130, 22));
     
     var config = PayPalConfiguration()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        getUserBalance();
+        getUserVehicles();
+        getUserName();
+        getUserParkingSessions();
+        
         //Populate all the labes with the relevant information
         lblBalance.text = User.sharedInstance.getBalanceString();
         lblForename.text = User.sharedInstance.FirstName;
         lblSurname.text = User.sharedInstance.Surname;
+        
+        paymentIndicatorView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7);
+        paymentIndicatorView.clipsToBounds = true;
+        paymentIndicatorView.layer.cornerRadius = 10.0;
+        
+        
+        paymentIndicatorActivity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray;
+        paymentIndicatorActivity.frame = CGRect(x: 65, y: 40, width: paymentIndicatorActivity.bounds.size.width, height: paymentIndicatorActivity.bounds.size.height);
+        
+        paymentIndicatorView.addSubview(paymentIndicatorActivity);
+        
+        paymentIndicatorLabel.backgroundColor = UIColor.clearColor();
+        paymentIndicatorLabel.textColor = UIColor.whiteColor()
+        paymentIndicatorLabel.adjustsFontSizeToFitWidth = true;
+        paymentIndicatorLabel.textAlignment = .Center;
+        paymentIndicatorLabel.text = "Processing...";
+        
+        paymentIndicatorView.addSubview(paymentIndicatorLabel);
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,10 +123,6 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         var amountInput = textAddFunds.text;
         let amount = NSDecimalNumber(string:amountInput)
         
-                paymentIndicator.center = self.view.center
-        paymentIndicator.hidesWhenStopped = true
-        paymentIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        
         println("amount \(amount)")
         
         var payment = PayPalPayment()
@@ -111,8 +135,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         } else {
             println("Processing payment")
             
-            view.addSubview(paymentIndicator)
-            paymentIndicator.startAnimating()
+            self.view.addSubview(paymentIndicatorView);
+            paymentIndicatorActivity.startAnimating();
             
             var paymentViewController = PayPalPaymentViewController(payment: payment, configuration: config, delegate: self)
             self.presentViewController(paymentViewController, animated: true, completion: nil)
@@ -126,7 +150,10 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     func payPalPaymentDidCancel(paymentViewController: PayPalPaymentViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        paymentIndicator.stopAnimating();
+        
+        paymentIndicatorActivity.stopAnimating();
+        self.paymentIndicatorView.removeFromSuperview();
+        
     }
     
     func sendCompletedPaymentToServer(completedPayment: PayPalPayment){
@@ -134,10 +161,32 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         NSLog(String(format: "%f", completedPayment.amount));
         
         var alert = UIAlertController(title: "Payment Complete", message: "Funds added to your account", preferredStyle: UIAlertControllerStyle.Alert);
+        var paypalTransactionID: String?;
         
-        paymentIndicator.stopAnimating();
-        self.presentViewController(alert, animated: true, completion: nil);
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
+        paymentIndicatorActivity.stopAnimating();
+        println(completedPayment.confirmation);
+        
+        if let newTransaction: NSDictionary = completedPayment.confirmation["response"] as? NSDictionary{
+            
+            if let transactionID = newTransaction["id"] as? String{
+                paypalTransactionID = transactionID;
+                
+                userAddFunds(User.sharedInstance.token!, paypalTransactionID!) { (success, balance, error) -> () in
+                    if (success) {
+                        println(balance);
+                        self.paymentIndicatorActivity.stopAnimating();
+                        self.paymentIndicatorView.removeFromSuperview();
+                        self.presentViewController(alert, animated: true, completion: nil);
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
+                        User.sharedInstance.CurrentBalance = balance!;
+                        self.lblBalance.text = User.sharedInstance.getBalanceString();
+                    }else{
+                        NSLog("Something went wrong")
+                    }
+                }
+            }
+        }
+        
     }
     
     
@@ -147,6 +196,56 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
             let currentSessionViewController = segue.destinationViewController as SessionSelectViewController
             currentSessionViewController.currentSessions = false
         }
+    }
+    
+    
+    //MARK:- Gte user information from the server
+    
+    func getUserBalance(){
+        userBalance(User.sharedInstance.token!, {(success, userBalance, error) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                println("getUserBalance()")
+                println("\(success) \(userBalance)")
+                if (success){
+                    User.sharedInstance.CurrentBalance = userBalance!;
+                    self.lblBalance.text = User.sharedInstance.getBalanceString();
+                }
+            });
+        });
+    }
+    
+    func getUserVehicles() {
+        //TODO:- Get the users vehicles from the API
+        User.sharedInstance.deleteAllvehciles();
+        getAllUserVehicles(User.sharedInstance.token!, { (success, vehicles, error) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                println("getUserVehicles()")
+                User.sharedInstance.Vehicles = vehicles;
+            });
+        });
+    }
+    
+    func getUserName(){
+        var testToken = User.sharedInstance.token!;
+        testToken = "This is a new token";
+        //TODO:- Get the users name from the API
+        User.sharedInstance.FirstName = "David";
+        User.sharedInstance.Surname = "McQueen";
+    }
+    
+    func getUserParkingSessions(){
+        getAllParkingSessions(User.sharedInstance.token!, {(success, sessions, error) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                User.sharedInstance.ParkSessions = sessions;
+                
+            });
+        });
+    }
+    
+    func refresh(sender:AnyObject)
+    {
+        self.tableView.reloadData();
+        self.refreshControl?.endRefreshing();
     }
     
 }

@@ -35,9 +35,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
         //TODO:- Validation checking on the input fields
-        let userVehicle = selectedVehicle?.VehicleID
+        let userVehicle = selectedVehicle?.VehicleID;
         
-        let carParkLocationID: Int = 1
+        let carParkLocationID: Int = 1;
         let parkingTimeMinutes: Int = 37;
         parkVehicle(User.sharedInstance.token!, carParkLocationID, userVehicle!, parkingTimeMinutes,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
             
