@@ -19,6 +19,9 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     @IBOutlet var lblForename: UILabel!
     @IBOutlet var lblSurname: UILabel!
     
+    @IBOutlet weak var lblCurrentSessionCount: UILabel!
+    @IBOutlet weak var lblPreviousSessionCount: UILabel!
+    
     var displayAddFunds: Bool = false;
     
     var paymentIndicatorView: UIView = UIView(frame: CGRectMake(0, 0, 200, 200));
@@ -226,8 +229,6 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     }
     
     func getUserName(){
-        var testToken = User.sharedInstance.token!;
-        testToken = "This is a new token";
         //TODO:- Get the users name from the API
         User.sharedInstance.FirstName = "David";
         User.sharedInstance.Surname = "McQueen";
@@ -237,6 +238,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         getAllParkingSessions(User.sharedInstance.token!, {(success, sessions, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 User.sharedInstance.ParkSessions = sessions;
+                self.lblCurrentSessionCount.text = String(User.sharedInstance.getCurrentParkSessionsCount());
+                self.lblPreviousSessionCount.text = String(User.sharedInstance.getPreviousParkSessionsCount());
                 
             });
         });
@@ -245,7 +248,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     func refresh(sender:AnyObject)
     {
         self.tableView.reloadData();
-        self.refreshControl?.endRefreshing();
+//        self.refreshControl?.endRefreshing();
     }
     
 }

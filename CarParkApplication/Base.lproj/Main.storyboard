@@ -1118,7 +1118,9 @@
                     <connections>
                         <outlet property="btnPay" destination="2Nn-hj-wrZ" id="xsw-Rw-eRH"/>
                         <outlet property="lblBalance" destination="pkC-Fy-OiL" id="wrg-zx-yP8"/>
+                        <outlet property="lblCurrentSessionCount" destination="TTt-SU-00U" id="T47-pp-UlJ"/>
                         <outlet property="lblForename" destination="PnC-fL-zaW" id="Utl-MW-sGy"/>
+                        <outlet property="lblPreviousSessionCount" destination="eed-Nl-1fp" id="wyy-Ev-1o8"/>
                         <outlet property="lblSurname" destination="mAX-D5-tSp" id="bIF-Od-12P"/>
                         <outlet property="textAddFunds" destination="CVQ-R6-16y" id="xID-gt-X4g"/>
                     </connections>

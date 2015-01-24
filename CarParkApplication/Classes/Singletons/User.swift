@@ -91,6 +91,18 @@ class User {
         
     }
     
+    func getCurrentParkSessionsCount() -> Int{
+        var currentSessions:[ParkSession] = [];
+        for session in self.ParkSessions{
+            if(session.CurrentSession){
+                currentSessions.append(session)
+            }
+        }
+        
+        return currentSessions.count;
+        
+    }
+    
     //Return only previous park sessions
     func getPreviousParkSessions() -> [ParkSession]{
         var previousSessions:[ParkSession] = [];
@@ -101,6 +113,17 @@ class User {
         }
         
         return previousSessions;
+    }
+    
+    func getPreviousParkSessionsCount() -> Int{
+        var previousSessions:[ParkSession] = [];
+        for session in self.ParkSessions{
+            if(!session.CurrentSession){
+                previousSessions.append(session)
+            }
+        }
+        
+        return previousSessions.count;
     }
     
     //MARK:- Balance Functions
