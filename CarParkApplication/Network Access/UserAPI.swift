@@ -282,7 +282,7 @@ func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicle
         var err: NSError?
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
         var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
-        println(jsonResult)
+    
         if (err != nil){
             println("JSON Error \(err!.localizedDescription) ");
         }
@@ -312,5 +312,44 @@ func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicle
     
     jsonResponse.resume();
     
+}
+
+
+func userBalance(token: String, requestCompleted: (success: Bool, balance: Double?, error: String?) -> ()) -> (){
+
+    println("User balance")
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/balance?Token=\(token)");
+    let urlSession = NSURLSession.sharedSession();
+    var newBalance: Double?;
+    
+    let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+        
+        var success = false;
+        var errorResponse: String?;
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+        }
+        var err: NSError?
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        var jsonResult : NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        if (err != nil){
+            println("JSON Error \(err!.localizedDescription) ");
+        }
+        
+        if let errorMessage: AnyObject = jsonResult["Error"]{
+            println(errorMessage);
+            errorResponse = errorMessage as? String;
+        }else{
+            let balance: AnyObject? = jsonResult["Balance"]!
+            newBalance = (balance!.description as NSString).doubleValue;
+                
+            success = true;
+        }
+        
+        requestCompleted(success: success, balance: newBalance, error: errorResponse);
+    });
+    
+    jsonResponse.resume();
 }
 

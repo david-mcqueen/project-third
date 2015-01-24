@@ -21,8 +21,16 @@ class LoggedInViewController: UITabBarController {
     }
     
     func getUserBalance(){
-        //TODO:- Get the users current balance from the API
-        User.sharedInstance.CurrentBalance = 11.74;
+        userBalance(User.sharedInstance.token!, {(success, userBalance, error) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                println("getUserBalance()")
+                println("\(success) \(userBalance)")
+                if (success){
+                    User.sharedInstance.CurrentBalance = userBalance!;
+                }
+                
+            });
+        });
     }
     
     func getUserVehicles() {
