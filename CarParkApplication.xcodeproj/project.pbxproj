@@ -175,6 +175,7 @@
 		55ABC7631A542CC1005A4371 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewControllers/ViewController.swift; sourceTree = "<group>"; };
 		55ABC7671A542E31005A4371 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAPI.swift; path = "Network Access/UserAPI.swift"; sourceTree = "<group>"; };
 		55B631801A598B7700DD5DBF /* CarParkAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarParkAPI.swift; path = "Network Access/CarParkAPI.swift"; sourceTree = "<group>"; };
+		55B8D2AC1A740EA3000665DA /* TimeConversionPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = TimeConversionPlayground.playground; path = ../../../../../../TimeConversionPlayground.playground; sourceTree = "<group>"; };
 		55BB569F19F2C70C00492154 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectUserVehicle.swift; path = Protocols/SelectUserVehicle.swift; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 				557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */,
 				550294BF1A542C7900198EC7 /* UserLogin.swift */,
 				55322CF71A6EAEB300C13F2E /* ParkSession.swift */,
+				55B8D2AC1A740EA3000665DA /* TimeConversionPlayground.playground */,
 			);
 			name = Classes;
 			sourceTree = "<group>";

@@ -24,6 +24,7 @@ class SessionViewController: UITableViewController{
     }
     
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
     }
@@ -38,7 +39,7 @@ class SessionViewController: UITableViewController{
         vehicleLabel.text = vehicleText;
         sessionStartLabel.text = parkingSession?.startTimeAsString();
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
-        sessionDurationLabel.text = "TODO";
+        sessionDurationLabel.text = parkingSession!.calculateDuration();
         sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
     }
     
