@@ -141,6 +141,8 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
             
             var success = false;
             var errorResponse: String?;
+            var dateFormatter = NSDateFormatter();
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.S"
             
             if (error != nil) {
                 println(error.localizedDescription);
@@ -169,7 +171,7 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                         let newSession = ParkSession(
                             parkSessionID: (sessionID!.description).toInt()!,
                             carParkID: (sessionCarParkID!.description).toInt()!,
-                            startTime: sessionStartTime!.description!,
+                            startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
                             currentSession: true,
                             parkedVehicleID: (sessionVehicleID!.description).toInt()!);
                         
@@ -178,8 +180,8 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                         let newSession = ParkSession(
                             parkSessionID: (sessionID!.description).toInt()!,
                             carParkID: (sessionCarParkID!.description).toInt()!,
-                            startTime: sessionStartTime!.description!,
-                            endTimeParking: sessionEndTime!.description!,
+                            startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
+                            endTimeParking: dateFormatter.dateFromString(sessionEndTime!.description!)!,
                             currentSession: false,
                             parkedVehicleID: (sessionVehicleID!.description).toInt()!,
                             value: (sessionValue!.description! as NSString).doubleValue);

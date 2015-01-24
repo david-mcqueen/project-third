@@ -46,7 +46,7 @@ class SessionSelectViewController: UITableViewController {
 
         var cellSession = allParkSessions[indexPath.row];
         
-        cell.sessionDetails.text = (cellSession.StartTime) + (!currentSessions ? " -> \(cellSession.EndTime!)" : "");
+        cell.sessionDetails.text = (cellSession.startTimeAsString()) + (!currentSessions ? " -> \(cellSession.endTimeAsString())" : "");
         cell.vehicleDetails.text = parkSessions[indexPath.row]
         
         var sessionVehicle: Vehicle?;

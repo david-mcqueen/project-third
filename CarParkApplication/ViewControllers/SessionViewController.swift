@@ -36,8 +36,8 @@ class SessionViewController: UITableViewController{
             }
         }
         vehicleLabel.text = vehicleText;
-        sessionStartLabel.text = parkingSession?.StartTime;
-        sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.EndTime! : "Session not ended");
+        sessionStartLabel.text = parkingSession?.startTimeAsString();
+        sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
         sessionDurationLabel.text = "TODO";
         sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
     }
