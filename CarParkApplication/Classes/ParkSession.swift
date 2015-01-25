@@ -40,11 +40,15 @@ class ParkSession {
     }
     
     func startTimeAsString() -> String{
-        return String(self.StartTime.description);
+        var dateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm";
+        return dateFormatter.stringFromDate(self.StartTime);
     }
     
     func endTimeAsString() -> String{
-        return String(self.EndTime!.description);
+        var dateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "HH:mm dd-MM-yyyy";
+        return dateFormatter.stringFromDate(self.EndTime!);
     }
     
     

@@ -39,8 +39,8 @@ class SessionViewController: UITableViewController{
         vehicleLabel.text = vehicleText;
         sessionStartLabel.text = parkingSession?.startTimeAsString();
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
-        sessionDurationLabel.text = parkingSession!.calculateDuration();
-        sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
+        sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
+        sessionCostLabel.text = (parkingSession?.Value != nil ? ("£\(parkingSession?.Value!.description)") : "Session not ended");
     }
     
     
