@@ -11,175 +11,119 @@
 
 import UIKit
 
-class RegisterViewController: FormViewController, FormViewControllerDelegate {
+class RegisterViewController: UITableViewController {
     
-    struct Static {
-        //The tags are used on the Submit section to extract the data
-        static let nameTag = "name"
-        static let passwordTag = "password"
-        static let lastNameTag = "lastName"
-        static let jobTag = "job"
-        static let emailTag = "email"
-        static let URLTag = "url"
-        static let phoneTag = "phone"
-        static let enabled = "enabled"
-        static let check = "check"
-        static let segmented = "segmented"
-        static let picker = "picker"
-        static let birthday = "birthday"
-        static let categories = "categories"
-        static let button = "button"
-        static let textView = "textview"
-    }
-    
-    override init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.loadForm()
-    }
+    @IBOutlet weak var txtFirstName: UITextField!
+    @IBOutlet weak var txtLastName: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPhone: UITextField!
+    @IBOutlet weak var txtPassword: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .Bordered, target: self, action: "submit:")
     }
     
+    //MARK:- Table delegates
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.section == 0 && indexPath.row == 0){
+            txtFirstName.becomeFirstResponder();
+        }else if(indexPath.section == 0 && indexPath.row == 1){
+            txtLastName.becomeFirstResponder();
+        }else if(indexPath.section == 1 && indexPath.row == 0){
+            txtEmail.becomeFirstResponder();
+        }else if(indexPath.section == 1 && indexPath.row == 1){
+            txtPhone.becomeFirstResponder();
+        }else if(indexPath.section == 1 && indexPath.row == 2){
+            txtPassword.becomeFirstResponder();
+        }
+    }
+    
+    @IBAction func registerUserPressed(sender: AnyObject) {
+    }
     /// MARK: Actions
     
-    func submit(_: UIBarButtonItem!) {
+    //func submit(_: UIBarButtonItem!) {
         
         
-        var validationErrors = self.form.validateForm();
- 
-        if validationErrors.count > 0 {
-            var validationMessage = "Please complete all fields!."
-            for (inputField) in validationErrors{
-                validationMessage = validationMessage + "\n" +  inputField.title;
-            }
-            
-            var validationAlert = UIAlertView(title: "Missing data!", message: validationMessage, delegate: nil, cancelButtonTitle: "Okay.")
-            validationAlert.show();
-        }else{
-            
-            let message = self.form.formValues().description
-            let inputs:Dictionary = self.form.formValues()
-            
-            var emailInput = inputs["email"] as String!
-            var forenameInput = inputs["name"] as String!
-            var lastnameInput = inputs["lastName"] as String!
-            var passwordInput = inputs["password"] as String!
-            var phoneNumberInput = inputs["phone"] as String!
-            
-            var newUser = UserRegistration(
-                _firstName: forenameInput,
-                _surname: lastnameInput,
-                _email: emailInput,
-                _password: passwordInput,
-                _phoneNumber: phoneNumberInput);
-            
-            if(!newUser.validEmailPattern() || !newUser.validPasswordPattern() || !newUser.validPhonePattern()){
-                var invalidInputsMessage = "Please correct your inputs"
-                if (!newUser.validEmailPattern()){
-                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Email"
-                }
-                if (!newUser.validPasswordPattern()){
-                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password"
-                }
-                if (!newUser.validPhonePattern()){
-                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Phone Number"
-                }
-                var invalidInputsAlert = UIAlertView(title: "Incomplete data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
-                invalidInputsAlert.show();
-                
-                println("Email failed: \(!newUser.validEmailPattern())");
-                println("Password failed: \(!newUser.validPasswordPattern())");
-                println("Phone failed: \(!newUser.validPhonePattern())");
-                
-                return;
-            }
-            
-            registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
-                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
-                if(success) {
-                    alert.title = "Success!"
-                    println(token)
-                    alert.message = message
-                    //TODO:- Add the token and user details into the user object
-                }
-                else {
-                    alert.title = "Failed : ("
-                    alert.message = token
-                }
-                
-                // Move to the UI thread
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    // Show the alert
-                    alert.show()
-                    if(success){
-                        User.sharedInstance.token = token;
-                        User.sharedInstance.FirstName = newUser.FirstName;
-                        User.sharedInstance.Surname = newUser.SurName;
-                        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
-                        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
-                    }
-                });
-                
-                }
-            );
-            
-        }
-        
-    }
-    
-    
-    /// MARK: Private interface
-    
-    private func loadForm() {
-        
-        let form = FormDescriptor()
-        
-        form.title = "Personal Details"
-        
-        let section1 = FormSectionDescriptor()
-        
-        var row: FormRowDescriptor! = FormRowDescriptor(tag: Static.nameTag, rowType: .Name, title: "First Name")
-        
-        row.cellConfiguration = ["textField.placeholder" : "e.g. David", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section1.addRow(row)
-        
-        row = FormRowDescriptor(tag: Static.lastNameTag, rowType: .Name, title: "Last Name")
-        row.cellConfiguration = ["textField.placeholder" : "e.g. McQueen", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section1.addRow(row)
-        
-        
-        let section2 = FormSectionDescriptor()
-        
-        row = FormRowDescriptor(tag: Static.emailTag, rowType: .Email, title: "Email")
-        row.cellConfiguration = ["textField.placeholder" : "e.g. myemail@gmail.com", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section2.addRow(row)
-        
-        row = FormRowDescriptor(tag: Static.phoneTag, rowType: .Phone, title: "Phone")
-        row.cellConfiguration = ["textField.placeholder" : "e.g. 0034666777999", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section2.addRow(row)
-        
-        row = FormRowDescriptor(tag: Static.passwordTag, rowType: .Password, title: "Password")
-        row.cellConfiguration = ["textField.placeholder" : "Enter password", "textField.textAlignment" : NSTextAlignment.Right.rawValue]
-        row.required = true;
-        section2.addRow(row)
-        
-        form.sections = [section1, section2]
-        
-        self.form = form
-    }
-    
-    /// MARK: FormViewControllerDelegate
-    
-    func formViewController(controller: FormViewController, didSelectRowDescriptor rowDescriptor: FormRowDescriptor) {
-        if rowDescriptor.tag == Static.button {
-            self.view.endEditing(true)
-        }
-    }
+//        var validationErrors = self.form.validateForm();
+// 
+//        if validationErrors.count > 0 {
+//            var validationMessage = "Please complete all fields!."
+//            for (inputField) in validationErrors{
+//                validationMessage = validationMessage + "\n" +  inputField.title;
+//            }
+//            
+//            var validationAlert = UIAlertView(title: "Missing data!", message: validationMessage, delegate: nil, cancelButtonTitle: "Okay.")
+//            validationAlert.show();
+//        }else{
+//            
+//            let message = self.form.formValues().description
+//            let inputs:Dictionary = self.form.formValues()
+//            
+//            var emailInput = inputs["email"] as String!
+//            var forenameInput = inputs["name"] as String!
+//            var lastnameInput = inputs["lastName"] as String!
+//            var passwordInput = inputs["password"] as String!
+//            var phoneNumberInput = inputs["phone"] as String!
+//            
+//            var newUser = UserRegistration(
+//                _firstName: forenameInput,
+//                _surname: lastnameInput,
+//                _email: emailInput,
+//                _password: passwordInput,
+//                _phoneNumber: phoneNumberInput);
+//            
+//            if(!newUser.validEmailPattern() || !newUser.validPasswordPattern() || !newUser.validPhonePattern()){
+//                var invalidInputsMessage = "Please correct your inputs"
+//                if (!newUser.validEmailPattern()){
+//                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Email"
+//                }
+//                if (!newUser.validPasswordPattern()){
+//                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password"
+//                }
+//                if (!newUser.validPhonePattern()){
+//                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Phone Number"
+//                }
+//                var invalidInputsAlert = UIAlertView(title: "Incomplete data!", message: invalidInputsMessage, delegate: nil, cancelButtonTitle: "Okay.")
+//                invalidInputsAlert.show();
+//                
+//                println("Email failed: \(!newUser.validEmailPattern())");
+//                println("Password failed: \(!newUser.validPasswordPattern())");
+//                println("Phone failed: \(!newUser.validPhonePattern())");
+//                
+//                return;
+//            }
+//            
+//            registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
+//                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
+//                if(success) {
+//                    alert.title = "Success!"
+//                    println(token)
+//                    alert.message = message
+//                    //TODO:- Add the token and user details into the user object
+//                }
+//                else {
+//                    alert.title = "Failed : ("
+//                    alert.message = token
+//                }
+//                
+//                // Move to the UI thread
+//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                    // Show the alert
+//                    alert.show()
+//                    if(success){
+//                        User.sharedInstance.token = token;
+//                        User.sharedInstance.FirstName = newUser.FirstName;
+//                        User.sharedInstance.Surname = newUser.SurName;
+//                        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
+//                        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
+//                    }
+//                });
+//                
+//                }
+//            );
+//            
+//        }
+//        
+//    }
 }
