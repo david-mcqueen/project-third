@@ -17,19 +17,56 @@ class SessionViewController: UITableViewController{
     @IBOutlet weak var sessionCostLabel: UILabel!
     var parkingSession: ParkSession?;
     
+    @IBOutlet weak var btnEndExtentParking: UIButton!
+    var extendParking: Bool = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
+        
         populateSessionFields();
+        
     }
     
     
+    @IBAction func ModifyParkingPressed(sender: AnyObject) {
+        if(extendParking){
+            println("Extend the parking session")
+        }else{
+            stopParking(User.sharedInstance.token!, self.parkingSession!.ParkSessionID, { (success, value, error) -> () in
+                
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if (success){
+                        //TODO:- Display the cost of the parking session.
+                        println("\(value)")
+                        self.parkingSession?.EndTime = NSDate();
+                        self.parkingSession?.Value = value;
+                        self.parkingSession?.CurrentSession = false;
+                    }else{
+                        NSLog("Something went wrong. \(error)")
+                    }
+                    
+                });
+                
+            });
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
     }
     
     func populateSessionFields(){
+        if (parkingSession?.EndTime != nil){
+            btnEndExtentParking.setTitle("Extend", forState: .Normal);
+            extendParking = true;
+        }else{
+            btnEndExtentParking.setTitle("End", forState: .Normal);
+            extendParking = false;
+        }
+        
         var vehicleText: String?;
         for vehicle in User.sharedInstance.getVehicles(){
             if vehicle.VehicleID! == parkingSession?.ParkedVehicleID{
@@ -40,69 +77,14 @@ class SessionViewController: UITableViewController{
         sessionStartLabel.text = parkingSession?.startTimeAsString();
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
         sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
-        sessionCostLabel.text = (parkingSession?.Value != nil ? ("£\(parkingSession?.Value!.description)") : "Session not ended");
+        sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
     }
     
     
-    @IBAction func endParkingPressed(sender: AnyObject) {
-        var sessionID = self.parkingSession?.ParkSessionID
-        stopParking(User.sharedInstance.token!, sessionID!, { (success, value, error) -> () in
-            
-            // Move to the UI thread
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if (success){
-                    
-                    println("\(value)")
-                    
-                }else{
-                    NSLog("Something went wrong. \(error)")
-                }
-                
-            });
-            
-        });
+    func refresh(sender:AnyObject)
+    {
+        populateSessionFields();
+        self.tableView.reloadData();
+        //        self.refreshControl?.endRefreshing();
     }
- 
-    
-    //MARK:- Table delegates
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if (indexPath.section == 1 && indexPath.row == 1){
-//            extendAddFunds(self);
-//        } else if (indexPath.section == 2 && indexPath.row == 0){
-//            textAddFunds.becomeFirstResponder();
-//        }
-    }
-    
-//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if(section == 2 && !displayAddFunds){
-//            //Set the header & footer heights to 0
-//            self.tableView.sectionHeaderHeight = 0;
-//            return 0;
-//        } else {
-//            return super.tableView(tableView, heightForHeaderInSection: section);
-//        }  //keeps inalterate all other Header
-//    }
-    
-//    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if(section == 2 && !displayAddFunds) {
-//            //Set the header & footer heights to 0
-//            self.tableView.sectionFooterHeight = 0;
-//            return 0;
-//        } else {
-//            return super.tableView(tableView, heightForFooterInSection: section)
-//        }
-//    }
-    
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if(section == 2) //Index number of interested section
-//        {
-//            if (displayAddFunds){
-//                return 1;
-//            }else{
-//                return 0;
-//            }
-//        }else{
-//            return super.tableView(tableView, numberOfRowsInSection: section)
-//        }
-//    }
 }

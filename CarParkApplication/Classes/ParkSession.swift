@@ -47,7 +47,7 @@ class ParkSession {
     
     func endTimeAsString() -> String{
         var dateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "HH:mm dd-MM-yyyy";
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm";
         return dateFormatter.stringFromDate(self.EndTime!);
     }
     
