@@ -102,8 +102,8 @@ func displayAlert(title: String, message: String, cancelButton: String){
     alert.show();
 }
 
-func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-    return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+func convertSecondsToHoursMinutes (seconds : Int) -> (Int, Int) {
+    return (seconds / 3600, (seconds % 3600) / 60)
 }
 
 

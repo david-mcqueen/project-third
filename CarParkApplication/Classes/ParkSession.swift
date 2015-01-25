@@ -50,14 +50,12 @@ class ParkSession {
     
     
     func calculateDuration() -> String{
-        var difference = self.EndTime!.timeIntervalSinceDate(self.StartTime);
+        var difference: Double = self.EndTime!.timeIntervalSinceDate(self.StartTime);
         //The difference is represented in seconds
-        var timeUnit: String?
-        timeUnit = "cat"
         
-        let (h, m, s) = secondsToHoursMinutesSeconds(640800);
+        var secondsInt: Int = (Int)(difference);
+        let (h, m) = convertSecondsToHoursMinutes(secondsInt);
         
-        println("\(h) \(m) \(s)")
-        return "\(h) hours \(m) minutes \(s) seconds";
+        return "\(h) hours \(m) minutes";
     }
 }
