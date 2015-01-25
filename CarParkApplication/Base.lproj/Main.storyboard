@@ -639,7 +639,7 @@
                         <sections>
                             <tableViewSection headerTitle="Vehicle" id="uHC-MK-JJx">
                                 <cells>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Ejn-04-n9Y" detailTextLabel="8k2-ti-uhc" style="IBUITableViewCellStyleValue1" id="4OQ-Fu-bri">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Ejn-04-n9Y" detailTextLabel="8k2-ti-uhc" style="IBUITableViewCellStyleValue1" id="4OQ-Fu-bri">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4OQ-Fu-bri" id="YNx-7N-NDS">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -663,7 +663,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Period" id="PVh-lG-NJi">
                                 <cells>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="iBf-rC-HUt" detailTextLabel="YIY-Fc-HfG" style="IBUITableViewCellStyleValue1" id="72W-UP-4RG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="iBf-rC-HUt" detailTextLabel="YIY-Fc-HfG" style="IBUITableViewCellStyleValue1" id="72W-UP-4RG">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="72W-UP-4RG" id="fRK-AR-fAO">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -683,7 +683,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="EhW-qf-nyb" detailTextLabel="LXA-hW-Wwp" style="IBUITableViewCellStyleValue1" id="jjU-ar-O0S">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="EhW-qf-nyb" detailTextLabel="LXA-hW-Wwp" style="IBUITableViewCellStyleValue1" id="jjU-ar-O0S">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jjU-ar-O0S" id="Ck4-OL-tza">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -703,7 +703,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="flA-Of-AuB" detailTextLabel="qS4-SU-khU" style="IBUITableViewCellStyleValue1" id="LhW-Wk-ST1">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="flA-Of-AuB" detailTextLabel="qS4-SU-khU" style="IBUITableViewCellStyleValue1" id="LhW-Wk-ST1">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LhW-Wk-ST1" id="evR-oB-B7u">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -727,7 +727,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Cost" id="nx1-0q-Rtf">
                                 <cells>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="cdR-Ov-qqc" detailTextLabel="CzS-y1-0u4" style="IBUITableViewCellStyleValue1" id="FqL-R2-Cvv">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="cdR-Ov-qqc" detailTextLabel="CzS-y1-0u4" style="IBUITableViewCellStyleValue1" id="FqL-R2-Cvv">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FqL-R2-Cvv" id="dN7-mp-t8y">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -761,32 +761,14 @@
                                                     <state key="normal" title="Extend">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="ModifyParkingPressed:" destination="hhp-3H-vZi" eventType="touchUpInside" id="ICC-4k-ARR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerX" secondItem="Ey0-yb-coY" secondAttribute="centerX" id="eqr-5Q-x41"/>
                                                 <constraint firstAttribute="centerY" secondItem="Ey0-yb-coY" secondAttribute="centerY" id="fWO-Y6-ORt"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ljA-t2-2AK">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ljA-t2-2AK" id="6Hg-3Z-qY3">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHb-Ib-uRT">
-                                                    <rect key="frame" x="277" y="7" width="46" height="30"/>
-                                                    <state key="normal" title="End">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="endParkingPressed:" destination="hhp-3H-vZi" eventType="touchUpInside" id="d4c-7Q-JTN"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="RHb-Ib-uRT" secondAttribute="centerY" constant="-0.5" id="Nvn-rS-0Z7"/>
-                                                <constraint firstAttribute="centerX" secondItem="RHb-Ib-uRT" secondAttribute="centerX" id="TD8-gq-D5k"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -798,7 +780,11 @@
                             <outlet property="delegate" destination="hhp-3H-vZi" id="NaB-0f-ITz"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="cdl-R8-e1q">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
+                        <outlet property="btnEndExtentParking" destination="Ey0-yb-coY" id="jgs-DF-y3L"/>
                         <outlet property="sessionCostLabel" destination="CzS-y1-0u4" id="sid-Pr-PQx"/>
                         <outlet property="sessionDurationLabel" destination="qS4-SU-khU" id="zqJ-cL-c0J"/>
                         <outlet property="sessionEndLabel" destination="LXA-hW-Wwp" id="0Lp-uE-gPN"/>

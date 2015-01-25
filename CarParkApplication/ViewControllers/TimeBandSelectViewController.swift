@@ -6,14 +6,21 @@
 //  Copyright (c) 2015 DavidMcQueen. All rights reserved.
 //
 
+/*
+//  TableViewController, displaying all the time bands for a speciic car park.
+//  Allows the user to select a a legth of time to park for
+*/
 import UIKit
 
 class TimeBandSelectViewController: UITableViewController {
     
+    //MARK:- Variables & Constants
     var timeBands:[String]!
     var selectedTimeBand:String? = nil
     var selectedTimeBandIndex:Int? = nil
     
+    
+    //MARK:- Default functions
     override func viewDidLoad() {
         super.viewDidLoad()
         timeBands = [
@@ -25,7 +32,6 @@ class TimeBandSelectViewController: UITableViewController {
         if let timeBand = selectedTimeBand {
             selectedTimeBandIndex = find(timeBands, timeBand)!
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,8 +39,8 @@ class TimeBandSelectViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
     
+    // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1 //Can only select 1 item from the list of vehicles
     }
@@ -55,8 +61,8 @@ class TimeBandSelectViewController: UITableViewController {
         return cell
     }
     
-    //MARK: - Table view delegate
     
+    //MARK: - Table view delegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -74,6 +80,7 @@ class TimeBandSelectViewController: UITableViewController {
         cell?.accessoryType = .Checkmark
     }
     
+    //MARK:- Segue Functions
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveTimeBand" {
             let cell = sender as UITableViewCell;

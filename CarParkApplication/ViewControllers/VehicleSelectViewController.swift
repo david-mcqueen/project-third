@@ -6,10 +6,15 @@
 //  Copyright (c) 2014 DavidMcQueen. All rights reserved.
 //
 
+/*
+//  TableViewController, displaying all the users vehicles.
+//  Allows the user to select a vehicle they want to park
+*/
 import UIKit
 
 class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate {
     
+    //MARK:- Variables & Constants
     var vehicles:[String] = []
     var selectedVehicle:Vehicle?
     var selectedVehicleObject: Vehicle?;
@@ -18,6 +23,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     
     weak var delegate: SelectUserVehicleDelegate?
     
+    //MARK:- Default functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,15 +32,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         if let vehicle = selectedVehicle?.displayVehicle() {
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
-        
 //        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-    }
-    
-    @IBAction func addNewVehicle(sender: AnyObject) {
-        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController
-        createVehicleViewController.delegate = self;
-        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,8 +40,26 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
     
+    //MARK:- Custom Functions
+    @IBAction func addNewVehicle(sender: AnyObject) {
+        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController
+        createVehicleViewController.delegate = self;
+        self.navigationController?.pushViewController(createVehicleViewController, animated: true);
+        
+    }
+    
+    func updateTabelData(){
+        //Update the view with the latest data.
+        allVehicles = User.sharedInstance.getVehicles();
+        vehicles.removeAll(keepCapacity: false);
+        for vehicle in allVehicles{
+            vehicles.append(vehicle.displayVehicle());
+        }
+    }
+    
+    
+    // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1 //Can only select 1 item from the list of vehicles
     }
@@ -64,8 +80,8 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         return cell
     }
     
-    //MARK: - Table view delegate
     
+    //MARK: - Table view delegates
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -88,10 +104,13 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         if let index = selectedVehicleIndex {
             selectedVehicle = allVehicles[index]
         }
+        
+        //Return to the delegate, with the selected vehicle
         delegate?.didSelectUserVehicle(selectedVehicle!);
         
     }
     
+    //MARK:- Row side-buttons
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Edit", handler:{action, indexpath in
@@ -106,8 +125,6 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
         });
         
-        
-        
         return [deleteRowAction, editRowAction];
     }
     
@@ -118,20 +135,11 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
+    //MARK:- CreateVehicleDelegate
     func newVehicleCreated(){
-        
         self.navigationController?.popViewControllerAnimated(true);
-        //TODO:- Refresh the list of user vehicles
         updateTabelData();
         self.tableView.reloadData();
-    }
-    
-    func updateTabelData(){
-        allVehicles = User.sharedInstance.getVehicles();
-        vehicles.removeAll(keepCapacity: false);
-        for vehicle in allVehicles{
-            vehicles.append(vehicle.displayVehicle());
-        }
     }
     
 }

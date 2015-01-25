@@ -6,24 +6,29 @@
 //  Copyright (c) 2015 DavidMcQueen. All rights reserved.
 //
 
-
+/*
+//  TableViewController, displaying all the users parking sessions (either current, or previous).
+//  Allows the user to select a a session they want to view in detail.
+*/
 import UIKit
 
 class SessionSelectViewController: UITableViewController {
     
+    //MARK:- Variables & Constants
     var parkSessions:[String] = []
     var allParkSessions:[ParkSession] = [];
     var allUserVehicles:[Vehicle] = []
     var currentSessions = true;
     var selectedSession: ParkSession?
     
+    
+    //MARK:- Default functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         allUserVehicles = User.sharedInstance.getVehicles();
         
         updateTabelData(currentSessions);
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,8 +36,8 @@ class SessionSelectViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
     
+    // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1 //Can only select 1 item from the list of vehicles
     }
@@ -60,14 +65,16 @@ class SessionSelectViewController: UITableViewController {
         return cell
     }
     
-    //MARK: - Table view delegate
     
+    //MARK: - Table view delegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedSession = allParkSessions[indexPath.row];
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("viewParkingSession", sender: self);
     }
     
+    
+    //MARK:- Row side-buttons
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         //TODO:- Change the colour of the END button
@@ -128,6 +135,7 @@ class SessionSelectViewController: UITableViewController {
     }
     
     
+    //MARK:- Segue Functions
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "viewParkingSession"){
             println("viewSession Segue")
