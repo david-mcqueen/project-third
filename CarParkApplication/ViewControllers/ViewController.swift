@@ -57,13 +57,18 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     println(parkTransactionID!)
                     var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate(), currentSession: true, parkedVehicleID: self.selectedVehicle!.VehicleID!);
                     User.sharedInstance.addParkSession(newParkSession);
+                    
+                    //Display the new parking session
+                    let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as SessionViewController;
+                    viewSessionViewController.parkingSession = newParkSession;
+                    self.navigationController?.showViewController(viewSessionViewController, sender: nil);
                 }
                 
                 if error != nil{
                     println(error!);
                 }
                 
-                })
+            });
             
             }
         );

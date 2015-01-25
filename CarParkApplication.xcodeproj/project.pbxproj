@@ -51,23 +51,6 @@
 		557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */; };
 		557C2CED19F2C4AE00DE28DF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */; };
 		557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */; };
-		557CD18B1A3F7723009D171F /* FormBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1781A3F7723009D171F /* FormBaseCell.swift */; };
-		557CD18C1A3F7723009D171F /* FormTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1791A3F7723009D171F /* FormTitleCell.swift */; };
-		557CD18D1A3F7723009D171F /* FormValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD17A1A3F7723009D171F /* FormValueCell.swift */; };
-		557CD18E1A3F7723009D171F /* FormButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD17B1A3F7723009D171F /* FormButtonCell.swift */; };
-		557CD18F1A3F7723009D171F /* FormCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD17C1A3F7723009D171F /* FormCheckCell.swift */; };
-		557CD1901A3F7723009D171F /* FormDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD17D1A3F7723009D171F /* FormDateCell.swift */; };
-		557CD1911A3F7723009D171F /* FormPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD17E1A3F7723009D171F /* FormPickerCell.swift */; };
-		557CD1921A3F7723009D171F /* FormSegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD17F1A3F7723009D171F /* FormSegmentedControlCell.swift */; };
-		557CD1931A3F7723009D171F /* FormSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1801A3F7723009D171F /* FormSelectorCell.swift */; };
-		557CD1941A3F7723009D171F /* FormSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1811A3F7723009D171F /* FormSwitchCell.swift */; };
-		557CD1951A3F7723009D171F /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1821A3F7723009D171F /* FormTextFieldCell.swift */; };
-		557CD1961A3F7723009D171F /* FormOptionsSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1841A3F7723009D171F /* FormOptionsSelectorController.swift */; };
-		557CD1971A3F7723009D171F /* FormSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1851A3F7723009D171F /* FormSelector.swift */; };
-		557CD1981A3F7723009D171F /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1861A3F7723009D171F /* FormViewController.swift */; };
-		557CD1991A3F7723009D171F /* FormDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1881A3F7723009D171F /* FormDescriptor.swift */; };
-		557CD19A1A3F7723009D171F /* FormRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD1891A3F7723009D171F /* FormRowDescriptor.swift */; };
-		557CD19B1A3F7723009D171F /* FormSectionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */; };
 		5585EA091A659E6B001CEF37 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5585EA081A659E6B001CEF37 /* MapKit.framework */; };
 		5585EA0E1A65A112001CEF37 /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */; };
 		5585EA0F1A65A112001CEF37 /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */; };
@@ -153,23 +136,6 @@
 		5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateVehicleDelegate.swift; path = Protocols/CreateVehicleDelegate.swift; sourceTree = "<group>"; };
 		557C2CE919F2C3FE00DE28DF /* UserRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRegistration.swift; path = Classes/UserRegistration.swift; sourceTree = "<group>"; };
 		557C2CEC19F2C4AE00DE28DF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vehicle.swift; path = Classes/Vehicle.swift; sourceTree = "<group>"; };
-		557CD1781A3F7723009D171F /* FormBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormBaseCell.swift; sourceTree = "<group>"; };
-		557CD1791A3F7723009D171F /* FormTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTitleCell.swift; sourceTree = "<group>"; };
-		557CD17A1A3F7723009D171F /* FormValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValueCell.swift; sourceTree = "<group>"; };
-		557CD17B1A3F7723009D171F /* FormButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormButtonCell.swift; sourceTree = "<group>"; };
-		557CD17C1A3F7723009D171F /* FormCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormCheckCell.swift; sourceTree = "<group>"; };
-		557CD17D1A3F7723009D171F /* FormDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDateCell.swift; sourceTree = "<group>"; };
-		557CD17E1A3F7723009D171F /* FormPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPickerCell.swift; sourceTree = "<group>"; };
-		557CD17F1A3F7723009D171F /* FormSegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSegmentedControlCell.swift; sourceTree = "<group>"; };
-		557CD1801A3F7723009D171F /* FormSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelectorCell.swift; sourceTree = "<group>"; };
-		557CD1811A3F7723009D171F /* FormSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSwitchCell.swift; sourceTree = "<group>"; };
-		557CD1821A3F7723009D171F /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
-		557CD1841A3F7723009D171F /* FormOptionsSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormOptionsSelectorController.swift; sourceTree = "<group>"; };
-		557CD1851A3F7723009D171F /* FormSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelector.swift; sourceTree = "<group>"; };
-		557CD1861A3F7723009D171F /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
-		557CD1881A3F7723009D171F /* FormDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDescriptor.swift; sourceTree = "<group>"; };
-		557CD1891A3F7723009D171F /* FormRowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRowDescriptor.swift; sourceTree = "<group>"; };
-		557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionDescriptor.swift; sourceTree = "<group>"; };
 		5585EA081A659E6B001CEF37 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewViewController.swift; path = ViewControllers/MapViewViewController.swift; sourceTree = "<group>"; };
 		558616741A75191600FAB689 /* UserRegistered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRegistered.swift; path = Protocols/UserRegistered.swift; sourceTree = "<group>"; };
@@ -282,7 +248,6 @@
 			children = (
 				55C836AA1A614CA0009167D4 /* Protocols */,
 				550294B71A54296E00198EC7 /* Network Access */,
-				557CD1741A3F7707009D171F /* SwiftForms */,
 				55440BA81A34B96700969FBC /* PayPalMobile */,
 				5519BD9519E33D5600A19484 /* ViewControllers */,
 				5519BD9419E33D3F00A19484 /* Classes */,
@@ -400,71 +365,6 @@
 				552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */,
 			);
 			name = Selectors;
-			sourceTree = "<group>";
-		};
-		557CD1741A3F7707009D171F /* SwiftForms */ = {
-			isa = PBXGroup;
-			children = (
-				557CD1751A3F7723009D171F /* Source */,
-			);
-			name = SwiftForms;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		557CD1751A3F7723009D171F /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				557CD1761A3F7723009D171F /* cells */,
-				557CD1831A3F7723009D171F /* controllers */,
-				557CD1871A3F7723009D171F /* descriptors */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		557CD1761A3F7723009D171F /* cells */ = {
-			isa = PBXGroup;
-			children = (
-				557CD1771A3F7723009D171F /* base */,
-				557CD17B1A3F7723009D171F /* FormButtonCell.swift */,
-				557CD17C1A3F7723009D171F /* FormCheckCell.swift */,
-				557CD17D1A3F7723009D171F /* FormDateCell.swift */,
-				557CD17E1A3F7723009D171F /* FormPickerCell.swift */,
-				557CD17F1A3F7723009D171F /* FormSegmentedControlCell.swift */,
-				557CD1801A3F7723009D171F /* FormSelectorCell.swift */,
-				557CD1811A3F7723009D171F /* FormSwitchCell.swift */,
-				557CD1821A3F7723009D171F /* FormTextFieldCell.swift */,
-			);
-			path = cells;
-			sourceTree = "<group>";
-		};
-		557CD1771A3F7723009D171F /* base */ = {
-			isa = PBXGroup;
-			children = (
-				557CD1781A3F7723009D171F /* FormBaseCell.swift */,
-				557CD1791A3F7723009D171F /* FormTitleCell.swift */,
-				557CD17A1A3F7723009D171F /* FormValueCell.swift */,
-			);
-			path = base;
-			sourceTree = "<group>";
-		};
-		557CD1831A3F7723009D171F /* controllers */ = {
-			isa = PBXGroup;
-			children = (
-				557CD1841A3F7723009D171F /* FormOptionsSelectorController.swift */,
-				557CD1851A3F7723009D171F /* FormSelector.swift */,
-				557CD1861A3F7723009D171F /* FormViewController.swift */,
-			);
-			path = controllers;
-			sourceTree = "<group>";
-		};
-		557CD1871A3F7723009D171F /* descriptors */ = {
-			isa = PBXGroup;
-			children = (
-				557CD1881A3F7723009D171F /* FormDescriptor.swift */,
-				557CD1891A3F7723009D171F /* FormRowDescriptor.swift */,
-				557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */,
-			);
-			path = descriptors;
 			sourceTree = "<group>";
 		};
 		558777EC1A5D5253008ACCE9 /* Singletons */ = {
@@ -591,50 +491,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */,
-				557CD1971A3F7723009D171F /* FormSelector.swift in Sources */,
 				55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */,
 				558777F41A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
-				557CD18F1A3F7723009D171F /* FormCheckCell.swift in Sources */,
 				552C98F91A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */,
 				558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
 				550294C21A542C7900198EC7 /* UserLogin.swift in Sources */,
 				557C2CED19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
-				557CD19A1A3F7723009D171F /* FormRowDescriptor.swift in Sources */,
-				557CD1901A3F7723009D171F /* FormDateCell.swift in Sources */,
-				557CD19B1A3F7723009D171F /* FormSectionDescriptor.swift in Sources */,
 				55BB56A019F2C70C00492154 /* Utilities.swift in Sources */,
-				557CD1911A3F7723009D171F /* FormPickerCell.swift in Sources */,
 				550294B91A5429B400198EC7 /* CarQueryAPI.swift in Sources */,
-				557CD1931A3F7723009D171F /* FormSelectorCell.swift in Sources */,
-				557CD1951A3F7723009D171F /* FormTextFieldCell.swift in Sources */,
-				557CD1981A3F7723009D171F /* FormViewController.swift in Sources */,
-				557CD1961A3F7723009D171F /* FormOptionsSelectorController.swift in Sources */,
 				557C2CEA19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,
-				557CD18C1A3F7723009D171F /* FormTitleCell.swift in Sources */,
 				55440BC81A34BA7400969FBC /* Bridge.m in Sources */,
 				550294B11A54268000198EC7 /* CarModel.swift in Sources */,
 				558616751A75191600FAB689 /* UserRegistered.swift in Sources */,
-				557CD1921A3F7723009D171F /* FormSegmentedControlCell.swift in Sources */,
 				55ABC7681A542E31005A4371 /* UserAPI.swift in Sources */,
 				5554A6221A6179C0004D2D28 /* CreateVehicleDelegate.swift in Sources */,
 				55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				558777F11A5D58E6008ACCE9 /* User.swift in Sources */,
 				551AC19B19E186BB0051C672 /* AppDelegate.swift in Sources */,
 				55EF4DBA1A5D9FA7006F7613 /* CreateVehicleViewController.swift in Sources */,
-				557CD1941A3F7723009D171F /* FormSwitchCell.swift in Sources */,
 				5585EA0E1A65A112001CEF37 /* MapViewViewController.swift in Sources */,
-				557CD18B1A3F7723009D171F /* FormBaseCell.swift in Sources */,
 				55B631811A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55ABC7641A542CC1005A4371 /* ViewController.swift in Sources */,
-				557CD1991A3F7723009D171F /* FormDescriptor.swift in Sources */,
 				55440BCD1A34D53900969FBC /* ProfileViewController.swift in Sources */,
 				552C98F51A6EC13400155AFC /* SessionSelectViewController.swift in Sources */,
-				557CD18E1A3F7723009D171F /* FormButtonCell.swift in Sources */,
 				550294B41A54269A00198EC7 /* CarMake.swift in Sources */,
 				5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */,
 				555031501A71174400B9FDB0 /* SessionViewController.swift in Sources */,
 				551A189719F0559500E6702B /* LoginViewController.swift in Sources */,
-				557CD18D1A3F7723009D171F /* FormValueCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

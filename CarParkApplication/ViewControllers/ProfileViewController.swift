@@ -30,6 +30,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     var config = PayPalConfiguration()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +68,10 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
+        
         PayPalMobile.preconnectWithEnvironment(PayPalEnvironmentSandbox)
+        displaySessionCount();
+        displayUserBalance();
     }
     
     override func didReceiveMemoryWarning() {
@@ -211,7 +215,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
                 println("\(success) \(userBalance)")
                 if (success){
                     User.sharedInstance.CurrentBalance = userBalance!;
-                    self.lblBalance.text = User.sharedInstance.getBalanceString();
+                    self.displayUserBalance()
                 }
             });
         });
@@ -238,15 +242,25 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         getAllParkingSessions(User.sharedInstance.token!, {(success, sessions, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 User.sharedInstance.ParkSessions = sessions;
-                self.lblCurrentSessionCount.text = String(User.sharedInstance.getCurrentParkSessionsCount());
-                self.lblPreviousSessionCount.text = String(User.sharedInstance.getPreviousParkSessionsCount());
                 
+                self.displaySessionCount();
             });
         });
     }
     
+    func displaySessionCount(){
+        self.lblCurrentSessionCount.text = String(User.sharedInstance.getCurrentParkSessionsCount());
+        self.lblPreviousSessionCount.text = String(User.sharedInstance.getPreviousParkSessionsCount());
+    }
+    
+    func displayUserBalance(){
+        self.lblBalance.text = User.sharedInstance.getBalanceString();
+    }
+    
     func refresh(sender:AnyObject)
     {
+        println("Refresh")
+        
         self.tableView.reloadData();
 //        self.refreshControl?.endRefreshing();
     }
