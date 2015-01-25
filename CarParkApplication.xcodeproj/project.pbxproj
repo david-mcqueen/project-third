@@ -71,6 +71,9 @@
 		5585EA091A659E6B001CEF37 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5585EA081A659E6B001CEF37 /* MapKit.framework */; };
 		5585EA0E1A65A112001CEF37 /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */; };
 		5585EA0F1A65A112001CEF37 /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */; };
+		558616751A75191600FAB689 /* UserRegistered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558616741A75191600FAB689 /* UserRegistered.swift */; };
+		558616761A75191600FAB689 /* UserRegistered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558616741A75191600FAB689 /* UserRegistered.swift */; };
+		558616771A751A3900FAB689 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5519BD8E19E32DC800A19484 /* RegisterViewController.swift */; };
 		558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */; };
 		558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */; };
 		558777F11A5D58E6008ACCE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558777F01A5D58E6008ACCE9 /* User.swift */; };
@@ -169,6 +172,7 @@
 		557CD18A1A3F7723009D171F /* FormSectionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionDescriptor.swift; sourceTree = "<group>"; };
 		5585EA081A659E6B001CEF37 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5585EA0D1A65A112001CEF37 /* MapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewViewController.swift; path = ViewControllers/MapViewViewController.swift; sourceTree = "<group>"; };
+		558616741A75191600FAB689 /* UserRegistered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRegistered.swift; path = Protocols/UserRegistered.swift; sourceTree = "<group>"; };
 		558777E61A5D42B1008ACCE9 /* TimeBandSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeBandSelectViewController.swift; path = ViewControllers/TimeBandSelectViewController.swift; sourceTree = "<group>"; };
 		558777F01A5D58E6008ACCE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/Singletons/User.swift; sourceTree = "<group>"; };
 		558777F31A5D5B5E008ACCE9 /* LoggedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoggedInViewController.swift; path = ViewControllers/LoggedInViewController.swift; sourceTree = "<group>"; };
@@ -476,6 +480,7 @@
 			children = (
 				55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */,
 				5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */,
+				558616741A75191600FAB689 /* UserRegistered.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				557CD18C1A3F7723009D171F /* FormTitleCell.swift in Sources */,
 				55440BC81A34BA7400969FBC /* Bridge.m in Sources */,
 				550294B11A54268000198EC7 /* CarModel.swift in Sources */,
+				558616751A75191600FAB689 /* UserRegistered.swift in Sources */,
 				557CD1921A3F7723009D171F /* FormSegmentedControlCell.swift in Sources */,
 				55ABC7681A542E31005A4371 /* UserAPI.swift in Sources */,
 				5554A6221A6179C0004D2D28 /* CreateVehicleDelegate.swift in Sources */,
@@ -659,6 +665,8 @@
 				550294C31A542C7900198EC7 /* UserLogin.swift in Sources */,
 				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,
 				558777F51A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
+				558616771A751A3900FAB689 /* RegisterViewController.swift in Sources */,
+				558616761A75191600FAB689 /* UserRegistered.swift in Sources */,
 				552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
