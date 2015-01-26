@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
+class ParkViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
 
     @IBOutlet var locationTextField: UITextField!
     let locationManager = CLLocationManager();
