@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 David McQueen. All rights reserved.
 //
 
+/*
+//  A singleton object for the User class
+//  Holds the user information, and any necessary functions.
+*/
+
 import Foundation
 
 class User {
@@ -31,6 +36,7 @@ class User {
         self.CurrentBalance = 0.0;
         self.Vehicles = []
     }
+    
     
     //MARK:- Vehicle functions
     func addVehicle(newVehicle: Vehicle) {
@@ -64,7 +70,8 @@ class User {
     func getFirstVehicle() -> Vehicle {
         return self.Vehicles[0];
     }
-        
+    
+    
     //MARK:- Park Session functions
     func deleteAllParkSessions(){
         self.ParkSessions.removeAll(keepCapacity: false);
@@ -78,7 +85,6 @@ class User {
         return self.ParkSessions;
     }
     
-    //Return only current sessions
     func getCurrentParkSessions() -> [ParkSession]{
         var currentSessions:[ParkSession] = [];
         for session in self.ParkSessions{
@@ -86,9 +92,7 @@ class User {
                 currentSessions.append(session)
             }
         }
-        
         return currentSessions;
-        
     }
     
     func getCurrentParkSessionsCount() -> Int{
@@ -98,12 +102,9 @@ class User {
                 currentSessions.append(session)
             }
         }
-        
         return currentSessions.count;
-        
     }
     
-    //Return only previous park sessions
     func getPreviousParkSessions() -> [ParkSession]{
         var previousSessions:[ParkSession] = [];
         for session in self.ParkSessions{
@@ -111,7 +112,6 @@ class User {
                 previousSessions.append(session)
             }
         }
-        
         return previousSessions;
     }
     
@@ -122,7 +122,6 @@ class User {
                 previousSessions.append(session)
             }
         }
-        
         return previousSessions.count;
     }
     
@@ -131,7 +130,8 @@ class User {
         return self.CurrentBalance.description;
     }
     
-        
+    
+    //MARK:- Logout
     func logout() {
         self.deleteAllvehciles();
         self.FirstName = "";
