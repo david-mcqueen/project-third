@@ -10,6 +10,7 @@ import UIKit
 
 class SessionViewController: UITableViewController{
     
+    @IBOutlet weak var sessionLocationLabel: UILabel!
     @IBOutlet weak var vehicleLabel: UILabel!
     @IBOutlet weak var sessionStartLabel: UILabel!
     @IBOutlet weak var sessionEndLabel: UILabel!
@@ -23,7 +24,7 @@ class SessionViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
+        //self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
         
         populateSessionFields();
         
@@ -44,6 +45,7 @@ class SessionViewController: UITableViewController{
                         self.parkingSession?.EndTime = NSDate();
                         self.parkingSession?.Value = value;
                         self.parkingSession?.CurrentSession = false;
+                        self.refresh(self);
                     }else{
                         NSLog("Something went wrong. \(error)")
                     }
@@ -78,6 +80,7 @@ class SessionViewController: UITableViewController{
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
         sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
         sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
+        sessionLocationLabel.text = parkingSession?.CarParkID.description;
     }
     
     
@@ -85,6 +88,6 @@ class SessionViewController: UITableViewController{
     {
         populateSessionFields();
         self.tableView.reloadData();
-        //        self.refreshControl?.endRefreshing();
+        self.refreshControl?.endRefreshing();
     }
 }

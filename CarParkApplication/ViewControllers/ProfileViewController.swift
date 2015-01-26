@@ -40,11 +40,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         getUserVehicles();
         getUserName();
         getUserParkingSessions();
+        displayUserInfo();
         
-        //Populate all the labes with the relevant information
-        lblBalance.text = User.sharedInstance.getBalanceString();
-        lblForename.text = User.sharedInstance.FirstName;
-        lblSurname.text = User.sharedInstance.Surname;
         
         paymentIndicatorView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7);
         paymentIndicatorView.clipsToBounds = true;
@@ -242,7 +239,6 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         getAllParkingSessions(User.sharedInstance.token!, {(success, sessions, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 User.sharedInstance.ParkSessions = sessions;
-                
                 self.displaySessionCount();
             });
         });
@@ -257,12 +253,23 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         self.lblBalance.text = User.sharedInstance.getBalanceString();
     }
     
+    func displayUserInfo(){
+        //Populate all the labes with the relevant information
+        lblBalance.text = User.sharedInstance.getBalanceString();
+        lblForename.text = User.sharedInstance.FirstName;
+        lblSurname.text = User.sharedInstance.Surname;
+    }
     func refresh(sender:AnyObject)
     {
         println("Refresh")
+        getUserBalance();
+        getUserVehicles();
+        getUserName();
+        getUserParkingSessions();
+        displayUserInfo();
         
         self.tableView.reloadData();
-//        self.refreshControl?.endRefreshing();
+        self.refreshControl?.endRefreshing();
     }
     
 }

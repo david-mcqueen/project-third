@@ -25,10 +25,17 @@ class SessionSelectViewController: UITableViewController {
     //MARK:- Default functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         allUserVehicles = User.sharedInstance.getVehicles();
         
         updateTabelData(currentSessions);
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true);
+        println("viewWillAppear");
+        updateTabelData(currentSessions);
+        refresh(self);
     }
     
     override func didReceiveMemoryWarning() {
@@ -143,5 +150,14 @@ class SessionSelectViewController: UITableViewController {
             let currentSessionViewController = segue.destinationViewController as SessionViewController
             currentSessionViewController.parkingSession = selectedSession!;
         }
+    }
+    
+    
+    func refresh(sender:AnyObject)
+    {
+        println("Refresh")
+        
+        self.tableView.reloadData();
+        self.refreshControl?.endRefreshing();
     }
 }
