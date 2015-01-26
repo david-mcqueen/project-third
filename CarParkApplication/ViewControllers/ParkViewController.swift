@@ -1,31 +1,70 @@
 //
-//  ViewController.swift
+//  ParkViewController.swift
 //  CarParkApplication
 //
 //  Created by DavidMcQueen on 05/10/2014.
 //  Copyright (c) 2014 DavidMcQueen. All rights reserved.
 //
 
+/*
+//  TableViewController, Displaying all the information the user needs to park a vehicle.
+//  Integrates CoreLocation in order to use the iBeacons and determine the users location
+*/
 import UIKit
 import CoreLocation
 
 class ParkViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
-
-    @IBOutlet var locationTextField: UITextField!
+    
+    //MARK:- Variables & Constants
     let locationManager = CLLocationManager();
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
-    
     var editLocationButton = false;
-    
-    @IBOutlet var determineLocationButton: UIButton!
-
-    @IBOutlet var timeBandLabel: UILabel!
-    @IBOutlet var vehicleLabel: UILabel!
     var selectedVehicle:Vehicle?;
     var selectedTimeBand: String?;
     
+    //MARK:- UI Outlets
+    @IBOutlet var determineLocationButton: UIButton!
+    @IBOutlet var locationTextField: UITextField!
+    @IBOutlet var timeBandLabel: UILabel!
+    @IBOutlet var vehicleLabel: UILabel!
     @IBOutlet var toggleMethod: UISwitch!
+    
+    
+    //MARK:- Default functions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var firstVehicle = User.sharedInstance.getFirstVehicle();
+        selectedVehicle = firstVehicle;
+        
+        locationManager.delegate = self;
+        vehicleLabel.text = selectedVehicle?.displayVehicle();
+        if ((selectedTimeBand) != nil){
+            timeBandLabel.text = selectedTimeBand;
+        }else{
+            timeBandLabel.text = "Select Time";
+        }
+        
+        
+        //Request permission to access beacons - Whilst the app is in Foreground
+        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
+            locationManager.requestWhenInUseAuthorization();
+        }
+        
+        //TODO:- Handle the user denying the location request
+        
+        beaconActivityIndicator.center = self.view.center
+        beaconActivityIndicator.hidesWhenStopped = true
+        beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     
     @IBAction func toggleMethodPressed(sender: AnyObject) {
         //Reload all of the table data
@@ -75,34 +114,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
         
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        var firstVehicle = User.sharedInstance.getFirstVehicle();
-        selectedVehicle = firstVehicle;
-        
-        locationManager.delegate = self;
-        vehicleLabel.text = selectedVehicle?.displayVehicle();
-        if ((selectedTimeBand) != nil){
-            timeBandLabel.text = selectedTimeBand;
-        }else{
-            timeBandLabel.text = "Select Time";
-        }
-        
-        
-        //Request permission to access beacons - Whilst the app is in Foreground
-        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
-            locationManager.requestWhenInUseAuthorization();
-        }
-        
-        //TODO:- Handle the user denying the location request
-        
-        beaconActivityIndicator.center = self.view.center
-        beaconActivityIndicator.hidesWhenStopped = true
-        beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        
-    }
-    
+    //MARK:- Beacon functions
     @IBAction func determineLocation(sender: AnyObject) {
         //Start looking for beacons so long as we have permission
         if (editLocationButton){
@@ -116,13 +128,6 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
             locationManager.startRangingBeaconsInRegion(region);
             }
         }
-    }
-    
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func getBeaconDetails(major: Int, minor: Int, rssi: Int){
@@ -159,16 +164,13 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
 
     }
 
-   
+    //MARK:- LocationManager Delegates
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
         println("rangingDidFailForRegion");
         println(error.localizedDescription);
     }
     
-    
-    
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-
         
         //Disregard beacons that are Unknown proximity
         let knownBeacons = beacons.filter{ $0.proximity != CLProximity.Unknown };
@@ -187,9 +189,10 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
             //TODO:- Only turn of beacon ranging, when the server has returned a car park ID?
             //TODO:- Or keep sending the same ID until a response is retunred?
         }
-        
     }
     
+    
+    //MARK:- TableView Delegates
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if(section == 2 && toggleMethod.on){
             //Set the header & footer heights to 0
@@ -235,7 +238,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
     }
 
     
-    //MARK:- Segue - Prepare
+    //MARK:- Segue Functions
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickTimeBand" {
             println("PickTimeBand Segue")
@@ -250,7 +253,8 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
         
     }
     
-    //MARK:- Segue unwind
+    
+    //MARK:- Exit Functions
     @IBAction func selectedTimeBandSave(segue:UIStoryboardSegue) {
         let timeBandSelectViewController = segue.sourceViewController as TimeBandSelectViewController
         if let _selectedTimeBand = timeBandSelectViewController.selectedTimeBand {
@@ -261,6 +265,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
         self.navigationController?.popViewControllerAnimated(true);
     }
     
+    
     //MARK:- SelectUserVehicleDelegate
     func didSelectUserVehicle(userVehicle: Vehicle) {
         println("vehicle Selected")
@@ -270,7 +275,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
     }
     
     
-    //CreateUserVehicleDelegate
+    //MARk:- CreateUserVehicleDelegate
     func newVehicleCreated() {
         println("New Vehicle")
         self.navigationController?.popViewControllerAnimated(true);
