@@ -13,7 +13,7 @@
 import UIKit
 import CoreLocation
 
-class ParkViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
+class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
     
     //MARK:- Variables & Constants
     let locationManager = CLLocationManager();
@@ -22,6 +22,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
     var editLocationButton = false;
     var selectedVehicle:Vehicle?;
     var selectedTimeBand: String?;
+    var selectedCarParkID: Int?;
     
     //MARK:- UI Outlets
     @IBOutlet var determineLocationButton: UIButton!
@@ -98,6 +99,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
                     User.sharedInstance.addParkSession(newParkSession);
                     
                     //Display the new parking session
+                    println("View the arking session")
                     let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as SessionViewController;
                     viewSessionViewController.parkingSession = newParkSession;
                     self.navigationController?.showViewController(viewSessionViewController, sender: nil);
@@ -118,7 +120,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
     @IBAction func determineLocation(sender: AnyObject) {
         //Start looking for beacons so long as we have permission
         if (editLocationButton){
-            self.locationTextField.becomeFirstResponder()
+            manuallyEnterLocation();
         }else{
             if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
             //Start looks for regions
@@ -153,7 +155,8 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
                 self.locationTextField.text = "\(carParkID): \(carParkName)";
-                self.determineLocationButton.setTitle("Edit location", forState: UIControlState.Normal);
+                self.selectedCarParkID = carParkID;
+                self.determineLocationButton.setTitle("Manually Enter location", forState: UIControlState.Normal);
                 self.editLocationButton = true;
                 
                 alert.show();
@@ -231,7 +234,7 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
         if(indexPath.section == 0 && indexPath.row == 1 && !editLocationButton) {
             determineLocation(self);
         }else if (indexPath.section == 0 && indexPath.row == 1 && editLocationButton){
-            self.locationTextField.becomeFirstResponder();
+            self.manuallyEnterLocation();
         }else if(indexPath.section == 3 && indexPath.row == 0){
             parkPressed(self);
         }
@@ -275,10 +278,19 @@ class ParkViewController: UITableViewController, UITableViewDelegate, CLLocation
     }
     
     
-    //MARk:- CreateUserVehicleDelegate
+    //MARK:- CreateUserVehicleDelegate
     func newVehicleCreated() {
         println("New Vehicle")
         self.navigationController?.popViewControllerAnimated(true);
+    }
+    
+    
+    //MARK:- Custom Functions
+    func manuallyEnterLocation(){
+        self.locationTextField.text = "";
+        self.locationTextField.placeholder = "Location ID"
+        self.selectedCarParkID = nil;
+        self.locationTextField.becomeFirstResponder()
     }
 }
 

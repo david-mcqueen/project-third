@@ -25,29 +25,33 @@ func determineCarPark(token: String, identifier: String, requestCompleted: (succ
         }
         var err: NSError?
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-        }
-        
-        if let dataError: AnyObject = jsonResult["Error"]{
-            println(dataError);
-            errorResponse = dataError as? String;
-        }else{
-            if let parkID: AnyObject = jsonResult["CarParkID"]{
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
             
-                carParkID = parkID as? Int
-                success = true;
+            if let dataError: AnyObject = jsonResult["Error"]{
+                println(dataError);
+                errorResponse = dataError as? String;
+            }else{
+                if let parkID: AnyObject = jsonResult["CarParkID"]{
+                    
+                    carParkID = parkID as? Int
+                    success = true;
+                }
+                if let parkName: AnyObject = jsonResult["Name"]{
+                    
+                    carParkName = parkName as? String
+                    success = true;
+                }
             }
-            if let parkName: AnyObject = jsonResult["Name"]{
-                
-                carParkName = parkName as? String
-                success = true;
-            }
+            
+            
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        }else{
+            errorResponse = "Server Error"
         }
-
         
-        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
         requestCompleted(success: success, carParkID: carParkID!, carParkName: carParkName!, error: errorResponse);
     });
     
@@ -88,21 +92,25 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkTime: Int, p
             errorResponse = error.localizedDescription;
         }
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-            errorResponse = err!.localizedDescription;
-        }
-        
-        if let dataError: AnyObject = jsonResult["Error"]{
-            println(dataError);
-            errorResponse = dataError as? String;
-        }else if let parkID: AnyObject = jsonResult["ParkTransactionID"]{
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
+            }
             
-            parkTransaction = parkID as? Int
-            success = true;
+            if let dataError: AnyObject = jsonResult["Error"]{
+                println(dataError);
+                errorResponse = dataError as? String;
+            }else if let parkID: AnyObject = jsonResult["ParkTransactionID"]{
+                
+                parkTransaction = parkID as? Int
+                success = true;
+            }
+        }else{
+            errorResponse = "Server Error"
         }
+        
+        
         
         parkCompleted(success: success, parkTransactionID: parkTransaction, error: errorResponse);
     });
@@ -144,23 +152,26 @@ func stopParking(token: String, parkTransactionID: Int, endParkComplete: (succes
             errorResponse = error.localizedDescription;
         }
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        
-        println(jsonResult);
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-            errorResponse = err!.localizedDescription;
-        }
-        
-        if let dataError: AnyObject = jsonResult["Error"]{
-            println(dataError);
-            errorResponse = dataError as? String;
-        }else if let parkID: AnyObject = jsonResult["Value"]{
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            println(jsonResult);
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
+            }
             
-            parkTransactionValue = parkID as? Double
-            success = true;
+            if let dataError: AnyObject = jsonResult["Error"]{
+                println(dataError);
+                errorResponse = dataError as? String;
+            }else if let parkID: AnyObject = jsonResult["Value"]{
+                
+                parkTransactionValue = parkID as? Double
+                success = true;
+            }
+            println(parkTransactionValue);
+        }else{
+            errorResponse = "Server Error"
         }
-        println(parkTransactionValue);
+        
         
         endParkComplete(success: success, value: parkTransactionValue, error: errorResponse);
     });
@@ -168,3 +179,55 @@ func stopParking(token: String, parkTransactionID: Int, endParkComplete: (succes
     parkVehicleResponse.resume();
     
 }
+
+
+func getCarParkParkingBands(token: String, carParkID: Int, requestCompleted: (success: Bool, carParkID: Int, carParkName: String, error: String?) -> ()) -> (){
+    
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/carpark/cost?Token=\(token)&CarParkID=\(carParkID)");
+    let urlSession = NSURLSession.sharedSession();
+    
+    let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+        
+        var carParkName: String?;
+        var carParkID: Int?;
+        var success = false;
+        var errorResponse: String?;
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+        }
+        var err: NSError?
+        
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+            
+            if let dataError: AnyObject = jsonResult["Error"]{
+                println(dataError);
+                errorResponse = dataError as? String;
+            }else{
+                if let parkID: AnyObject = jsonResult["CarParkID"]{
+                    
+                    carParkID = parkID as? Int
+                    success = true;
+                }
+                if let parkName: AnyObject = jsonResult["Name"]{
+                    
+                    carParkName = parkName as? String
+                    success = true;
+                }
+            }
+
+        }else{
+            errorResponse = "Server Error"
+        }
+        
+        
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        requestCompleted(success: success, carParkID: carParkID!, carParkName: carParkName!, error: errorResponse);
+    });
+    
+    jsonResponse.resume();
+}
+

@@ -46,21 +46,25 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
             errorResponse = error.localizedDescription;
         }
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-            errorResponse = err!.localizedDescription;
-        }
-        
-        
-        if let responseToken: AnyObject = jsonResult["Token"]{
-            token = responseToken as? String;
-            
-            if (validateGUID(token!)){
-                success = true;
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
             }
+            
+            
+            if let responseToken: AnyObject = jsonResult["Token"]{
+                token = responseToken as? String;
+                
+                if (validateGUID(token!)){
+                    success = true;
+                }
+            }
+        }else{
+            errorResponse = "Server Error"
         }
+        
+        
         
         loginCompleted(success: success, token: token, error: errorResponse);
     });
@@ -108,21 +112,25 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
             println(error.localizedDescription);
             errorResponse = error.localizedDescription;
         }
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-            errorResponse = err!.localizedDescription;
-        }
-        
-        
-        if let responseToken: AnyObject = jsonResult["Token"]{
-            token = responseToken as? String;
-            
-            if (validateGUID(token!)){
-                success = true;
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
             }
+            
+            
+            if let responseToken: AnyObject = jsonResult["Token"]{
+                token = responseToken as? String;
+                
+                if (validateGUID(token!)){
+                    success = true;
+                }
+            }
+        }else{
+            errorResponse = "Server Error"
         }
+        
+        
         
         registerCompleted(success: success, token: token!, error: errorResponse);
     });
@@ -149,12 +157,11 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
             }
             var err: NSError?
             var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
-            var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
-            
-            if (err != nil){
-                println("JSON Error \(err!.localizedDescription) ");
-            }
-            
+            if var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSArray{
+                if (err != nil){
+                    println("JSON Error \(err!.localizedDescription) ");
+                }
+                
                 for session in jsonResult{
                     if let errorMessage: AnyObject = session["Error"]!{
                         println(errorMessage);
@@ -194,6 +201,11 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     
                 }
                 success = true;
+            }else{
+                errorResponse = "Server Error"
+            }
+            
+            
             requestCompleted(success: success, session: sessions, error: errorResponse);
         });
         
@@ -245,19 +257,23 @@ func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success:
             errorResponse = error.localizedDescription;
         }
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        
-        
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-            errorResponse = err!.localizedDescription;
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
+            }
+            
+            
+            if let newVehicleID: AnyObject = jsonResult["UserVehicleID"]{
+                success = true;
+                newVehicle.VehicleID = newVehicleID as? Int;
+            }
+            
+        }else{
+            errorResponse = "Server Error";
         }
         
         
-        if let newVehicleID: AnyObject = jsonResult["UserVehicleID"]{
-            success = true;
-            newVehicle.VehicleID = newVehicleID as? Int;
-        }
         
         vehicleCreated(success: success, createdVehicle: newVehicle, error: errorResponse);
     });
@@ -283,30 +299,32 @@ func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicle
         }
         var err: NSError?
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
-        var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
-    
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-        }
-        
-        for vehicle in jsonResult{
-            if let errorMessage: AnyObject = vehicle["Error"]!{
-                println(errorMessage);
-                errorResponse = errorMessage as? String;
+        if var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSArray{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
             }
-            let userVehicleID: AnyObject? = vehicle["UserVehicleID"]!
-            let vehicleRegistration: AnyObject?  = vehicle["Registration"]!
-            let vehicleModel: AnyObject?  = vehicle["Model"]!
-            let vehicleMake: AnyObject?  = vehicle["Make"]!
-            let vehicleColour: AnyObject?  = vehicle["Colour"]!
             
-            //TODO:- Get the vehicle information back from the server
-            //Or can link to the known vehicles on the user account?
-            let vehicle = Vehicle(make: vehicleMake!.description, model: vehicleModel!.description, colour: vehicleColour!.description, registrationNumber: vehicleRegistration!.description, vehicleID: (userVehicleID!.description).toInt()!);
-            
-            vehicles.append(vehicle);
+            for vehicle in jsonResult{
+                if let errorMessage: AnyObject = vehicle["Error"]!{
+                    println(errorMessage);
+                    errorResponse = errorMessage as? String;
+                }
+                let userVehicleID: AnyObject? = vehicle["UserVehicleID"]!
+                let vehicleRegistration: AnyObject?  = vehicle["Registration"]!
+                let vehicleModel: AnyObject?  = vehicle["Model"]!
+                let vehicleMake: AnyObject?  = vehicle["Make"]!
+                let vehicleColour: AnyObject?  = vehicle["Colour"]!
+                
+                //TODO:- Get the vehicle information back from the server
+                //Or can link to the known vehicles on the user account?
+                let vehicle = Vehicle(make: vehicleMake!.description, model: vehicleModel!.description, colour: vehicleColour!.description, registrationNumber: vehicleRegistration!.description, vehicleID: (userVehicleID!.description).toInt()!);
+                
+                vehicles.append(vehicle);
+            }
+            success = true;
+        }else{
+            errorResponse = "Server Error"
         }
-        success = true;
         
         
         requestCompleted(success: success, vehicles: vehicles, error: errorResponse);
@@ -334,19 +352,22 @@ func userBalance(token: String, requestCompleted: (success: Bool, balance: Doubl
         }
         var err: NSError?
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
-        var jsonResult : NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-        }
-        
-        if let errorMessage: AnyObject = jsonResult["Error"]{
-            println(errorMessage);
-            errorResponse = errorMessage as? String;
-        }else{
-            let balance: AnyObject? = jsonResult["Balance"]!
-            newBalance = (balance!.description as NSString).doubleValue;
+        if var jsonResult : NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+            
+            if let errorMessage: AnyObject = jsonResult["Error"]{
+                println(errorMessage);
+                errorResponse = errorMessage as? String;
+            }else{
+                let balance: AnyObject? = jsonResult["Balance"]!
+                newBalance = (balance!.description as NSString).doubleValue;
                 
-            success = true;
+                success = true;
+            }
+        }else{
+            errorResponse = "Server Error"
         }
         
         requestCompleted(success: success, balance: newBalance, error: errorResponse);
@@ -388,19 +409,22 @@ func userAddFunds(token: String, paypalTransactionID: String, requestCompleted: 
             errorResponse = error.localizedDescription;
         }
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-        
-        
-        if (err != nil){
-            println("JSON Error \(err!.localizedDescription) ");
-            errorResponse = err!.localizedDescription;
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
+            }
+            
+            
+            if let newVehicleID: AnyObject = jsonResult["Balance"]{
+                success = true;
+                userBalance = newVehicleID as? Double;
+            }
+        }else{
+            errorResponse = "Server Error"
         }
-        
-        
-        if let newVehicleID: AnyObject = jsonResult["Balance"]{
-            success = true;
-            userBalance = newVehicleID as? Double;
-        }
+       
         
         requestCompleted(success: success, balance: userBalance, error: errorResponse);
     });

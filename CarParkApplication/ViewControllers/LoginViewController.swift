@@ -26,7 +26,7 @@ class LoginViewController: UIViewController{
         }
         
         //TODO:- remove this line
-        inputPassword.text = "Password123"
+        inputPassword.text = "Password"
         
     }
     

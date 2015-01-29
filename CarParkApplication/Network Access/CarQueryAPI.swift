@@ -27,21 +27,25 @@ func getMakes(requestCompleted: (success: Bool, vehicleMakes: [CarMake], serverE
         var makes: [CarMake] = [];
         var _success: Bool = false;
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &jsonerr) as NSDictionary;
-        
-        if let vehicleMakeArray = jsonResult["Makes"] as? NSArray{
-            for make in vehicleMakeArray {
-                let carCountry: AnyObject? = make["make_display"]!;
-                let carDisplay: AnyObject?  = make["make_display"]!;
-                let carID: AnyObject?  = make["make_id"]!;
-                let carCommon: AnyObject?  = make["make_is_common"]!;
-                
-                let newCar = CarMake(_make_country: carCountry!.description, _make_display: carDisplay!.description, _make_id: carID!.description, _make_is_common: carCommon!.description);
-                
-                makes.append(newCar);
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &jsonerr) as? NSDictionary{
+            if let vehicleMakeArray = jsonResult["Makes"] as? NSArray{
+                for make in vehicleMakeArray {
+                    let carCountry: AnyObject? = make["make_display"]!;
+                    let carDisplay: AnyObject?  = make["make_display"]!;
+                    let carID: AnyObject?  = make["make_id"]!;
+                    let carCommon: AnyObject?  = make["make_is_common"]!;
+                    
+                    let newCar = CarMake(_make_country: carCountry!.description, _make_display: carDisplay!.description, _make_id: carID!.description, _make_is_common: carCommon!.description);
+                    
+                    makes.append(newCar);
+                }
+                _success = true;
             }
-            _success = true;
+
+        }else{
+            NSLog("Server Error")
         }
+        
         
         requestCompleted(success: _success, vehicleMakes: makes, serverError: error, JSONerror: jsonerr);
     });
@@ -65,19 +69,22 @@ func getModels(modelID: String, requestModelsCompleted: (success: Bool, vehicleM
         var _success: Bool = false;
 
         
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &jsonerr) as NSDictionary;
-        
-        if let vehicleModelArray = jsonResult["Models"] as? NSArray{
-            for model in vehicleModelArray {
-                let modelname: AnyObject? = model["model_name"]!;
-                let modelID: AnyObject?  = model["model_make_id"]!;
-                
-                let newCar = CarModel(_model_name: modelname!.description, _model_make_id: modelID!.description);
-                
-                models.append(newCar);
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &jsonerr) as? NSDictionary{
+            if let vehicleModelArray = jsonResult["Models"] as? NSArray{
+                for model in vehicleModelArray {
+                    let modelname: AnyObject? = model["model_name"]!;
+                    let modelID: AnyObject?  = model["model_make_id"]!;
+                    
+                    let newCar = CarModel(_model_name: modelname!.description, _model_make_id: modelID!.description);
+                    
+                    models.append(newCar);
+                }
+                _success = true;
             }
-            _success = true;
+        }else{
+            NSLog("Server Error")
         }
+        
         
         requestModelsCompleted(success: _success, vehicleModels: models, serverError: error, JSONerror: jsonerr);
     });

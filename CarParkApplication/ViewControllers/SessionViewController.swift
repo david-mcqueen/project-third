@@ -3,7 +3,7 @@
 //  CarParkApplication
 //
 //  Created by DavidMcQueen on 22/01/2015.
-//  Copyright (c) 2015 DavidMcQueen. All rights reserved.
+//  Copyright (c) 2015 David McQueen. All rights reserved.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ class SessionViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        println("SessionViewController")
         //self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
         
         populateSessionFields();
@@ -80,7 +80,8 @@ class SessionViewController: UITableViewController{
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
         sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
         sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
-        sessionLocationLabel.text = parkingSession?.CarParkID.description;
+//        sessionLocationLabel.text = parkingSession?.CarParkID.description;
+        println("CarParkID \(parkingSession?.CarParkID.description)");
     }
     
     

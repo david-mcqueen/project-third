@@ -21,16 +21,16 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     @IBOutlet weak var lblCurrentSessionCount: UILabel!
     @IBOutlet weak var lblPreviousSessionCount: UILabel!
-    
+
     var displayAddFunds: Bool = false;
-    
+
     var paymentIndicatorView: UIView = UIView(frame: CGRectMake(0, 0, 200, 200));
     var paymentIndicatorActivity : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView;
     var paymentIndicatorLabel: UILabel = UILabel(frame: CGRectMake(20, 115, 130, 22));
     
     var config = PayPalConfiguration()
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,7 +62,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         paymentIndicatorView.addSubview(paymentIndicatorLabel);
         
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
         
@@ -75,7 +75,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     //MARK:- Table delegates
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 1 && indexPath.row == 1){
@@ -159,7 +159,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         self.paymentIndicatorView.removeFromSuperview();
         
     }
-    
+
     func sendCompletedPaymentToServer(completedPayment: PayPalPayment){
         NSLog("Here is your proof of payment:\n\n%@\n\nSend this to your server for confirmation and fulfillment.", completedPayment.confirmation);
         NSLog(String(format: "%f", completedPayment.amount));
@@ -192,7 +192,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         }
         
     }
-    
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "previousParkingSessions" {
@@ -201,7 +201,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
             currentSessionViewController.currentSessions = false
         }
     }
-    
+
     
     //MARK:- Gte user information from the server
     
@@ -261,7 +261,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     }
     func refresh(sender:AnyObject)
     {
-        println("Refresh")
+        println("Refresh");
         getUserBalance();
         getUserVehicles();
         getUserName();
