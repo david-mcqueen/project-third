@@ -75,11 +75,26 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
         //TODO:- Validation checking on the input fields
-        let userVehicle = selectedVehicle?.VehicleID;
         
-        let carParkLocationID: Int = 1;
+        if (self.selectedCarParkID != nil){
+            //Use the determined location
+            parkUserVehicle(self.selectedCarParkID!)
+            //Use the user provided location
+        }else if (validateLocationID(self.locationTextField.text)){
+            parkUserVehicle((self.locationTextField.text).toInt()!);
+        }else{
+            //No valid location, display an error
+            displayAlert("Incorrect Location", "Please enter a correct location ID", "Ok!");
+            return;
+        }
+    }
+    
+    
+    func parkUserVehicle(selectedCarParkID: Int){
+        let userVehicle = selectedVehicle?.VehicleID;
         let parkingTimeMinutes: Int = 37;
-        parkVehicle(User.sharedInstance.token!, carParkLocationID, userVehicle!, parkingTimeMinutes,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
+        println(selectedCarParkID);
+        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, parkingTimeMinutes,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
             
             var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
             
@@ -95,11 +110,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 alert.show();
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
-                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: carParkLocationID, startTime: NSDate(), currentSession: true, parkedVehicleID: self.selectedVehicle!.VehicleID!);
+                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: selectedCarParkID, startTime: NSDate(), currentSession: true, parkedVehicleID: self.selectedVehicle!.VehicleID!);
                     User.sharedInstance.addParkSession(newParkSession);
                     
                     //Display the new parking session
-                    println("View the arking session")
+                    println("View the parking session")
                     let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as SessionViewController;
                     viewSessionViewController.parkingSession = newParkSession;
                     self.navigationController?.showViewController(viewSessionViewController, sender: nil);
@@ -113,7 +128,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             
             }
         );
-        
     }
 
     //MARK:- Beacon functions

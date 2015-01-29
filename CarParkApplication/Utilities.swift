@@ -97,6 +97,14 @@ func validateGUID(inputGUID: String) -> Bool {
     return GUIDTest!.evaluateWithObject(inputGUID);
 }
 
+func validateLocationID(inputID: String) -> Bool{
+    //Phone Number must be 11 characters long
+    let numberRegEx = "[0-9]{1,8}";
+    var numberTest = NSPredicate(format:"SELF MATCHES %@", numberRegEx);
+    
+    return numberTest!.evaluateWithObject(inputID);
+}
+
 func displayAlert(title: String, message: String, cancelButton: String){
     var alert = UIAlertView(title: "Success!", message: message, delegate: nil, cancelButtonTitle: cancelButton)
     alert.show();
