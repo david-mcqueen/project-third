@@ -26,6 +26,6 @@ class PricingBand{
     }
     
     func displayBand() -> String {
-        return "\(self.MinimumTimeHours) - \(self.MaximumTimeHours) hours";
+        return "\(self.MinimumTimeHours) - \(self.MaximumTimeHours) hours. £\(self.BandCost)";
     }
 }

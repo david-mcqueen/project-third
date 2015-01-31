@@ -315,6 +315,10 @@
                                                     <rect key="frame" x="93" y="8" width="499" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="didChangeLocationID:" destination="nUs-13-0F2" eventType="valueChanged" id="Vod-wK-Xlo"/>
+                                                        <action selector="didFinishEditingLocationID:" destination="nUs-13-0F2" eventType="editingDidEnd" id="DhH-L6-lOU"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>

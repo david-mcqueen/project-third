@@ -72,9 +72,32 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.tableView.reloadData();
     }
     
+    @IBAction func didFinishEditingLocationID(sender: AnyObject) {
+        println("finished editing")
+        if (validateLocationID(self.locationTextField.text)){
+            self.selectedCarParkID = (self.locationTextField.text).toInt();
+        }else{
+            displayAlert("Invalid ID", "Please enter a valid location ID", "Ok");
+        }
+        
+        
+    }
+    
+
+    
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
         //TODO:- Validation checking on the input fields
+        
+        if (selectedTimeBand == nil){
+            displayAlert("Time Band", "Please select a valid time band", "Ok")
+            return;
+        }
+        
+        if (User.sharedInstance.CurrentBalance < selectedTimeBand?.BandCost){
+            displayAlert("Insufficient Fund", "Please ensure you have enough funds on your account for this parking", "Ok");
+            return;
+        }
         
         if (self.selectedCarParkID != nil){
             //Use the determined location
@@ -160,13 +183,13 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             }
             else {
                 alert.title = "Failed : ("
-                alert.message = carParkName
+                alert.message = error
             }
             
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
-                self.locationTextField.text = "\(carParkID): \(carParkName)";
+                self.locationTextField.text = "\(carParkID)";
                 self.selectedCarParkID = carParkID;
                 self.determineLocationButton.setTitle("Manually Enter location", forState: UIControlState.Normal);
                 self.editLocationButton = true;
@@ -258,10 +281,14 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         if segue.identifier == "PickTimeBand" {
             
             println("PickTimeBand Segue")
+            self.didFinishEditingLocationID(self);
+            self.locationTextField.endEditing(true);
             let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
             timeBandSelectViewController.selectedTimeBand = selectedTimeBand
             timeBandSelectViewController.delegate = self;
+            
             timeBandSelectViewController.selectedCarPark = selectedCarParkID;
+            
             
         }else if segue.identifier == "PickUserVehicle" {
             
