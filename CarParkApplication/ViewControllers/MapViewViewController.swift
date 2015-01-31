@@ -184,6 +184,11 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 
                 self.addMapAnnotation(location, title: "Car Park Location", subtitle: "Some car park information goes here");
                 displayAlert("Map Coordinates", ("Lat: \(latitude) Long: \(longitude)"), "Dismiss");
+                
+                searchCarParks(User.sharedInstance.token!, latitude.description, longitude.description, { (success, returnedCarParks, error) -> () in
+                    println(success);
+                    println(returnedCarParks);
+                })
             }
         });
     }

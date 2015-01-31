@@ -30,6 +30,8 @@
 		552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
 		552C98F91A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
 		552C98FA1A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
+		552E0A2A1A7CE61E008C6A2A /* CarPark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A291A7CE61E008C6A2A /* CarPark.swift */; };
+		552E0A2B1A7CE62F008C6A2A /* CarPark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A291A7CE61E008C6A2A /* CarPark.swift */; };
 		55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55440BB91A34B96700969FBC /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BB11A34B96700969FBC /* libPayPalMobile.a */; };
@@ -104,6 +106,7 @@
 		55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleSelectViewController.swift; path = ViewControllers/VehicleSelectViewController.swift; sourceTree = "<group>"; };
 		552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionSelectViewController.swift; path = ViewControllers/SessionSelectViewController.swift; sourceTree = "<group>"; };
 		552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSessionViewCell.swift; path = Classes/Display/ParkSessionViewCell.swift; sourceTree = "<group>"; };
+		552E0A291A7CE61E008C6A2A /* CarPark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarPark.swift; path = Classes/CarPark.swift; sourceTree = "<group>"; };
 		55322CF71A6EAEB300C13F2E /* ParkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSession.swift; path = Classes/ParkSession.swift; sourceTree = "<group>"; };
 		55440BA91A34B96700969FBC /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		55440BAA1A34B96700969FBC /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 				550294BF1A542C7900198EC7 /* UserLogin.swift */,
 				55322CF71A6EAEB300C13F2E /* ParkSession.swift */,
 				55B8D2AC1A740EA3000665DA /* TimeConversionPlayground.playground */,
+				552E0A291A7CE61E008C6A2A /* CarPark.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -494,6 +498,7 @@
 				550294C21A542C7900198EC7 /* UserLogin.swift in Sources */,
 				557C2CED19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
 				55BB56A019F2C70C00492154 /* Utilities.swift in Sources */,
+				552E0A2A1A7CE61E008C6A2A /* CarPark.swift in Sources */,
 				550294B91A5429B400198EC7 /* CarQueryAPI.swift in Sources */,
 				557C2CEA19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,
 				55440BC81A34BA7400969FBC /* Bridge.m in Sources */,
@@ -532,6 +537,7 @@
 				555031511A71174400B9FDB0 /* SessionViewController.swift in Sources */,
 				5554A6231A617C60004D2D28 /* CreateVehicleDelegate.swift in Sources */,
 				55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
+				552E0A2B1A7CE62F008C6A2A /* CarPark.swift in Sources */,
 				557C2CEB19F2C3FE00DE28DF /* UserRegistration.swift in Sources */,
 				558777F21A5D58E6008ACCE9 /* User.swift in Sources */,
 				55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */,

@@ -231,3 +231,65 @@ func getCarParkParkingBands(token: String, carParkID: Int, requestCompleted: (su
     jsonResponse.resume();
 }
 
+
+
+func searchCarParks(token: String, lat:String, long:String, searchComplete: (success: Bool, returnedCarParks: [CarPark], error: String?) -> ()) -> (){
+    
+    println("All user vehicles")
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/carpark/search?Token=\(token)&Latitude=\(lat)&Longitude=\(long)");
+    let urlSession = NSURLSession.sharedSession();
+    var carParks: [CarPark] = []
+    
+    let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
+        
+        var success = false;
+        var errorResponse: String?;
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+        }
+        var err: NSError?
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        if var jsonResult : NSArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSArray{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+            }
+            
+            println(jsonResult);
+            
+            for carPark in jsonResult{
+                if let errorMessage: AnyObject = carPark["Error"]!{
+                    println(errorMessage);
+                    errorResponse = errorMessage as? String;
+                }
+                let carParkID: AnyObject? = carPark["CarParkID"]!
+                let carParkName: AnyObject?  = carPark["Name"]!
+                let carParkLat: AnyObject?  = carPark["Latitude"]!
+                let carParkLong: AnyObject?  = carPark["Longitude"]!
+                let carParkDistance: AnyObject?  = carPark["Distance"]!
+                let carParkOpen: AnyObject? = carPark["OpenTime"];
+                let carParkClose: AnyObject? = carPark["CloseTime"];
+
+                let newCarPark = CarPark(_id:
+                    (carParkID!.description).toInt()!,
+                    _name: carParkName!.description,
+                    _lat: carParkLat!.description,
+                    _long: carParkLong!.description,
+                    _distance: ((carParkDistance!.description) as NSString).doubleValue,
+                    _open: carParkOpen?.description,
+                    _close: carParkClose?.description
+                )
+                println(newCarPark);
+                carParks.append(newCarPark);
+            }
+            success = true;
+        }else{
+            errorResponse = "Server Error"
+        }
+        
+        searchComplete(success: success, returnedCarParks: carParks, error: errorResponse);
+    });
+    
+    jsonResponse.resume();
+    
+}
