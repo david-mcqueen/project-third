@@ -152,11 +152,15 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         focusMap(location);
     }
     
-    @IBAction func searchPressed(sender: AnyObject) {
-
+    func removeAnnotations(){
         self.view.endEditing(true)
         self.map.removeAnnotations(allAnnotations);
         allAnnotations.removeAll(keepCapacity: false);
+    }
+    
+    @IBAction func searchPressed(sender: AnyObject) {
+
+        
         
         var address =  txtSearchLocation.text;
         println("Searching in location \(address)")
@@ -176,18 +180,26 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 
                 self.focusMap(location);
+                
 
-                //TODO:- Populate the map with markers indicating each of the parking locations
-                //First need to send to the server to get the map locations
-                println("Lat: \(latitude)");
-                println("Long: \(longitude)");
-                
-                self.addMapAnnotation(location, title: "Car Park Location", subtitle: "Some car park information goes here");
-                displayAlert("Map Coordinates", ("Lat: \(latitude) Long: \(longitude)"), "Dismiss");
-                
+                self.removeAnnotations();
                 searchCarParks(User.sharedInstance.token!, latitude.description, longitude.description, { (success, returnedCarParks, error) -> () in
-                    println(success);
-                    println(returnedCarParks);
+                    if success {
+                        for carPark in returnedCarParks{
+                            let latitude: CLLocationDegrees = (carPark.Latitude as NSString).doubleValue;
+                            let longitude: CLLocationDegrees = (carPark.Longitude as NSString).doubleValue;
+                            let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude);
+                            var openingTimes: String?;
+                            if (carPark.Open != nil) && (carPark.Close != nil){
+                                openingTimes = "Open: \(carPark.Open!) Close: \(carPark.Close!)"
+                            }else{
+                                openingTimes = "Car park is currently closed";
+                            }
+                            self.addMapAnnotation(location, title: "\(carPark.Name) (\(carPark.ID))", subtitle: "\(openingTimes!)");
+                        }
+                    }else{
+                        NSLog("Something went wrong")
+                    }
                 })
             }
         });
@@ -241,7 +253,6 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     func addMapAnnotation(location: CLLocationCoordinate2D, title: String, subtitle: String){
-        println("Add Annotation")
         var annotation = MKPointAnnotation()
         annotation.coordinate = location
         annotation.title = title
@@ -252,8 +263,8 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
 
     func focusMap(location: CLLocationCoordinate2D){
-        var mapCamera = MKMapCamera(lookingAtCenterCoordinate: location, fromEyeCoordinate: location, eyeAltitude: 1000)
-        self.map.setCamera(mapCamera, animated: true)
+        var mapCamera = MKMapCamera(lookingAtCenterCoordinate: location, fromEyeCoordinate: location, eyeAltitude: 1500);
+        self.map.setCamera(mapCamera, animated: true);
     }
     
     
