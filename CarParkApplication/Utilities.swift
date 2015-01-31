@@ -106,7 +106,7 @@ func validateLocationID(inputID: String) -> Bool{
 }
 
 func displayAlert(title: String, message: String, cancelButton: String){
-    var alert = UIAlertView(title: "Success!", message: message, delegate: nil, cancelButtonTitle: cancelButton)
+    var alert = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButton)
     alert.show();
 }
 

@@ -100,7 +100,8 @@ class SessionSelectViewController: UITableViewController {
                             //TODO:- Display the cost of the parking session.
                             println("\(value)")
                         }else{
-                            NSLog("Something went wrong. \(error)")
+                            displayAlert("Server Error", error!, "Ok");
+                            NSLog("Something went wrong. \(error)");
                         }
 
                     });

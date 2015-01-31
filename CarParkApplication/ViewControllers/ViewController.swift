@@ -13,7 +13,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate {
+class ViewController: UITableViewController, UITableViewDelegate, CLLocationManagerDelegate, SelectUserVehicleDelegate, CreateVehicleDelegate, TimeBandSelectedDelegate {
     
     //MARK:- Variables & Constants
     let locationManager = CLLocationManager();
@@ -21,7 +21,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     var editLocationButton = false;
     var selectedVehicle:Vehicle?;
-    var selectedTimeBand: String?;
+    var selectedTimeBand: PricingBand?;
     var selectedCarParkID: Int?;
     
     //MARK:- UI Outlets
@@ -42,7 +42,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         locationManager.delegate = self;
         vehicleLabel.text = selectedVehicle?.displayVehicle();
         if ((selectedTimeBand) != nil){
-            timeBandLabel.text = selectedTimeBand;
+            timeBandLabel.text = selectedTimeBand!.displayBand();
         }else{
             timeBandLabel.text = "Select Time";
         }
@@ -92,9 +92,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     func parkUserVehicle(selectedCarParkID: Int){
         let userVehicle = selectedVehicle?.VehicleID;
-        let parkingTimeMinutes: Int = 37;
-        println(selectedCarParkID);
-        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, parkingTimeMinutes,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
+        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, selectedTimeBand!.BandID,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
             
             var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
             
@@ -258,10 +256,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     //MARK:- Segue Functions
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickTimeBand" {
+            
             println("PickTimeBand Segue")
             let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
             timeBandSelectViewController.selectedTimeBand = selectedTimeBand
+            timeBandSelectViewController.delegate = self;
+            timeBandSelectViewController.selectedCarPark = selectedCarParkID;
+            
         }else if segue.identifier == "PickUserVehicle" {
+            
             println("PickVehicleBand Segue")
             let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
             vehicleSelectViewController.selectedVehicle = selectedVehicle
@@ -275,7 +278,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     @IBAction func selectedTimeBandSave(segue:UIStoryboardSegue) {
         let timeBandSelectViewController = segue.sourceViewController as TimeBandSelectViewController
         if let _selectedTimeBand = timeBandSelectViewController.selectedTimeBand {
-            timeBandLabel.text = _selectedTimeBand
+            timeBandLabel.text = _selectedTimeBand.displayBand()
             selectedTimeBand = _selectedTimeBand
             println("selected time band: \(selectedTimeBand)");
         }
@@ -296,6 +299,12 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     func newVehicleCreated() {
         println("New Vehicle")
         self.navigationController?.popViewControllerAnimated(true);
+    }
+    
+    
+    //MARK:- TimeBandSelectedDelegate
+    func didSelectTimeBand(timeBandID: PricingBand){
+        println(timeBandID);
     }
     
     

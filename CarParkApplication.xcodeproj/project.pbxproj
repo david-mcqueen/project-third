@@ -32,6 +32,10 @@
 		552C98FA1A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
 		552E0A2A1A7CE61E008C6A2A /* CarPark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A291A7CE61E008C6A2A /* CarPark.swift */; };
 		552E0A2B1A7CE62F008C6A2A /* CarPark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A291A7CE61E008C6A2A /* CarPark.swift */; };
+		552E0A2D1A7D0358008C6A2A /* PricingBands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A2C1A7D0358008C6A2A /* PricingBands.swift */; };
+		552E0A2E1A7D0358008C6A2A /* PricingBands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A2C1A7D0358008C6A2A /* PricingBands.swift */; };
+		552E0A301A7D2108008C6A2A /* TimeBandSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A2F1A7D2108008C6A2A /* TimeBandSelected.swift */; };
+		552E0A311A7D2108008C6A2A /* TimeBandSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A2F1A7D2108008C6A2A /* TimeBandSelected.swift */; };
 		55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55322CF71A6EAEB300C13F2E /* ParkSession.swift */; };
 		55440BB91A34B96700969FBC /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55440BB11A34B96700969FBC /* libPayPalMobile.a */; };
@@ -107,6 +111,8 @@
 		552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionSelectViewController.swift; path = ViewControllers/SessionSelectViewController.swift; sourceTree = "<group>"; };
 		552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSessionViewCell.swift; path = Classes/Display/ParkSessionViewCell.swift; sourceTree = "<group>"; };
 		552E0A291A7CE61E008C6A2A /* CarPark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarPark.swift; path = Classes/CarPark.swift; sourceTree = "<group>"; };
+		552E0A2C1A7D0358008C6A2A /* PricingBands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PricingBands.swift; path = Classes/PricingBands.swift; sourceTree = "<group>"; };
+		552E0A2F1A7D2108008C6A2A /* TimeBandSelected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeBandSelected.swift; path = Protocols/TimeBandSelected.swift; sourceTree = "<group>"; };
 		55322CF71A6EAEB300C13F2E /* ParkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkSession.swift; path = Classes/ParkSession.swift; sourceTree = "<group>"; };
 		55440BA91A34B96700969FBC /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		55440BAA1A34B96700969FBC /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
@@ -201,6 +207,7 @@
 				55322CF71A6EAEB300C13F2E /* ParkSession.swift */,
 				55B8D2AC1A740EA3000665DA /* TimeConversionPlayground.playground */,
 				552E0A291A7CE61E008C6A2A /* CarPark.swift */,
+				552E0A2C1A7D0358008C6A2A /* PricingBands.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -381,6 +388,7 @@
 			children = (
 				55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */,
 				5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */,
+				552E0A2F1A7D2108008C6A2A /* TimeBandSelected.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -492,6 +500,7 @@
 			files = (
 				55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */,
 				55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */,
+				552E0A301A7D2108008C6A2A /* TimeBandSelected.swift in Sources */,
 				558777F41A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
 				552C98F91A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */,
 				558777E71A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
@@ -517,6 +526,7 @@
 				550294B41A54269A00198EC7 /* CarMake.swift in Sources */,
 				5519BD8F19E32DC800A19484 /* RegisterViewController.swift in Sources */,
 				555031501A71174400B9FDB0 /* SessionViewController.swift in Sources */,
+				552E0A2D1A7D0358008C6A2A /* PricingBands.swift in Sources */,
 				551A189719F0559500E6702B /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,11 +535,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552E0A2E1A7D0358008C6A2A /* PricingBands.swift in Sources */,
 				55322CF91A6EAEB300C13F2E /* ParkSession.swift in Sources */,
 				550294B51A54269A00198EC7 /* CarMake.swift in Sources */,
 				552C98FA1A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */,
 				55B631821A598B7700DD5DBF /* CarParkAPI.swift in Sources */,
 				55BB56A119F2C70C00492154 /* Utilities.swift in Sources */,
+				552E0A311A7D2108008C6A2A /* TimeBandSelected.swift in Sources */,
 				5554A6241A617D1F004D2D28 /* SelectUserVehicle.swift in Sources */,
 				55ABC7691A542E31005A4371 /* UserAPI.swift in Sources */,
 				558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,

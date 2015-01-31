@@ -58,7 +58,7 @@ func determineCarPark(token: String, identifier: String, requestCompleted: (succ
     jsonResponse.resume();
 }
 
-func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkTime: Int, parkCompleted: (success: Bool, parkTransactionID: Int?, error: String?) -> ()) -> (){
+func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int, parkCompleted: (success: Bool, parkTransactionID: Int?, error: String?) -> ()) -> (){
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park");
     let urlSession = NSURLSession.sharedSession();
 
@@ -71,7 +71,7 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkTime: Int, p
         "Token" : token,
         "CarParkID" : carParkID,
         "UserVehicleID" : vehicleID,
-        "Time" : "\(parkTime)"
+        "CarParkCostID" : "\(parkBandID)"
         ]);
     
     request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
@@ -181,7 +181,7 @@ func stopParking(token: String, parkTransactionID: Int, endParkComplete: (succes
 }
 
 
-func getCarParkParkingBands(token: String, carParkID: Int, requestCompleted: (success: Bool, carParkID: Int, carParkName: String, error: String?) -> ()) -> (){
+func getCarParkParkingBands(token: String, carParkID: Int, requestCompleted: (success: Bool, allPricingBands: [PricingBand], error: String?) -> ()) -> (){
     
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/carpark/cost?Token=\(token)&CarParkID=\(carParkID)");
     let urlSession = NSURLSession.sharedSession();
@@ -189,46 +189,56 @@ func getCarParkParkingBands(token: String, carParkID: Int, requestCompleted: (su
     let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
         
         var carParkName: String?;
-        var carParkID: Int?;
         var success = false;
         var errorResponse: String?;
+        var pricingBands: [PricingBand] = [];
         
         if (error != nil) {
             println(error.localizedDescription);
         }
         var err: NSError?
         
-        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSArray{
             if (err != nil){
                 println("JSON Error \(err!.localizedDescription) ");
             }
             
-            if let dataError: AnyObject = jsonResult["Error"]{
-                println(dataError);
-                errorResponse = dataError as? String;
-            }else{
-                if let parkID: AnyObject = jsonResult["CarParkID"]{
-                    
-                    carParkID = parkID as? Int
-                    success = true;
+            println(jsonResult);
+            
+            for band in jsonResult{
+                if let errorMessage: AnyObject = band["Error"]!{
+                    println(errorMessage);
+                    errorResponse = errorMessage as? String;
                 }
-                if let parkName: AnyObject = jsonResult["Name"]{
-                    
-                    carParkName = parkName as? String
-                    success = true;
-                }
+                let bandID: AnyObject? = band["CarParkCostID"]!
+                let bandMinimum: AnyObject?  = band["MinimumTime"]!
+                let bandMaximum: AnyObject?  = band["MaximumTime"]!
+                let bandDay: AnyObject?  = band["Day"]!
+                let bandCost: AnyObject?  = band["Cost"]!
+                
+                
+                let newPricingBand = PricingBand(
+                    _carParkID: carParkID,
+                    _bandID: (bandID!.description).toInt()!,
+                    _minimum: (bandMinimum!.description).toInt()!,
+                    _maximum: (bandMaximum!.description).toInt()!,
+                    _cost: (bandCost!.description as NSString).doubleValue,
+                    _day: (bandDay!.description).toInt()!
+                );
+                println(newPricingBand);
+                pricingBands.append(newPricingBand);
             }
-
+            success = true;
         }else{
             errorResponse = "Server Error"
         }
         
-        
-        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
-        requestCompleted(success: success, carParkID: carParkID!, carParkName: carParkName!, error: errorResponse);
+        requestCompleted(success: success, allPricingBands: pricingBands, error: errorResponse);
     });
     
     jsonResponse.resume();
+    
 }
 
 
