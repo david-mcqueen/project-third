@@ -34,6 +34,7 @@ class SessionSelectViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
         println("viewWillAppear");
+        
         updateTabelData(currentSessions);
         refresh(self);
     }
@@ -58,9 +59,9 @@ class SessionSelectViewController: UITableViewController {
 
         var cellSession = allParkSessions[indexPath.row];
         
-        cell.sessionDetails.text = (cellSession.startTimeAsString()) + (!currentSessions ? " -> \(cellSession.endTimeAsString())" : "");
-        cell.vehicleDetails.text = parkSessions[indexPath.row]
-        cell.locationDetails.text = cellSession.locationDetails();
+        cell.sessionDetails.text = "Date: " + cellSession.startTimeAsString();
+        
+        cell.locationDetails.text = "Location: " + cellSession.locationDetails();
         
         var sessionVehicle: Vehicle?;
         for vehicle in allUserVehicles{
@@ -68,7 +69,7 @@ class SessionSelectViewController: UITableViewController {
                 sessionVehicle = vehicle;
             }
         }
-        cell.vehicleDetails.text = "\(sessionVehicle!.displayVehicle())";
+        cell.vehicleDetails.text = "Vehicle: \(sessionVehicle!.displayVehicle())";
         
         return cell
     }

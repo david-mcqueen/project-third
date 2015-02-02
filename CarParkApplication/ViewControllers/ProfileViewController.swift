@@ -106,9 +106,10 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView //recast your view as a UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
+        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -256,7 +257,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     }
     
     func displayUserBalance(){
-        self.lblBalance.text = User.sharedInstance.getBalanceString();
+        self.lblBalance.text = "£" + User.sharedInstance.getBalanceString();
     }
     
     func displayUserInfo(){

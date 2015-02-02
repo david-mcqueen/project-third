@@ -55,7 +55,7 @@ class ParkSession {
     }
     
     func locationDetails() -> String{
-        return "\(self.CarParkID): \(self.CarParkName)";
+        return "\(self.CarParkName) (\(self.CarParkID))";
     }
     
     func calculateDuration() -> String{
