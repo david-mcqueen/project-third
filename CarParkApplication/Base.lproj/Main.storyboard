@@ -276,7 +276,7 @@
         <scene sceneID="Sqx-Pe-NMo">
             <objects>
                 <navigationController id="SqF-sj-zr8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Park" id="wzf-4P-kKn"/>
+                    <tabBarItem key="tabBarItem" title="Park" image="clock-timer" id="wzf-4P-kKn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BrD-up-P3U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -662,7 +662,7 @@
         <scene sceneID="9YY-JW-39n">
             <objects>
                 <navigationController id="iqD-YZ-B1e" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="NzT-36-9EC"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="earth-america" id="NzT-36-9EC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7e2-bP-hci">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1084,7 +1084,7 @@
         <scene sceneID="r2H-e0-6fj">
             <objects>
                 <navigationController id="PTn-df-WNM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="pwh-XG-UPe"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="circle-user" id="pwh-XG-UPe"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="S8V-AV-9bl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1361,6 +1361,11 @@
             <point key="canvasLocation" x="1774" y="251"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circle-user" width="30" height="30"/>
+        <image name="clock-timer" width="29" height="30"/>
+        <image name="earth-america" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ehk-dQ-7VM"/>
         <segue reference="PoQ-Gl-3fc"/>
