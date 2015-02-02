@@ -10,10 +10,10 @@ import UIKit
 
 class ParkSessionViewCell: UITableViewCell {
     
-    
+    @IBOutlet weak var locationDetails: UILabel!
     @IBOutlet weak var vehicleDetails: UILabel!
-    
     @IBOutlet weak var sessionDetails: UILabel!
+    
     override func awakeFromNib(){
         super.awakeFromNib();
     }

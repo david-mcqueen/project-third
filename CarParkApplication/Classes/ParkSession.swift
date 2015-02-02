@@ -11,23 +11,26 @@ import Foundation
 class ParkSession {
     var ParkSessionID: Int;
     var CarParkID: Int;
+    var CarParkName: String;
     var StartTime: NSDate;
     var EndTime: NSDate?;
     var CurrentSession: Bool;
     var ParkedVehicleID: Int;
     var Value: Double?;
     
-    init (parkSessionID: Int, carParkID: Int, startTime: NSDate, currentSession: Bool, parkedVehicleID: Int){
+    init (parkSessionID: Int, carParkID: Int, carParkName: String, startTime: NSDate, currentSession: Bool, parkedVehicleID: Int){
         self.ParkSessionID = parkSessionID;
         self.CarParkID = carParkID;
+        self.CarParkName = carParkName;
         self.StartTime = startTime;
         self.CurrentSession = currentSession;
         self.ParkedVehicleID = parkedVehicleID;
     }
     
-    init (parkSessionID: Int, carParkID: Int, startTime: NSDate, endTimeParking: NSDate, currentSession: Bool, parkedVehicleID: Int, value: Double){
+    init (parkSessionID: Int, carParkID: Int, carParkName: String, startTime: NSDate, endTimeParking: NSDate, currentSession: Bool, parkedVehicleID: Int, value: Double){
         self.ParkSessionID = parkSessionID;
         self.CarParkID = carParkID;
+        self.CarParkName = carParkName;
         self.StartTime = startTime;
         self.EndTime = endTimeParking;
         self.CurrentSession = currentSession;
@@ -51,7 +54,9 @@ class ParkSession {
         return dateFormatter.stringFromDate(self.EndTime!);
     }
     
-    
+    func locationDetails() -> String{
+        return "\(self.CarParkID): \(self.CarParkName)";
+    }
     
     func calculateDuration() -> String{
         var difference: Double = self.EndTime!.timeIntervalSinceDate(self.StartTime);

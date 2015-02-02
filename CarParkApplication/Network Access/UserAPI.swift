@@ -173,11 +173,13 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     let sessionStartTime: AnyObject?  = session["StartTime"]!
                     let sessionEndTime: AnyObject?  = session["FinishTime"]!
                     let sessionValue: AnyObject?  = session["Value"]!
+                    var sessionCarParkName: AnyObject?  = session["CarParkName"]!
                     
                     if(sessionEndTime == nil){
                         let newSession = ParkSession(
                             parkSessionID: (sessionID!.description).toInt()!,
                             carParkID: (sessionCarParkID!.description).toInt()!,
+                            carParkName: sessionCarParkName!.description!,
                             startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
                             currentSession: true,
                             parkedVehicleID: (sessionVehicleID!.description).toInt()!);
@@ -187,6 +189,7 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                         let newSession = ParkSession(
                             parkSessionID: (sessionID!.description).toInt()!,
                             carParkID: (sessionCarParkID!.description).toInt()!,
+                            carParkName: sessionCarParkName!.description!,
                             startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
                             endTimeParking: dateFormatter.dateFromString(sessionEndTime!.description!)!,
                             currentSession: false,
@@ -195,10 +198,6 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                         
                         sessions.append(newSession);
                     }
-                    
-                    
-                    
-                    
                 }
                 success = true;
             }else{

@@ -50,7 +50,7 @@ class SessionSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return parkSessions.count //The amount of vehicles linked to the user
+        return parkSessions.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,6 +60,7 @@ class SessionSelectViewController: UITableViewController {
         
         cell.sessionDetails.text = (cellSession.startTimeAsString()) + (!currentSessions ? " -> \(cellSession.endTimeAsString())" : "");
         cell.vehicleDetails.text = parkSessions[indexPath.row]
+        cell.locationDetails.text = cellSession.locationDetails();
         
         var sessionVehicle: Vehicle?;
         for vehicle in allUserVehicles{

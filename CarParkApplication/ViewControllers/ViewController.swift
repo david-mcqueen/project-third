@@ -23,6 +23,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var selectedVehicle:Vehicle?;
     var selectedTimeBand: PricingBand?;
     var selectedCarParkID: Int?;
+    var selectedCarParkName: String?;
     
     //MARK:- UI Outlets
     @IBOutlet var determineLocationButton: UIButton!
@@ -129,9 +130,18 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 alert.show();
+                if (self.selectedCarParkName == nil){
+                    self.selectedCarParkName = "";
+                }
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
-                    var newParkSession = ParkSession(parkSessionID: parkTransactionID!, carParkID: selectedCarParkID, startTime: NSDate(), currentSession: true, parkedVehicleID: self.selectedVehicle!.VehicleID!);
+                    var newParkSession = ParkSession(
+                        parkSessionID: parkTransactionID!,
+                        carParkID: selectedCarParkID,
+                        carParkName: self.selectedCarParkName!,
+                        startTime: NSDate(),
+                        currentSession: true,
+                        parkedVehicleID: self.selectedVehicle!.VehicleID!);
                     User.sharedInstance.addParkSession(newParkSession);
                     
                     //Display the new parking session
@@ -177,6 +187,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
             var alert = UIAlertView(title: "Success!", message: carParkName, delegate: nil, cancelButtonTitle: "Okay.")
             if(success) {
+                self.selectedCarParkName = carParkName;
                 alert.title = "Success!"
                 alert.message = carParkName
                 

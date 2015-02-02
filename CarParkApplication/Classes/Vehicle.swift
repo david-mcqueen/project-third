@@ -34,7 +34,5 @@ class Vehicle {
         return ("\(self.Make) \(self.Model) (\(self.RegistrationNumber))");
     }
     
-    func getVehicleID() -> Int{
-        return 2;
-    }
+
 }

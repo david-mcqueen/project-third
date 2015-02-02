@@ -30,7 +30,6 @@ class SessionViewController: UITableViewController{
         
     }
     
-    
     @IBAction func ModifyParkingPressed(sender: AnyObject) {
         if(extendParking){
             println("Extend the parking session")
@@ -80,7 +79,7 @@ class SessionViewController: UITableViewController{
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
         sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
         sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
-//        sessionLocationLabel.text = parkingSession?.CarParkID.description;
+        sessionLocationLabel.text = parkingSession?.locationDetails();
         println("CarParkID \(parkingSession?.CarParkID.description)");
     }
     

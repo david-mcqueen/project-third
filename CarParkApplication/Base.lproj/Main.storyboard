@@ -764,6 +764,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="locationDetails" destination="wVj-mS-uSA" id="1hZ-tP-A2Z"/>
                                     <outlet property="sessionDetails" destination="3pc-pv-02o" id="npf-0U-IE8"/>
                                     <outlet property="vehicleDetails" destination="FDq-Na-s8f" id="RdO-Hw-lBV"/>
                                 </connections>
@@ -963,6 +964,7 @@
                         <outlet property="sessionCostLabel" destination="CzS-y1-0u4" id="sid-Pr-PQx"/>
                         <outlet property="sessionDurationLabel" destination="qS4-SU-khU" id="zqJ-cL-c0J"/>
                         <outlet property="sessionEndLabel" destination="LXA-hW-Wwp" id="0Lp-uE-gPN"/>
+                        <outlet property="sessionLocationLabel" destination="ylx-yH-Oun" id="358-kb-bcq"/>
                         <outlet property="sessionStartLabel" destination="YIY-Fc-HfG" id="u3N-kI-fSX"/>
                         <outlet property="vehicleLabel" destination="8k2-ti-uhc" id="dD0-T3-s8d"/>
                     </connections>
