@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
-class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,UIPickerViewDelegate{
+class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,UIPickerViewDelegate, UITextFieldDelegate{
     
     //MARK:- Static view objects
     @IBOutlet var makeLabel: UILabel!
     @IBOutlet var modelLabel: UILabel!
-    @IBOutlet var modelInput: UITextField!
-    @IBOutlet var makeInput: UITextField!
+
+    @IBOutlet weak var modelInput: UITextField!
+    @IBOutlet weak var makeInput: UITextField!
     @IBOutlet var colourLabel: UITextField!
     @IBOutlet var registrationLabel: UITextField!
     
@@ -47,23 +48,34 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         
         makeInput.inputView = makePicker;
         makeInput.frame = CGRectZero
-        makeInput.hidden = true;
+        makeInput.userInteractionEnabled = false;
+        makeInput.delegate = self;
+        
+        
         
         modelInput.inputView = modelPicker;
         modelInput.frame = CGRectZero;
-        modelInput.hidden = true;
         modelInput.userInteractionEnabled = false;
         
         populateMakes();
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        //Dont allow the user to PASTE into the make / model inputs
+        if textField == makeInput || textField == modelInput{
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    
     //MARK:- Add vehicle
     func submit(_: UIBarButtonItem!) {
         println("Register new vehicle with user")
         
-        println(allInputsComplete());
         if(allInputsComplete()){
-            let newUserVehicle = Vehicle(make: makeLabel.text!, model: modelLabel.text!, colour: colourLabel.text!, registrationNumber: registrationLabel.text!)
+            let newUserVehicle = Vehicle(make: makeInput.text!, model: modelInput.text!, colour: colourLabel.text!, registrationNumber: registrationLabel.text!)
             
             //Process the new vehicle registration with the server
             
@@ -100,8 +112,8 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     
     //MARK:- viewFunctions
     func allInputsComplete() -> Bool{
-        if (modelLabel.text == nil || modelLabel.text == ""
-            || makeLabel.text == nil || makeLabel.text == ""
+        if (modelInput.text == nil || modelInput.text == ""
+            || makeInput.text == nil || makeInput.text == ""
             || registrationLabel.text == nil || registrationLabel.text == ""
             || colourLabel.text == nil || colourLabel.text == ""){
                 return false;
@@ -134,29 +146,31 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         var result: (String, String) = ("","");
         //makePicker.tag == 0
+        println(pickerView.tag);
         if (pickerView.tag == 0){
             //Display the selected car make
-            makeLabel.text = makePickerData[row]
+            makeInput.text = makePickerData[row]
+            println(makePickerData[row]);
             
             //Make the model read only, until the models for that make are loaded
             modelInput.userInteractionEnabled = false;
-            modelLabel.text = "Loading models..."
+            modelInput.placeholder = "Loading models..."
             
             populateModels(self.makeDictionary[makePickerData[row]]!);
         }else{
-            modelLabel.text = modelPickerData[row]
+            modelInput.text = modelPickerData[row]
         }
     }
     
     //MARK:- Table delegates
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == 0){
+        if (indexPath.row == 0){
             registrationLabel.becomeFirstResponder();
-        }else if(indexPath.section == 1){
+        }else if(indexPath.row == 1){
             colourLabel.becomeFirstResponder();
-        }else if(indexPath.section == 2){
+        }else if(indexPath.row == 2){
             makeInput.becomeFirstResponder();
-        }else if(indexPath.section == 3){
+        }else if(indexPath.row == 3){
             modelInput.becomeFirstResponder();
         }
     }
@@ -186,7 +200,8 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                 }
                 //TODO:- Handle no data being returned from the server (empty list for picker etc)
                 self.makePickerData = listOfMakes;
-                self.makeLabel.text = "Select Make";
+                self.makeInput.userInteractionEnabled = true;
+                self.makeInput.placeholder = "Select Make";
                 
             }else{
                 println("Something went wrong");
@@ -210,7 +225,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                     }
                     //TODO:- Handle no data being returned from the server (empty list for picker etc)
                     self.modelPickerData = listOfModels;
-                    self.modelLabel.text = "Select Model";
+                    self.modelInput.placeholder = "Select Model";
                     self.modelInput.userInteractionEnabled = true;
                 
                 }else{
