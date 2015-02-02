@@ -105,6 +105,12 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         }
     }
     
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView //recast your view as a UITableViewHeaderFooterView
+        
+        header.textLabel.textColor = UIColor.whiteColor() //make the text white
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 2) //Index number of interested section
         {
