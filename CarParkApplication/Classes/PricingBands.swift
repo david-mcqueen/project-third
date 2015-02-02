@@ -25,7 +25,15 @@ class PricingBand{
         self.Day = _day;
     }
     
+    func displayBandName() -> String {
+        return "\(self.MinimumTimeHours) - \(self.MaximumTimeHours) hours";
+    }
+    
+    func displayBandCost() -> String{
+        return "£\(getCostFormattedString(self.BandCost))";
+    }
+    
     func displayBand() -> String {
-        return "\(self.MinimumTimeHours) - \(self.MaximumTimeHours) hours. £\(self.BandCost)";
+        return "\(self.MinimumTimeHours) - \(self.MaximumTimeHours) hours (£\(getCostFormattedString(self.BandCost)))";
     }
 }

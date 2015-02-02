@@ -46,14 +46,10 @@ class TimeBandSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = timeBands[indexPath.row].displayBand();
+        let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as TimeBandViewCell
+        cell.cost.text = timeBands[indexPath.row].displayBandCost();
+        cell.timeBand.text = timeBands[indexPath.row].displayBandName();
         
-        if indexPath.row == selectedTimeBandIndex {
-            cell.accessoryType = .Checkmark
-        } else {
-            cell.accessoryType = .None
-        }
         return cell
     }
     

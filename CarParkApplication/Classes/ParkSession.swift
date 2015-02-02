@@ -67,4 +67,12 @@ class ParkSession {
         
         return "\(h) hours \(m) minutes";
     }
+    
+    
+    func displaySessionCost() -> String{
+        return "£\(getCostFormattedString(self.Value!))";
+    }
+    
+    
+    
 }

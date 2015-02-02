@@ -85,7 +85,7 @@ class SessionViewController: UITableViewController{
         sessionStartLabel.text = parkingSession?.startTimeAsString();
         sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
         sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
-        sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.Value!.description : "Session not ended");
+        sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.displaySessionCost() : "Session not ended");
         sessionLocationLabel.text = parkingSession?.locationDetails();
         println("CarParkID \(parkingSession?.CarParkID.description)");
     }

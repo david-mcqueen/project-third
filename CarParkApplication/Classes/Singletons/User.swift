@@ -127,7 +127,7 @@ class User {
     
     //MARK:- Balance Functions
     func getBalanceString() -> String {
-        return self.CurrentBalance.description;
+        return getCostFormattedString(self.CurrentBalance);
     }
     
     

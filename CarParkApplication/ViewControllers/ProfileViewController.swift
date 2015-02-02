@@ -190,7 +190,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
                         self.presentViewController(alert, animated: true, completion: nil);
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
                         User.sharedInstance.CurrentBalance = balance!;
-                        self.lblBalance.text = User.sharedInstance.getBalanceString();
+                        self.displayUserBalance();
                     }else{
                         NSLog("Something went wrong")
                     }

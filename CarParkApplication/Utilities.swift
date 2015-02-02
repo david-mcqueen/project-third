@@ -115,3 +115,31 @@ func convertSecondsToHoursMinutes (seconds : Int) -> (Int, Int) {
 }
 
 
+func isWholeNumber(input: Double) -> Bool{
+    if (input % 1 == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+func getCostFormattedString(inputCost: Double) -> String{
+    var costString: String = (inputCost.description)
+    var costStringSplit = split(costString) {$0 == "."};
+    var pounds = costStringSplit[0];
+    var pence = costStringSplit[1];
+    
+    
+    if(isWholeNumber(inputCost)){
+        return pounds;
+    }else{
+        
+        if (countElements(pence) == 1){
+            pence = pence + "0";
+        }
+        
+        return pounds + "." + pence;
+    }
+    
+}
+
