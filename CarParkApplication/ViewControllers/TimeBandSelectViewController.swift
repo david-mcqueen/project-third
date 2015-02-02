@@ -50,6 +50,11 @@ class TimeBandSelectViewController: UITableViewController {
         cell.cost.text = timeBands[indexPath.row].displayBandCost();
         cell.timeBand.text = timeBands[indexPath.row].displayBandName();
         
+        if indexPath.row == selectedTimeBandIndex {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
+        }
         return cell
     }
     
@@ -103,9 +108,13 @@ class TimeBandSelectViewController: UITableViewController {
         println("loadTimeBands")
         println(User.sharedInstance.token!);
         getCarParkParkingBands(User.sharedInstance.token!, selectedCarPark!, { (success, allPricingBands, error) -> () in
+            var timeBandIndex = 0;
             for band in allPricingBands{
                 self.timeBands.append(band);
-                
+                if (self.selectedTimeBand?.BandID == band.BandID){
+                    self.selectedTimeBandIndex = timeBandIndex;
+                }
+                timeBandIndex++;
             }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData();

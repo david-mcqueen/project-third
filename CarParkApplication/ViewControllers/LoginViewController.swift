@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController{
+class LoginViewController: UITableViewController{
 
     @IBOutlet weak var inputEmail: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
@@ -34,6 +34,35 @@ class LoginViewController: UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        let cellRowHeight = CGFloat(44.0);
+        let sectionHeight = cellRowHeight * 2; //2 rows in the section
+        
+        let tabheight = (self.navigationController?.navigationBar.frame.height)!;
+        
+        let viewHeight = self.view.frame.height;
+        
+        let screenHeight = viewHeight + tabheight;
+        
+        return ((screenHeight - sectionHeight) / 3);
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if(indexPath.section == 0 && indexPath.row == 0) {
+            self.inputEmail.becomeFirstResponder();
+        }else if (indexPath.section == 0 && indexPath.row == 1){
+            self.inputPassword.becomeFirstResponder();
+        }
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        
+        header.textLabel.textColor = UIColor.whiteColor() //make the text white
+        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
     }
     
 
