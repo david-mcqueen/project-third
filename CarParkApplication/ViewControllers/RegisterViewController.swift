@@ -38,6 +38,13 @@ class RegisterViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        
+        header.textLabel.textColor = UIColor.whiteColor() //make the text white
+        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
+    }
+    
     @IBAction func registerUserPressed(sender: AnyObject) {
         let (inputsCompleted, missingInputs) = allFieldsCompleted();
         

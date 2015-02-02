@@ -82,6 +82,21 @@ class SessionSelectViewController: UITableViewController {
         self.performSegueWithIdentifier("viewParkingSession", sender: self);
     }
     
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        header.textLabel.textColor = UIColor.whiteColor()
+        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
+        
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(currentSessions){
+            return "Current Sessions"
+        }else{
+            return "Previous Sessions"
+        }
+    }
+    
     
     //MARK:- Row side-buttons
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {

@@ -161,6 +161,13 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         }
     }
     
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        
+        header.textLabel.textColor = UIColor.whiteColor() //make the text white
+        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
+    }
+    
     //MARK:- Vehicle data
     func populateMakes(){
         //Get the makes from the API
