@@ -24,8 +24,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
 
     var displayAddFunds: Bool = false;
 
-    var paymentIndicatorView: UIView = UIView(frame: CGRectMake(0, 0, 200, 200));
-    var paymentIndicatorActivity : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView;
+    var paymentIndicatorView: UIView = UIView(frame: CGRectMake(50, 50, 200, 200));
+    var paymentIndicatorActivitySpinner : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView;
     var paymentIndicatorLabel: UILabel = UILabel(frame: CGRectMake(20, 115, 130, 22));
     
     var config = PayPalConfiguration()
@@ -42,24 +42,25 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         getUserParkingSessions();
         displayUserInfo();
         
+        paymentIndicatorView.frame = CGRectMake(((self.view.frame.width - 200) / 2), ((self.view.frame.height - 200) / 3), 200, 200);
         
-        paymentIndicatorView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7);
+        
+        paymentIndicatorView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5);
         paymentIndicatorView.clipsToBounds = true;
         paymentIndicatorView.layer.cornerRadius = 10.0;
         
-        
-        paymentIndicatorActivity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray;
-        paymentIndicatorActivity.frame = CGRect(x: 65, y: 40, width: paymentIndicatorActivity.bounds.size.width, height: paymentIndicatorActivity.bounds.size.height);
-        
-        paymentIndicatorView.addSubview(paymentIndicatorActivity);
+        paymentIndicatorActivitySpinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge;
+        paymentIndicatorActivitySpinner.backgroundColor = UIColor.clearColor();
+        paymentIndicatorActivitySpinner.frame = CGRect(x: 65, y: 40, width: paymentIndicatorActivitySpinner.bounds.size.width, height: paymentIndicatorActivitySpinner.bounds.size.height);
         
         paymentIndicatorLabel.backgroundColor = UIColor.clearColor();
         paymentIndicatorLabel.textColor = UIColor.whiteColor()
         paymentIndicatorLabel.adjustsFontSizeToFitWidth = true;
         paymentIndicatorLabel.textAlignment = .Center;
-        paymentIndicatorLabel.text = "Processing...";
+        paymentIndicatorLabel.text = "Adding Funds...";
         
         paymentIndicatorView.addSubview(paymentIndicatorLabel);
+        paymentIndicatorView.addSubview(paymentIndicatorActivitySpinner);
         
     }
 
@@ -146,9 +147,6 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         } else {
             println("Processing payment")
             
-            self.view.addSubview(paymentIndicatorView);
-            paymentIndicatorActivity.startAnimating();
-            
             var paymentViewController = PayPalPaymentViewController(payment: payment, configuration: config, delegate: self)
             self.presentViewController(paymentViewController, animated: true, completion: nil)
         }
@@ -156,13 +154,16 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     func payPalPaymentViewController(paymentViewController: PayPalPaymentViewController!, didCompletePayment completedPayment: PayPalPayment!) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        
+        paymentIndicatorActivitySpinner.startAnimating();
+        self.tableView.addSubview(paymentIndicatorView);
         sendCompletedPaymentToServer(completedPayment);
     }
     
     func payPalPaymentDidCancel(paymentViewController: PayPalPaymentViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        paymentIndicatorActivity.stopAnimating();
+        paymentIndicatorActivitySpinner.stopAnimating();
         self.paymentIndicatorView.removeFromSuperview();
         
     }
@@ -174,7 +175,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         var alert = UIAlertController(title: "Payment Complete", message: "Funds added to your account", preferredStyle: UIAlertControllerStyle.Alert);
         var paypalTransactionID: String?;
         
-        paymentIndicatorActivity.stopAnimating();
+        paymentIndicatorActivitySpinner.stopAnimating();
         println(completedPayment.confirmation);
         
         if let newTransaction: NSDictionary = completedPayment.confirmation["response"] as? NSDictionary{
@@ -184,13 +185,17 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
                 
                 userAddFunds(User.sharedInstance.token!, paypalTransactionID!) { (success, balance, error) -> () in
                     if (success) {
-                        println(balance);
-                        self.paymentIndicatorActivity.stopAnimating();
-                        self.paymentIndicatorView.removeFromSuperview();
-                        self.presentViewController(alert, animated: true, completion: nil);
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
-                        User.sharedInstance.CurrentBalance = balance!;
-                        self.displayUserBalance();
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            println(balance);
+                            self.paymentIndicatorActivitySpinner.stopAnimating();
+                            self.paymentIndicatorView.removeFromSuperview();
+                            
+                            self.presentViewController(alert, animated: true, completion: nil);
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
+                            User.sharedInstance.CurrentBalance = balance!;
+                            self.displayUserBalance();
+                        });
+                        
                     }else{
                         NSLog("Something went wrong")
                     }
