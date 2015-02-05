@@ -389,12 +389,14 @@ func deleteVehicle(token: String, vehicleID: Int, vehicleDeleted: (success: Bool
     deleteVehicleResponse.resume();
 }
 
-func userBalance(token: String, requestCompleted: (success: Bool, balance: Double?, error: String?) -> ()) -> (){
+func userBalance(token: String, requestCompleted: (success: Bool, balance: Double?, forename: String?, surname: String?, error: String?) -> ()) -> (){
 
     println("User balance")
-    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/balance?Token=\(token)");
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/user?Token=\(token)");
     let urlSession = NSURLSession.sharedSession();
     var newBalance: Double?;
+    var newForename: String?
+    var newSurname: String?;
     
     let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
         
@@ -415,16 +417,23 @@ func userBalance(token: String, requestCompleted: (success: Bool, balance: Doubl
                 println(errorMessage);
                 errorResponse = errorMessage as? String;
             }else{
-                let balance: AnyObject? = jsonResult["Balance"]!
-                newBalance = (balance!.description as NSString).doubleValue;
-                
+                if let userForename: AnyObject? = jsonResult["Forename"]{
+                    newForename = userForename!.description!;
+                }
+                if let userSurname: AnyObject? = jsonResult["Surname"]{
+                    newSurname = userSurname!.description!
+                }
+                if let balance: AnyObject? = jsonResult["Balance"]{
+                    newBalance = (balance!.description as NSString).doubleValue;
+                }
                 success = true;
             }
+            
         }else{
             errorResponse = "Server Error"
         }
         
-        requestCompleted(success: success, balance: newBalance, error: errorResponse);
+        requestCompleted(success: success, balance: newBalance, forename: newForename, surname: newSurname, error: errorResponse);
     });
     
     jsonResponse.resume();

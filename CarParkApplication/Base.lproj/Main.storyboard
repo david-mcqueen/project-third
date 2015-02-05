@@ -1150,44 +1150,56 @@
                         <sections>
                             <tableViewSection headerTitle="Personal Details" id="9gu-qs-a8c">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Syd-B2-9zC" detailTextLabel="PnC-fL-zaW" style="IBUITableViewCellStyleValue1" id="8Kb-GQ-BuH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="8Kb-GQ-BuH">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Kb-GQ-BuH" id="zVg-4Q-1an">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Forename" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Syd-B2-9zC">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSv-VI-3rD">
+                                                    <rect key="frame" x="104" y="13" width="488" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Forename" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCM-qE-q2U">
+                                                    <rect key="frame" x="14" y="11" width="88" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.27450980390000002" green="0.40000000000000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PnC-fL-zaW">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="qCM-qE-q2U" secondAttribute="centerY" constant="0.5" id="IKr-mC-Cua"/>
+                                                <constraint firstItem="qCM-qE-q2U" firstAttribute="leading" secondItem="zVg-4Q-1an" secondAttribute="leadingMargin" constant="6" id="IqM-gZ-gKr"/>
+                                                <constraint firstAttribute="centerY" secondItem="FSv-VI-3rD" secondAttribute="centerY" constant="-1.5" id="PPj-Hh-T9a"/>
+                                                <constraint firstItem="FSv-VI-3rD" firstAttribute="trailing" secondItem="zVg-4Q-1an" secondAttribute="trailingMargin" id="m2R-pV-asD"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="gxq-g3-NuS" detailTextLabel="mAX-D5-tSp" style="IBUITableViewCellStyleValue1" id="acg-Qa-vef">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="acg-Qa-vef">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="acg-Qa-vef" id="i0Z-fM-guR">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Surname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxq-g3-NuS">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYK-fN-Bw5">
+                                                    <rect key="frame" x="97" y="12" width="495" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Surname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yuz-l6-phu">
+                                                    <rect key="frame" x="15" y="12" width="81" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.27450980390000002" green="0.40000000000000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mAX-D5-tSp">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dYK-fN-Bw5" firstAttribute="trailing" secondItem="i0Z-fM-guR" secondAttribute="trailingMargin" id="11v-qv-7Fu"/>
+                                                <constraint firstAttribute="centerY" secondItem="Yuz-l6-phu" secondAttribute="centerY" constant="-0.5" id="8f1-D3-26c"/>
+                                                <constraint firstItem="Yuz-l6-phu" firstAttribute="leading" secondItem="i0Z-fM-guR" secondAttribute="leadingMargin" constant="7" id="e7u-DQ-uCn"/>
+                                                <constraint firstAttribute="centerY" secondItem="dYK-fN-Bw5" secondAttribute="centerY" constant="-0.5" id="h2N-rk-gZp"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="3Eh-fb-fQK" detailTextLabel="20Q-5i-Ne2" style="IBUITableViewCellStyleValue1" id="GSW-RV-C3T">
@@ -1368,16 +1380,16 @@
                         <outlet property="btnPay" destination="2Nn-hj-wrZ" id="xsw-Rw-eRH"/>
                         <outlet property="lblBalance" destination="pkC-Fy-OiL" id="wrg-zx-yP8"/>
                         <outlet property="lblCurrentSessionCount" destination="TTt-SU-00U" id="T47-pp-UlJ"/>
-                        <outlet property="lblForename" destination="PnC-fL-zaW" id="Utl-MW-sGy"/>
+                        <outlet property="lblForename" destination="FSv-VI-3rD" id="GtT-KC-VtR"/>
                         <outlet property="lblPreviousSessionCount" destination="eed-Nl-1fp" id="wyy-Ev-1o8"/>
-                        <outlet property="lblSurname" destination="mAX-D5-tSp" id="bIF-Od-12P"/>
+                        <outlet property="lblSurname" destination="dYK-fN-Bw5" id="1Hb-d9-322"/>
                         <outlet property="textAddFunds" destination="CVQ-R6-16y" id="xID-gt-X4g"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0h-Yg-HyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="YB4-8r-ddW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1774" y="1828"/>
+            <point key="canvasLocation" x="1774" y="1823"/>
         </scene>
         <!--Logged In-->
         <scene sceneID="Lyq-AC-FZN">
@@ -1409,6 +1421,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PoQ-Gl-3fc"/>
-        <segue reference="acm-hZ-7sZ"/>
+        <segue reference="ehk-dQ-7VM"/>
     </inferredMetricsTieBreakers>
 </document>

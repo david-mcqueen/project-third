@@ -36,9 +36,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
-        getUserBalance();
+        getUserDetails();
         getUserVehicles();
-        getUserName();
         getUserParkingSessions();
         displayUserInfo();
         
@@ -215,16 +214,16 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     }
 
     
-    //MARK:- Gte user information from the server
-    
-    func getUserBalance(){
-        userBalance(User.sharedInstance.token!, {(success, userBalance, error) -> () in
+    //MARK:- Get user information from the server
+    func getUserDetails(){
+        userBalance(User.sharedInstance.token!, {(success, userBalance, userForename, userSurname, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 println("getUserBalance()")
-                println("\(success) \(userBalance)")
                 if (success){
                     User.sharedInstance.CurrentBalance = userBalance!;
-                    self.displayUserBalance()
+                    User.sharedInstance.FirstName = userForename!;
+                    User.sharedInstance.Surname = userSurname!;
+                    self.displayUserInfo()
                 }
             });
         });
@@ -239,12 +238,6 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
                 User.sharedInstance.Vehicles = vehicles;
             });
         });
-    }
-    
-    func getUserName(){
-        //TODO:- Get the users name from the API
-        User.sharedInstance.FirstName = "David";
-        User.sharedInstance.Surname = "McQueen";
     }
     
     func getUserParkingSessions(){
@@ -267,18 +260,18 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
     func displayUserInfo(){
         //Populate all the labes with the relevant information
-        lblBalance.text = User.sharedInstance.getBalanceString();
-        lblForename.text = User.sharedInstance.FirstName;
-        lblSurname.text = User.sharedInstance.Surname;
+        displayUserBalance();
+        println("displayUserInfo")
+        self.lblForename.text = User.sharedInstance.FirstName;
+        self.lblSurname.text = User.sharedInstance.Surname;
     }
+    
     func refresh(sender:AnyObject)
     {
         println("Refresh");
-        getUserBalance();
+        getUserDetails();
         getUserVehicles();
-        getUserName();
         getUserParkingSessions();
-        displayUserInfo();
         
         self.tableView.reloadData();
         self.refreshControl?.endRefreshing();
