@@ -53,6 +53,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
             locationManager.requestWhenInUseAuthorization();
+            self.toggleLocationButton(false, locatedBeacon: false);
         }
         
         beaconActivityIndicator.center = self.view.center
@@ -186,13 +187,24 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             manuallyEnterLocation();
         }else{
             if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-            //Start looks for regions
-            NSLog("Start monitoring for regions");
-            locationTextField.text = "Searching..."
-            beaconActivityIndicator.startAnimating()
-            locationManager.startRangingBeaconsInRegion(region);
+                //Start looks for regions
+                NSLog("Start monitoring for regions");
+                locationTextField.text = "Searching..."
+                locationManager.startRangingBeaconsInRegion(region);
+                
+                //Start a timer for 5 seconds, after which stop attempting to find beacons.
+                var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("cancelRanging"), userInfo: nil, repeats: false);
+                toggleLocationButton(true, locatedBeacon: false)
             }
         }
+    }
+    
+    func cancelRanging(){
+        
+        locationManager.stopRangingBeaconsInRegion(region);
+        beaconActivityIndicator.stopAnimating();
+        displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "ok");
+        toggleLocationButton(false, locatedBeacon: false);
     }
     
     func getBeaconDetails(major: Int, minor: Int, rssi: Int){
@@ -253,10 +265,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             //We have found the closest beacon, stop ranging for new locations
             locationManager.stopRangingBeaconsInRegion(region);
             beaconActivityIndicator.stopAnimating();
-            //TODO:- Only turn of beacon ranging, when the server has returned a car park ID?
-            //TODO:- Or keep sending the same ID until a response is retunred?
+
         }
     }
+    
+    
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status{
@@ -406,10 +419,14 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             editLocationButton = true;
             self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
             locationIDCell.userInteractionEnabled = true
+            self.locationTextField.text = "";
+            self.locationTextField.placeholder = "Location ID"
         }else{
             editLocationButton = true;
             self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
             locationIDCell.userInteractionEnabled = true
+            self.locationTextField.text = "";
+            self.locationTextField.placeholder = "Location ID"
         }
     }
 }
