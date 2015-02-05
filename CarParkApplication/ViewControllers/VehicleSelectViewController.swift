@@ -32,7 +32,10 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         if let vehicle = selectedVehicle?.displayVehicle() {
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
-//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        if (delegate == nil){
+            self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,9 +132,9 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
                 println(success);
             });
             
+            User.sharedInstance.deleteVehicle(self.allVehicles[indexPath.row]);
             self.vehicles.removeAtIndex(indexPath.row);
             self.allVehicles.removeAtIndex(indexPath.row);
-            User.sharedInstance.deleteVehicle(self.allVehicles[indexPath.row]);
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
             
         });
