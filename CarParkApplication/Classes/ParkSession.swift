@@ -64,8 +64,15 @@ class ParkSession {
         
         var secondsInt: Int = (Int)(difference);
         let (h, m) = convertSecondsToHoursMinutes(secondsInt);
+        var returnTime: String = "";
+        if (h > 0){
+            returnTime = "\(returnTime)\(h) hours"
+        }
+        if(m > 0){
+            returnTime = "\(returnTime) \(m) minutes"
+        }
         
-        return "\(h) hours \(m) minutes";
+        return returnTime;
     }
     
     
