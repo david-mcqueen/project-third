@@ -353,7 +353,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ng2-H6-ioH">
                                                     <rect key="frame" x="93" y="8" width="499" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                     <connections>
                                                         <action selector="didChangeLocationID:" destination="nUs-13-0F2" eventType="valueChanged" id="Vod-wK-Xlo"/>
                                                         <action selector="didFinishEditingLocationID:" destination="nUs-13-0F2" eventType="editingDidEnd" id="DhH-L6-lOU"/>
@@ -1422,6 +1422,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PoQ-Gl-3fc"/>
-        <segue reference="ehk-dQ-7VM"/>
+        <segue reference="acm-hZ-7sZ"/>
     </inferredMetricsTieBreakers>
 </document>

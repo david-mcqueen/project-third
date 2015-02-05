@@ -176,33 +176,19 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     var sessionCarParkName: AnyObject?  = session["CarParkName"]!
                     var sessionFinished: AnyObject? = session["Finished"]!
                     
-                    if(sessionFinished!.description == "0"){
-                        let newSession = ParkSession(
-                            parkSessionID: (sessionID!.description).toInt()!,
-                            carParkID: (sessionCarParkID!.description).toInt()!,
-                            carParkName: sessionCarParkName!.description!,
-                            startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
-                            currentSession: true,
-                            parkedVehicleID: (sessionVehicleID!.description).toInt()!,
-                            finished: false
-                        );
+                    let newSession = ParkSession(
+                        parkSessionID: (sessionID!.description).toInt()!,
+                        carParkID: (sessionCarParkID!.description).toInt()!,
+                        carParkName: sessionCarParkName!.description!,
+                        startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
+                        endTimeParking: dateFormatter.dateFromString(sessionEndTime!.description!)!,
+                        currentSession: (sessionFinished!.description == "0") ? true : false,
+                        parkedVehicleID: (sessionVehicleID!.description).toInt()!,
+                        value: (sessionValue!.description! as NSString).doubleValue,
+                        finished: (sessionFinished!.description == "0") ? false : true
+                    );
                         
-                        sessions.append(newSession);
-                    }else{
-                        let newSession = ParkSession(
-                            parkSessionID: (sessionID!.description).toInt()!,
-                            carParkID: (sessionCarParkID!.description).toInt()!,
-                            carParkName: sessionCarParkName!.description!,
-                            startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
-                            endTimeParking: dateFormatter.dateFromString(sessionEndTime!.description!)!,
-                            currentSession: false,
-                            parkedVehicleID: (sessionVehicleID!.description).toInt()!,
-                            value: (sessionValue!.description! as NSString).doubleValue,
-                            finished: true
-                        );
-                        
-                        sessions.append(newSession);
-                    }
+                    sessions.append(newSession);
                 }
                 success = true;
             }else{

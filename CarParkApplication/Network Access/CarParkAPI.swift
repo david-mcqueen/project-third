@@ -58,7 +58,7 @@ func determineCarPark(token: String, identifier: String, requestCompleted: (succ
     jsonResponse.resume();
 }
 
-func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int, parkCompleted: (success: Bool, parkTransactionID: Int?, error: String?) -> ()) -> (){
+func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int, parkCompleted: (success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkCost: Double?, error: String?) -> ()) -> (){
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park");
     let urlSession = NSURLSession.sharedSession();
 
@@ -93,15 +93,20 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
         
         var err: NSError?
         var parkTransaction:Int?;
-        
+        var sessionCost: Double?;
+        var sessionFinishTime: NSDate?;
+        var sessionFinished: Bool?;
         var success = false;
+        var dateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         
         if (error != nil) {
             println(error.localizedDescription);
             errorResponse = error.localizedDescription;
         }
-        
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        println(strData)
         if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
             println(jsonResult);
             if (err != nil){
@@ -113,17 +118,22 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
                 println(dataError);
                 errorResponse = dataError as? String;
             }else if let parkID: AnyObject = jsonResult["ParkTransactionID"]{
-                
                 parkTransaction = parkID as? Int
+                
+                if let finished: AnyObject = jsonResult["Finished"]{
+                    sessionFinished = finished as? Bool;
+                }
+                if let cost: AnyObject = jsonResult["Cost"]{
+                    sessionCost = cost as? Double;
+                }
+                
                 success = true;
             }
         }else{
             errorResponse = "Server Error"
         }
         
-        
-        
-        parkCompleted(success: success, parkTransactionID: parkTransaction, error: errorResponse);
+        parkCompleted(success: success, parkTransactionID: parkTransaction, parkFinished:sessionFinished, parkCost: sessionCost, error: errorResponse);
     });
     
     parkVehicleResponse.resume();

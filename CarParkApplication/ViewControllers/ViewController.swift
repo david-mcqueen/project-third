@@ -134,8 +134,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         // -1 time band indicates that no time band is selected
         var timeBand: Int = toggleMethod.on ? -1 : selectedTimeBand!.BandID;
         
-        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, timeBand,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
-            
+        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, timeBand,  {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkCost: Double?, error: String?) -> () in
             var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
             
             if(!success) {
@@ -153,15 +152,25 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 }
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
+                    let startTime = NSDate();
+                    var maxHours: Double = Double(self.selectedTimeBand!.MaximumTimeHours);
+                    var secondsToAdd: Double =  maxHours * 60 * 60;
+                    var calculatedFinishTime = startTime.dateByAddingTimeInterval(secondsToAdd)
+                    
                     var newParkSession = ParkSession(
                         parkSessionID: parkTransactionID!,
                         carParkID: selectedCarParkID,
                         carParkName: self.selectedCarParkName!,
-                        startTime: NSDate(),
-                        currentSession: true,
+                        startTime: startTime,
+                        endTimeParking: calculatedFinishTime,
+                        currentSession: !parkFinished!,
                         parkedVehicleID: self.selectedVehicle!.VehicleID!,
-                        finished: !self.toggleMethod.on);
+                        value: parkCost!,
+                        finished: parkFinished!
+                    );
                     User.sharedInstance.addParkSession(newParkSession);
+                    
+                    
                     
                     //Display the new parking session
                     println("View the parking session")
@@ -200,11 +209,14 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     func cancelRanging(){
-        
-        locationManager.stopRangingBeaconsInRegion(region);
-        beaconActivityIndicator.stopAnimating();
-        displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "ok");
-        toggleLocationButton(false, locatedBeacon: false);
+        if (self.selectedCarParkID == nil){
+            locationManager.stopRangingBeaconsInRegion(region);
+            beaconActivityIndicator.stopAnimating();
+            self.locationTextField.text = "";
+            self.locationTextField.placeholder = "Location ID"
+            displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "ok");
+            toggleLocationButton(false, locatedBeacon: false);
+        }
     }
     
     func getBeaconDetails(major: Int, minor: Int, rssi: Int){
@@ -403,6 +415,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     //MARK:- Custom Functions
     func manuallyEnterLocation(){
+        self.selectedTimeBand = nil;
+        self.timeBandLabel.text = "Select Time";
         self.locationTextField.text = "";
         self.locationTextField.placeholder = "Location ID"
         self.selectedCarParkID = nil;
@@ -419,14 +433,10 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             editLocationButton = true;
             self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
             locationIDCell.userInteractionEnabled = true
-            self.locationTextField.text = "";
-            self.locationTextField.placeholder = "Location ID"
         }else{
             editLocationButton = true;
             self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
             locationIDCell.userInteractionEnabled = true
-            self.locationTextField.text = "";
-            self.locationTextField.placeholder = "Location ID"
         }
     }
 }

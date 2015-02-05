@@ -41,7 +41,7 @@ func encryptVehicleRegistration(registrationInput:Vehicle) -> Vehicle {
     
     //PRE: VehicleRegistration object, unecnrypted
     //POST: VehicleRegistration object, with values encrypted
-    return Vehicle(make: encryptString(registrationInput.Make), model: "Test", colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber), vehicleID: 1);
+    return Vehicle(make: encryptString(registrationInput.Make), model: "Test", colour: encryptString(registrationInput.Colour), registrationNumber: encryptString(registrationInput.RegistrationNumber), vehicleID: 1, deleted: false);
 }
 
 

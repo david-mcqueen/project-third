@@ -44,6 +44,7 @@ class SessionViewController: UITableViewController{
                         self.parkingSession?.EndTime = NSDate();
                         self.parkingSession?.Value = value;
                         self.parkingSession?.CurrentSession = false;
+                        self.parkingSession?.Finished = true;
                         self.refresh(self);
                     }else{
                         NSLog("Something went wrong. \(error)")
@@ -67,7 +68,7 @@ class SessionViewController: UITableViewController{
     }
     
     func populateSessionFields(){
-        if (parkingSession?.EndTime != nil){
+        if (parkingSession?.Finished == true){
             btnEndExtentParking.setTitle("Extend", forState: .Normal);
             extendParking = true;
         }else{
@@ -81,11 +82,15 @@ class SessionViewController: UITableViewController{
                 vehicleText = vehicle.displayVehicle();
             }
         }
+
+        
+        println(parkingSession?.EndTime)
+        println(parkingSession?.Value)
         vehicleLabel.text = vehicleText;
         sessionStartLabel.text = parkingSession?.startTimeAsString();
-        sessionEndLabel.text = (parkingSession?.EndTime != nil ? parkingSession?.endTimeAsString() : "Session not ended");
-        sessionDurationLabel.text = (parkingSession?.EndTime != nil ? parkingSession!.calculateDuration() : "Session not ended");
-        sessionCostLabel.text = (parkingSession?.Value != nil ? parkingSession?.displaySessionCost() : "Session not ended");
+        sessionEndLabel.text = (parkingSession?.Finished == true ? parkingSession?.endTimeAsString() : "Latest Endtime: \(parkingSession!.endTimeAsString())");
+        sessionDurationLabel.text = (parkingSession?.Finished == true ? parkingSession!.calculateDuration() : "Max Duration: \(parkingSession!.calculateDuration())");
+        sessionCostLabel.text = (parkingSession?.Finished == true ? parkingSession?.displaySessionCost() : "Max Cost: \(parkingSession!.displaySessionCost())");
         sessionLocationLabel.text = parkingSession?.locationDetails();
         println("CarParkID \(parkingSession?.CarParkID.description)");
     }

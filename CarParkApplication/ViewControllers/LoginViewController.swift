@@ -24,11 +24,11 @@ class LoginViewController: UITableViewController{
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
         }else{
-            inputEmail.text = "emaildm@gmail.com"
+            inputEmail.text = "frank@underwood.com"
         }
         
         //TODO:- remove this line
-        inputPassword.text = "Password"
+        inputPassword.text = "Password123"
         
     }
     
