@@ -24,7 +24,7 @@ class SessionViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         println("SessionViewController")
-        //self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
         
         populateSessionFields();
         

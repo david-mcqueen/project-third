@@ -315,3 +315,70 @@ func searchCarParks(token: String, lat:String, long:String, searchComplete: (suc
     jsonResponse.resume();
     
 }
+
+
+
+func extendParkingSession(token: String, parkTransactionID:Int, bandID:Int, extendComplete: (success: Bool, newFinishTime: String?, newCost: Double?, error: String?) -> ()) -> (){
+    
+    
+    let urlSession = NSURLSession.sharedSession();
+    
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park/extend");
+    var request = NSMutableURLRequest(URL: url!);
+    
+    
+    var error1 : NSError?;
+    var errorResponse: String?;
+    request.HTTPMethod = "POST";
+    var params: Dictionary<String, String> = ([
+        "Token" : token,
+        "ParkTransactionID" : String(parkTransactionID),
+        "CarParkCostID": String(bandID)
+        ]);
+    
+    request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type");
+    request.addValue("application/json", forHTTPHeaderField: "Accept");
+    
+    var extendResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        
+        var err: NSError?
+        var token:String?;
+        var finishTime: String?;
+        var cost: Double?
+        
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+        var success = false;
+        println(strData)
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+            errorResponse = error.localizedDescription;
+        }
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
+            }
+            
+            
+            if let newFinishTime: AnyObject = jsonResult["FinishTime"]{
+   
+                finishTime = newFinishTime.description!;
+                if let newCost: AnyObject = jsonResult["Cost"]{
+                    
+                    cost = (newCost.description as NSString).doubleValue;
+                    success = true;
+                }
+            }
+            
+        }else{
+            errorResponse = "Server Error"
+        }
+        
+        extendComplete(success: success, newFinishTime: finishTime, newCost: cost, error: errorResponse);
+    });
+    
+    extendResponse.resume();
+    
+}
