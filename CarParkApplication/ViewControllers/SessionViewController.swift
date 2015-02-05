@@ -76,7 +76,7 @@ class SessionViewController: UITableViewController{
         }
         
         var vehicleText: String?;
-        for vehicle in User.sharedInstance.getVehicles(){
+        for vehicle in User.sharedInstance.getActiveVehicles(){
             if vehicle.VehicleID! == parkingSession?.ParkedVehicleID{
                 vehicleText = vehicle.displayVehicle();
             }

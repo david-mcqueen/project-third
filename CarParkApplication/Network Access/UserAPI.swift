@@ -313,10 +313,17 @@ func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicle
                 let vehicleModel: AnyObject?  = vehicle["Model"]!
                 let vehicleMake: AnyObject?  = vehicle["Make"]!
                 let vehicleColour: AnyObject?  = vehicle["Colour"]!
+                let vehicleActive: AnyObject? = vehicle["Deleted"]!
                 
                 //TODO:- Get the vehicle information back from the server
                 //Or can link to the known vehicles on the user account?
-                let vehicle = Vehicle(make: vehicleMake!.description, model: vehicleModel!.description, colour: vehicleColour!.description, registrationNumber: vehicleRegistration!.description, vehicleID: (userVehicleID!.description).toInt()!);
+                let vehicle = Vehicle(
+                    make: vehicleMake!.description,
+                    model: vehicleModel!.description,
+                    colour: vehicleColour!.description,
+                    registrationNumber: vehicleRegistration!.description,
+                    vehicleID: (userVehicleID!.description).toInt()!,
+                    deleted: (vehicleActive!.description == "0") ? false : true);
                 
                 vehicles.append(vehicle);
             }
@@ -338,25 +345,21 @@ func deleteVehicle(token: String, vehicleID: Int, vehicleDeleted: (success: Bool
     
     let urlSession = NSURLSession.sharedSession();
     
-    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/vehicle");
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/vehicle?Token=\(token)&UserVehicleID=\(vehicleID)");
     var request = NSMutableURLRequest(URL: url!);
     
     var error1 : NSError?;
     var errorResponse: String?;
     
     request.HTTPMethod = "DELETE";
-    var params: Dictionary<String, AnyObject> = ([
-        "Token" : token,
-        "VehicleID" : vehicleID
-        ]);
     
-    request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
     request.addValue("application/json", forHTTPHeaderField: "Content-Type");
     request.addValue("application/json", forHTTPHeaderField: "Accept");
     
-    
+    println(url);
     var deleteVehicleResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
-        
+        var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        println(strData);
         var err: NSError?
         var success:Bool = false;
         var token:String?;

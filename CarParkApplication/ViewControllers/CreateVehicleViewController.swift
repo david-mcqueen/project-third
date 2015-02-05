@@ -75,7 +75,13 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         println("Register new vehicle with user")
         
         if(allInputsComplete()){
-            let newUserVehicle = Vehicle(make: makeInput.text!, model: modelInput.text!, colour: colourLabel.text!, registrationNumber: registrationLabel.text!)
+            let newUserVehicle = Vehicle(
+                make: makeInput.text!,
+                model: modelInput.text!,
+                colour: colourLabel.text!,
+                registrationNumber: registrationLabel.text!,
+                deleted: false
+            )
             
             //Process the new vehicle registration with the server
             

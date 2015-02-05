@@ -39,17 +39,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var firstVehicle = User.sharedInstance.getFirstVehicle();
-        selectedVehicle = firstVehicle;
-        
         locationManager.delegate = self;
-        vehicleLabel.text = selectedVehicle?.displayVehicle();
+        
         if ((selectedTimeBand) != nil){
             timeBandLabel.text = selectedTimeBand!.displayBand();
         }else{
             timeBandLabel.text = "Select Time";
             selectTimeBandCell.userInteractionEnabled = false;
         }
+
         
         
         //Request permission to access beacons - Whilst the app is in Foreground
@@ -62,6 +60,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         
     }
+    override func viewWillAppear(animated: Bool) {
+        var firstVehicle = User.sharedInstance.getFirstVehicle();
+        selectedVehicle = firstVehicle;
+        vehicleLabel.text = selectedVehicle?.displayVehicle();
+        }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -342,7 +345,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             
             println("PickVehicleBand Segue")
             let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
-            vehicleSelectViewController.selectedVehicle = selectedVehicle
+            if (selectedVehicle != nil){
+                vehicleSelectViewController.selectedVehicle = selectedVehicle
+            }
             vehicleSelectViewController.delegate = self;
         }
         

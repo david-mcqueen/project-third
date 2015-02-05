@@ -62,14 +62,28 @@ class User {
         self.Vehicles.removeAll(keepCapacity: false)
     }
     
-    func getVehicles() -> [Vehicle]{
+    func getActiveVehicles() -> [Vehicle]{
         //POST: Returns the array of all vehicles associated with the user.
-        return self.Vehicles;
+        var activeVehicles: [Vehicle] = []
+        for vehicle in self.Vehicles{
+            if (!vehicle.Deleted){
+                activeVehicles.append(vehicle);
+            }
+        }
+        return activeVehicles;
     }
     
-    func getFirstVehicle() -> Vehicle {
-        return self.Vehicles[0];
+    func getFirstVehicle() -> Vehicle? {
+        var activeVehicles = self.getActiveVehicles();
+        
+        if activeVehicles.count > 0{
+            return activeVehicles[0];
+        }else{
+            return nil;
+        }
+        
     }
+    
     
     
     //MARK:- Park Session functions

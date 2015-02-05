@@ -54,7 +54,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     
     func updateTabelData(){
         //Update the view with the latest data.
-        allVehicles = User.sharedInstance.getVehicles();
+        allVehicles = User.sharedInstance.getActiveVehicles();
         vehicles.removeAll(keepCapacity: false);
         for vehicle in allVehicles{
             vehicles.append(vehicle.displayVehicle());
