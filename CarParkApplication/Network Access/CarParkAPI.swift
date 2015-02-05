@@ -58,7 +58,7 @@ func determineCarPark(token: String, identifier: String, requestCompleted: (succ
     jsonResponse.resume();
 }
 
-func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int, parkCompleted: (success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkCost: Double?, error: String?) -> ()) -> (){
+func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int, parkCompleted: (success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkFinishTime: NSDate?, parkCost: Double?, error: String?) -> ()) -> (){
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/park");
     let urlSession = NSURLSession.sharedSession();
 
@@ -120,6 +120,9 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
             }else if let parkID: AnyObject = jsonResult["ParkTransactionID"]{
                 parkTransaction = parkID as? Int
                 
+                if let finishTime: AnyObject = jsonResult["FinishTime"]{
+                    sessionFinishTime = dateFormatter.dateFromString((finishTime as? NSString)!);
+                }
                 if let finished: AnyObject = jsonResult["Finished"]{
                     sessionFinished = finished as? Bool;
                 }
@@ -133,7 +136,7 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
             errorResponse = "Server Error"
         }
         
-        parkCompleted(success: success, parkTransactionID: parkTransaction, parkFinished:sessionFinished, parkCost: sessionCost, error: errorResponse);
+        parkCompleted(success: success, parkTransactionID: parkTransaction, parkFinished:sessionFinished, parkFinishTime: sessionFinishTime, parkCost: sessionCost, error: errorResponse);
     });
     
     parkVehicleResponse.resume();

@@ -134,7 +134,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         // -1 time band indicates that no time band is selected
         var timeBand: Int = toggleMethod.on ? -1 : selectedTimeBand!.BandID;
         
-        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, timeBand,  {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkCost: Double?, error: String?) -> () in
+        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, timeBand,  {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkFinishTime: NSDate?, parkCost: Double?, error: String?) -> () in
             var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
             
             if(!success) {
@@ -162,7 +162,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                         carParkID: selectedCarParkID,
                         carParkName: self.selectedCarParkName!,
                         startTime: startTime,
-                        endTimeParking: calculatedFinishTime,
+                        endTimeParking: parkFinishTime!,
                         currentSession: !parkFinished!,
                         parkedVehicleID: self.selectedVehicle!.VehicleID!,
                         value: parkCost!,
