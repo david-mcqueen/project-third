@@ -143,3 +143,19 @@ func getCostFormattedString(inputCost: Double) -> String{
     
 }
 
+func borderRed(inputCell: UITableViewCell){
+    //Set the border colour red for the input that failed
+    
+    inputCell.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
+    inputCell.layer.borderWidth = 2.0;
+    inputCell.layer.cornerRadius = 2;
+    inputCell.clipsToBounds = true;
+}
+
+func clearBorderRed(inputCell: UITableViewCell){
+    inputCell.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
+    inputCell.layer.borderWidth = 0.0;
+    inputCell.layer.cornerRadius = 5;
+    inputCell.clipsToBounds = true;
+}
+

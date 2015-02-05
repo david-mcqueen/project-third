@@ -108,6 +108,8 @@
                     <connections>
                         <outlet property="inputEmail" destination="xbB-fZ-vdc" id="Wfz-Si-Uvy"/>
                         <outlet property="inputPassword" destination="9hH-dF-Llf" id="TIA-CV-DkC"/>
+                        <outlet property="loginCell" destination="5mh-cp-pMg" id="0hw-bD-TQA"/>
+                        <outlet property="passwordCell" destination="gXT-p7-I84" id="9b6-ZP-Uvf"/>
                         <segue destination="gWl-Q9-dSo" kind="showDetail" identifier="loggedIn" id="fZ3-C4-sNI"/>
                     </connections>
                 </tableViewController>
@@ -511,7 +513,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="determineLocationButton" destination="b96-Yb-4IO" id="dFE-Er-YB6"/>
+                        <outlet property="locationIDCell" destination="qXF-On-iYg" id="mnb-IO-vGI"/>
                         <outlet property="locationTextField" destination="ng2-H6-ioH" id="TaE-tc-RkQ"/>
+                        <outlet property="selectTimeBandCell" destination="uQU-u1-vHu" id="S55-82-W73"/>
                         <outlet property="timeBandLabel" destination="Bz0-tD-LD3" id="OIy-PO-fuL"/>
                         <outlet property="toggleMethod" destination="Q2k-jd-bx5" id="EGB-h1-kDu"/>
                         <outlet property="vehicleLabel" destination="DcO-GD-gN6" id="uIx-6g-7wz"/>

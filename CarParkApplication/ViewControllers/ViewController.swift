@@ -25,6 +25,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var selectedCarParkID: Int?;
     var selectedCarParkName: String?;
     
+    @IBOutlet weak var locationIDCell: UITableViewCell!
+    @IBOutlet weak var selectTimeBandCell: UITableViewCell!
     //MARK:- UI Outlets
     @IBOutlet var determineLocationButton: UIButton!
     @IBOutlet var locationTextField: UITextField!
@@ -46,6 +48,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             timeBandLabel.text = selectedTimeBand!.displayBand();
         }else{
             timeBandLabel.text = "Select Time";
+            selectTimeBandCell.userInteractionEnabled = false;
         }
         
         
@@ -53,8 +56,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
             locationManager.requestWhenInUseAuthorization();
         }
-        
-        //TODO:- Handle the user denying the location request
         
         beaconActivityIndicator.center = self.view.center
         beaconActivityIndicator.hidesWhenStopped = true
@@ -77,25 +78,25 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         println("finished editing")
         if (validateLocationID(self.locationTextField.text)){
             self.selectedCarParkID = (self.locationTextField.text).toInt();
+            selectTimeBandCell.userInteractionEnabled = true;
         }else{
             displayAlert("Invalid ID", "Please enter a valid location ID", "Ok");
         }
         
         
     }
-    
 
     
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
         //TODO:- Validation checking on the input fields
         
-        if (selectedTimeBand == nil){
+        if (selectedTimeBand == nil && !toggleMethod.on){
             displayAlert("Time Band", "Please select a valid time band", "Ok")
             return;
         }
         
-        if (User.sharedInstance.CurrentBalance < selectedTimeBand?.BandCost){
+        if (User.sharedInstance.CurrentBalance < selectedTimeBand?.BandCost && !toggleMethod.on){
             displayAlert("Insufficient Fund", "Please ensure you have enough funds on your account for this parking", "Ok");
             return;
         }
@@ -113,10 +114,23 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         }
     }
     
+    func allInputsComplete() -> Bool{
+        if (toggleMethod.on){
+            
+        }
+        return true;
+    }
+    
     
     func parkUserVehicle(selectedCarParkID: Int){
+        
         let userVehicle = selectedVehicle?.VehicleID;
-        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, selectedTimeBand!.BandID,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
+        //Check all inputs are filled in
+        
+        // -1 time band indicates that no time band is selected
+        var timeBand: Int = toggleMethod.on ? -1 : selectedTimeBand!.BandID;
+        
+        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, timeBand,  {(success: Bool, parkTransactionID: Int?, error: String?) -> () in
             
             var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
             
@@ -202,9 +216,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 // Show the alert
                 self.locationTextField.text = "\(carParkID)";
                 self.selectedCarParkID = carParkID;
-                self.determineLocationButton.setTitle("Manually Enter location", forState: UIControlState.Normal);
-                self.editLocationButton = true;
-                
+                self.toggleLocationButton(true);
+                self.selectTimeBandCell.userInteractionEnabled = true;
+                self.toggleLocationButton(true)
                 alert.show();
             });
             
@@ -212,6 +226,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         );
 
     }
+
 
     //MARK:- LocationManager Delegates
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
@@ -240,6 +255,19 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         }
     }
     
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        switch status{
+        case .Authorized, .AuthorizedWhenInUse:
+            self.toggleLocationButton(true);
+            break;
+        case .Denied, .NotDetermined, .Restricted:
+            self.toggleLocationButton(false);
+            break;
+        default:
+            self.toggleLocationButton(false);
+            break;
+        }
+    }
     
     //MARK:- TableView Delegates
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -277,7 +305,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if(indexPath.section == 0 && indexPath.row == 1 && !editLocationButton) {
+        if(indexPath.section == 0 && indexPath.row == 0 && editLocationButton) {
+            locationTextField.becomeFirstResponder();
+        }else if(indexPath.section == 0 && indexPath.row == 1 && !editLocationButton) {
             determineLocation(self);
         }else if (indexPath.section == 0 && indexPath.row == 1 && editLocationButton){
             self.manuallyEnterLocation();
@@ -358,7 +388,20 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.locationTextField.text = "";
         self.locationTextField.placeholder = "Location ID"
         self.selectedCarParkID = nil;
+        selectTimeBandCell.userInteractionEnabled = false;
         self.locationTextField.becomeFirstResponder()
+    }
+    
+    func toggleLocationButton(automatic: Bool){
+        if(automatic){
+            editLocationButton = false;
+            self.determineLocationButton.setTitle("Determine location", forState: UIControlState.Normal);
+            locationIDCell.userInteractionEnabled = false;
+        }else{
+            editLocationButton = true;
+            self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
+            locationIDCell.userInteractionEnabled = true
+        }
     }
 }
 

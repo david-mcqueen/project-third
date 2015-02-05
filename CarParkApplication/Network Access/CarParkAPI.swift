@@ -67,12 +67,22 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
     var error1 : NSError?;
     var errorResponse: String?;
     request.HTTPMethod = "POST";
-    var params: Dictionary<String, AnyObject> = ([
-        "Token" : token,
-        "CarParkID" : carParkID,
-        "UserVehicleID" : vehicleID,
-        "CarParkCostID" : "\(parkBandID)"
-        ]);
+    var params: Dictionary<String, AnyObject>
+    
+    if (parkBandID == -1){
+        params = ([
+            "Token" : token,
+            "CarParkID" : carParkID,
+            "UserVehicleID" : vehicleID
+            ]);
+    }else{
+         params = ([
+            "Token" : token,
+            "CarParkID" : carParkID,
+            "UserVehicleID" : vehicleID,
+            "CarParkCostID" : "\(parkBandID)"
+            ]);
+    }
     
     request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
     request.addValue("application/json", forHTTPHeaderField: "Content-Type");
@@ -93,6 +103,7 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
         }
         
         if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            println(jsonResult);
             if (err != nil){
                 println("JSON Error \(err!.localizedDescription) ");
                 errorResponse = err!.localizedDescription;

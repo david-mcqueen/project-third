@@ -19,6 +19,7 @@ class TimeBandSelectViewController: UITableViewController {
     var selectedTimeBand:PricingBand?
     var selectedTimeBandIndex:Int? = nil
     var selectedCarPark: Int?
+    var bandsFound = false;
     weak var delegate: TimeBandSelectedDelegate?;
     
     
@@ -42,19 +43,37 @@ class TimeBandSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeBands.count
+        
+        if (!self.bandsFound){
+            return 1;
+        }else{
+            return timeBands.count
+        }
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as TimeBandViewCell
-        cell.cost.text = timeBands[indexPath.row].displayBandCost();
-        cell.timeBand.text = timeBands[indexPath.row].displayBandName();
         
-        if indexPath.row == selectedTimeBandIndex {
-            cell.accessoryType = .Checkmark
-        } else {
-            cell.accessoryType = .None
+        if (!self.bandsFound){
+            cell.cost.text = ""
+            cell.timeBand.text = "Car Park Closed"
+            cell.userInteractionEnabled = false;
+        }else{
+            cell.cost.text = timeBands[indexPath.row].displayBandCost();
+            cell.timeBand.text = timeBands[indexPath.row].displayBandName();
+            
+            if indexPath.row == selectedTimeBandIndex {
+                cell.accessoryType = .Checkmark
+            } else {
+                cell.accessoryType = .None
+            }
         }
+        
+        
+        
+
+        
         return cell
     }
     
@@ -76,6 +95,7 @@ class TimeBandSelectViewController: UITableViewController {
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
+
     }
     
     //MARK:- Segue Functions
@@ -111,6 +131,7 @@ class TimeBandSelectViewController: UITableViewController {
             var timeBandIndex = 0;
             for band in allPricingBands{
                 self.timeBands.append(band);
+                self.bandsFound = true;
                 if (self.selectedTimeBand?.BandID == band.BandID){
                     self.selectedTimeBandIndex = timeBandIndex;
                 }

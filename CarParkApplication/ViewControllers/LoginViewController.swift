@@ -13,6 +13,8 @@ class LoginViewController: UITableViewController{
     @IBOutlet weak var inputEmail: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
    
+    @IBOutlet weak var loginCell: UITableViewCell!
+    @IBOutlet weak var passwordCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,7 @@ class LoginViewController: UITableViewController{
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
         }else{
-            inputEmail.text = "email@gmail.com"
+            inputEmail.text = "emaildm@gmail.com"
         }
         
         //TODO:- remove this line
@@ -73,11 +75,13 @@ class LoginViewController: UITableViewController{
         loginIndicator.center = self.view.center
         loginIndicator.hidesWhenStopped = true
         loginIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        inputEmail.endEditing(true);
+        inputPassword.endEditing(true);
         
         if(userLogin.emptyInputUsername()){
-            borderRed(inputEmail);
+            borderRed(loginCell);
         }else if(userLogin.emptyInputPassword()){
-            borderRed(inputPassword);
+            borderRed(passwordCell);
         }else{
             view.addSubview(loginIndicator)
             loginIndicator.startAnimating()
@@ -110,8 +114,8 @@ class LoginViewController: UITableViewController{
                     }else{
                          alert.show();
                         //Highlight the relevant fields
-                        self.borderRed(self.inputEmail);
-                        self.borderRed(self.inputPassword);
+                        borderRed(self.loginCell);
+                        borderRed(self.passwordCell);
                         loginIndicator.stopAnimating();
                     }
                 })
@@ -135,19 +139,6 @@ class LoginViewController: UITableViewController{
     }
 
 
-    func borderRed(inputField: UITextField){
-        //Set the border colour red for the input that failed
-        inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
-        inputField.layer.borderWidth = 2.0;
-        inputField.layer.cornerRadius = 5;
-        inputField.clipsToBounds = true;
-    }
-    
-    func clearBorderRed(inputField: UITextField){
-        inputField.layer.borderColor = (UIColor( red: 1, green: 0, blue:0, alpha: 1.0 )).CGColor;
-        inputField.layer.borderWidth = 0.0;
-        inputField.layer.cornerRadius = 5;
-        inputField.clipsToBounds = true;
-    }
+
 
 }

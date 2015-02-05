@@ -85,13 +85,9 @@ class RegisterViewController: UITableViewController {
             
             registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
                 var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
-                if(success) {
-                    alert.title = "Success!"
-                    println(token)
-                }
-                else {
+                if(!success) {
                     alert.title = "Failed : ("
-                    alert.message = token
+                    alert.message = "Something went wrong";
                 }
 
                 // Move to the UI thread
@@ -136,7 +132,7 @@ class RegisterViewController: UITableViewController {
         }
         if(txtPassword.text == nil || txtPassword.text == ""){
             success = false;
-            missingInputs.append("Phone Number");
+            missingInputs.append("Password");
         }
         
         return (success, missingInputs);
