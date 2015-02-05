@@ -334,6 +334,58 @@ func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicle
 }
 
 
+func deleteVehicle(token: String, vehicleID: Int, vehicleDeleted: (success: Bool, error: String?) -> ()) -> (){
+    
+    let urlSession = NSURLSession.sharedSession();
+    
+    let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/vehicle");
+    var request = NSMutableURLRequest(URL: url!);
+    
+    var error1 : NSError?;
+    var errorResponse: String?;
+    
+    request.HTTPMethod = "DELETE";
+    var params: Dictionary<String, AnyObject> = ([
+        "Token" : token,
+        "VehicleID" : vehicleID
+        ]);
+    
+    request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error1);
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type");
+    request.addValue("application/json", forHTTPHeaderField: "Accept");
+    
+    
+    var deleteVehicleResponse = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        
+        var err: NSError?
+        var success:Bool = false;
+        var token:String?;
+        
+        if (error != nil) {
+            println(error.localizedDescription);
+            errorResponse = error.localizedDescription;
+        }
+        
+        if var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as? NSDictionary{
+            if (err != nil){
+                println("JSON Error \(err!.localizedDescription) ");
+                errorResponse = err!.localizedDescription;
+            }else{
+                 success = true;
+            }
+            
+        }else{
+            errorResponse = "Server Error";
+        }
+        
+        
+        
+        vehicleDeleted(success: success, error: errorResponse);
+    });
+    
+    deleteVehicleResponse.resume();
+}
+
 func userBalance(token: String, requestCompleted: (success: Bool, balance: Double?, error: String?) -> ()) -> (){
 
     println("User balance")

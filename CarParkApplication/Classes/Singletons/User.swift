@@ -48,7 +48,7 @@ class User {
         var searchIndex = 0;
         
         for vehicle in self.Vehicles{
-            if vehicle.RegistrationNumber == oldVehicle.RegistrationNumber{
+            if vehicle.VehicleID == oldVehicle.VehicleID{
                 removeVehicleIndex = searchIndex;
             }
             searchIndex++;

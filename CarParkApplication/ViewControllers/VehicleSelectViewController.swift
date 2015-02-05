@@ -122,9 +122,18 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             //Delete vehicle
+            
+            println("Deleting")
+            println(self.allVehicles[indexPath.row].VehicleID!)
+            deleteVehicle(User.sharedInstance.token!, self.allVehicles[indexPath.row].VehicleID!, { (success, error) -> () in
+                println(success);
+            });
+            
             self.vehicles.removeAtIndex(indexPath.row);
+            self.allVehicles.removeAtIndex(indexPath.row);
             User.sharedInstance.deleteVehicle(self.allVehicles[indexPath.row]);
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+            
         });
         
         return [deleteRowAction, editRowAction];
