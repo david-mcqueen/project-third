@@ -174,15 +174,18 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     let sessionEndTime: AnyObject?  = session["FinishTime"]!
                     let sessionValue: AnyObject?  = session["Value"]!
                     var sessionCarParkName: AnyObject?  = session["CarParkName"]!
+                    var sessionFinished: AnyObject? = session["Finished"]!
                     
-                    if(sessionEndTime == nil){
+                    if(sessionFinished!.description == "false"){
                         let newSession = ParkSession(
                             parkSessionID: (sessionID!.description).toInt()!,
                             carParkID: (sessionCarParkID!.description).toInt()!,
                             carParkName: sessionCarParkName!.description!,
                             startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
                             currentSession: true,
-                            parkedVehicleID: (sessionVehicleID!.description).toInt()!);
+                            parkedVehicleID: (sessionVehicleID!.description).toInt()!,
+                            finished: (sessionFinished!.description == "true" ? true : false)
+                        );
                         
                         sessions.append(newSession);
                     }else{
@@ -194,7 +197,9 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                             endTimeParking: dateFormatter.dateFromString(sessionEndTime!.description!)!,
                             currentSession: false,
                             parkedVehicleID: (sessionVehicleID!.description).toInt()!,
-                            value: (sessionValue!.description! as NSString).doubleValue);
+                            value: (sessionValue!.description! as NSString).doubleValue,
+                            finished: (sessionFinished!.description == "true" ? true : false)
+                        );
                         
                         sessions.append(newSession);
                     }
@@ -408,6 +413,7 @@ func userBalance(token: String, requestCompleted: (success: Bool, balance: Doubl
         }
         var err: NSError?
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
+        println(strData)
         if var jsonResult : NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary{
             if (err != nil){
                 println("JSON Error \(err!.localizedDescription) ");

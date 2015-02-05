@@ -158,7 +158,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                         carParkName: self.selectedCarParkName!,
                         startTime: NSDate(),
                         currentSession: true,
-                        parkedVehicleID: self.selectedVehicle!.VehicleID!);
+                        parkedVehicleID: self.selectedVehicle!.VehicleID!,
+                        finished: !self.toggleMethod.on);
                     User.sharedInstance.addParkSession(newParkSession);
                     
                     //Display the new parking session
@@ -219,9 +220,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 // Show the alert
                 self.locationTextField.text = "\(carParkID)";
                 self.selectedCarParkID = carParkID;
-                self.toggleLocationButton(true);
                 self.selectTimeBandCell.userInteractionEnabled = true;
-                self.toggleLocationButton(true)
+                self.toggleLocationButton(true, locatedBeacon: true)
                 alert.show();
             });
             
@@ -261,13 +261,13 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status{
         case .Authorized, .AuthorizedWhenInUse:
-            self.toggleLocationButton(true);
+            self.toggleLocationButton(true, locatedBeacon: false);
             break;
         case .Denied, .NotDetermined, .Restricted:
-            self.toggleLocationButton(false);
+            self.toggleLocationButton(false, locatedBeacon: false);
             break;
         default:
-            self.toggleLocationButton(false);
+            self.toggleLocationButton(false, locatedBeacon: false);
             break;
         }
     }
@@ -397,11 +397,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.locationTextField.becomeFirstResponder()
     }
     
-    func toggleLocationButton(automatic: Bool){
-        if(automatic){
+    func toggleLocationButton(automatic: Bool, locatedBeacon: Bool){
+        if(automatic && !locatedBeacon){
             editLocationButton = false;
             self.determineLocationButton.setTitle("Determine location", forState: UIControlState.Normal);
             locationIDCell.userInteractionEnabled = false;
+        }else if (automatic && locatedBeacon){
+            editLocationButton = true;
+            self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
+            locationIDCell.userInteractionEnabled = true
         }else{
             editLocationButton = true;
             self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);

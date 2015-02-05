@@ -56,13 +56,13 @@ class TimeBandSelectViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as TimeBandViewCell
         
         if (!self.bandsFound){
-            cell.cost.text = ""
+            cell.cost.text = "£"
             cell.timeBand.text = "Car Park Closed"
             cell.userInteractionEnabled = false;
         }else{
             cell.cost.text = timeBands[indexPath.row].displayBandCost();
             cell.timeBand.text = timeBands[indexPath.row].displayBandName();
-            
+            cell.userInteractionEnabled = true;
             if indexPath.row == selectedTimeBandIndex {
                 cell.accessoryType = .Checkmark
             } else {

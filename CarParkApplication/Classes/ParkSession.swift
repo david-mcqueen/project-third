@@ -17,17 +17,19 @@ class ParkSession {
     var CurrentSession: Bool;
     var ParkedVehicleID: Int;
     var Value: Double?;
+    var Finished: Bool;
     
-    init (parkSessionID: Int, carParkID: Int, carParkName: String, startTime: NSDate, currentSession: Bool, parkedVehicleID: Int){
+    init (parkSessionID: Int, carParkID: Int, carParkName: String, startTime: NSDate, currentSession: Bool, parkedVehicleID: Int, finished: Bool){
         self.ParkSessionID = parkSessionID;
         self.CarParkID = carParkID;
         self.CarParkName = carParkName;
         self.StartTime = startTime;
         self.CurrentSession = currentSession;
         self.ParkedVehicleID = parkedVehicleID;
+        self.Finished = finished;
     }
     
-    init (parkSessionID: Int, carParkID: Int, carParkName: String, startTime: NSDate, endTimeParking: NSDate, currentSession: Bool, parkedVehicleID: Int, value: Double){
+    init (parkSessionID: Int, carParkID: Int, carParkName: String, startTime: NSDate, endTimeParking: NSDate, currentSession: Bool, parkedVehicleID: Int, value: Double, finished: Bool){
         self.ParkSessionID = parkSessionID;
         self.CarParkID = carParkID;
         self.CarParkName = carParkName;
@@ -36,6 +38,7 @@ class ParkSession {
         self.CurrentSession = currentSession;
         self.ParkedVehicleID = parkedVehicleID;
         self.Value = value;
+        self.Finished = finished;
     }
     
     func vehicleIDAsString() -> String {

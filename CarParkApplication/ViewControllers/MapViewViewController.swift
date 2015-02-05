@@ -12,6 +12,7 @@ import MapKit
 
 class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var btnCurrentLocation: UIBarButtonItem!
     @IBOutlet var btnRememberLocation: UIBarButtonItem!
     @IBOutlet var btnSearch: UIButton!
     @IBOutlet var txtSearchLocation: UITextField!
@@ -25,27 +26,36 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         super.viewDidLoad()
         locationManager.delegate = self;
         
-        //TODO:- Do we need "Always" authorisation?
-        //Request permission to access beacons - Whilst the app is in Foreground
-        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
-            println("Requesting")
-            locationManager.requestWhenInUseAuthorization();
-        }else{
-             viewCurrentLocation(self);
-        }
-        txtSearchLocation.delegate = self;
-       
         getSavedCoordinates();
-        
-//        let longPress = UILongPressGestureRecognizer(target: self, action: "action:")
-//        longPress.minimumPressDuration = 1.0
-//        map.addGestureRecognizer(longPress)
-        
         if (savedLocation != nil){
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Retrieve Location", style: .Bordered, target: self, action: "retrieveLocation:")
         }else{
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remember Location", style: .Bordered, target: self, action: "rememberLocation:")
         }
+        
+        
+        //TODO:- Do we need "Always" authorisation?
+        //Request permission to access beacons - Whilst the app is in Foreground
+        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
+            println("Requesting")
+            self.locationAuthorised(false);
+            locationManager.requestWhenInUseAuthorization();
+            
+        }else{
+            locationAuthorised(true);
+            viewCurrentLocation(self);
+            
+            
+        }
+        txtSearchLocation.delegate = self;
+        
+        
+        
+//        let longPress = UILongPressGestureRecognizer(target: self, action: "action:")
+//        longPress.minimumPressDuration = 1.0
+//        map.addGestureRecognizer(longPress)
+        
+        
     }
     
     func getSavedCoordinates(){
@@ -206,12 +216,27 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
-            locationManager.startUpdatingLocation()
-        }else{
-            println("Don't have authorisation")
+        
+        switch status{
+        case .Authorized, .AuthorizedWhenInUse:
+            self.locationAuthorised(true)
+            break;
+        case .Denied, .NotDetermined, .Restricted:
+            self.locationAuthorised(false);
+            break;
         }
     }
+    
+    func locationAuthorised(authorised: Bool){
+        
+        self.navigationItem.leftBarButtonItem?.enabled = authorised
+         self.navigationItem.rightBarButtonItem?.enabled = authorised
+        
+        if(!authorised){
+            displayAlert("Permission Error", "Certain map features are disabled due to lack of permissio, please enable location services in your iPhone settings to use all features", "Ok")
+        }
+    }
+
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         //Set the view to be of the users current location

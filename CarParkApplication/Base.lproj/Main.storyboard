@@ -770,6 +770,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnCurrentLocation" destination="VGj-Ra-sVa" id="5WO-TE-jl1"/>
                         <outlet property="btnSearch" destination="Tck-vE-d70" id="Wvq-oQ-Vdh"/>
                         <outlet property="map" destination="r5I-tY-vYu" id="pdo-SH-lwK"/>
                         <outlet property="txtSearchLocation" destination="Fpp-jK-vdg" id="aw3-w9-2Wv"/>
