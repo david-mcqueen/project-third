@@ -176,7 +176,7 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                     var sessionCarParkName: AnyObject?  = session["CarParkName"]!
                     var sessionFinished: AnyObject? = session["Finished"]!
                     
-                    if(sessionFinished!.description == "false"){
+                    if(sessionFinished!.description == "0"){
                         let newSession = ParkSession(
                             parkSessionID: (sessionID!.description).toInt()!,
                             carParkID: (sessionCarParkID!.description).toInt()!,
@@ -184,7 +184,7 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                             startTime: dateFormatter.dateFromString(sessionStartTime!.description!)!,
                             currentSession: true,
                             parkedVehicleID: (sessionVehicleID!.description).toInt()!,
-                            finished: (sessionFinished!.description == "true" ? true : false)
+                            finished: false
                         );
                         
                         sessions.append(newSession);
@@ -198,7 +198,7 @@ func getAllParkingSessions(token: String, requestCompleted: (success: Bool, sess
                             currentSession: false,
                             parkedVehicleID: (sessionVehicleID!.description).toInt()!,
                             value: (sessionValue!.description! as NSString).doubleValue,
-                            finished: (sessionFinished!.description == "true" ? true : false)
+                            finished: true
                         );
                         
                         sessions.append(newSession);
