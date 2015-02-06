@@ -153,10 +153,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
                     let startTime = NSDate();
-                    var maxHours: Double = Double(self.selectedTimeBand!.MaximumTimeHours);
-                    var secondsToAdd: Double =  maxHours * 60 * 60;
-                    var calculatedFinishTime = startTime.dateByAddingTimeInterval(secondsToAdd)
-                    
+                                        
                     var newParkSession = ParkSession(
                         parkSessionID: parkTransactionID!,
                         carParkID: selectedCarParkID,
@@ -169,8 +166,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                         finished: parkFinished!
                     );
                     User.sharedInstance.addParkSession(newParkSession);
-                    
-                    
                     
                     //Display the new parking session
                     println("View the parking session")

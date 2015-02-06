@@ -98,7 +98,7 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
         var sessionFinished: Bool?;
         var success = false;
         var dateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.S"
         
         
         if (error != nil) {
@@ -121,7 +121,7 @@ func parkVehicle(token: String, carParkID: Int, vehicleID: Int, parkBandID: Int,
                 parkTransaction = parkID as? Int
                 
                 if let finishTime: AnyObject = jsonResult["FinishTime"]{
-                    sessionFinishTime = dateFormatter.dateFromString((finishTime as? NSString)!);
+                    sessionFinishTime = dateFormatter.dateFromString(finishTime.description!);
                 }
                 if let finished: AnyObject = jsonResult["Finished"]{
                     sessionFinished = finished as? Bool;
