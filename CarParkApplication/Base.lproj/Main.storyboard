@@ -497,6 +497,62 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Notification Settings" id="80U-CU-5AX">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qt5-hm-YBn">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qt5-hm-YBn" id="j27-PP-CJ7">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recieve Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2do-Ux-pHX">
+                                                    <rect key="frame" x="8" y="12" width="171" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.27450980390000002" green="0.40000000000000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahu-1j-zTV">
+                                                    <rect key="frame" x="543" y="8" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleMethodPressed:" destination="nUs-13-0F2" eventType="valueChanged" id="WMp-vl-oLK"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ahu-1j-zTV" firstAttribute="trailing" secondItem="j27-PP-CJ7" secondAttribute="trailingMargin" id="AJz-A8-MmK"/>
+                                                <constraint firstAttribute="centerY" secondItem="2do-Ux-pHX" secondAttribute="centerY" constant="-0.5" id="HNK-fi-njw"/>
+                                                <constraint firstItem="2do-Ux-pHX" firstAttribute="leading" secondItem="j27-PP-CJ7" secondAttribute="leadingMargin" id="UFA-ZZ-7AL"/>
+                                                <constraint firstAttribute="centerY" secondItem="ahu-1j-zTV" secondAttribute="centerY" constant="-1.5" id="heH-bF-Mff"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9x3-O9-uvp">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9x3-O9-uvp" id="dq3-ND-PWZ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Minutes Before" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up0-vV-s8U">
+                                                    <rect key="frame" x="8" y="12" width="166" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.27450980390000002" green="0.40000000000000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Minutes" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VMl-mN-0Lz">
+                                                    <rect key="frame" x="182" y="7" width="410" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="up0-vV-s8U" firstAttribute="leading" secondItem="dq3-ND-PWZ" secondAttribute="leadingMargin" id="DvW-Ws-FGb"/>
+                                                <constraint firstItem="VMl-mN-0Lz" firstAttribute="leading" secondItem="up0-vV-s8U" secondAttribute="trailing" constant="8" id="aif-iw-mUa"/>
+                                                <constraint firstAttribute="centerY" secondItem="up0-vV-s8U" secondAttribute="centerY" constant="0.5" id="daq-YL-DuS"/>
+                                                <constraint firstAttribute="centerY" secondItem="VMl-mN-0Lz" secondAttribute="centerY" id="dlg-0q-tVK"/>
+                                                <constraint firstItem="VMl-mN-0Lz" firstAttribute="trailing" secondItem="dq3-ND-PWZ" secondAttribute="trailingMargin" id="zgy-HB-WNO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="nUs-13-0F2" id="ol3-hl-C5a"/>
@@ -515,6 +571,8 @@
                         <outlet property="determineLocationButton" destination="b96-Yb-4IO" id="dFE-Er-YB6"/>
                         <outlet property="locationIDCell" destination="qXF-On-iYg" id="mnb-IO-vGI"/>
                         <outlet property="locationTextField" destination="ng2-H6-ioH" id="TaE-tc-RkQ"/>
+                        <outlet property="notificationMinsInput" destination="VMl-mN-0Lz" id="2yK-7C-4ba"/>
+                        <outlet property="notificationSwitch" destination="ahu-1j-zTV" id="EPa-xV-Xd6"/>
                         <outlet property="selectTimeBandCell" destination="uQU-u1-vHu" id="S55-82-W73"/>
                         <outlet property="timeBandLabel" destination="Bz0-tD-LD3" id="OIy-PO-fuL"/>
                         <outlet property="toggleMethod" destination="Q2k-jd-bx5" id="EGB-h1-kDu"/>
@@ -524,7 +582,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxd-zv-aBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oTD-bT-3Re" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2501" y="1828"/>
+            <point key="canvasLocation" x="2501" y="1825"/>
         </scene>
         <!--Create Vehicle View Controller-->
         <scene sceneID="IUM-Dr-N4D">

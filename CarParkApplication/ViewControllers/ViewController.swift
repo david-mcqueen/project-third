@@ -34,6 +34,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     @IBOutlet var vehicleLabel: UILabel!
     @IBOutlet var toggleMethod: UISwitch!
     
+    @IBOutlet weak var notificationSwitch: UISwitch!
+    @IBOutlet weak var notificationMinsInput: UITextField!
     
     //MARK:- Default functions
     override func viewDidLoad() {
@@ -105,6 +107,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             return;
         }
         
+        if (notificationSwitch.on && (notificationMinsInput.text == nil || notificationMinsInput.text == "")){
+            displayAlert("Incorrect Value", "Please enter a notification time in minutes", "Ok");
+            return;
+        }
+        
         if (self.selectedCarParkID != nil){
             //Use the determined location
             parkUserVehicle(self.selectedCarParkID!)
@@ -167,12 +174,17 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     );
                     User.sharedInstance.addParkSession(newParkSession);
                     
+                    if (self.notificationSwitch.on){
+                        var notificationWarning = Double(self.notificationMinsInput.text.toInt()!)
+                        notificationWarning = (notificationWarning * 60) * -1;
+                        
+                        //Schedule a notification for 30 mins before the expirary time
+                        scheduleNotification("Your parking for vehicle \(self.selectedVehicle?.displayVehicle()) is due to expire in \(self.notificationMinsInput.text) minutes",
+                            parkFinishTime!,
+                            notificationWarning
+                        )
+                    }
                     
-                    //Schedule a notification for 30 mins before the expirary time
-                    scheduleNotification("Your parking for vehicle \(self.selectedVehicle?.displayVehicle()) is due to expire in 30 minutes",
-                        parkFinishTime!,
-                        ((30 * 60) * -1)
-                    )
                     
                     //Display the new parking session
                     println("View the parking session")
@@ -305,9 +317,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             //Set the header & footer heights to 0
             self.tableView.sectionHeaderHeight = 0;
             return 0;
-        } else {
+        } else{
             return super.tableView(tableView, heightForHeaderInSection: section);
-        }  //keeps inalterate all other Header
+        }  //keeps all other Header
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -321,14 +333,18 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 2) //Index number of interested section
-        {
-            if(section == 2 && toggleMethod.on){
+        if(section == 2){
+            if(toggleMethod.on){
                 return 0;
-            } else  {
+            } else {
+                return 1
+            }
+        }else if (section == 4){
+            if(notificationSwitch.on){
+                return 2;
+            }else{
                 return 1;
             }
-            
         }else{
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
@@ -343,6 +359,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             self.manuallyEnterLocation();
         }else if(indexPath.section == 3 && indexPath.row == 0){
             parkPressed(self);
+        }else if(indexPath.section == 4 && indexPath.row == 1){
+            notificationMinsInput.becomeFirstResponder();
         }
     }
     
