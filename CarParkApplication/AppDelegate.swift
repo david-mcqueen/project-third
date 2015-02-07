@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         PayPalMobile.initializeWithClientIdsForEnvironments([PayPalEnvironmentProduction: "ARy5LxCT4xDIFi5JRr-NLSpNOYtTq-WX8ZLieKM_1donhR9X9283XszvYqdE", PayPalEnvironmentSandbox: "ARy5LxCT4xDIFi5JRr-NLSpNOYtTq-WX8ZLieKM_1donhR9X9283XszvYqdE"])
+        
+        if(application.respondsToSelector("registerUserNotificationSettings:")) {
+            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Sound | .Badge, categories: nil))
+        }
+        
         return true
     }
 

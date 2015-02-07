@@ -167,6 +167,13 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     );
                     User.sharedInstance.addParkSession(newParkSession);
                     
+                    
+                    //Schedule a notification for 30 mins before the expirary time
+                    scheduleNotification("Your parking for vehicle \(self.selectedVehicle?.displayVehicle()) is due to expire in 30 minutes",
+                        parkFinishTime!,
+                        ((30 * 60) * -1)
+                    )
+                    
                     //Display the new parking session
                     println("View the parking session")
                     let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as SessionViewController;

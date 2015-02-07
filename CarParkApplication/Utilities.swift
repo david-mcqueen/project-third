@@ -159,3 +159,13 @@ func clearBorderRed(inputCell: UITableViewCell){
     inputCell.clipsToBounds = true;
 }
 
+
+func scheduleNotification(message: String, notificationTime: NSDate, offsetSeconds: NSTimeInterval){
+    let notification: UILocalNotification = UILocalNotification();
+    
+    notification.alertBody = message;
+    notification.fireDate = NSDate(timeInterval: offsetSeconds, sinceDate: notificationTime);
+    notification.timeZone = NSTimeZone.defaultTimeZone();
+    
+    UIApplication.sharedApplication().scheduleLocalNotification(notification);
+}
