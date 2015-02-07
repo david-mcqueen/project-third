@@ -16,6 +16,9 @@ class LoginViewController: UITableViewController{
     @IBOutlet weak var loginCell: UITableViewCell!
     @IBOutlet weak var passwordCell: UITableViewCell!
     
+    
+    var keyboardIsShowing: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,8 +33,34 @@ class LoginViewController: UITableViewController{
         //TODO:- remove this line
         inputPassword.text = "Password123"
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        println("viewWillDisappear")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        println("keyboardWillShow")
+        if (!self.keyboardIsShowing){
+            self.tableView.frame.origin.y -= 100;
+            self.keyboardIsShowing = true
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        println("keyboardWillHide")
+        
+        if (self.keyboardIsShowing){
+            self.tableView.frame.origin.y += 100;
+            self.keyboardIsShowing = false;
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -60,8 +60,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         beaconActivityIndicator.center = self.view.center
         beaconActivityIndicator.hidesWhenStopped = true
-        beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         
+        beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray;
     }
     override func viewWillAppear(animated: Bool) {
         var firstVehicle = User.sharedInstance.getFirstVehicle();
