@@ -8,22 +8,23 @@
 
 import UIKit
 
+//The login view controller. The user can enter their credentials to login, or select to go to the register screen.
 class LoginViewController: UITableViewController{
 
+    //MARK:- UI Outlets
     @IBOutlet weak var inputEmail: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
-   
     @IBOutlet weak var loginCell: UITableViewCell!
     @IBOutlet weak var passwordCell: UITableViewCell!
     
-    
+    //MARK:- Variables
     var keyboardIsShowing: Bool = false
     
+    //MARK:- Default Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
+        //Get the saved username from the phone memory, if it exists, and populate the input field
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
         }else{
@@ -33,6 +34,7 @@ class LoginViewController: UITableViewController{
         //TODO:- remove this line
         inputPassword.text = "Password123"
         
+        //Attach a handler to move the view up when displaying the keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
@@ -40,33 +42,20 @@ class LoginViewController: UITableViewController{
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated);
-        println("viewWillDisappear")
+        //Remove the keyboard handlers when leaving this view
+        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil);
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        println("keyboardWillShow")
-        if (!self.keyboardIsShowing){
-            self.tableView.frame.origin.y -= 100;
-            self.keyboardIsShowing = true
-        }
-    }
     
-    func keyboardWillHide(notification: NSNotification) {
-        println("keyboardWillHide")
-        
-        if (self.keyboardIsShowing){
-            self.tableView.frame.origin.y += 100;
-            self.keyboardIsShowing = false;
-        }
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK:- TableView Delegates
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         let cellRowHeight = CGFloat(44.0);
@@ -96,10 +85,31 @@ class LoginViewController: UITableViewController{
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
     }
     
+    
+    //MARK:- Keyboard functions
+    func keyboardWillShow(notification: NSNotification) {
+        println("keyboardWillShow")
+        if (!self.keyboardIsShowing){
+            self.tableView.frame.origin.y -= 100;
+            self.keyboardIsShowing = true
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        println("keyboardWillHide")
+        
+        if (self.keyboardIsShowing){
+            self.tableView.frame.origin.y += 100;
+            self.keyboardIsShowing = false;
+        }
+    }
+    
 
+    //MARK:- Button Actions
     @IBAction func LoginButtonPressed(sender: AnyObject) {
         let userLogin = UserLogin(userName: inputEmail.text, password: inputPassword.text);
         
+        //Setup an activity to display when loggin the user in.
         var loginIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
         loginIndicator.center = self.view.center
         loginIndicator.hidesWhenStopped = true
@@ -107,6 +117,7 @@ class LoginViewController: UITableViewController{
         inputEmail.endEditing(true);
         inputPassword.endEditing(true);
         
+        //Check that the inputs have been completed
         if(userLogin.emptyInputUsername()){
             borderRed(loginCell);
         }else if(userLogin.emptyInputPassword()){
@@ -114,17 +125,18 @@ class LoginViewController: UITableViewController{
         }else{
             view.addSubview(loginIndicator)
             loginIndicator.startAnimating()
+            
+            //Start the network access to log the user in
             loginUser(userLogin, {(success: Bool, token: String?, error:String?) -> () in
                 var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
                 
-                if(!success) {
-                    alert.title = "Login Failed";
-                    alert.message = error!;
-                }
-                
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    // Show the alert
+                    //Dispay the error to the user
+                    if(!success) {
+                        alert.title = "Login Failed";
+                        alert.message = error!;
+                    }
                    
                     if(success){
                         NSLog("Login successful");
@@ -142,7 +154,7 @@ class LoginViewController: UITableViewController{
                         
                     }else{
                          alert.show();
-                        //Highlight the relevant fields
+                        //Highlight the relevant fieldss
                         borderRed(self.loginCell);
                         borderRed(self.passwordCell);
                         loginIndicator.stopAnimating();
@@ -154,6 +166,8 @@ class LoginViewController: UITableViewController{
         }
     }
     
+    
+    //MARK:- Segue Functions
     @IBAction func cancelRegistration(segue:UIStoryboardSegue) {
         //Log the user out, removing all of their information from the singleton.
         User.sharedInstance.logout();
@@ -166,8 +180,5 @@ class LoginViewController: UITableViewController{
         //TODO:- Need to logout on the server as well
         self.navigationController?.popViewControllerAnimated(true);
     }
-
-
-
 
 }

@@ -12,16 +12,21 @@ import MapKit
 
 class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
     
+    //MARK:- UI Outlets
     @IBOutlet weak var btnCurrentLocation: UIBarButtonItem!
     @IBOutlet var btnRememberLocation: UIBarButtonItem!
     @IBOutlet var btnSearch: UIButton!
     @IBOutlet var txtSearchLocation: UITextField!
     @IBOutlet var map: MKMapView!
+    
+    //MARK:- Variables
     var locationManager = CLLocationManager();
     var savedLocation: CLLocationCoordinate2D?;
     var allAnnotations: [MKAnnotation] = []
     var firstTimeLoad = true;
     
+    
+    //MARK:- Default functions
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self;
@@ -33,8 +38,6 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remember Location", style: .Bordered, target: self, action: "rememberLocation:")
         }
         
-        
-        //TODO:- Do we need "Always" authorisation?
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
             println("Requesting")
@@ -45,19 +48,17 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
             locationAuthorised(true);
             viewCurrentLocation(self);
             
-            
         }
         txtSearchLocation.delegate = self;
-        
-        
-        
-//        let longPress = UILongPressGestureRecognizer(target: self, action: "action:")
-//        longPress.minimumPressDuration = 1.0
-//        map.addGestureRecognizer(longPress)
-        
-        
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    //MARK:- Remember location functions
     func getSavedCoordinates(){
         var savedLatitude: CLLocationDegrees?;
         var savedLongitude: CLLocationDegrees?;
@@ -154,6 +155,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     
+    //MARK:- Map functions
     @IBAction func viewCurrentLocation(sender: AnyObject) {
         let latitude = locationManager.location.coordinate.latitude;
         let longitude = locationManager.location.coordinate.longitude;
@@ -169,9 +171,6 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     @IBAction func searchPressed(sender: AnyObject) {
-
-        
-        
         var address =  txtSearchLocation.text;
         println("Searching in location \(address)")
         
@@ -215,6 +214,23 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         });
     }
     
+    func addMapAnnotation(location: CLLocationCoordinate2D, title: String, subtitle: String){
+        var annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = title
+        annotation.subtitle = subtitle
+        self.map.addAnnotation(annotation)
+        
+        self.allAnnotations.append(annotation);
+    }
+    
+    func focusMap(location: CLLocationCoordinate2D){
+        var mapCamera = MKMapCamera(lookingAtCenterCoordinate: location, fromEyeCoordinate: location, eyeAltitude: 1500);
+        self.map.setCamera(mapCamera, animated: true);
+    }
+    
+    
+    //MARK:- LocationManager delegate
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         switch status{
@@ -226,18 +242,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
             break;
         }
     }
-    
-    func locationAuthorised(authorised: Bool){
-        
-        self.navigationItem.leftBarButtonItem?.enabled = authorised
-         self.navigationItem.rightBarButtonItem?.enabled = authorised
-        
-        if(!authorised){
-            displayAlert("Permission Error", "Certain map features are disabled due to lack of permissio, please enable location services in your iPhone settings to use all features", "Ok")
-        }
-    }
 
-    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         //Set the view to be of the users current location
         if let location = locations.first as? CLLocation {
@@ -253,44 +258,23 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         }
     }
     
-//    func action(gestureRecognizer:UIGestureRecognizer) {
-//        var touchPoint = gestureRecognizer.locationInView(self.map)
-//        var newCoord:CLLocationCoordinate2D = map.convertPoint(touchPoint, toCoordinateFromView: self.map)
-//        
-//        var newAnotation = MKPointAnnotation()
-//        newAnotation.coordinate = newCoord
-//        newAnotation.title = "New Location"
-//        newAnotation.subtitle = "New Subtitle"
-//        map.addAnnotation(newAnotation)
-//        
-//    }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    //MARK:- TextField delegate
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         txtSearchLocation.resignFirstResponder();
         searchPressed(self);
         return true;
     }
     
-    func addMapAnnotation(location: CLLocationCoordinate2D, title: String, subtitle: String){
-        var annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        annotation.title = title
-        annotation.subtitle = subtitle
-        self.map.addAnnotation(annotation)
+    
+    //MARK:- Custom functions
+    func locationAuthorised(authorised: Bool){
         
-        self.allAnnotations.append(annotation);
+        self.navigationItem.leftBarButtonItem?.enabled = authorised
+        self.navigationItem.rightBarButtonItem?.enabled = authorised
+        
+        if(!authorised){
+            displayAlert("Permission Error", "Certain map features are disabled due to lack of permissio, please enable location services in your iPhone settings to use all features", "Ok")
+        }
     }
-
-    func focusMap(location: CLLocationCoordinate2D){
-        var mapCamera = MKMapCamera(lookingAtCenterCoordinate: location, fromEyeCoordinate: location, eyeAltitude: 1500);
-        self.map.setCamera(mapCamera, animated: true);
-    }
-    
-    
 }

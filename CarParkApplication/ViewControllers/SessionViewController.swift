@@ -10,26 +10,45 @@ import UIKit
 
 class SessionViewController: UITableViewController{
     
+    //MARK:- UI Outlets
     @IBOutlet weak var sessionLocationLabel: UILabel!
     @IBOutlet weak var vehicleLabel: UILabel!
     @IBOutlet weak var sessionStartLabel: UILabel!
     @IBOutlet weak var sessionEndLabel: UILabel!
     @IBOutlet weak var sessionDurationLabel: UILabel!
     @IBOutlet weak var sessionCostLabel: UILabel!
-    var parkingSession: ParkSession?;
-    
     @IBOutlet weak var btnEndExtentParking: UIButton!
+    
+    
+    //MARk:- Variables
+    var parkingSession: ParkSession?;
     var extendParking: Bool = false;
     
+    //MARK:- Default functions
     override func viewDidLoad() {
         super.viewDidLoad()
         println("SessionViewController")
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged);
         
         populateSessionFields();
-        
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true);
+    }
+    
+    
+    
+    //MARK:- TableView delegate
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        
+        header.textLabel.textColor = UIColor.whiteColor() //make the text white
+        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
+    }
+    
+    
+    //MARK:- Custom Functions
     @IBAction func ModifyParkingPressed(sender: AnyObject) {
         if(extendParking){
             println("Extend the parking session")
@@ -56,17 +75,6 @@ class SessionViewController: UITableViewController{
         }
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
-        
-        header.textLabel.textColor = UIColor.whiteColor() //make the text white
-        header.textLabel.font = UIFont.boldSystemFontOfSize(12);
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true);
-    }
-    
     func populateSessionFields(){
         if (parkingSession?.Finished == true){
             btnEndExtentParking.setTitle("Extend", forState: .Normal);
@@ -83,7 +91,6 @@ class SessionViewController: UITableViewController{
             }
         }
 
-        
         println(parkingSession?.EndTime)
         println(parkingSession?.Value)
         vehicleLabel.text = vehicleText;
@@ -96,6 +103,7 @@ class SessionViewController: UITableViewController{
     }
     
     
+    //The function called when the user pulls the table view down to refresh the data.
     func refresh(sender:AnyObject)
     {
         populateSessionFields();

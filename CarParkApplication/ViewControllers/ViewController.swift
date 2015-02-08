@@ -25,9 +25,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var selectedCarParkID: Int?;
     var selectedCarParkName: String?;
     
+    //MARK:- UI Outlets
     @IBOutlet weak var locationIDCell: UITableViewCell!
     @IBOutlet weak var selectTimeBandCell: UITableViewCell!
-    //MARK:- UI Outlets
     @IBOutlet var determineLocationButton: UIButton!
     @IBOutlet var locationTextField: UITextField!
     @IBOutlet var timeBandLabel: UILabel!
@@ -49,8 +49,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             timeBandLabel.text = "Select Time";
             selectTimeBandCell.userInteractionEnabled = false;
         }
-
-        
         
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
@@ -63,6 +61,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray;
     }
+    
     override func viewWillAppear(animated: Bool) {
         var firstVehicle = User.sharedInstance.getFirstVehicle();
         selectedVehicle = firstVehicle;
@@ -75,6 +74,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     
+    //MARK:- Button Functions
     @IBAction func toggleMethodPressed(sender: AnyObject) {
         //Reload all of the table data
         self.tableView.reloadData();
@@ -88,11 +88,26 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         }else{
             displayAlert("Invalid ID", "Please enter a valid location ID", "Ok");
         }
-        
-        
+    }
+    
+    @IBAction func determineLocation(sender: AnyObject) {
+        //Start looking for beacons so long as we have permission
+        if (editLocationButton){
+            manuallyEnterLocation();
+        }else{
+            if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
+                //Start looks for regions
+                NSLog("Start monitoring for regions");
+                locationTextField.text = "Searching..."
+                locationManager.startRangingBeaconsInRegion(region);
+                
+                //Start a timer for 5 seconds, after which stop attempting to find beacons.
+                var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("cancelRanging"), userInfo: nil, repeats: false);
+                toggleLocationButton(true, locatedBeacon: false)
+            }
+        }
     }
 
-    
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
         //TODO:- Validation checking on the input fields
@@ -125,14 +140,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         }
     }
     
-    func allInputsComplete() -> Bool{
-        if (toggleMethod.on){
-            
-        }
-        return true;
-    }
     
-    
+    //MARL:- Custom functions
     func parkUserVehicle(selectedCarParkID: Int){
         
         let userVehicle = selectedVehicle?.VehicleID;
@@ -203,71 +212,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         );
     }
 
-    //MARK:- Beacon functions
-    @IBAction func determineLocation(sender: AnyObject) {
-        //Start looking for beacons so long as we have permission
-        if (editLocationButton){
-            manuallyEnterLocation();
-        }else{
-            if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse){
-                //Start looks for regions
-                NSLog("Start monitoring for regions");
-                locationTextField.text = "Searching..."
-                locationManager.startRangingBeaconsInRegion(region);
-                
-                //Start a timer for 5 seconds, after which stop attempting to find beacons.
-                var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("cancelRanging"), userInfo: nil, repeats: false);
-                toggleLocationButton(true, locatedBeacon: false)
-            }
-        }
-    }
-    
-    func cancelRanging(){
-        if (self.selectedCarParkID == nil){
-            locationManager.stopRangingBeaconsInRegion(region);
-            beaconActivityIndicator.stopAnimating();
-            self.locationTextField.text = "";
-            self.locationTextField.placeholder = "Location ID"
-            displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "ok");
-            toggleLocationButton(false, locatedBeacon: false);
-        }
-    }
-    
-    func getBeaconDetails(major: Int, minor: Int, rssi: Int){
-        println("getBeaconDetails")
-        var locationName: String;
-        
-        //The beacon ID needs to be in the format stored on the server.
-        var beacon = String(major) + "." + String(minor);
-        
-        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
-            var alert = UIAlertView(title: "Success!", message: carParkName, delegate: nil, cancelButtonTitle: "Okay.")
-            if(success) {
-                self.selectedCarParkName = carParkName;
-                alert.title = "Success!"
-                alert.message = carParkName
-                
-            }
-            else {
-                alert.title = "Failed : ("
-                alert.message = error
-            }
-            
-            // Move to the UI thread
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                // Show the alert
-                self.locationTextField.text = "\(carParkID)";
-                self.selectedCarParkID = carParkID;
-                self.selectTimeBandCell.userInteractionEnabled = true;
-                self.toggleLocationButton(true, locatedBeacon: true)
-                alert.show();
-            });
-            
-            }
-        );
-
-    }
-
 
     //MARK:- LocationManager Delegates
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
@@ -294,8 +238,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
 
         }
     }
-    
-    
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status{
@@ -458,6 +400,52 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             self.determineLocationButton.setTitle("Enter location", forState: UIControlState.Normal);
             locationIDCell.userInteractionEnabled = true
         }
+    }
+    
+    func cancelRanging(){
+        if (self.selectedCarParkID == nil){
+            locationManager.stopRangingBeaconsInRegion(region);
+            beaconActivityIndicator.stopAnimating();
+            self.locationTextField.text = "";
+            self.locationTextField.placeholder = "Location ID"
+            displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "ok");
+            toggleLocationButton(false, locatedBeacon: false);
+        }
+    }
+    
+    func getBeaconDetails(major: Int, minor: Int, rssi: Int){
+        println("getBeaconDetails")
+        var locationName: String;
+        
+        //The beacon ID needs to be in the format stored on the server.
+        var beacon = String(major) + "." + String(minor);
+        
+        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
+            var alert = UIAlertView(title: "Success!", message: carParkName, delegate: nil, cancelButtonTitle: "Okay.")
+            if(success) {
+                self.selectedCarParkName = carParkName;
+                alert.title = "Success!"
+                alert.message = carParkName
+                
+            }
+            else {
+                alert.title = "Failed : ("
+                alert.message = error
+            }
+            
+            // Move to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // Show the alert
+                self.locationTextField.text = "\(carParkID)";
+                self.selectedCarParkID = carParkID;
+                self.selectTimeBandCell.userInteractionEnabled = true;
+                self.toggleLocationButton(true, locatedBeacon: true)
+                alert.show();
+            });
+            
+            }
+        );
+        
     }
 }
 

@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
+//Controller to allow the user to create a new vehicle. This is used by both the main register process, and also from the VehicleSelector
 class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,UIPickerViewDelegate, UITextFieldDelegate{
     
-    //MARK:- Static view objects
+    //MARK:- UI Outlets
     @IBOutlet var makeLabel: UILabel!
     @IBOutlet var modelLabel: UILabel!
-
     @IBOutlet weak var modelInput: UITextField!
     @IBOutlet weak var makeInput: UITextField!
     @IBOutlet var colourLabel: UITextField!
@@ -32,12 +32,14 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     
     weak var delegate: CreateVehicleDelegate?;
     
+    //MARK:- default functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Create a navbar item
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Bordered, target: self, action: "submit:")
         
+        //Setup the picker delegates
         makePicker.dataSource = self;
         makePicker.delegate = self;
         makePicker.tag = 0;
@@ -46,12 +48,11 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         modelPicker.delegate = self;
         modelPicker.tag = 1;
         
+        //Setup the pickers as the input methods for the Make & model text fields.
         makeInput.inputView = makePicker;
         makeInput.frame = CGRectZero
         makeInput.userInteractionEnabled = false;
         makeInput.delegate = self;
-        
-        
         
         modelInput.inputView = modelPicker;
         modelInput.frame = CGRectZero;
@@ -60,6 +61,8 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         populateMakes();
     }
     
+    
+    //MARK:- TextField Delegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         //Dont allow the user to PASTE into the make / model inputs
         if textField == makeInput || textField == modelInput{
@@ -84,8 +87,6 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             )
             
             //Process the new vehicle registration with the server
-            
-            //Add the new vehicle to the user vehicle list
             createVehicle(User.sharedInstance.token!, newUserVehicle, {(success: Bool, createdVehicle: Vehicle, error:String?) -> () in
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -93,6 +94,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                     
                     if(success){
                         println("New vehicle added")
+                        //Add the new vehicle to the user vehicle list
                         User.sharedInstance.addVehicle(createdVehicle);
                         
                         if (self.delegate != nil){
@@ -111,8 +113,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             );
             
         }else{
-            var validationAlert = UIAlertView(title: "Missing data!", message: "Please complete all fields", delegate: nil, cancelButtonTitle: "Okay.")
-            validationAlert.show();
+            displayAlert("Missing data!", "Please complete all fields", "Okay.");
         }
     }
     
@@ -128,9 +129,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         }
     }
 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
+
     //MARK:- Picker data sources
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if (pickerView.tag == 0){
@@ -139,6 +138,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             return modelPickerData.count
         }
     }
+    
     
     //MARK:- Picker delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
@@ -168,6 +168,12 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         }
     }
     
+    //MARK:- Picker Function
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    
     //MARK:- Table delegates
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == 0){
@@ -187,6 +193,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
     }
+    
     
     //MARK:- Vehicle data
     func populateMakes(){

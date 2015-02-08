@@ -13,6 +13,7 @@ import UIKit
 
 class RegisterViewController: UITableViewController {
     
+    //MARK:- UI Outlets
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var txtLastName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -45,6 +46,8 @@ class RegisterViewController: UITableViewController {
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
     }
     
+    
+    //MARK:- Button Functions
     @IBAction func registerUserPressed(sender: AnyObject) {
         let (inputsCompleted, missingInputs) = allFieldsCompleted();
         
@@ -110,6 +113,8 @@ class RegisterViewController: UITableViewController {
         
     }
     
+    
+    //MARK:- Functions
     func allFieldsCompleted() -> (Bool, [String]){
         var success = true;
         var missingInputs: [String] = [];

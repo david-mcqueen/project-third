@@ -9,8 +9,8 @@
 import UIKit
 import Foundation
 
+//The controller for the main TabView after the user has logged in.
 class LoggedInViewController: UITabBarController {
-    //Perform all background data GETS after the user has logged in
     
     override func viewDidLoad() {
         super.viewDidLoad()

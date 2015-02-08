@@ -8,41 +8,42 @@
 
 import UIKit
 
+//The profile controller
 class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     
-    
+    //MARK:- UI Outlets
     @IBOutlet var textAddFunds: UITextField!
     @IBOutlet var lblBalance: UILabel!
     @IBOutlet var btnPay: UIButton!
     @IBOutlet var btnAddFunds: UIButton!
-    
     @IBOutlet var lblForename: UILabel!
     @IBOutlet var lblSurname: UILabel!
-    
     @IBOutlet weak var lblCurrentSessionCount: UILabel!
     @IBOutlet weak var lblPreviousSessionCount: UILabel!
 
+    
+    //MARK:- Variables
     var displayAddFunds: Bool = false;
-
     var paymentIndicatorView: UIView = UIView(frame: CGRectMake(50, 50, 200, 200));
     var paymentIndicatorActivitySpinner : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView;
     var paymentIndicatorLabel: UILabel = UILabel(frame: CGRectMake(20, 115, 130, 22));
-    
     var config = PayPalConfiguration()
     
 
+    //MARK:- Default Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
+        //Get all the user information from the server.
         getUserDetails();
         getUserVehicles();
         getUserParkingSessions();
         displayUserInfo();
         
+        //Setup a payment indicator
         paymentIndicatorView.frame = CGRectMake(((self.view.frame.width - 200) / 2), ((self.view.frame.height - 200) / 3), 200, 200);
-        
         
         paymentIndicatorView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5);
         paymentIndicatorView.clipsToBounds = true;
@@ -60,12 +61,12 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         
         paymentIndicatorView.addSubview(paymentIndicatorLabel);
         paymentIndicatorView.addSubview(paymentIndicatorActivitySpinner);
-        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
         
+        //Preconnect to PayPal, as per their SDK.
         PayPalMobile.preconnectWithEnvironment(PayPalEnvironmentSandbox)
         displaySessionCount();
         displayUserBalance();
@@ -76,6 +77,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    
     //MARK:- Table delegates
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 1 && indexPath.row == 1){
@@ -125,6 +127,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         }
     }
     
+    
+    //MARK:- Button Functions
     @IBAction func extendAddFunds(sender: AnyObject) {
         displayAddFunds = true;
         self.tableView.reloadData();
@@ -151,6 +155,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         }
     }
     
+    
+    //MARK:- PayPal Delegate
     func payPalPaymentViewController(paymentViewController: PayPalPaymentViewController!, didCompletePayment completedPayment: PayPalPayment!) {
         self.dismissViewControllerAnimated(true, completion: nil)
         
@@ -167,6 +173,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         
     }
 
+    
+    //MARK:- Custom functions
     func sendCompletedPaymentToServer(completedPayment: PayPalPayment){
         NSLog("Here is your proof of payment:\n\n%@\n\nSend this to your server for confirmation and fulfillment.", completedPayment.confirmation);
         NSLog(String(format: "%f", completedPayment.amount));
@@ -201,20 +209,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
                 }
             }
         }
-        
     }
-
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "previousParkingSessions" {
-            println("currentParkingSessions Segue")
-            let currentSessionViewController = segue.destinationViewController as SessionSelectViewController
-            currentSessionViewController.currentSessions = false
-        }
-    }
-
-    
-    //MARK:- Get user information from the server
     func getUserDetails(){
         userBalance(User.sharedInstance.token!, {(success, userBalance, userForename, userSurname, error) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -266,6 +262,8 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         self.lblSurname.text = User.sharedInstance.Surname;
     }
     
+    
+    //The function called when the user pulls the table view down to refresh the data.
     func refresh(sender:AnyObject)
     {
         println("Refresh");
@@ -276,5 +274,16 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         self.tableView.reloadData();
         self.refreshControl?.endRefreshing();
     }
+    
+    
+    //MARK:- Segue functions
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "previousParkingSessions" {
+            println("currentParkingSessions Segue")
+            let currentSessionViewController = segue.destinationViewController as SessionSelectViewController
+            currentSessionViewController.currentSessions = false
+        }
+    }
+
     
 }
