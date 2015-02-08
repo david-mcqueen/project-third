@@ -27,7 +27,6 @@
 		55282B8C1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
 		55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55282B8B1A5C8254001EC46E /* VehicleSelectViewController.swift */; };
 		552C98F51A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
-		552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F41A6EC13400155AFC /* SessionSelectViewController.swift */; };
 		552C98F91A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
 		552C98FA1A6ECBFF00155AFC /* ParkSessionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C98F81A6ECBFF00155AFC /* ParkSessionViewCell.swift */; };
 		552E0A2A1A7CE61E008C6A2A /* CarPark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E0A291A7CE61E008C6A2A /* CarPark.swift */; };
@@ -49,7 +48,6 @@
 		55440BCD1A34D53900969FBC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55440BCC1A34D53900969FBC /* ProfileViewController.swift */; };
 		554E2CF81A7A663E00B4603C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554E2CF71A7A663E00B4603C /* ViewController.swift */; };
 		555031501A71174400B9FDB0 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550314F1A71174400B9FDB0 /* SessionViewController.swift */; };
-		555031511A71174400B9FDB0 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550314F1A71174400B9FDB0 /* SessionViewController.swift */; };
 		5554A6221A6179C0004D2D28 /* CreateVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */; };
 		5554A6231A617C60004D2D28 /* CreateVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554A6211A6179C0004D2D28 /* CreateVehicleDelegate.swift */; };
 		5554A6241A617D1F004D2D28 /* SelectUserVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */; };
@@ -553,7 +551,6 @@
 				558970FF1A7FCB6E00326485 /* TimeBandViewCell.swift in Sources */,
 				558777E81A5D42B1008ACCE9 /* TimeBandSelectViewController.swift in Sources */,
 				557C2CEE19F2C4AE00DE28DF /* Vehicle.swift in Sources */,
-				555031511A71174400B9FDB0 /* SessionViewController.swift in Sources */,
 				5554A6231A617C60004D2D28 /* CreateVehicleDelegate.swift in Sources */,
 				55282B8D1A5C8254001EC46E /* VehicleSelectViewController.swift in Sources */,
 				552E0A2B1A7CE62F008C6A2A /* CarPark.swift in Sources */,
@@ -569,7 +566,6 @@
 				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,
 				558777F51A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
 				558616771A751A3900FAB689 /* RegisterViewController.swift in Sources */,
-				552C98F61A6EC13400155AFC /* SessionSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

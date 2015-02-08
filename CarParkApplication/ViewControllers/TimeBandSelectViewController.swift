@@ -21,6 +21,7 @@ class TimeBandSelectViewController: UITableViewController {
     var selectedCarPark: Int?
     var bandsFound = false;
     weak var delegate: TimeBandSelectedDelegate?;
+    var bandDuration: Int?
     
     
     //MARK:- Default functions
@@ -57,9 +58,14 @@ class TimeBandSelectViewController: UITableViewController {
         
         if (!self.bandsFound){
             cell.cost.text = "£"
-            cell.timeBand.text = "Car Park Closed"
+            cell.timeBand.text = "No Bands Found"
             cell.userInteractionEnabled = false;
         }else{
+            if (bandDuration != nil){
+                if timeBands[indexPath.row].MaximumTimeHours <= bandDuration {
+                    cell.userInteractionEnabled = false;
+                }
+            }
             cell.cost.text = timeBands[indexPath.row].displayBandCost();
             cell.timeBand.text = timeBands[indexPath.row].displayBandName();
             cell.userInteractionEnabled = true;
@@ -124,9 +130,7 @@ class TimeBandSelectViewController: UITableViewController {
     }
     
     func loadTimeBands(){
-        
-        println("loadTimeBands")
-        println(User.sharedInstance.token!);
+
         getCarParkParkingBands(User.sharedInstance.token!, selectedCarPark!, { (success, allPricingBands, error) -> () in
             var timeBandIndex = 0;
             for band in allPricingBands{

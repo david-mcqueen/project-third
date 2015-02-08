@@ -61,7 +61,7 @@ class ParkSession {
         return "\(self.CarParkName) (\(self.CarParkID))";
     }
     
-    func calculateDuration() -> String{
+    func calculateDuration() -> (String, Int, Int){
         var difference: Double = self.EndTime!.timeIntervalSinceDate(self.StartTime);
         //The difference is represented in seconds
         
@@ -75,7 +75,7 @@ class ParkSession {
             returnTime = "\(returnTime) \(m) minutes"
         }
         
-        return returnTime;
+        return (returnTime, h, m);
     }
     
     

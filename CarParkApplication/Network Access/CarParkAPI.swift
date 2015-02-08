@@ -331,7 +331,7 @@ func searchCarParks(token: String, lat:String, long:String, searchComplete: (suc
 
 
 
-func extendParkingSession(token: String, parkTransactionID:Int, bandID:Int, extendComplete: (success: Bool, newFinishTime: String?, newCost: Double?, error: String?) -> ()) -> (){
+func extendParkingSession(token: String, parkTransactionID:Int, bandID:Int, extendComplete: (success: Bool, newFinishTime: NSDate?, newCost: Double?, error: String?) -> ()) -> (){
     
     
     let urlSession = NSURLSession.sharedSession();
@@ -357,8 +357,10 @@ func extendParkingSession(token: String, parkTransactionID:Int, bandID:Int, exte
         
         var err: NSError?
         var token:String?;
-        var finishTime: String?;
+        var finishTime: NSDate?;
         var cost: Double?
+        var dateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.S"
         
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
         var success = false;
@@ -377,7 +379,7 @@ func extendParkingSession(token: String, parkTransactionID:Int, bandID:Int, exte
             
             if let newFinishTime: AnyObject = jsonResult["FinishTime"]{
    
-                finishTime = newFinishTime.description!;
+                finishTime = dateFormatter.dateFromString(newFinishTime.description!);
                 if let newCost: AnyObject = jsonResult["Cost"]{
                     
                     cost = (newCost.description as NSString).doubleValue;

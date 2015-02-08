@@ -24,8 +24,17 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var selectedTimeBand: PricingBand?;
     var selectedCarParkID: Int?;
     var selectedCarParkName: String?;
+    var edidtingSession: Bool = false;
+    var timeBands:[PricingBand] = []
+    var bandDuration: Int?;
+    var bandDescription: String?;
+    var originalParkID: Int?
+    var originalSession: ParkSession?;
+    
     
     //MARK:- UI Outlets
+    @IBOutlet weak var parkButton: UIButton!
+    @IBOutlet weak var vehicleCell: UITableViewCell!
     @IBOutlet weak var locationIDCell: UITableViewCell!
     @IBOutlet weak var selectTimeBandCell: UITableViewCell!
     @IBOutlet var determineLocationButton: UIButton!
@@ -43,7 +52,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         locationManager.delegate = self;
         
-        if ((selectedTimeBand) != nil){
+        if (selectedTimeBand != nil){
             timeBandLabel.text = selectedTimeBand!.displayBand();
         }else{
             timeBandLabel.text = "Select Time";
@@ -63,10 +72,25 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func viewWillAppear(animated: Bool) {
-        var firstVehicle = User.sharedInstance.getFirstVehicle();
-        selectedVehicle = firstVehicle;
-        vehicleLabel.text = selectedVehicle?.displayVehicle();
+        
+        if edidtingSession {
+            if (selectedCarParkID != nil){
+                locationTextField.text = "\(selectedCarParkID!)"
+                locationTextField.textColor = UIColor(red: 0.557, green: 0.557, blue: 0.557, alpha: 1.0)
+            }
+            vehicleLabel.text = selectedVehicle?.displayVehicle();
+            selectTimeBandCell.userInteractionEnabled = true;
+            locationIDCell.userInteractionEnabled = false;
+            vehicleCell.userInteractionEnabled = false;
+            parkButton.setTitle("Extend Stay", forState: .Normal);
+            timeBandLabel.text = bandDescription!;
+            
+        }else{
+            var firstVehicle = User.sharedInstance.getFirstVehicle();
+            selectedVehicle = firstVehicle;
+            vehicleLabel.text = selectedVehicle?.displayVehicle();
         }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -149,8 +173,34 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         // -1 time band indicates that no time band is selected
         var timeBand: Int = toggleMethod.on ? -1 : selectedTimeBand!.BandID;
+        if (!edidtingSession){
+            createParkSession(userVehicle!, timeBandID: timeBand);
+        }else{
+            extendParkSession(selectedTimeBand!.BandID);
+        }
         
-        parkVehicle(User.sharedInstance.token!, selectedCarParkID, userVehicle!, timeBand,  {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkFinishTime: NSDate?, parkCost: Double?, error: String?) -> () in
+    }
+    
+    func extendParkSession(newBandID: Int){
+        extendParkingSession(User.sharedInstance.token!, self.originalParkID!, newBandID) { (success, newFinishTime, newCost, error) -> () in
+            println(success);
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
+                if(success){
+                    self.originalSession?.EndTime = newFinishTime;
+                    self.originalSession?.Value = newCost;
+                
+                    User.sharedInstance.removeParkSession(self.originalSession!);
+                    User.sharedInstance.addParkSession(self.originalSession!)
+                    displayAlert("Success", "Parking session successfully modified", "Ok")
+                    self.navigationController?.popViewControllerAnimated(true);
+                }
+            });
+        }
+    }
+    
+    func createParkSession(userVehicleID: Int, timeBandID: Int){
+        parkVehicle(User.sharedInstance.token!, selectedCarParkID!, userVehicleID, timeBandID, {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkFinishTime: NSDate?, parkCost: Double?, error: String?) -> () in
             var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
             
             if(!success) {
@@ -169,10 +219,10 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
                     let startTime = NSDate();
-                                        
+                    
                     var newParkSession = ParkSession(
                         parkSessionID: parkTransactionID!,
-                        carParkID: selectedCarParkID,
+                        carParkID: self.selectedCarParkID!,
                         carParkName: self.selectedCarParkName!,
                         startTime: startTime,
                         endTimeParking: parkFinishTime!,
@@ -211,7 +261,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             }
         );
     }
-
 
     //MARK:- LocationManager Delegates
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
@@ -275,20 +324,29 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 2){
-            if(toggleMethod.on){
-                return 0;
-            } else {
-                return 1
-            }
-        }else if (section == 4){
-            if(notificationSwitch.on){
-                return 2;
-            }else{
-                return 1;
-            }
+        
+        if (edidtingSession && section == 0){
+            
+            return 1;
+            
         }else{
-            return super.tableView(tableView, numberOfRowsInSection: section)
+            
+            if(section == 2){
+                if(toggleMethod.on){
+                    return 0;
+                } else {
+                    return 1
+                }
+            }else if (section == 4){
+                if(notificationSwitch.on){
+                    return 2;
+                }else{
+                    return 1;
+                }
+            }else{
+                return super.tableView(tableView, numberOfRowsInSection: section)
+            }
+            
         }
     }
     
@@ -324,12 +382,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
             timeBandSelectViewController.selectedTimeBand = selectedTimeBand
             timeBandSelectViewController.delegate = self;
+            timeBandSelectViewController.bandDuration = bandDuration;
+            
+            if self.timeBands.count > 0 {
+                timeBandSelectViewController.timeBands = self.timeBands;
+            }
             
             timeBandSelectViewController.selectedCarPark = selectedCarParkID;
             
-            
         }else if segue.identifier == "PickUserVehicle" {
-            
             println("PickVehicleBand Segue")
             let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
             if (selectedVehicle != nil){

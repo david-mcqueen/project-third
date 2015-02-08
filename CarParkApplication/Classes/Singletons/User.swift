@@ -95,6 +95,31 @@ class User {
         self.ParkSessions.append(newParkSession);
     }
     
+    func removeParkSession(oldParkSession: ParkSession){
+        var removeSessionIndex: Int?;
+        var searchIndex = 0;
+        
+        for band in self.ParkSessions{
+            if band.ParkSessionID == oldParkSession.ParkSessionID{
+                removeSessionIndex = searchIndex;
+            }
+            searchIndex++;
+        }
+        println(removeSessionIndex)
+        //TODO:- Only delete if there is > 1 vehicle (need at least 1)
+        self.ParkSessions.removeAtIndex(removeSessionIndex!)
+
+    }
+    
+    func getParkSession(sessionID: Int) -> ParkSession?{
+        for session in self.ParkSessions{
+            if session.ParkSessionID == sessionID{
+                return session;
+            }
+        }
+        return nil;
+    }
+    
     func getAllParkSessions() -> [ParkSession] {
         return self.ParkSessions;
     }
