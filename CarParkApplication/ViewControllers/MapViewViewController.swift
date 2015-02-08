@@ -159,9 +159,12 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     @IBAction func viewCurrentLocation(sender: AnyObject) {
         let latitude = locationManager.location.coordinate.latitude;
         let longitude = locationManager.location.coordinate.longitude;
-        let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
+        self.searchLocation(latitude, longitude: longitude)
+        
+        let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         focusMap(location);
+        
     }
     
     func removeAnnotations(){
@@ -189,27 +192,29 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 
                 self.focusMap(location);
-                
-
-                self.removeAnnotations();
-                searchCarParks(User.sharedInstance.token!, latitude.description, longitude.description, { (success, returnedCarParks, error) -> () in
-                    if success {
-                        for carPark in returnedCarParks{
-                            let latitude: CLLocationDegrees = (carPark.Latitude as NSString).doubleValue;
-                            let longitude: CLLocationDegrees = (carPark.Longitude as NSString).doubleValue;
-                            let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude);
-                            var openingTimes: String?;
-                            if (carPark.Open != nil) && (carPark.Close != nil){
-                                openingTimes = "Open: \(carPark.Open!) Close: \(carPark.Close!)"
-                            }else{
-                                openingTimes = "Car park is currently closed";
-                            }
-                            self.addMapAnnotation(location, title: "\(carPark.Name) (\(carPark.ID))", subtitle: "\(openingTimes!)");
-                        }
+                self.searchLocation(latitude, longitude: longitude);
+            }
+        });
+    }
+    
+    func searchLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+        self.removeAnnotations();
+        searchCarParks(User.sharedInstance.token!, latitude.description, longitude.description, { (success, returnedCarParks, error) -> () in
+            if success {
+                for carPark in returnedCarParks{
+                    let latitude: CLLocationDegrees = (carPark.Latitude as NSString).doubleValue;
+                    let longitude: CLLocationDegrees = (carPark.Longitude as NSString).doubleValue;
+                    let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude);
+                    var openingTimes: String?;
+                    if (carPark.Open != nil) && (carPark.Close != nil){
+                        openingTimes = "Open: \(carPark.Open!) Close: \(carPark.Close!)"
                     }else{
-                        NSLog("Something went wrong")
+                        openingTimes = "Car park is currently closed";
                     }
-                })
+                    self.addMapAnnotation(location, title: "\(carPark.Name) (\(carPark.ID))", subtitle: "\(openingTimes!)");
+                }
+            }else{
+                NSLog("Something went wrong")
             }
         });
     }
