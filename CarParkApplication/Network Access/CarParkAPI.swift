@@ -269,7 +269,6 @@ func getCarParkParkingBands(token: String, carParkID: Int, requestCompleted: (su
 
 func searchCarParks(token: String, lat:String, long:String, searchComplete: (success: Bool, returnedCarParks: [CarPark], error: String?) -> ()) -> (){
     
-    println("All user vehicles")
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/carpark/search?Token=\(token)&Latitude=\(lat)&Longitude=\(long)");
     let urlSession = NSURLSession.sharedSession();
     var carParks: [CarPark] = []

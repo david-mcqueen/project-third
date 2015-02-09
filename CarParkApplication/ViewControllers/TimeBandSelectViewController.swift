@@ -61,11 +61,7 @@ class TimeBandSelectViewController: UITableViewController {
             cell.timeBand.text = "No Bands Found"
             cell.userInteractionEnabled = false;
         }else{
-            if (bandDuration != nil){
-                if timeBands[indexPath.row].MaximumTimeHours <= bandDuration {
-                    cell.userInteractionEnabled = false;
-                }
-            }
+            
             cell.cost.text = timeBands[indexPath.row].displayBandCost();
             cell.timeBand.text = timeBands[indexPath.row].displayBandName();
             cell.userInteractionEnabled = true;
@@ -74,11 +70,14 @@ class TimeBandSelectViewController: UITableViewController {
             } else {
                 cell.accessoryType = .None
             }
+            
+            if (bandDuration != nil){
+                if timeBands[indexPath.row].MaximumTimeHours <= bandDuration {
+                    cell.userInteractionEnabled = false;
+                    cell.backgroundColor = UIColor.grayColor();
+                }
+            }
         }
-        
-        
-        
-
         
         return cell
     }
