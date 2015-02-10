@@ -102,6 +102,9 @@ class LoginViewController: UITableViewController{
 
     //MARK:- Button Actions
     @IBAction func LoginButtonPressed(sender: AnyObject) {
+        clearBorderRed(self.loginCell);
+        clearBorderRed(self.passwordCell);
+        
         let userLogin = UserLogin(userName: inputEmail.text, password: inputPassword.text);
         
         //Setup an activity to display when loggin the user in.

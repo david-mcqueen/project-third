@@ -85,7 +85,6 @@ class RegisterViewController: UITableViewController {
                 return;
             }
             
-            
             registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in

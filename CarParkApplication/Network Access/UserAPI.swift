@@ -61,7 +61,7 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
                 }
             }
         }else{
-            errorResponse = "Server Error"
+            errorResponse = "Incorrect Credentials"
         }
         
         

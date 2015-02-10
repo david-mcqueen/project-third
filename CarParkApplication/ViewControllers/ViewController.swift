@@ -426,6 +426,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     //MARK:- CreateUserVehicleDelegate
     func newVehicleCreated() {
         println("New Vehicle")
+        var firstVehicle = User.sharedInstance.getFirstVehicle();
+        selectedVehicle = firstVehicle;
+        vehicleLabel.text = selectedVehicle?.displayVehicle();
         self.navigationController?.popViewControllerAnimated(true);
     }
     
