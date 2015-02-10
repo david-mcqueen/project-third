@@ -66,6 +66,11 @@ class ParkSession {
         //The difference is represented in seconds
         
         var secondsInt: Int = (Int)(difference);
+        //If not a whole minute, then round up to the next whol minute
+        if (secondsInt % 60 != 0){
+            var secondsRemaining = secondsInt % 60;
+            secondsInt += (60 - secondsRemaining)
+        }
         let (h, m) = convertSecondsToHoursMinutes(secondsInt);
         var returnTime: String = "";
         if (h > 0){
