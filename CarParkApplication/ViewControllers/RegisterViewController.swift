@@ -87,22 +87,18 @@ class RegisterViewController: UITableViewController {
             
             
             registerUser(newUser, {(success: Bool, token: String, error: String?) -> () in
-                var alert = UIAlertView(title: "Success!", message: token, delegate: nil, cancelButtonTitle: "Okay.")
-                if(!success) {
-                    alert.title = "Failed : ("
-                    alert.message = "Something went wrong";
-                }
-
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // Show the alert
-                    alert.show()
+                    
                     if(success){
                         User.sharedInstance.token = token;
                         User.sharedInstance.FirstName = newUser.FirstName;
                         User.sharedInstance.Surname = newUser.SurName;
                         let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
                         self.navigationController?.pushViewController(createVehicleViewController, animated: true);
+                    }else{
+                        displayAlert("FAILED", "Something went wrong", "OK")
                     }
                 });
                 
