@@ -314,7 +314,7 @@
         <!--Park-->
         <scene sceneID="Sqx-Pe-NMo">
             <objects>
-                <navigationController id="SqF-sj-zr8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="parkNavController" id="SqF-sj-zr8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Park" image="clock-timer" id="wzf-4P-kKn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BrD-up-P3U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

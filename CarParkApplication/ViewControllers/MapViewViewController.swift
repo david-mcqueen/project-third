@@ -25,6 +25,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     var allAnnotations: [MKAnnotation] = []
     var firstTimeLoad = true;
     
+    var searchIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     
     //MARK:- Default functions
     override func viewDidLoad() {
@@ -50,6 +51,10 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
             
         }
         txtSearchLocation.delegate = self;
+        
+        searchIndicator.center = self.view.center
+        searchIndicator.hidesWhenStopped = true
+        searchIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
     }
     
     override func didReceiveMemoryWarning() {
@@ -157,6 +162,8 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     //MARK:- Map functions
     @IBAction func viewCurrentLocation(sender: AnyObject) {
+        view.addSubview(searchIndicator)
+        searchIndicator.startAnimating()
         let latitude = locationManager.location.coordinate.latitude;
         let longitude = locationManager.location.coordinate.longitude;
         
@@ -164,6 +171,9 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         
         let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         focusMap(location);
+        searchIndicator.stopAnimating();
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Retrieve Location", style: .Bordered, target: self, action: "retrieveLocation:")
         
     }
     
@@ -175,13 +185,18 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     @IBAction func searchPressed(sender: AnyObject) {
         var address =  txtSearchLocation.text;
-        println("Searching in location \(address)")
+        view.addSubview(searchIndicator)
+        searchIndicator.startAnimating()
         
+        if address == "" || address == nil {
+            displayAlert("Error", "Please enter a search location", "OK");
+        }
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address, {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             
             if error != nil {
                 println(error.description)
+                self.searchIndicator.stopAnimating()
             }
             
             if let placemark = placemarks?[0] as? CLPlacemark {
@@ -191,8 +206,9 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 let longitude = placemark.location.coordinate.longitude;
                 let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 
-                self.focusMap(location);
                 self.searchLocation(latitude, longitude: longitude);
+                self.focusMap(location);
+                self.searchIndicator.stopAnimating()
             }
         });
     }

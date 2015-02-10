@@ -20,6 +20,8 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     var selectedVehicleObject: Vehicle?;
     var selectedVehicleIndex:Int? = nil
     var allVehicles:[Vehicle] = [];
+    var addVehicleNavButton: UIBarButtonItem?;
+    var profileBackButton: UIBarButtonItem?;
     
     weak var delegate: SelectUserVehicleDelegate?
     
@@ -33,6 +35,8 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
         if (delegate == nil){
+            addVehicleNavButton = self.navigationItem.rightBarButtonItem;
+            profileBackButton = self.navigationItem.leftBarButtonItem;
             self.navigationItem.rightBarButtonItem = self.editButtonItem()
         }
         
@@ -118,11 +122,6 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     //MARK:- Row side-buttons
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
-        var editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Edit", handler:{action, indexpath in
-            println("EDIT•ACTION");
-        });
-        editRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
-        
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             //Delete vehicle
             
@@ -139,11 +138,28 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
             
         });
         
-        return [deleteRowAction, editRowAction];
+        return [deleteRowAction];
+    }
+    override func setEditing(editing: Bool, animated: Bool) {
+        if (delegate == nil && false){
+            if(editing){
+                self.navigationItem.leftBarButtonItem = addVehicleNavButton!;
+                self.navigationItem.leftBarButtonItems = [addVehicleNavButton!, addVehicleNavButton!];
+            }else{
+                
+                self.navigationItem.leftBarButtonItem = profileBackButton;
+            }
+        }
+        super.setEditing(editing, animated: animated)
+        
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        if (delegate == nil){
+            return true
+        }else {
+            return false;
+        }
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

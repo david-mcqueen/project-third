@@ -73,7 +73,7 @@ class SessionViewController: UITableViewController{
                     self.parkingSession?.Finished = true;
                     self.refresh(self);
                 }else{
-                    NSLog("Something went wrong. \(error)")
+                    displayAlert("Server Error", error!, "Ok");
                 }
             });
         });
@@ -103,7 +103,6 @@ class SessionViewController: UITableViewController{
         modifySessionViewController.originalParkID = parkingSession?.ParkSessionID;
         modifySessionViewController.originalSession = parkingSession;
         self.navigationController?.pushViewController(modifySessionViewController, animated: true);
-//        self.tabBarController?.selectedIndex = 1;
     }
     
     func populateSessionFields(){

@@ -118,7 +118,6 @@ class SessionSelectViewController: UITableViewController {
                             println("\(value)")
                         }else{
                             displayAlert("Server Error", error!, "Ok");
-                            NSLog("Something went wrong. \(error)");
                         }
 
                     });

@@ -59,6 +59,10 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             selectTimeBandCell.userInteractionEnabled = false;
         }
         
+        var firstVehicle = User.sharedInstance.getFirstVehicle();
+        selectedVehicle = firstVehicle;
+        vehicleLabel.text = selectedVehicle?.displayVehicle();
+        
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
             locationManager.requestWhenInUseAuthorization();
@@ -85,10 +89,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             parkButton.setTitle("Extend Stay", forState: .Normal);
             timeBandLabel.text = bandDescription!;
             
-        }else{
-            var firstVehicle = User.sharedInstance.getFirstVehicle();
-            selectedVehicle = firstVehicle;
-            vehicleLabel.text = selectedVehicle?.displayVehicle();
         }
     }
     
@@ -194,6 +194,16 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     User.sharedInstance.addParkSession(self.originalSession!)
                     displayAlert("Success", "Parking session successfully modified", "Ok")
                     self.navigationController?.popViewControllerAnimated(true);
+                    if (self.notificationSwitch.on){
+                        var notificationWarning = Double(self.notificationMinsInput.text.toInt()!)
+                        notificationWarning = (notificationWarning * 60) * -1;
+                        
+                        //Schedule a notification for 30 mins before the expirary time
+                        scheduleNotification("Your modified parking for vehicle \(self.selectedVehicle!.displayVehicle()) is due to expire in \(self.notificationMinsInput.text) minutes",
+                            newFinishTime!,
+                            notificationWarning
+                        )
+                    }
                 }
             });
         }
@@ -201,18 +211,9 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     func createParkSession(userVehicleID: Int, timeBandID: Int){
         parkVehicle(User.sharedInstance.token!, selectedCarParkID!, userVehicleID, timeBandID, {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkFinishTime: NSDate?, parkCost: Double?, error: String?) -> () in
-            var alert = UIAlertView(title: "Success!", message: "", delegate: nil, cancelButtonTitle: "Okay.")
-            
-            if(!success) {
-                alert.title = "Park Failed";
-                alert.message = String(error!);
-            }else{
-                alert.title = "Park Success";
-                alert.message = String(parkTransactionID!);
-            }
-            
+
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                alert.show();
+                displayAlert("Park Failed", "Something went wrong \(error)", "Ok")
                 if (self.selectedCarParkName == nil){
                     self.selectedCarParkName = "";
                 }
@@ -238,7 +239,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                         notificationWarning = (notificationWarning * 60) * -1;
                         
                         //Schedule a notification for 30 mins before the expirary time
-                        scheduleNotification("Your parking for vehicle \(self.selectedVehicle?.displayVehicle()) is due to expire in \(self.notificationMinsInput.text) minutes",
+                        scheduleNotification("Your parking for vehicle \(self.selectedVehicle!.displayVehicle()) is due to expire in \(self.notificationMinsInput.text) minutes",
                             parkFinishTime!,
                             notificationWarning
                         )
@@ -394,6 +395,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             println("PickVehicleBand Segue")
             let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
             if (selectedVehicle != nil){
+                println(selectedVehicle?.displayVehicle())
                 vehicleSelectViewController.selectedVehicle = selectedVehicle
             }
             vehicleSelectViewController.delegate = self;
@@ -419,6 +421,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         println("vehicle Selected")
         vehicleLabel.text = userVehicle.displayVehicle();
         selectedVehicle = userVehicle
+        println(selectedVehicle?.displayVehicle())
+        self.tableView.reloadData()
         self.navigationController?.popViewControllerAnimated(true);
     }
     
@@ -426,9 +430,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     //MARK:- CreateUserVehicleDelegate
     func newVehicleCreated() {
         println("New Vehicle")
-        var firstVehicle = User.sharedInstance.getFirstVehicle();
-        selectedVehicle = firstVehicle;
-        vehicleLabel.text = selectedVehicle?.displayVehicle();
         self.navigationController?.popViewControllerAnimated(true);
     }
     
@@ -500,11 +501,17 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
-                self.locationTextField.text = "\(carParkID)";
-                self.selectedCarParkID = carParkID;
-                self.selectTimeBandCell.userInteractionEnabled = true;
-                self.toggleLocationButton(true, locatedBeacon: true)
-                alert.show();
+                if success {
+                    displayAlert("Success", "Car Park Found (\(carParkName))", "OK")
+                    self.locationTextField.text = "\(carParkID)";
+                    self.selectedCarParkID = carParkID;
+                    self.selectTimeBandCell.userInteractionEnabled = true;
+                    self.toggleLocationButton(true, locatedBeacon: true)
+                }else{
+                    self.toggleLocationButton(false, locatedBeacon: false);
+                    displayAlert("Failed", "No car park was found. Please enter the Carpark ID manually", "OK")
+                }
+                
             });
             
             }
