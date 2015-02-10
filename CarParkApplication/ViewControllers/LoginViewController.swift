@@ -27,12 +27,7 @@ class LoginViewController: UITableViewController{
         //Get the saved username from the phone memory, if it exists, and populate the input field
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
-        }else{
-            inputEmail.text = "frank@underwood.com"
         }
-        
-        //TODO:- remove this line
-        inputPassword.text = "Password123"
         
         //Attach a handler to move the view up when displaying the keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
