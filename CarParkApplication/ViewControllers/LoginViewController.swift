@@ -30,19 +30,13 @@ class LoginViewController: UITableViewController{
             inputEmail.text = savedUsername.description;
         }
         
-        //Check to see if we have the users saved password, this can be used for quicklogin using touchID (if available)
-        if let savedPassword: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("password"){
-            println(savedPassword);
-        }
-        
-        
         //Attach a handler to move the view up when displaying the keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
     
-    func requestFingerPrintAuthentication(){
+    func requestFingerPrintAuthentication(password: String){
         let context = LAContext()
         var authError: NSError?
         let authenticationReason: String = "Quick Login"
@@ -51,13 +45,12 @@ class LoginViewController: UITableViewController{
             context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: authenticationReason, reply: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
-                    self.inputPassword.text = "Password123";
+                    self.inputPassword.text = password;
                     self.LoginButtonPressed(self)
                 } else {
                     println("Unable to Authenticate")
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     displayAlert("Uable to Authenticate", "Plase enter your credentials manually", "Ok")
-                    self.inputPassword.text = "";
                     });
                 }
             })
@@ -73,7 +66,15 @@ class LoginViewController: UITableViewController{
     }
     
      override func viewWillAppear(animated: Bool) {
-        requestFingerPrintAuthentication();
+        self.inputPassword.text = "";
+        
+        //If the user has previously logged in, get the password from Keychain and attempt to login using TouchID
+        let (dictionary, error) = Locksmith.loadDataForUserAccount("carParkApplication")
+        
+        if let userPassword: AnyObject =  dictionary!["password"]{
+            requestFingerPrintAuthentication(userPassword.description);
+        }
+        
         super.viewWillAppear(animated);
     }
     
@@ -175,7 +176,7 @@ class LoginViewController: UITableViewController{
                         
                         //Save the username to phone memory, for fast login
                         NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
-                        NSUserDefaults.standardUserDefaults().setObject(userLogin.Password, forKey: "password");
+                        let error = Locksmith.saveData(["password": userLogin.Password], forUserAccount: "carParkApplication")
                         NSUserDefaults.standardUserDefaults().synchronize();
                         
                         loginIndicator.stopAnimating();
