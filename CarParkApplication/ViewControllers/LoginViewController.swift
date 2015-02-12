@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 //The login view controller. The user can enter their credentials to login, or select to go to the register screen.
 class LoginViewController: UITableViewController{
@@ -29,10 +30,38 @@ class LoginViewController: UITableViewController{
             inputEmail.text = savedUsername.description;
         }
         
+        //Check to see if we have the users saved password, this can be used for quicklogin using touchID (if available)
+        if let savedPassword: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("password"){
+            println(savedPassword);
+        }
+        
+        
         //Attach a handler to move the view up when displaying the keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    func requestFingerPrintAuthentication(){
+        let context = LAContext()
+        var authError: NSError?
+        let authenticationReason: String = "Quick Login"
+        
+        if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: authenticationReason, reply: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.inputPassword.text = "Password123";
+                    self.LoginButtonPressed(self)
+                } else {
+                    println("Unable to Authenticate")
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    displayAlert("Uable to Authenticate", "Plase enter your credentials manually", "Ok")
+                    self.inputPassword.text = "";
+                    });
+                }
+            })
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -41,6 +70,11 @@ class LoginViewController: UITableViewController{
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil);
+    }
+    
+     override func viewWillAppear(animated: Bool) {
+        requestFingerPrintAuthentication();
+        super.viewWillAppear(animated);
     }
     
     
@@ -141,6 +175,7 @@ class LoginViewController: UITableViewController{
                         
                         //Save the username to phone memory, for fast login
                         NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
+                        NSUserDefaults.standardUserDefaults().setObject(userLogin.Password, forKey: "password");
                         NSUserDefaults.standardUserDefaults().synchronize();
                         
                         loginIndicator.stopAnimating();
