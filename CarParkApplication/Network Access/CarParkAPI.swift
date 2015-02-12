@@ -302,6 +302,8 @@ func searchCarParks(token: String, lat:String, long:String, searchComplete: (suc
                 let carParkDistance: AnyObject?  = carPark["Distance"]!
                 let carParkOpen: AnyObject? = carPark["OpenTime"];
                 let carParkClose: AnyObject? = carPark["CloseTime"];
+                let spaces: AnyObject? = carPark["Spaces"]!
+                let currentlyParked: AnyObject? = carPark["CurrentlyParked"]!
 
                 
                 let newCarPark = CarPark(_id:
@@ -311,7 +313,9 @@ func searchCarParks(token: String, lat:String, long:String, searchComplete: (suc
                     _long: carParkLong!.description,
                     _distance: ((carParkDistance!.description) as NSString).doubleValue,
                     _open: carParkOpen?.description,
-                    _close: carParkClose?.description
+                    _close: carParkClose?.description,
+                    _spaces: (spaces!.description).toInt()!,
+                    _currentlyParked: (currentlyParked!.description).toInt()!
                 );
                 println(newCarPark);
                 carParks.append(newCarPark);

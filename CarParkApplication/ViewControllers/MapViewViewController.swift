@@ -215,6 +215,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     func searchLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
         self.removeAnnotations();
+        println("searching")
         searchCarParks(User.sharedInstance.token!, latitude.description, longitude.description, { (success, returnedCarParks, error) -> () in
             if success {
                 for carPark in returnedCarParks{
@@ -223,7 +224,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                     let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude);
                     var openingTimes: String?;
                     if (carPark.Open != nil) && (carPark.Close != nil){
-                        openingTimes = "Open: \(carPark.Open!) Close: \(carPark.Close!)"
+                        openingTimes = "Open: \(carPark.Open!) Close: \(carPark.Close!) Max Spaces available: \(carPark.Spaces)"
                     }else{
                         openingTimes = "Car park is currently closed";
                     }
@@ -240,6 +241,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         annotation.coordinate = location
         annotation.title = title
         annotation.subtitle = subtitle
+        
         self.map.addAnnotation(annotation)
         
         self.allAnnotations.append(annotation);
