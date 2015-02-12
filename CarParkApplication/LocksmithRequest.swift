@@ -5,6 +5,12 @@
 //  Copyright (c) 2014 Colour Coding. All rights reserved.
 //
 
+
+/*
+    Used with permission under the MIT license
+    https://github.com/matthewpalmer/Locksmith
+*/
+
 import UIKit
 import Security
 
