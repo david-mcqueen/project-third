@@ -44,15 +44,17 @@ class LoginViewController: UITableViewController{
         if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &authError) {
             context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: authenticationReason, reply: {
                 (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.inputPassword.text = password;
-                    self.LoginButtonPressed(self)
-                } else {
-                    println("Unable to Authenticate")
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    displayAlert("Uable to Authenticate", "Plase enter your credentials manually", "Ok")
-                    });
-                }
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if success {
+                        self.inputPassword.text = password;
+                        self.LoginButtonPressed(self)
+                    } else {
+                        println("Unable to Authenticate")
+                    
+                        displayAlert("Uable to Authenticate", "Plase enter your credentials manually", "Ok")
+                   
+                    }
+                });
             })
         }
     }

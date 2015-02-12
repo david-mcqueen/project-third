@@ -71,7 +71,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         beaconActivityIndicator.center = self.view.center
         beaconActivityIndicator.hidesWhenStopped = true
-        
         beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray;
     }
     
@@ -210,15 +209,23 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     func createParkSession(userVehicleID: Int, timeBandID: Int){
+        var parkIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
+        parkIndicator.center = self.view.center
+        parkIndicator.hidesWhenStopped = true
+        parkIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        view.addSubview(parkIndicator)
+        parkIndicator.startAnimating()
+        
+        
         parkVehicle(User.sharedInstance.token!, selectedCarParkID!, userVehicleID, timeBandID, {(success: Bool, parkTransactionID: Int?, parkFinished: Bool?, parkFinishTime: NSDate?, parkCost: Double?, error: String?) -> () in
 
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                displayAlert("Park Failed", "Something went wrong \(error)", "Ok")
                 if (self.selectedCarParkName == nil){
                     self.selectedCarParkName = "";
                 }
                 if (parkTransactionID != nil && success){
                     println(parkTransactionID!)
+                    
                     let startTime = NSDate();
                     
                     var newParkSession = ParkSession(
@@ -248,13 +255,14 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     
                     //Display the new parking session
                     println("View the parking session")
+                    parkIndicator.stopAnimating()
                     let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as SessionViewController;
                     viewSessionViewController.parkingSession = newParkSession;
                     self.navigationController?.showViewController(viewSessionViewController, sender: nil);
                 }
-                
                 if error != nil{
-                    println(error!);
+                    parkIndicator.stopAnimating()
+                    displayAlert("Park Failed", "Something went wrong. (\(error!))", "Ok")
                 }
                 
             });
@@ -484,8 +492,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         //The beacon ID needs to be in the format stored on the server.
         var beacon = String(major) + "." + String(minor);
+        view.addSubview(beaconActivityIndicator)
+        beaconActivityIndicator.startAnimating()
         
         determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
+            
             var alert = UIAlertView(title: "Success!", message: carParkName, delegate: nil, cancelButtonTitle: "Okay.")
             if(success) {
                 self.selectedCarParkName = carParkName;
@@ -501,6 +512,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 // Show the alert
+                self.beaconActivityIndicator.stopAnimating();
                 if success {
                     displayAlert("Success", "Car Park Found (\(carParkName))", "OK")
                     self.locationTextField.text = "\(carParkID)";
