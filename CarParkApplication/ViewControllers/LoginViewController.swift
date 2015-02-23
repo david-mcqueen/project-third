@@ -25,6 +25,7 @@ class LoginViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Get the saved username from the phone memory, if it exists, and populate the input field
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
@@ -50,8 +51,7 @@ class LoginViewController: UITableViewController{
                         self.LoginButtonPressed(self)
                     } else {
                         println("Unable to Authenticate")
-                    
-                        displayAlert("Uable to Authenticate", "Plase enter your credentials manually", "Ok")
+                        displayAlert("Unable to Authenticate", "Please enter your credentials manually", "Ok")
                    
                     }
                 });
@@ -73,9 +73,12 @@ class LoginViewController: UITableViewController{
         //If the user has previously logged in, get the password from Keychain and attempt to login using TouchID
         let (dictionary, error) = Locksmith.loadDataForUserAccount("carParkApplication")
         
-        if let userPassword: AnyObject =  dictionary!["password"]{
-            requestFingerPrintAuthentication(userPassword.description);
+        if let dictionaryResult: AnyObject = dictionary{
+            if let userPassword: AnyObject =  dictionary!["password"]{
+                requestFingerPrintAuthentication(userPassword.description);
+            }
         }
+        
         
         super.viewWillAppear(animated);
     }
@@ -121,19 +124,39 @@ class LoginViewController: UITableViewController{
     //MARK:- Keyboard functions
     func keyboardWillShow(notification: NSNotification) {
         println("keyboardWillShow")
-        if (!self.keyboardIsShowing){
-            self.tableView.frame.origin.y -= 100;
-            self.keyboardIsShowing = true
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        if (screenHeight < 500){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                if (!self.keyboardIsShowing){
+                    self.keyboardIsShowing = true
+                    self.tableView.frame.origin.y -= 100;
+                }
+            }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         println("keyboardWillHide")
-        
-        if (self.keyboardIsShowing){
-            self.tableView.frame.origin.y += 100;
-            self.keyboardIsShowing = false;
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        if (screenHeight < 500){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                
+                if (self.keyboardIsShowing){
+                    self.keyboardIsShowing = false
+                    self.tableView.frame.origin.y += 100;
+                    
+                }
+            }
         }
+        
     }
     
 
