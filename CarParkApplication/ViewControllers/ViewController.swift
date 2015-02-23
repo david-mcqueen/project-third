@@ -30,6 +30,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var bandDescription: String?;
     var originalParkID: Int?
     var originalSession: ParkSession?;
+    var keyboardIsShowing = false;
     
     
     //MARK:- UI Outlets
@@ -72,6 +73,11 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         beaconActivityIndicator.center = self.view.center
         beaconActivityIndicator.hidesWhenStopped = true
         beaconActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray;
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,6 +101,47 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        //Remove the keyboard handlers when leaving this view
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        println("keyboardWillShow")
+        if (notificationMinsInput.isFirstResponder()){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                
+                if (!self.keyboardIsShowing){
+                    self.keyboardIsShowing = true
+                    self.tableView.frame.origin.y -= keyboardFrame.height;
+                }
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        println("keyboardWillHide")
+        if (notificationMinsInput.isFirstResponder()){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                
+                if (self.keyboardIsShowing){
+                    self.keyboardIsShowing = false
+                    self.tableView.frame.origin.y += keyboardFrame.height;
+                    
+                }
+            }
+        }
+        
+    }
+    
     
     
     //MARK:- Button Functions

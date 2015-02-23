@@ -26,7 +26,7 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
     
     request.HTTPMethod = "POST";
     var params: Dictionary<String, String> = ([
-        "Email" : user.UserName,
+        "Username" : user.UserName,
         "Password" : user.Password
         ]);
     
