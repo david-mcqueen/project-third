@@ -93,8 +93,12 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             vehicleCell.userInteractionEnabled = false;
             parkButton.setTitle("Extend Stay", forState: .Normal);
             timeBandLabel.text = bandDescription!;
-            
+        }else{
+            var firstVehicle = User.sharedInstance.getFirstVehicle();
+            selectedVehicle = firstVehicle;
+            vehicleLabel.text = selectedVehicle?.displayVehicle();
         }
+        
     }
     
     override func didReceiveMemoryWarning() {
