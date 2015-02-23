@@ -20,8 +20,60 @@ class RegisterViewController: UITableViewController {
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
+    var keyboardIsShowing: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Attach a handler to move the view up when displaying the keyboard
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShowRegister:"), name:UIKeyboardWillShowNotification, object: nil);
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHideRegister:"), name:UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        //Remove the keyboard handlers when leaving this view
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    //MARK:- Keyboard functions
+    func keyboardWillShowRegister(notification: NSNotification) {
+        println("keyboardWillShowRegister")
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        if (screenHeight < 500 && (txtEmail.isFirstResponder() || txtPhone.isFirstResponder() || txtPassword.isFirstResponder())){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                if (!self.keyboardIsShowing){
+                    self.keyboardIsShowing = true
+                    self.tableView.frame.origin.y -= 150;
+                }
+            }
+        }
+    }
+    
+    func keyboardWillHideRegister(notification: NSNotification) {
+        println("keyboardWillHideRegister")
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        if (screenHeight < 500 && (txtEmail.isFirstResponder() || txtPhone.isFirstResponder() || txtPassword.isFirstResponder())){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                
+                if (self.keyboardIsShowing){
+                    self.keyboardIsShowing = false
+                    self.tableView.frame.origin.y += 150;
+                    
+                }
+            }
+        }
+        
     }
     
     //MARK:- Table delegates

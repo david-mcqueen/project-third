@@ -30,7 +30,9 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     var modelPickerData = ["Loading..."];
     var modelDictionary: [String: String] = ["": ""];
     
+    //MARK:- Variables
     weak var delegate: CreateVehicleDelegate?;
+    var keyboardIsShowing: Bool = false
     
     //MARK:- default functions
     override func viewDidLoad() {
@@ -58,8 +60,70 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         modelInput.frame = CGRectZero;
         modelInput.userInteractionEnabled = false;
         
+        //Attach a handler to move the view up when displaying the keyboard
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShowVehicle:"), name:UIKeyboardWillShowNotification, object: nil);
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHideVehicle:"), name:UIKeyboardWillHideNotification, object: nil);
+        
         populateMakes();
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        //Remove the keyboard handlers when leaving this view
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    //MARK:- Keyboard functions
+    func keyboardWillShowVehicle(notification: NSNotification) {
+        println("keyboardWillShowVehicle")
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        if (screenHeight < 500){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                if (!self.keyboardIsShowing){
+                    self.keyboardIsShowing = true
+                    if(registrationLabel.isFirstResponder() || colourLabel.isFirstResponder()){
+                        self.tableView.frame.origin.y -= 50;
+                    }else{
+                        self.tableView.frame.origin.y -= 75;
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func keyboardWillHideVehicle(notification: NSNotification) {
+        println("keyboardWillHideVehicle")
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        if (screenHeight < 500){
+            if let info = notification.userInfo {
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                
+                
+                if (self.keyboardIsShowing){
+                    self.keyboardIsShowing = false
+                    if(registrationLabel.isFirstResponder() || colourLabel.isFirstResponder()){
+                        self.tableView.frame.origin.y += 50;
+                    }else{
+                        self.tableView.frame.origin.y += 75;
+                    }
+                    
+                    
+                }
+            }
+        }
+        
+    }
+
     
     
     //MARK:- TextField Delegate

@@ -32,9 +32,9 @@ class LoginViewController: UITableViewController{
         }
         
         //Attach a handler to move the view up when displaying the keyboard
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShowLogin:"), name:UIKeyboardWillShowNotification, object: nil);
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHideLogin:"), name:UIKeyboardWillHideNotification, object: nil);
     }
     
     func requestFingerPrintAuthentication(password: String){
@@ -122,8 +122,8 @@ class LoginViewController: UITableViewController{
     
     
     //MARK:- Keyboard functions
-    func keyboardWillShow(notification: NSNotification) {
-        println("keyboardWillShow")
+    func keyboardWillShowLogin(notification: NSNotification) {
+        println("keyboardWillShowLogin")
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
@@ -139,8 +139,8 @@ class LoginViewController: UITableViewController{
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
-        println("keyboardWillHide")
+    func keyboardWillHideLogin(notification: NSNotification) {
+        println("keyboardWillHideLogin")
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
