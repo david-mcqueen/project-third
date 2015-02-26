@@ -43,9 +43,10 @@ class User {
         self.Vehicles.append(newVehicle);
     }
     
-    func deleteVehicle(oldVehicle: Vehicle){
+    func deleteVehicle(oldVehicle: Vehicle) -> Bool{
         var removeVehicleIndex: Int?;
         var searchIndex = 0;
+        var activeVehicles = getActiveVehicles();
         
         for vehicle in self.Vehicles{
             if vehicle.VehicleID == oldVehicle.VehicleID{
@@ -54,8 +55,14 @@ class User {
             searchIndex++;
         }
         
-        //TODO:- Only delete if there is > 1 vehicle (need at least 1)
-        self.Vehicles.removeAtIndex(removeVehicleIndex!)
+        // Only delete if there is > 1 vehicle (need at least 1)
+        if activeVehicles.count > 1{
+            self.Vehicles.removeAtIndex(removeVehicleIndex!)
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     
     func deleteAllvehciles() {
