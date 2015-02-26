@@ -32,12 +32,8 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         super.viewDidLoad()
         locationManager.delegate = self;
         
-        getSavedCoordinates();
-        if (savedLocation != nil){
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Retrieve Location", style: .Bordered, target: self, action: "retrieveLocation:")
-        }else{
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remember Location", style: .Bordered, target: self, action: "rememberLocation:")
-        }
+        
+        
         
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
@@ -60,6 +56,16 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+     override func viewWillAppear(animated: Bool) {
+        getSavedCoordinates();
+        println(savedLocation);
+        if (savedLocation != nil){
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Retrieve Location", style: .Bordered, target: self, action: "retrieveLocation:")
+        }else{
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remember Location", style: .Bordered, target: self, action: "rememberLocation:")
+        }
     }
     
     
@@ -297,7 +303,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         self.navigationItem.rightBarButtonItem?.enabled = authorised
         
         if(!authorised){
-            displayAlert("Permission Error", "Certain map features are disabled due to lack of permissio, please enable location services in your iPhone settings to use all features", "Ok")
+            displayAlert("Permission Error", "Certain map features are disabled due to lack of permission, please enable location services in your iPhone settings to use all features", "Ok")
         }
     }
 }
