@@ -215,7 +215,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         var result: (String, String) = ("","");
-        //makePicker.tag == 0
+        
         println(pickerView.tag);
         if (pickerView.tag == 0){
             //Display the selected car make
@@ -224,7 +224,11 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
             
             //Make the model read only, until the models for that make are loaded
             modelInput.userInteractionEnabled = false;
+            modelInput.text = "";
             modelInput.placeholder = "Loading models..."
+            modelPickerData.removeAll(keepCapacity: false);
+            modelPickerData = [""];
+            modelPicker.selectRow(0, inComponent: 0, animated: false);
             
             populateModels(self.makeDictionary[makePickerData[row]]!);
         }else{
@@ -300,7 +304,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                         listOfModels.append(model.model_name);
                         self.modelDictionary[model.model_name] = model.model_make_id;
                     }
-                    //TODO:- Handle no data being returned from the server (empty list for picker etc)
+                    
                     self.modelPickerData = listOfModels;
                     self.modelInput.placeholder = "Select Model";
                     self.modelInput.userInteractionEnabled = true;
