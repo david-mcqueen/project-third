@@ -73,7 +73,7 @@ func loginUser(user: UserLogin, loginCompleted: (success: Bool, token: String?, 
     
 }
 
-func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, token: String, error: String?) -> ()) -> (){
+func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, token: String?, error: String?) -> ()) -> (){
     //Pass the user details to the server, to register
     //TODO:- Handle failure reponse / unknown failure
     
@@ -107,7 +107,6 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
         var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
         var success = false;
         
-        
         if (error != nil) {
             println(error.localizedDescription);
             errorResponse = error.localizedDescription;
@@ -132,7 +131,7 @@ func registerUser(newUser: UserRegistration, registerCompleted: (success: Bool, 
         
         
         
-        registerCompleted(success: success, token: token!, error: errorResponse);
+        registerCompleted(success: success, token: token, error: errorResponse);
     });
     
     registerResponse.resume();
@@ -210,10 +209,6 @@ func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success:
     println("Create Vehicle")
     //Pass the user details to the server, to register
     
-    //TODO:- Handle failure reponse / unknown failure
-    
-    //TODO:- After the user has registered / added a new vehicle the Singleton needs updating!
-    
     let urlSession = NSURLSession.sharedSession();
     
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/vehicle");
@@ -263,8 +258,6 @@ func createVehicle(token: String, newVehicle: Vehicle, vehicleCreated: (success:
             errorResponse = "Server Error";
         }
         
-        
-        
         vehicleCreated(success: success, createdVehicle: newVehicle, error: errorResponse);
     });
     
@@ -306,8 +299,6 @@ func getAllUserVehicles(token: String, requestCompleted: (success: Bool, vehicle
                 let vehicleColour: AnyObject?  = vehicle["Colour"]!
                 let vehicleActive: AnyObject? = vehicle["Deleted"]!
                 
-                //TODO:- Get the vehicle information back from the server
-                //Or can link to the known vehicles on the user account?
                 let vehicle = Vehicle(
                     make: vehicleMake!.description,
                     model: vehicleModel!.description,
