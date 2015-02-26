@@ -26,18 +26,13 @@ class LoginViewController: UITableViewController{
         super.viewDidLoad()
         
         
-        //Get the saved username from the phone memory, if it exists, and populate the input field
-        if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
-            inputEmail.text = savedUsername.description;
-        }
-        
         //Attach a handler to move the view up when displaying the keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShowLogin:"), name:UIKeyboardWillShowNotification, object: nil);
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHideLogin:"), name:UIKeyboardWillHideNotification, object: nil);
     }
     
-    func requestFingerPrintAuthentication(password: String){
+    func requestFingerPrintAuthentication(password: String, userName: String){
         let context = LAContext()
         var authError: NSError?
         let authenticationReason: String = "Quick Login"
@@ -48,6 +43,7 @@ class LoginViewController: UITableViewController{
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     if success {
                         self.inputPassword.text = password;
+                        self.inputEmail.text = userName;
                         self.LoginButtonPressed(self)
                     } else {
                         println("Unable to Authenticate")
@@ -68,6 +64,10 @@ class LoginViewController: UITableViewController{
     }
     
      override func viewWillAppear(animated: Bool) {
+        //Get the saved username from the phone memory, if it exists, and populate the input field
+        if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
+            inputEmail.text = savedUsername.description;
+        }
         self.inputPassword.text = "";
         
         //If the user has previously logged in, get the password from Keychain and attempt to login using TouchID
@@ -75,7 +75,7 @@ class LoginViewController: UITableViewController{
         
         if let dictionaryResult: AnyObject = dictionary{
             if let userPassword: AnyObject =  dictionary!["password"]{
-                requestFingerPrintAuthentication(userPassword.description);
+                requestFingerPrintAuthentication(userPassword.description, userName: inputEmail.text);
             }
         }
         
