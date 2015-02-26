@@ -32,6 +32,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     var originalParkID: Int?
     var originalSession: ParkSession?;
     var keyboardIsShowing = false;
+    var newTimeBandSelected = false;
     
     
     //MARK:- UI Outlets
@@ -61,10 +62,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             selectTimeBandCell.userInteractionEnabled = false;
         }
         
-        var firstVehicle = User.sharedInstance.getFirstVehicle();
-        selectedVehicle = firstVehicle;
-        vehicleLabel.text = selectedVehicle?.displayVehicle();
-        
         //Request permission to access beacons - Whilst the app is in Foreground
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedWhenInUse){
             locationManager.requestWhenInUseAuthorization();
@@ -82,13 +79,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func viewWillAppear(animated: Bool) {
-        allVehicles = User.sharedInstance.getActiveVehicles();
-        var selectedVehicleActive = false;
-        for vehicle in allVehicles{
-            if vehicle.displayVehicle() == selectedVehicle?.displayVehicle(){
-                selectedVehicleActive = true;
-            }
-        }
+        
         
         if edidtingSession {
             if (selectedCarParkID != nil){
@@ -100,11 +91,25 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             locationIDCell.userInteractionEnabled = false;
             vehicleCell.userInteractionEnabled = false;
             parkButton.setTitle("Extend Stay", forState: .Normal);
-            timeBandLabel.text = bandDescription!;
-        }else if selectedVehicle == nil || !selectedVehicleActive{
-            var firstVehicle = User.sharedInstance.getFirstVehicle();
-            selectedVehicle = firstVehicle;
-            vehicleLabel.text = selectedVehicle?.displayVehicle();
+            if (!newTimeBandSelected){
+                timeBandLabel.text = bandDescription!;
+            }
+        }else {
+            
+            allVehicles = User.sharedInstance.getActiveVehicles();
+            var selectedVehicleActive = false;
+            
+            for vehicle in allVehicles{
+                if vehicle.displayVehicle() == selectedVehicle?.displayVehicle(){
+                    selectedVehicleActive = true;
+                }
+            }
+            
+            if selectedVehicle == nil || !selectedVehicleActive{
+                var firstVehicle = User.sharedInstance.getFirstVehicle();
+                selectedVehicle = firstVehicle;
+                vehicleLabel.text = selectedVehicle?.displayVehicle();
+            }
         }
         
     }
@@ -194,7 +199,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
 
     @IBAction func parkPressed(sender: AnyObject) {
         println("park the vehicle");
-        //TODO:- Validation checking on the input fields
         
         if (selectedTimeBand == nil && !toggleMethod.on){
             displayAlert("Time Band", "Please select a valid time band", "Ok")
@@ -478,7 +482,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         let timeBandSelectViewController = segue.sourceViewController as TimeBandSelectViewController
         if let _selectedTimeBand = timeBandSelectViewController.selectedTimeBand {
             timeBandLabel.text = _selectedTimeBand.displayBand()
-            selectedTimeBand = _selectedTimeBand
+            selectedTimeBand = _selectedTimeBand;
+            self.newTimeBandSelected = true;
             println("selected time band: \(selectedTimeBand)");
         }
         self.navigationController?.popViewControllerAnimated(true);

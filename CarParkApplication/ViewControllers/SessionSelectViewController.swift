@@ -26,9 +26,7 @@ class SessionSelectViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        allUserVehicles = User.sharedInstance.getActiveVehicles();
-        
-        updateTabelData(currentSessions);
+        allUserVehicles = User.sharedInstance.Vehicles;
     }
     
     override func viewWillAppear(animated: Bool) {

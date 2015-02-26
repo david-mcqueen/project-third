@@ -81,9 +81,8 @@ class SessionViewController: UITableViewController{
     
     func extendParkingSession(){
         
-        //Check that the vehicle is still associated with the user
-        var allVehicles = User.sharedInstance.getActiveVehicles();
-        var parkedVehicle:Vehicle?;
+        var allVehicles = User.sharedInstance.Vehicles;
+        var parkedVehicle: Vehicle?;
         
         for vehicle in allVehicles{
             if vehicle.VehicleID == parkingSession?.ParkedVehicleID{
@@ -119,7 +118,7 @@ class SessionViewController: UITableViewController{
         }
         
         var vehicleText: String?;
-        for vehicle in User.sharedInstance.getActiveVehicles(){
+        for vehicle in User.sharedInstance.Vehicles{
             if vehicle.VehicleID! == parkingSession?.ParkedVehicleID{
                 vehicleText = vehicle.displayVehicle();
             }
