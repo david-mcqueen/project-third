@@ -78,6 +78,8 @@
 		55BB56A119F2C70C00492154 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB569F19F2C70C00492154 /* Utilities.swift */; };
 		55BB56A519F2CD1800492154 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB56A419F2CD1800492154 /* UtilitiesTests.swift */; };
 		55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */; };
+		55E1BD761A9F726400BDCE7F /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1BD751A9F726400BDCE7F /* CustomAnnotation.swift */; };
+		55E1BD771A9F72E900BDCE7F /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1BD751A9F726400BDCE7F /* CustomAnnotation.swift */; };
 		55EF4DBA1A5D9FA7006F7613 /* CreateVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +162,7 @@
 		55BB569F19F2C70C00492154 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		55BB56A419F2CD1800492154 /* UtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		55C836AB1A614CC0009167D4 /* SelectUserVehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectUserVehicle.swift; path = Protocols/SelectUserVehicle.swift; sourceTree = "<group>"; };
+		55E1BD751A9F726400BDCE7F /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomAnnotation.swift; path = Classes/CustomAnnotation.swift; sourceTree = "<group>"; };
 		55EF4DB91A5D9FA7006F7613 /* CreateVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateVehicleViewController.swift; path = ViewControllers/CreateVehicleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +216,7 @@
 				55B8D2AC1A740EA3000665DA /* TimeConversionPlayground.playground */,
 				552E0A291A7CE61E008C6A2A /* CarPark.swift */,
 				552E0A2C1A7D0358008C6A2A /* PricingBands.swift */,
+				55E1BD751A9F726400BDCE7F /* CustomAnnotation.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -516,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				558970FE1A7FCB6E00326485 /* TimeBandViewCell.swift in Sources */,
+				55E1BD761A9F726400BDCE7F /* CustomAnnotation.swift in Sources */,
 				55322CF81A6EAEB300C13F2E /* ParkSession.swift in Sources */,
 				55C836AC1A614CC0009167D4 /* SelectUserVehicle.swift in Sources */,
 				552E0A301A7D2108008C6A2A /* TimeBandSelected.swift in Sources */,
@@ -582,6 +587,7 @@
 				551AC1B119E186BB0051C672 /* CarParkApplicationTests.swift in Sources */,
 				558777F51A5D5B5E008ACCE9 /* LoggedInViewController.swift in Sources */,
 				558616771A751A3900FAB689 /* RegisterViewController.swift in Sources */,
+				55E1BD771A9F72E900BDCE7F /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,7 +32,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         super.viewDidLoad()
         locationManager.delegate = self;
         
-        
+        self.map.delegate = self;
         
         
         //Request permission to access beacons - Whilst the app is in Foreground
@@ -101,7 +101,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
         //Drop a pin onto the saved location
-        self.addMapAnnotation(location, title: "Your car", subtitle: "Your vehicle is here!");
+        self.addMapAnnotationBasic(location, title: "Your car", subtitle: "Your vehicle is here!");
         
         //Saved the location into the UserDefaults - so that it persists after the app is closed
         NSUserDefaults.standardUserDefaults().setObject(latitude, forKey: "savedParkingLocation-Lat");
@@ -129,7 +129,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         }
         
         if let newLocation = savedLocation {
-            self.addMapAnnotation(newLocation, title: annotationTitle, subtitle: annotationSubtitle);
+            self.addMapAnnotationBasic(newLocation, title: annotationTitle, subtitle: annotationSubtitle);
         }
         
         if let vehicleLocation = savedLocation {
@@ -229,12 +229,13 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                     let longitude: CLLocationDegrees = (carPark.Longitude as NSString).doubleValue;
                     let location:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude);
                     var openingTimes: String?;
-                    if (carPark.Open != nil) && (carPark.Close != nil){
-                        openingTimes = "Open: \(carPark.Open!) Close: \(carPark.Close!) Max Spaces available: \(carPark.Spaces)"
-                    }else{
-                        openingTimes = "Car park is currently closed";
+                    if (carPark.Open == nil) {
+                        carPark.Open = "CLOSED";
                     }
-                    self.addMapAnnotation(location, title: "\(carPark.Name) (\(carPark.ID))", subtitle: "\(openingTimes!)");
+                    if (carPark.Close == nil){
+                        carPark.Close = "CLOSED";
+                    }
+                    self.addMapAnnotation(location, openingTime: carPark.Open!, closingTime: carPark.Close!, maxSpaces: carPark.Spaces, spacesUsed: carPark.CurrentlyParked, name: carPark.Name, id: carPark.ID);
                 }
             }else{
                 NSLog("Something went wrong")
@@ -242,16 +243,77 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         });
     }
     
-    func addMapAnnotation(location: CLLocationCoordinate2D, title: String, subtitle: String){
-        var annotation = MKPointAnnotation()
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        var annotation = view.annotation as CustomAnnotation;
+        var carParkInformation = ""
+        if (annotation.OpeningTime != "CLOSED"){
+            carParkInformation = "Opens: \(annotation.OpeningTime)";
+            carParkInformation += "\nCloses: \(annotation.ClosingTime)";
+            carParkInformation += "\nEst. available: \(annotation.MaxSpaces - annotation.UsedSpaces)";
+            carParkInformation += "\nCapacity: \(annotation.MaxSpaces)";
+            
+        }else{
+            carParkInformation = "Carpark is Currently Closed";
+        }
+        
+        displayAlert("\(annotation.Name) (\(annotation.ID))", carParkInformation, "Ok");
+        
+    }
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+            
+            if annotation is MKUserLocation {
+                //return nil so map view draws "blue dot" for standard user location
+                return nil
+            }
+        if annotation is CustomAnnotation{
+            let reuseId = "pin"
+            
+            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                pinView!.canShowCallout = true
+                pinView!.animatesDrop = true
+                pinView!.pinColor = .Purple
+                pinView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoDark) as UIView;
+            }
+            else {
+                pinView!.annotation = annotation
+            }
+            
+            return pinView
+        }else{
+            return nil;
+        }
+        
+    }
+    
+    func addMapAnnotation(location: CLLocationCoordinate2D, openingTime: String, closingTime: String, maxSpaces: Int, spacesUsed: Int, name: String, id: Int){
+        var annotation = CustomAnnotation()
         annotation.coordinate = location
-        annotation.title = title
-        annotation.subtitle = subtitle
+        annotation.title = "\(name) (\(id))"
+        annotation.OpeningTime = openingTime;
+        annotation.ClosingTime = closingTime;
+        annotation.UsedSpaces = spacesUsed;
+        annotation.MaxSpaces = maxSpaces;
+        annotation.ID = id;
+        annotation.Name = name;
         
         self.map.addAnnotation(annotation)
         
         self.allAnnotations.append(annotation);
     }
+    
+    func addMapAnnotationBasic(location: CLLocationCoordinate2D, title: String, subtitle: String){
+        var annotation = MKPointAnnotation();
+        annotation.coordinate = location
+        annotation.title = title
+        annotation.subtitle = subtitle
+        
+        self.map.addAnnotation(annotation)
+        self.allAnnotations.append(annotation);
+    }
+
     
     func focusMap(location: CLLocationCoordinate2D){
         var mapCamera = MKMapCamera(lookingAtCenterCoordinate: location, fromEyeCoordinate: location, eyeAltitude: 1500);
