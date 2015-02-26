@@ -278,6 +278,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lxs-xF-oHC">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lxs-xF-oHC" id="ScL-oS-ejZ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Confirm Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c57-aq-ihY">
+                                                    <rect key="frame" x="8" y="13" width="81" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.27450980390000002" green="0.40000000000000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hRg-fm-QZM">
+                                                    <rect key="frame" x="97" y="6" width="495" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="hRg-fm-QZM" secondAttribute="centerY" constant="1" id="2rd-1M-itS"/>
+                                                <constraint firstItem="hRg-fm-QZM" firstAttribute="leading" secondItem="ScL-oS-ejZ" secondAttribute="leadingMargin" constant="89" id="DDQ-Rq-9tF"/>
+                                                <constraint firstAttribute="centerY" secondItem="c57-aq-ihY" secondAttribute="centerY" constant="-0.5" id="I8s-D0-IzA"/>
+                                                <constraint firstItem="c57-aq-ihY" firstAttribute="leading" secondItem="ScL-oS-ejZ" secondAttribute="leadingMargin" id="RR9-2p-Wxo"/>
+                                                <constraint firstItem="hRg-fm-QZM" firstAttribute="trailing" secondItem="ScL-oS-ejZ" secondAttribute="trailingMargin" id="qI7-IV-2k6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -303,6 +329,7 @@
                         <outlet property="txtFirstName" destination="seh-vt-OyD" id="jS7-Is-1gx"/>
                         <outlet property="txtLastName" destination="xaM-cs-SSf" id="usT-lE-6HF"/>
                         <outlet property="txtPassword" destination="30E-SA-Uni" id="d4O-iW-TdE"/>
+                        <outlet property="txtPasswordConfirm" destination="hRg-fm-QZM" id="DRb-zH-2jq"/>
                         <outlet property="txtPhone" destination="WeF-Jf-Jk3" id="dLl-2n-ZVi"/>
                     </connections>
                 </tableViewController>

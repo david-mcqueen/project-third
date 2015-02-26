@@ -19,6 +19,7 @@ class RegisterViewController: UITableViewController {
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var txtPasswordConfirm: UITextField!
     
     var keyboardIsShowing: Bool = false
     
@@ -110,6 +111,8 @@ class RegisterViewController: UITableViewController {
             }
             var validationAlert = UIAlertView(title: "Missing data!", message: validationMessage, delegate: nil, cancelButtonTitle: "Okay.")
             validationAlert.show();
+        }else if (txtPasswordConfirm.text != txtPassword.text){
+            displayAlert("Error", "Passwords do not match", "OK");
         }else{
             var newUser = UserRegistration(
                     _firstName: txtFirstName.text,
