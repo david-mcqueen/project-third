@@ -20,6 +20,7 @@ class LoginViewController: UITableViewController{
     
     //MARK:- Variables
     var keyboardIsShowing: Bool = false
+    var savedUser: Bool = false;
     
     //MARK:- Default Functions
     override func viewDidLoad() {
@@ -67,18 +68,20 @@ class LoginViewController: UITableViewController{
         //Get the saved username from the phone memory, if it exists, and populate the input field
         if let savedUsername: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("userName") {
             inputEmail.text = savedUsername.description;
+            savedUser = true;
         }
         self.inputPassword.text = "";
         
         //If the user has previously logged in, get the password from Keychain and attempt to login using TouchID
         let (dictionary, error) = Locksmith.loadDataForUserAccount("carParkApplication")
         
-        if let dictionaryResult: AnyObject = dictionary{
-            if let userPassword: AnyObject =  dictionary!["password"]{
-                requestFingerPrintAuthentication(userPassword.description, userName: inputEmail.text);
+        if (savedUser){
+            if let dictionaryResult: AnyObject = dictionary{
+                if let userPassword: AnyObject =  dictionary!["password"]{
+                    requestFingerPrintAuthentication(userPassword.description, userName: inputEmail.text);
+                }
             }
         }
-        
         
         super.viewWillAppear(animated);
     }
