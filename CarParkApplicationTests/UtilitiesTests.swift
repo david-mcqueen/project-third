@@ -114,21 +114,4 @@ class UtilitiesTests: XCTestCase {
         XCTAssertFalse(validateGUID("192317b4"), "GUID Validation - Short")
     }
     
-    //MARK:- Encryption & Decryption Tests
-    
-    func testStringEncryption(){
-        //Tests that a string is encrypted correctly
-        //Once we decide on an encryption method
-        
-        //This needs to be changed to XCTAssertEqual()
-        XCTAssertNotEqual("Call Function And Encrypt String", "Encrypted string to compare", "String Encryption");
-    }
-    
-    func testStringDecryption(){
-        //Tests that a string is decrypted correctly
-        //Once we decide on an encryption method
-        
-        //This needs to be changed to XCTAssertEqual()
-        XCTAssertNotEqual("Call Function And Decrypt String", "Decrypted string to compare", "String Decryption");
-    }
 }

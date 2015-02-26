@@ -192,5 +192,4 @@ class ClassTests: XCTestCase {
         XCTAssertFalse(testUser.emptyInputUsername(), "Empty Username");
     }
     
-    //TODO:- Create a logged in user object (singleton)
 }
