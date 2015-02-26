@@ -20,12 +20,13 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524"), identifier: "CarPark");
     var beaconActivityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 100, 100)) as UIActivityIndicatorView
     var editLocationButton = false;
-    var selectedVehicle:Vehicle?;
+    var selectedVehicle: Vehicle?;
+    var allVehicles: [Vehicle] = [];
     var selectedTimeBand: PricingBand?;
     var selectedCarParkID: Int?;
     var selectedCarParkName: String?;
     var edidtingSession: Bool = false;
-    var timeBands:[PricingBand] = []
+    var timeBands: [PricingBand] = []
     var bandDuration: Int?;
     var bandDescription: String?;
     var originalParkID: Int?
@@ -81,6 +82,13 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func viewWillAppear(animated: Bool) {
+        allVehicles = User.sharedInstance.getActiveVehicles();
+        var selectedVehicleActive = false;
+        for vehicle in allVehicles{
+            if vehicle.displayVehicle() == selectedVehicle?.displayVehicle(){
+                selectedVehicleActive = true;
+            }
+        }
         
         if edidtingSession {
             if (selectedCarParkID != nil){
@@ -93,7 +101,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             vehicleCell.userInteractionEnabled = false;
             parkButton.setTitle("Extend Stay", forState: .Normal);
             timeBandLabel.text = bandDescription!;
-        }else{
+        }else if selectedVehicle == nil || !selectedVehicleActive{
             var firstVehicle = User.sharedInstance.getFirstVehicle();
             selectedVehicle = firstVehicle;
             vehicleLabel.text = selectedVehicle?.displayVehicle();

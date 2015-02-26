@@ -34,7 +34,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
         if let vehicle = selectedVehicle?.displayVehicle() {
             selectedVehicleIndex = find(vehicles, vehicle)!
         }
-        if (delegate == nil){
+        if (delegate == nil && allVehicles.count > 0){
             addVehicleNavButton = self.navigationItem.rightBarButtonItem;
             profileBackButton = self.navigationItem.leftBarButtonItem;
             self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -127,14 +127,18 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
             
             println("Deleting")
             println(self.allVehicles[indexPath.row].VehicleID!)
-            deleteVehicle(User.sharedInstance.token!, self.allVehicles[indexPath.row].VehicleID!, { (success, error) -> () in
-                println(success);
-            });
-            
-            User.sharedInstance.deleteVehicle(self.allVehicles[indexPath.row]);
-            self.vehicles.removeAtIndex(indexPath.row);
-            self.allVehicles.removeAtIndex(indexPath.row);
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+            if(User.sharedInstance.deleteVehicle(self.allVehicles[indexPath.row])){
+                deleteVehicle(User.sharedInstance.token!, self.allVehicles[indexPath.row].VehicleID!, { (success, error) -> () in
+                    println(success);
+                });
+                self.vehicles.removeAtIndex(indexPath.row);
+                self.allVehicles.removeAtIndex(indexPath.row);
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade);
+
+            }else{
+                displayAlert("Error", "You need at least 1 vehicle linked to your account", "Ok");
+                self.tableView.editing = false;
+            }
             
         });
         
