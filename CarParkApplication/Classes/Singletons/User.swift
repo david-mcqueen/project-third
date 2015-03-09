@@ -57,7 +57,7 @@ class User {
         
         // Only delete if there is > 1 vehicle (need at least 1)
         if activeVehicles.count > 1{
-            self.Vehicles.removeAtIndex(removeVehicleIndex!)
+            self.Vehicles[removeVehicleIndex!].Deleted = true;
             return true;
         }else{
             return false;
@@ -66,7 +66,9 @@ class User {
     }
     
     func deleteAllvehciles() {
-        self.Vehicles.removeAll(keepCapacity: false)
+        for vehicle in self.Vehicles{
+            vehicle.Deleted = true;
+        }
     }
     
     func getActiveVehicles() -> [Vehicle]{
@@ -112,8 +114,7 @@ class User {
             }
             searchIndex++;
         }
-        println(removeSessionIndex)
-        //TODO:- Only delete if there is > 1 vehicle (need at least 1)
+        
         self.ParkSessions.removeAtIndex(removeSessionIndex!)
 
     }
