@@ -8,10 +8,11 @@
 
 import Foundation
 
-func determineCarPark(token: String, identifier: String, requestCompleted: (success: Bool, carParkID: Int, carParkName: String, error: String?) -> ()) -> (){
+func determineCarPark(token: String, identifier: String, requestCompleted: (success: Bool, carParkID: Int?, carParkName: String?, error: String?) -> ()) -> (){
     
     let url = NSURL(string:"http://projectthird.ddns.net:8181/WebAPI/webapi/determineCarpark?Token=\(token)&Identifier=\(identifier)");
     let urlSession = NSURLSession.sharedSession();
+    
     
     let jsonResponse = urlSession.dataTaskWithURL(url!, completionHandler: { data, response, error -> Void in
         
@@ -32,7 +33,7 @@ func determineCarPark(token: String, identifier: String, requestCompleted: (succ
             
             if let dataError: AnyObject = jsonResult["Error"]{
                 println(dataError);
-                errorResponse = dataError as? String;
+                errorResponse = (dataError as? String)!;
             }else{
                 if let parkID: AnyObject = jsonResult["CarParkID"]{
                     
@@ -45,14 +46,11 @@ func determineCarPark(token: String, identifier: String, requestCompleted: (succ
                     success = true;
                 }
             }
-            
-            
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding);
         }else{
-            errorResponse = "Server Error"
+            errorResponse = "Something went wrong"
         }
         
-        requestCompleted(success: success, carParkID: carParkID!, carParkName: carParkName!, error: errorResponse);
+        requestCompleted(success: success, carParkID: carParkID, carParkName: carParkName, error: errorResponse);
     });
     
     jsonResponse.resume();

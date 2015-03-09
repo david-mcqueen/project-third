@@ -558,15 +558,15 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         //The beacon ID needs to be in the format stored on the server.
         var beacon = String(major) + "." + String(minor);
         
-        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
+        determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int?, carParkName: String?, error: String?) -> () in
             
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 if success {
-                    displayAlert("Success", "Car Park Found (\(carParkName))", "OK")
-                    self.locationTextField.text = "\(carParkID)";
-                    self.selectedCarParkID = carParkID;
+                    displayAlert("Success", "Car Park Found (\(carParkName!))", "OK")
+                    self.locationTextField.text = "\(carParkID!)";
+                    self.selectedCarParkID = carParkID!;
                     self.selectTimeBandCell.userInteractionEnabled = true;
                     self.toggleLocationButton(true, locatedBeacon: true)
                 }else{
