@@ -252,6 +252,7 @@ class ClassTests: XCTestCase {
         XCTAssertTrue(User.sharedInstance.FirstName ==  "David", "Access User Singleton correctly");
         XCTAssertTrue(User.sharedInstance.Surname == "McQueen", "Access User Singleton correctly");
         XCTAssertTrue(User.sharedInstance.CurrentBalance == 19.74, "Access User Singleton correctly");
+        XCTAssertTrue(User.sharedInstance.getBalanceString() == "19.74", "Display the users balance correctly");
         
        
         XCTAssertTrue(firstVehicle?.displayVehicle() == "Renault Megane (AB05 ABC)", "Gets first (non deleted) vehicle")
@@ -291,6 +292,8 @@ class ClassTests: XCTestCase {
         firstVehicle = User.sharedInstance.getFirstVehicle();
         allActiveVehicles = User.sharedInstance.getActiveVehicles();
         XCTAssertTrue(firstVehicle?.displayVehicle() == "Renault Megane (AB11 ABC)", "Vehicle 11 should still be active (last vehicle)")
+        
+        
     }
 
 }

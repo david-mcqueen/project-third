@@ -114,4 +114,58 @@ class UtilitiesTests: XCTestCase {
         XCTAssertFalse(validateGUID("192317b4"), "GUID Validation - Short")
     }
     
+    //MARK:- Cost formatter
+    
+    func testgetCostFormattedString(){
+        XCTAssertTrue(getCostFormattedString(19.24) == "19.24", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(19.04) == "19.04", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(01.24) == "1.24", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(190.24) == "190.24", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(19.2) == "19.20", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(19.94) == "19.94", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(19.99) == "19.99", "Cost string is formatted correctly")
+        XCTAssertTrue(getCostFormattedString(21.01) == "21.01", "Cost string is formatted correctly")
+    }
+    
+    //MARK:- Seconds to Hours & Minutes
+    
+    func testconvertSecondsToHoursMinutes(){
+        var (Hours, Minutes) = convertSecondsToHoursMinutes(60);
+        
+        XCTAssertTrue(Hours == 0, "Time formats correctly")
+        XCTAssertTrue(Minutes == 1, "Time formats correctly")
+        
+        (Hours, Minutes) = convertSecondsToHoursMinutes(180);
+        
+        XCTAssertTrue(Hours == 0, "Time formats correctly")
+        XCTAssertTrue(Minutes == 3, "Time formats correctly")
+        
+        (Hours, Minutes) = convertSecondsToHoursMinutes(1800);
+        
+        XCTAssertTrue(Hours == 0, "Time formats correctly")
+        XCTAssertTrue(Minutes == 30, "Time formats correctly")
+        
+        (Hours, Minutes) = convertSecondsToHoursMinutes(18000);
+        
+        XCTAssertTrue(Hours == 5, "Time formats correctly")
+        XCTAssertTrue(Minutes == 0, "Time formats correctly")
+        
+        (Hours, Minutes) = convertSecondsToHoursMinutes(17940);
+        
+        XCTAssertTrue(Hours == 4, "Time formats correctly")
+        XCTAssertTrue(Minutes == 59, "Time formats correctly")
+        
+        (Hours, Minutes) = convertSecondsToHoursMinutes(86400);
+        
+        XCTAssertTrue(Hours == 24, "Time formats correctly")
+        XCTAssertTrue(Minutes == 0, "Time formats correctly")
+        
+        (Hours, Minutes) = convertSecondsToHoursMinutes(18060);
+        
+        XCTAssertTrue(Hours == 5, "Time formats correctly")
+        XCTAssertTrue(Minutes == 1, "Time formats correctly")
+        
+        
+    }
+    
 }
