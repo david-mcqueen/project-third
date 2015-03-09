@@ -274,7 +274,13 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
                 pinView!.canShowCallout = true
                 pinView!.animatesDrop = true
-                pinView!.pinColor = .Purple
+                var ann = annotation as CustomAnnotation;
+                if(ann.OpeningTime != "CLOSED"){
+                    pinView!.pinColor = .Green
+                }else{
+                    pinView!.pinColor = .Purple
+                }
+                
                 pinView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoDark) as UIView;
             }
             else {

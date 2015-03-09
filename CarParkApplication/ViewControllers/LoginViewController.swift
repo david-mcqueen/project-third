@@ -46,10 +46,6 @@ class LoginViewController: UITableViewController{
                         self.inputPassword.text = password;
                         self.inputEmail.text = userName;
                         self.LoginButtonPressed(self)
-                    } else {
-                        println("Unable to Authenticate")
-                        displayAlert("Unable to Authenticate", "Please enter your credentials manually", "Ok")
-                   
                     }
                 });
             })
@@ -204,9 +200,16 @@ class LoginViewController: UITableViewController{
                         
                         //Save the username to phone memory, for fast login
                         NSUserDefaults.standardUserDefaults().setObject(userLogin.UserName, forKey: "userName");
-                        let error = Locksmith.saveData(["password": userLogin.Password], forUserAccount: "carParkApplication")
                         NSUserDefaults.standardUserDefaults().synchronize();
                         
+                        //Save the password to Keychain
+                        let updateError = Locksmith.updateData(["password": userLogin.Password], forUserAccount: "carParkApplication")
+                        
+                        if (updateError != nil){
+                            //If update failed, save a new entry
+                            let error = Locksmith.saveData(["password": userLogin.Password], forUserAccount: "carParkApplication")
+                            
+                        }
                         loginIndicator.stopAnimating();
                         //Save the token into the Singleton object, for use throughut the app
                         User.sharedInstance.token = token!;

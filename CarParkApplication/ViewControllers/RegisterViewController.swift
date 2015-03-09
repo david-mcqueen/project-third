@@ -130,7 +130,8 @@ class RegisterViewController: UITableViewController {
                     invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Phone Number"
                 }
                 if (!newUser.validPasswordPattern()){
-                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password"
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Invalid Password:"
+                    invalidInputsMessage = invalidInputsMessage + "\n" + "Passwords must contain 1 upper, 1 lower character and 1 number";
                 }
                 
                 

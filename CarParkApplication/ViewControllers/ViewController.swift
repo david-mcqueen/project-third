@@ -133,7 +133,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             if let info = notification.userInfo {
                 var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
                 
-                
                 if (!self.keyboardIsShowing){
                     self.keyboardIsShowing = true
                     self.tableView.frame.origin.y -= keyboardFrame.height;
@@ -561,21 +560,8 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         
         determineCarPark(User.sharedInstance.token!, beacon, {(success: Bool, carParkID: Int, carParkName: String, error: String?) -> () in
             
-            var alert = UIAlertView(title: "Success!", message: carParkName, delegate: nil, cancelButtonTitle: "Okay.")
-            if(success) {
-                self.selectedCarParkName = carParkName;
-                alert.title = "Success!"
-                alert.message = carParkName
-                
-            }
-            else {
-                alert.title = "Failed : ("
-                alert.message = error
-            }
-            
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                // Show the alert
                 
                 if success {
                     displayAlert("Success", "Car Park Found (\(carParkName))", "OK")
@@ -587,9 +573,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     self.toggleLocationButton(false, locatedBeacon: false);
                     displayAlert("Failed", "No car park was found. Please enter the Carpark ID manually", "OK")
                 }
-                
             });
-            
             }
         );
         
