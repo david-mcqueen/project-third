@@ -179,7 +179,10 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         focusMap(location);
         searchIndicator.stopAnimating();
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Retrieve Location", style: .Bordered, target: self, action: "retrieveLocation:")
+        if(savedLocation != nil){
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Retrieve Location", style: .Bordered, target: self, action: "retrieveLocation:")
+
+        }
         
     }
     
