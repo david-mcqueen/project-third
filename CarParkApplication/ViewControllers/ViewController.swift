@@ -59,7 +59,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             timeBandLabel.text = selectedTimeBand!.displayBand();
         }else{
             timeBandLabel.text = "Select Time";
-            selectTimeBandCell.userInteractionEnabled = false;
         }
         
         //Request permission to access beacons - Whilst the app is in Foreground
@@ -363,7 +362,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status{
-        case .Authorized, .AuthorizedWhenInUse:
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             self.toggleLocationButton(true, locatedBeacon: false);
             break;
         case .Denied, .NotDetermined, .Restricted:
@@ -461,7 +460,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                 timeBandSelectViewController.timeBands = self.timeBands;
             }
             
-            timeBandSelectViewController.selectedCarPark = selectedCarParkID;
+            timeBandSelectViewController.selectedCarPark = (selectedCarParkID != nil) ? selectedCarParkID : 0;
             
         }else if segue.identifier == "PickUserVehicle" {
             println("PickVehicleBand Segue")
@@ -520,7 +519,6 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         self.locationTextField.text = "";
         self.locationTextField.placeholder = "Location ID"
         self.selectedCarParkID = nil;
-        selectTimeBandCell.userInteractionEnabled = false;
         self.locationTextField.becomeFirstResponder()
     }
     
@@ -546,7 +544,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             beaconActivityIndicator.stopAnimating();
             self.locationTextField.text = "";
             self.locationTextField.placeholder = "Location ID"
-            displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "ok");
+            displayAlert("Error", "Failed to find a beacon, please enter the car park ID", "Ok");
             toggleLocationButton(false, locatedBeacon: false);
         }
     }

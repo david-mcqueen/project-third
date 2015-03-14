@@ -36,11 +36,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
-        //Get all the user information from the server.
-        getUserDetails();
-        getUserVehicles();
-        getUserParkingSessions();
-        displayUserInfo();
+        
         
         //Setup a payment indicator
         paymentIndicatorView.frame = CGRectMake(((self.view.frame.width - 200) / 2), ((self.view.frame.height - 200) / 3), 200, 200);
@@ -68,8 +64,12 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
         
         //Preconnect to PayPal, as per their SDK.
         PayPalMobile.preconnectWithEnvironment(PayPalEnvironmentSandbox)
-        displaySessionCount();
-        displayUserBalance();
+        
+        //Get all the user information from the server.
+        getUserDetails();
+        getUserVehicles();
+        getUserParkingSessions();
+        displayUserInfo();
     }
     
     override func didReceiveMemoryWarning() {

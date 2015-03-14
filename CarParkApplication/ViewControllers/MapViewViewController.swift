@@ -334,7 +334,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         switch status{
-        case .Authorized, .AuthorizedWhenInUse:
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             self.locationAuthorised(true)
             break;
         case .Denied, .NotDetermined, .Restricted:
