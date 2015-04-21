@@ -47,7 +47,7 @@ class RegisterViewController: UITableViewController {
         let screenHeight = screenSize.height
         if (screenHeight < 500 && (txtEmail.isFirstResponder() || txtPhone.isFirstResponder() || txtPassword.isFirstResponder())){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 if (!self.keyboardIsShowing){
                     self.keyboardIsShowing = true
@@ -64,7 +64,7 @@ class RegisterViewController: UITableViewController {
         let screenHeight = screenSize.height
         if (screenHeight < 500 && (txtEmail.isFirstResponder() || txtPhone.isFirstResponder() || txtPassword.isFirstResponder())){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 
                 if (self.keyboardIsShowing){
@@ -93,7 +93,7 @@ class RegisterViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
@@ -150,7 +150,7 @@ class RegisterViewController: UITableViewController {
                             User.sharedInstance.token = token;
                             User.sharedInstance.FirstName = newUser.FirstName;
                             User.sharedInstance.Surname = newUser.SurName;
-                            let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController;
+                            let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as! CreateVehicleViewController;
                             self.navigationController?.pushViewController(createVehicleViewController, animated: true);
                         }else{
                             displayAlert("Failed", "Something went wrong", "OK")

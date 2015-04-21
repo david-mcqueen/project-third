@@ -130,7 +130,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         println("keyboardWillShow")
         if (notificationMinsInput.isFirstResponder()){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 if (!self.keyboardIsShowing){
                     self.keyboardIsShowing = true
@@ -144,7 +144,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
         println("keyboardWillHide")
         if (notificationMinsInput.isFirstResponder()){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 
                 if (self.keyboardIsShowing){
@@ -319,7 +319,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
                     //Display the new parking session
                     println("View the parking session")
                     parkIndicator.stopAnimating()
-                    let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as SessionViewController;
+                    let viewSessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("viewParkingSession") as! SessionViewController;
                     viewSessionViewController.parkingSession = newParkSession;
                     self.navigationController?.showViewController(viewSessionViewController, sender: nil);
                 }
@@ -348,7 +348,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
 
         if(knownBeacons.count > 0){
             println("Known Beacons \(knownBeacons)");
-            let closestBeacon = knownBeacons[0] as CLBeacon;
+            let closestBeacon = knownBeacons[0] as! CLBeacon;
             
             
             getBeaconDetails(closestBeacon.major.integerValue, minor: closestBeacon.minor.integerValue, rssi: closestBeacon.rssi);
@@ -437,7 +437,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
@@ -451,7 +451,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             println("PickTimeBand Segue")
             self.didFinishEditingLocationID(self);
             self.locationTextField.endEditing(true);
-            let timeBandSelectViewController = segue.destinationViewController as TimeBandSelectViewController
+            let timeBandSelectViewController = segue.destinationViewController as! TimeBandSelectViewController
             timeBandSelectViewController.selectedTimeBand = selectedTimeBand
             timeBandSelectViewController.delegate = self;
             timeBandSelectViewController.bandDuration = bandDuration;
@@ -464,7 +464,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
             
         }else if segue.identifier == "PickUserVehicle" {
             println("PickVehicleBand Segue")
-            let vehicleSelectViewController = segue.destinationViewController as VehicleSelectViewController
+            let vehicleSelectViewController = segue.destinationViewController as! VehicleSelectViewController
             if (selectedVehicle != nil){
                 println(selectedVehicle?.displayVehicle())
                 vehicleSelectViewController.selectedVehicle = selectedVehicle
@@ -477,7 +477,7 @@ class ViewController: UITableViewController, UITableViewDelegate, CLLocationMana
     
     //MARK:- Exit Functions
     @IBAction func selectedTimeBandSave(segue:UIStoryboardSegue) {
-        let timeBandSelectViewController = segue.sourceViewController as TimeBandSelectViewController
+        let timeBandSelectViewController = segue.sourceViewController as! TimeBandSelectViewController
         if let _selectedTimeBand = timeBandSelectViewController.selectedTimeBand {
             timeBandLabel.text = _selectedTimeBand.displayBand()
             selectedTimeBand = _selectedTimeBand;

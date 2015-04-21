@@ -27,6 +27,7 @@ class SessionSelectViewController: UITableViewController {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         allUserVehicles = User.sharedInstance.Vehicles;
+        self.tableView.rowHeight = 100.0;
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,9 +54,10 @@ class SessionSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("sessionCell", forIndexPath: indexPath) as ParkSessionViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("sessionCell", forIndexPath: indexPath) as! ParkSessionViewCell
 
         var cellSession = allParkSessions[indexPath.row];
+        
         
         cell.sessionDetails.text = "Date: " + cellSession.startTimeAsString();
         
@@ -81,7 +83,7 @@ class SessionSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         header.textLabel.textColor = UIColor.whiteColor()
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
         
@@ -162,7 +164,7 @@ class SessionSelectViewController: UITableViewController {
         if (segue.identifier == "viewParkingSession"){
             println("viewSession Segue")
             println(selectedSession!)
-            let currentSessionViewController = segue.destinationViewController as SessionViewController
+            let currentSessionViewController = segue.destinationViewController as! SessionViewController
             currentSessionViewController.parkingSession = selectedSession!;
         }
     }

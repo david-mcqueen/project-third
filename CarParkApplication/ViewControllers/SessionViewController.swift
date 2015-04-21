@@ -43,7 +43,7 @@ class SessionViewController: UITableViewController{
     
     //MARK:- TableView delegate
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
@@ -90,7 +90,7 @@ class SessionViewController: UITableViewController{
             }
         }
         
-        let modifySessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ViewController") as ViewController
+        let modifySessionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
         
         var (durationString, hours, minutes) = parkingSession!.calculateDuration();
         

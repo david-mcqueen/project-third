@@ -54,7 +54,7 @@ class TimeBandSelectViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as TimeBandViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("timeBandCell", forIndexPath: indexPath) as! TimeBandViewCell
         
         if (!self.bandsFound){
             cell.cost.text = "£"
@@ -106,7 +106,7 @@ class TimeBandSelectViewController: UITableViewController {
     //MARK:- Segue Functions
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveTimeBand" {
-            let cell = sender as UITableViewCell;
+            let cell = sender as! UITableViewCell;
             let indexPath = tableView.indexPathForCell(cell);
             selectedTimeBandIndex = indexPath?.row
             

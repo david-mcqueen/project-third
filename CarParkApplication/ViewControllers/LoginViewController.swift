@@ -113,7 +113,7 @@ class LoginViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
@@ -128,7 +128,7 @@ class LoginViewController: UITableViewController{
         let screenHeight = screenSize.height
         if (screenHeight < 500){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 if (!self.keyboardIsShowing){
                     self.keyboardIsShowing = true
@@ -145,7 +145,7 @@ class LoginViewController: UITableViewController{
         let screenHeight = screenSize.height
         if (screenHeight < 500){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 
                 if (self.keyboardIsShowing){

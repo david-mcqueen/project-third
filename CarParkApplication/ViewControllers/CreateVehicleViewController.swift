@@ -84,7 +84,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         let screenHeight = screenSize.height
         if (screenHeight < 500){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 if (!self.keyboardIsShowing){
                     self.keyboardIsShowing = true
@@ -106,7 +106,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
         let screenHeight = screenSize.height
         if (screenHeight < 500){
             if let info = notification.userInfo {
-                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+                var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
                 
                 
                 if (self.keyboardIsShowing){
@@ -165,7 +165,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                             self.delegate?.newVehicleCreated();
                         }else{
                             //Navigate to the logged in section (replacing the previous view)
-                            let userRegistered = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as UITabBarController;
+                            let userRegistered = self.storyboard?.instantiateViewControllerWithIdentifier("viewLoggedInViewController") as! UITabBarController;
                             self.navigationController?.showDetailViewController(userRegistered, sender: self);
                         }
                     }else{
@@ -256,7 +256,7 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
@@ -279,14 +279,9 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                     //Save the make name & ID in a dictionary
                     self.makeDictionary[make.make_display] = make.make_id;
                 }
-                //TODO:- Handle no data being returned from the server (empty list for picker etc)
                 self.makePickerData = listOfMakes;
                 self.makeInput.userInteractionEnabled = true;
                 self.makeInput.placeholder = "Select Make";
-                
-            }else{
-                println("Something went wrong");
-                //TODO:- Handler the 2 error vairables
             }
             });
         });
@@ -309,9 +304,6 @@ class CreateVehicleViewController: UITableViewController,UIPickerViewDataSource,
                     self.modelInput.placeholder = "Select Model";
                     self.modelInput.userInteractionEnabled = true;
                 
-                }else{
-                    println("Something went wrong");
-                    //TODO:- Handler the 2 error vairables
                 }
             });
         });

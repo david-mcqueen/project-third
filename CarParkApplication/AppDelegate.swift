@@ -13,18 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         PayPalMobile.initializeWithClientIdsForEnvironments([PayPalEnvironmentProduction: "ARy5LxCT4xDIFi5JRr-NLSpNOYtTq-WX8ZLieKM_1donhR9X9283XszvYqdE", PayPalEnvironmentSandbox: "ARy5LxCT4xDIFi5JRr-NLSpNOYtTq-WX8ZLieKM_1donhR9X9283XszvYqdE"])
         
         if(application.respondsToSelector("registerUserNotificationSettings:")) {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Sound | .Badge, categories: nil))
         }
         
-        return true
-    }
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 

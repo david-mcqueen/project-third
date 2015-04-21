@@ -108,7 +108,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as UITableViewHeaderFooterView
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel.textColor = UIColor.whiteColor() //make the text white
         header.textLabel.font = UIFont.boldSystemFontOfSize(12);
@@ -280,7 +280,7 @@ class ProfileVewController: UITableViewController, PayPalPaymentDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "previousParkingSessions" {
             println("currentParkingSessions Segue")
-            let currentSessionViewController = segue.destinationViewController as SessionSelectViewController
+            let currentSessionViewController = segue.destinationViewController as! SessionSelectViewController
             currentSessionViewController.currentSessions = false
         }
     }

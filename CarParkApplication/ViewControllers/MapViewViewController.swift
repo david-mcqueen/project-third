@@ -201,7 +201,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
             displayAlert("Error", "Please enter a search location", "OK");
         }
         var geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address, {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+        geocoder.geocodeAddressString(address, completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             
             if error != nil {
                 println(error.description)
@@ -247,7 +247,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        var annotation = view.annotation as CustomAnnotation;
+        var annotation = view.annotation as! CustomAnnotation;
         var carParkInformation = ""
         if (annotation.OpeningTime != "CLOSED"){
             carParkInformation = "Opens: \(annotation.OpeningTime)";
@@ -277,14 +277,15 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
                 pinView!.canShowCallout = true
                 pinView!.animatesDrop = true
-                var ann = annotation as CustomAnnotation;
+                var ann = annotation as! CustomAnnotation;
+                println(ann);
                 if(ann.OpeningTime != "CLOSED"){
                     pinView!.pinColor = .Green
                 }else{
                     pinView!.pinColor = .Purple
                 }
                 
-                pinView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoDark) as UIView;
+                pinView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoDark) as! UIView;
             }
             else {
                 pinView!.annotation = annotation
@@ -360,7 +361,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     
     //MARK:- TextField delegate
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         txtSearchLocation.resignFirstResponder();
         searchPressed(self);
         return true;

@@ -50,7 +50,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     
     //MARK:- Custom Functions
     @IBAction func addNewVehicle(sender: AnyObject) {
-        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as CreateVehicleViewController
+        let createVehicleViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateVehicleViewController") as! CreateVehicleViewController
         createVehicleViewController.delegate = self;
         self.navigationController?.pushViewController(createVehicleViewController, animated: true);
         
@@ -76,7 +76,7 @@ class VehicleSelectViewController: UITableViewController, CreateVehicleDelegate 
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = vehicles[indexPath.row]
         cell.textLabel?.textColor = UIColor(red: 0.275, green: 0.4, blue: 0.459, alpha: 1);
         

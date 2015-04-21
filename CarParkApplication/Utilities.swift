@@ -62,7 +62,7 @@ func validateEmail(inputEmail: String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     var emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx);
     
-    return emailTest!.evaluateWithObject(inputEmail);
+    return emailTest.evaluateWithObject(inputEmail);
     
     }
 
@@ -77,7 +77,7 @@ func validatePassword(inputPassword: String) -> Bool{
     let passwordRegEx = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,30})";
     var passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegEx);
     
-    return passwordTest!.evaluateWithObject(inputPassword);
+    return passwordTest.evaluateWithObject(inputPassword);
     
 }
 
@@ -86,7 +86,7 @@ func validatePhoneNumber(inputNumber: String) -> Bool{
     let numberRegEx = "[0-9]{11}";
     var numberTest = NSPredicate(format:"SELF MATCHES %@", numberRegEx);
     
-    return numberTest!.evaluateWithObject(inputNumber);
+    return numberTest.evaluateWithObject(inputNumber);
 }
 
 func validateGUID(inputGUID: String) -> Bool {
@@ -94,7 +94,7 @@ func validateGUID(inputGUID: String) -> Bool {
     let GUIDRegEx = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
     var GUIDTest = NSPredicate(format:"SELF MATCHES %@", GUIDRegEx);
     
-    return GUIDTest!.evaluateWithObject(inputGUID);
+    return GUIDTest.evaluateWithObject(inputGUID);
 }
 
 func validateLocationID(inputID: String) -> Bool{
@@ -102,7 +102,7 @@ func validateLocationID(inputID: String) -> Bool{
     let numberRegEx = "[0-9]{1,8}";
     var numberTest = NSPredicate(format:"SELF MATCHES %@", numberRegEx);
     
-    return numberTest!.evaluateWithObject(inputID);
+    return numberTest.evaluateWithObject(inputID);
 }
 
 func displayAlert(title: String, message: String, cancelButton: String){
@@ -134,7 +134,7 @@ func getCostFormattedString(inputCost: Double) -> String{
         return pounds;
     }else{
         
-        if (countElements(pence) == 1){
+        if (count(pence) == 1){
             pence = pence + "0";
         }
         
